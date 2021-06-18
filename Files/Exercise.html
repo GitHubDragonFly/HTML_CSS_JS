@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta content="utf-8" charset="utf-8" http-equiv="encoding">
+    <style>
+      div { background-color: aliceblue; width: 99%; border: 2px solid green; border-radius: 5px; padding: 5px; margin: 5px; }
+      h1, h2, h3, h4, h5, h6 { margin-top: 1px; margin-bottom: 3px;}
+      table { margin-left: auto; margin-right: auto; border: 1; padding: 2px; background-color: blue; font-size: 120%; }
+      th { padding: 6px; color: navy; background-color: #f2f4f4; }
+      td { padding: 6px; background-color: #f8f1c1; width: 25%; }
+      body { background-image: url('dark_blue.png'); background-size: 100% 100%; }
+      ol { display: table; margin: auto; }
+      ul { list-style-type: '\2714'; display: table; margin: auto; }
+      li { color: green; font-size: 120%; width: 10%; padding: 5px; }
+      li.block { color: green; font-size: 120%; width: 10%; display: block; }
+      li.inline { color: green; font-size: 120%; width: 10%; display: inline; }
+      p { text-align:center; color: blue; border: 1px solid lightblue; }
+      gnt { color: green; font-size: 150%; }
+      rdt { color: red; font-size: 125%; }
+      dgt { color: darkgrey ; font-size: 100%; }
+      blt { color: black; font-size: 75%;}
+      .required label:after { color: red; content: ' *'; display: inline; }
+      .fixed { position: fixed; left: 0; bottom: 35px; width: 100%; color: rgb(110, 57, 75); text-align: center; }
+      .footer { position: static; margin: 0; left: 0; bottom: 0; width: 100%; background-color: yellow; text-align: center; }
+      .rotateX { animation: rotationX 8s infinite linear; }
+      .rotateY { animation: rotationY 8s infinite linear; }
+      .rotateZ { animation: rotationZ 8s infinite linear; }
+      @keyframes rotationX { from { transform: rotateX(0deg); } to { transform: rotateX(359deg); } }
+      @keyframes rotationY { from { transform: rotateY(0deg); } to { transform: rotateY(359deg); } }
+      @keyframes rotationZ { from { transform: rotateZ(0deg); } to { transform: rotateZ(359deg); } }
+    </style>
+    <title>HTML-CSS-JS Exercise</title>
+  </head>
+  <body>
+    <p style="font-size: 36px; margin-top: 2px; margin-bottom: 20px; padding-top: 10px; padding-bottom: 10px; border: 0px;">
+      &#128578; ~ Emojis ~ &#128579;
+    </p>
+
+    <div style="text-align: center; display: inline-block;">SVG
+      <div style="width: 7%; float: inline-start;">
+        <svg width="100" height="100">
+          <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:rgb(0,255,255);stop-opacity:1" />
+              <stop offset="100%" style="stop-color:rgb(0,0,255);stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <ellipse cx="50" cy="50" rx="50" ry="35" fill="url(#grad1)" />
+        </svg>
+      </div>
+      <div style="width: 7%; float: inline-end;">
+        <svg width="100" height="100">
+          <defs>
+            <radialGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
+              <stop offset="100%" style="stop-color:rgb(255,0,0);stop-opacity:1" />
+            </radialGradient>
+          </defs>
+          <circle cx="50" cy="50" r="48" stroke="green" stroke-width="1" fill="url(#grad2)" />
+        </svg>
+      </div>
+      <div style="text-align: center; width: 7%; margin-left: auto; margin-right: auto; margin-top: 10px;">
+        <a href="https://svgstudio.com/pages/free-sample" target="_blank">
+          <img src="Freesample.svg" alt="Free SVG Sample" style="width: 75px; height: 64px; display:block; margin: auto;">
+        </a>
+      </div>
+    </div>
+
+    <p style="font-size: 150%;"><u>(150% Font-Size & Underline) Unboxed Headers - inline style</u></p>
+      <h1 style="color: red;">This is RED Header 1</h1>
+      <h2 style="color: green;">This is GREEN Header 2</h2>
+      <h3 style="color: yellow;">This is YELLOW Header 3</h3>
+      <h4 style="color: brown;">This is BROWN Header 4</h4>
+      <h5 style="color: purple;">This is PURPLE Header 5</h5>
+      <h6 style="color: turquoise;">This is TURQUOISE Header 6</h6><br>
+
+    <div>
+      <p style="font-size: 125%;"><s>(125% Font-Size & Strike-through) Boxed Centered Headers - inline style</s></p>
+      <h1 style="color: red; text-align: center;">This is RED Header 1</h1>
+      <h2 style="color: green; text-align: center;">This is GREEN Header 2</h2>
+      <h3 style="color: maroon; text-align: center;">This is MAROON Header 3</h3>
+      <h4 style="color: black; text-align: center;">This is BLACK Header 4</h4>
+      <h5 style="color: purple; text-align: center;">This is PURPLE Header 5</h5>
+      <h6 style="color: blue; text-align: center;">This is BLUE Header 6</h6>
+    </div><br>
+
+    <div style="text-align: center;">
+      <p>Mixed color and font-size inline text</p>
+        <gnt>Green &nbsp;</gnt><rdt>Red &nbsp;</rdt><dgt>DarkGrey &nbsp;</dgt><blt>Black &nbsp;</blt>
+        <dgt>DarkGrey &nbsp;</dgt><rdt>Red &nbsp;</rdt><gnt>Green</gnt>
+    </div><br>
+
+    <div>
+      <p>Horizontal Centered List (inline)</p>
+        <ol>
+          <li class="inline">Item1</li>
+          <li class="inline">Item2</li>
+          <li class="inline">Item3</li>
+          <li class="inline">Item4</li>
+        </ol>
+    </div><br>
+
+    <div>
+      <p>Vertical Centered List (block)</p>
+        <ol>
+          <li class="block">Item1</li>
+          <li class="block">Item2</li>
+          <li class="block">Item3</li>
+          <li class="block">Item4</li>
+        </ol>
+    </div><br>
+
+    <p>Unboxed Centered Ordered List</p>
+      <ol type = "a">
+        <li>Item1</li>
+        <li>Item2</li>
+        <li>Item3</li>
+        <li>Item4</li>
+      </ol>
+
+    <p>Unboxed Centered Table</p>
+      <table>
+        <thead>
+          <tr>
+            <th colspan="3">Things that help us move around</th>
+          </tr>
+          <tr>
+            <td style="color: black;">Car</td>
+            <td style="color: blue;">Bus</td>
+            <td style="color: green;">Train</td>
+          </tr>
+          <tr>
+            <td style="color: black;">Roller Skates</td>
+            <td style="color: blue;">Plane</td>
+            <td style="color: green;">Scooter</td>
+          </tr>
+          <tr>
+            <td style="color: black;">SUV</td>
+            <td style="color: blue;">Bicycle</td>
+            <td style="color: green;">Rollerblades</td>
+          </tr>
+        </thead>
+      </table><br>
+
+      <div style="text-align: center;"><p>Inline Frame</p>
+        <iframe src="iFrame1.html" name="ifrm" title="Inline Examples" style="width: 98%; height: 100px;"></iframe>
+        <p><a href="iFrame1.html" target="ifrm">iFrame1 Page</a>&nbsp; &nbsp;<a href="iFrame2.html" target="ifrm">iFrame2 Page</a></p>
+      </div><br>
+  
+      <div><p>Form</p>
+      <form id="form" method="POST">
+        <div class="required" style="width: 23%;">
+          <label for="fname">First name:</label><br>
+          <input type="text" id="fname" name="fname" size="40" value=""><br>
+          <label for="lname">Last name:</label><br>
+          <input type="text" id="lname" name="lname" size="40" value=""><br>
+        </div><br>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">Male</label><br>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label><br>
+        <input type="radio" id="other" name="gender" value="other">
+        <label for="other">Other</label><br><br>
+        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+        <label for="vehicle1"> I have a bike</label><br>
+        <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+        <label for="vehicle2"> I have a car</label><br>
+        <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+        <label for="vehicle3"> I have a boat</label><br><br>
+        <label for="favcolor">Select your favorite color:</label>
+        <input type="color" id="favcolor" name="favcolor"><br><br>
+        <input type="button" value="Submit" onclick="form_query()" style="background-color: green; border-radius: 5px; margin: 2px; padding: 5px;">
+        <input type="reset" id="btn_reset" value="Reset" style="background-color: orange; border-radius: 5px; margin: 2px; padding: 5px;">
+        <input type="button" onclick="alert('ALERT !!!\n\nOMG ... you just clicked the button !?')" value="Click Me NOT"><br>
+      </form>
+    </div>
+
+    <div class="form_entries" style="color: blue; text-align: center;"><p><marquee width="15%">Submitted Form Entries</marquee></p>
+      <div id="entries" style="background-color: #eee; width: 50%; border: 1px solid #111; padding: 2px; margin: auto;"></div>
+    </div><br>
+
+    <script>
+      // Submit button is currently of the 'button' input and not 'submit' input
+      // Collect all form entries to display in this window only
+      function form_query() {
+        var formData = new FormData(document.querySelector('form'));
+        var str = '';
+
+        formData.forEach(get_values);
+
+        function get_values(value) { str += value.trim() + ', '; };
+
+        var missingOneName = str.startsWith(',') || str.includes(', , ');
+
+        if (!missingOneName){
+          if (document.getElementById('entries').innerHTML != ''){ document.getElementById('entries').innerHTML += "<br>"; }
+          document.getElementById('entries').innerHTML += str.substring(0, str.length - 2)
+          document.getElementById("btn_reset").click();
+        }
+      }
+    </script>
+
+    <div style="display: inline-block;"><p>Images & Text</p>
+      <div style="width: 48%; float: inline-start;">
+        <a href="https://svgstudio.com/pages/free-sample" target="_blank">
+          <img src="Freesample.svg" alt="Free SVG Sample" style="width: 67px; height: 56px; float: left;">
+        </a>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec cursus dictum justo, nec finibus nisi auctor sed.
+        In commodo odio et volutpat dictum. Vestibulum congue viverra orci, sit amet elementum eros.
+        Morbi at quam in nibh sollicitudin sodales sit amet ut felis. Aenean at leo dignissim, gravida eros a, vulputate lectus.
+        Quisque tristique purus dolor, sit amet vestibulum leo condimentum ut. Sed eget velit sed purus bibendum tincidunt.
+        Cras faucibus mauris a faucibus suscipit. Nam vel elementum lectus. Integer vitae enim massa.
+        Cras porttitor sit amet ex iaculis venenatis. Morbi nec arcu ac velit sagittis rutrum.
+      </div>
+      <div style="width: 48%; float: inline-end;">
+        <a href="https://svgstudio.com/pages/free-sample" target="_blank">
+          <img src="Freesample.svg" alt="Free SVG Sample" style="width: 67px; height: 56px; float: right;">
+        </a>
+        Maecenas sit amet dolor vitae nisi maximus cursus. Curabitur ultricies in libero eget porttitor.
+        Nulla congue luctus lobortis. Nulla efficitur, enim non euismod faucibus, nisl nibh facilisis nunc,
+        sit amet luctus turpis nunc vel enim. Nulla eu lorem ex. Curabitur a justo dolor. Donec vel quam magna.
+        Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam a turpis odio.
+        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+        Donec sed dolor in metus vestibulum sodales at a mi. Vestibulum sed nibh nec dolor consectetur posuere.
+        Praesent lacus dui, aliquet elementum lobortis non, sollicitudin nec libero.
+      </div>
+    </div><br><br>
+
+    <div style="display: inline-block;"><p>Rotation</p>
+      <div class="rotateX" style="text-align: center; width: 10%; float: inline-start;">Rotating over X axis</div><br><br><br>
+
+      <div class="rotateZ" style="text-align: center; width: 10%; margin: auto">Rotating over Z axis</div><br><br>
+
+      <div class="rotateY" style="text-align: center; width: 10%; float: inline-end;">Rotating over Y axis</div>
+    </div><br><br>
+
+    <div><p>Javascript</p>
+      <p id="link" style="width: 10%; margin: auto;"></p><br>
+      <div style="text-align: center; width: 8%; margin: auto;">
+        <button type="button" id="btnLink" onclick="show_hide_link()">Show GitHub Link</button>
+      </div>
+      <script>
+        function show_hide_link() {
+          if (document.getElementById('link').innerHTML != ''){
+            document.getElementById('link').innerHTML = ''
+            document.getElementById('btnLink').innerHTML = 'Show GitHub Link'
+          } else {
+            document.getElementById('btnLink').innerHTML = 'Hide GitHub Link'
+
+            // Create anchor element
+            var a = document.createElement('a');
+
+            // Create the text node for anchor element
+            var link = document.createTextNode("GitHub Account");
+
+            // Append the text node to anchor element
+            a.appendChild(link);
+
+            // Set the title
+            a.title = "GitHub Account";
+
+            // Set the href property
+            a.href = "https://github.com/GitHubDragonFly";
+
+            // Set target as new tab or window
+            a.target = "_blank"
+
+            // Append the anchor element to the 'link' paragraph
+            document.getElementById('link').appendChild(a)
+
+            // Append the anchor element to the body
+            // document.body.appendChild(a);
+          }
+        }
+      </script>
+    </div><br><br>
+
+    <p class="fixed">I am here all day long...</p>
+
+    <p class="footer">References: https://www.w3schools.com , https://www.geeksforgeeks.org/how-to-create-a-link-in-javascript/ ,
+      https://flaviocopes.com/rotate-image <br> https://www.lipsum.com , https://svgstudio.com/pages/free-sample ,
+      https://stackoverflow.com/questions/11197671/use-css-to-automatically-add-required-field-asterisk-to-form-inputs
+    </p>
+  </body>
+</html>
