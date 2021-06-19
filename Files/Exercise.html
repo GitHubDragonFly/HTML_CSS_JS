@@ -143,10 +143,30 @@
       </table><br>
 
       <div style="text-align: center;"><p>Inline Frame</p>
-        <iframe src="iFrame1.html" name="ifrm" title="Inline Examples" style="width: 98%; height: 100px;"></iframe>
-        <p><a href="iFrame1.html" target="ifrm">iFrame1 Page</a>&nbsp; &nbsp;<a href="iFrame2.html" target="ifrm">iFrame2 Page</a></p>
+        <iframe src="iFrame1.html" name="ifrm" title="Inline Examples" style="width: 98%; height: 150px;" sandbox="allow-scripts"></iframe>
+        <p>
+          <a href="iFrame1.html" target="ifrm">iFrame1 Page</a>&nbsp; &nbsp; &nbsp;
+          <a href="iFrame2.html" target="ifrm">iFrame2 Page</a>&nbsp; &nbsp; &nbsp;
+          <label for="url">URL</label>&nbsp;
+          <input type="text" id="url" name="url" size="40" value="">&nbsp;
+          <button onclick="display_url()" style="border-radius: 2px; margin: 2px; padding: 2px;">Go</button>
+        </p>
       </div><br>
   
+      <script>
+        function display_url() {
+          var txt = document.getElementById('url').value;
+
+          if ( txt != '') {
+            // Create and use anchor element
+            var a = document.createElement('a');
+            a.href = txt;
+            a.target = "ifrm"
+            a.click()
+          }
+        }
+      </script>
+
       <div><p>Form</p>
       <form id="form" method="POST">
         <div class="required" style="width: 23%;">
@@ -171,7 +191,8 @@
         <input type="color" id="favcolor" name="favcolor"><br><br>
         <input type="button" value="Submit" onclick="form_query()" style="background-color: green; border-radius: 5px; margin: 2px; padding: 5px;">
         <input type="reset" id="btn_reset" value="Reset" style="background-color: orange; border-radius: 5px; margin: 2px; padding: 5px;">
-        <input type="button" onclick="alert('ALERT !!!\n\nOMG ... you just clicked the button !?')" value="Click Me NOT"><br>
+        <input type="button" style="background-color: red; border-radius: 5px; margin: 2px; padding: 5px;" onclick="alert('ALERT !!!\n\nOMG ... you just clicked the RED button !?')" value="Click Me NOT">
+        <input type="button" id="btn_disappear" onmouseover="document.getElementById('btn_disappear').hidden = 'True'" value="I am here temporarily">
       </form>
     </div>
 
