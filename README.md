@@ -1,7 +1,7 @@
 # HTML_CSS_JS
 Exercise in HTML, CSS and JavaScript. Intended for those who might be either learning these or would just like to have several examples in a single page.
 
-Some might consider these relatively simple examples and they only reflect a way of how I am going about learning these languages.
+Some might consider these relatively simple examples but they only reflect a way of how I am going about learning these languages.
 
 A good portion of the page should be self-explanatory, some content is static, some animated and some is interactive.
 
