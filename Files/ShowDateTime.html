@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta content="utf-8" charset="utf-8" http-equiv="encoding">
+    <style>
+      div { background-color: blue; color: white; width:50%; font-size: 150%; text-align: center; margin: auto; border: 2px solid green; border-radius: 5px; padding: 5px; }
+    </style>
+    <title>Date/Time Page</title>
+  </head>
+  <body>
+    <br>
+    <div id="date"></div>
+    <div id="time"></div>
+    <div id="zone"></div>
+
+    <script>
+      function showDateTime(){
+        var date = new Date();
+        var all_parts = date.toString().split(" ");
+
+        document.getElementById("date").innerText = "Date: " + all_parts[0] + " " + date.toLocaleDateString();
+        document.getElementById("time").innerText = "Time: " + date.toLocaleTimeString();
+        document.getElementById("zone").innerText = "Zone: " + date.toString().substring(date.toString().indexOf("G"));
+    
+        setTimeout(showDateTime, 1000);
+      }
+
+      showDateTime();
+    </script>
+  </body>
+</html>
