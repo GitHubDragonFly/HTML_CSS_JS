@@ -42,7 +42,7 @@
     </p><br>
 
     <p class="spacer" id="P1"></p>
-    <p style="font-size: 36px; margin-top: 2px; margin-bottom: 20px; padding-top: 10px; padding-bottom: 10px; border: 0px;">
+    <p style="font-size: 36px; margin-top: 2px; margin-bottom: 20px; padding-top: 20px; padding-bottom: 10px; border: 0px;">
       &#128578; ~ Emojis ~ &#128579;
     </p>
 
@@ -56,7 +56,7 @@
               <stop offset="100%" style="stop-color:rgb(0,0,255);stop-opacity:1" />
             </linearGradient>
           </defs>
-          <ellipse cx="50" cy="50" rx="50" ry="35" fill="url(#grad1)" />
+          <ellipse cx="50" cy="50" rx="48" ry="35" stroke="navy" stroke-width="1" fill="url(#grad1)" />
         </svg>
       </div>
       <div style="width: 7%; float: inline-end;">
@@ -163,9 +163,9 @@
       <p>
         <a href="iFrame1.html" target="ifrm">iFrame1 Page</a>&nbsp; &nbsp; &nbsp;
         <a href="iFrame2.html" target="ifrm">iFrame2 Page</a>&nbsp; &nbsp; &nbsp;
-        <label for="url">URL</label>&nbsp;
+        <label for="url">URL:</label>&nbsp;
         <input type="text" id="url" name="url" size="60" value="">&nbsp;
-        <button onclick="display_url()" style="border-radius: 2px; margin: 2px; padding: 2px;">Go</button>
+        <button id="btn_go" onclick="display_url()" style="border-radius: 2px; margin: 2px; padding: 2px;">Go</button>
       </p>
     </div><br>
 
@@ -175,12 +175,27 @@
 
         if ( txt != '') {
           // Create and use anchor element
+          // Some sites will still not allow openning their page in an embedded frame
           var a = document.createElement('a');
           a.href = txt;
           a.target = "ifrm"
           a.click()
         }
       }
+
+      // Allow the Enter key pressed inside the url box to activate the 'Go' button
+      var input = document.getElementById("url");
+
+      // Execute a function when the user releases a key on the keyboard
+      input.addEventListener("keyup", function(event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+        // Cancel any existing default action
+        event.preventDefault();
+        // Trigger the 'Go' button click
+        document.getElementById("btn_go").click();
+        }
+      });
     </script>
 
     <p class="spacer" id="P8"></p>
@@ -209,7 +224,7 @@
         <input type="button" value="Submit" onclick="form_query()" style="background-color: green; border-radius: 5px; margin: 2px; padding: 5px;">
         <input type="reset" id="btn_reset" value="Reset" style="background-color: orange; border-radius: 5px; margin: 2px; padding: 5px;">
         <input type="button" style="background-color: red; border-radius: 5px; margin: 2px; padding: 5px;" onclick="alert('ALERT !!!\n\nOMG ... you just clicked the RED button !?')" value="Click Me NOT">
-        <input type="button" id="btn_disappear" onmouseover="document.getElementById('btn_disappear').hidden = 'True'" value="I am here temporarily">
+        <input type="button" id="btn_disappear" onclick="document.getElementById('btn_disappear').hidden = 'True'" value="I am here temporarily">
       </form>
     </div>
 
@@ -218,7 +233,7 @@
     </div><br>
 
     <script>
-      // Submit button is currently of the 'button' input and not 'submit' input
+      // Submit button is currently of the 'button' input and not 'submit' input type
       // Collect all form entries to display in this window only
       function form_query() {
         var formData = new FormData(document.querySelector('form'));
