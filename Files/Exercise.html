@@ -15,7 +15,6 @@
       li.block { color: green; font-size: 120%; width: 10%; display: block; }
       li.inline { color: green; font-size: 120%; width: 10%; display: inline; }
       p { text-align:center; color: blue; border: 1px solid lightblue; margin-bottom: 10px; }
-      .spacer { border: 0px; margin: 10px;}
       blut { color: blue; font-size: 175%; }
       gnt { color: green; font-size: 150%; }
       rdt { color: red; font-size: 125%; }
@@ -27,7 +26,7 @@
       .rotateX { animation: rotationX 8s infinite linear; }
       .rotateY { animation: rotationY 8s infinite linear; }
       .rotateZ { animation: rotationZ 8s infinite linear; }
-      .rotateXYZ { animation: rotationXYZ 8s infinite linear;}
+      .rotateXYZ { animation: rotationXYZ 8s infinite linear; }
       @keyframes rotationX { from { transform: rotateX(0deg); } to { transform: rotateX(359deg); } }
       @keyframes rotationY { from { transform: rotateY(0deg); } to { transform: rotateY(359deg); } }
       @keyframes rotationZ { from { transform: rotateZ(0deg); } to { transform: rotateZ(359deg); } }
@@ -42,12 +41,12 @@
       <a href="#P10">Rotation</a>&nbsp; &nbsp;<a href="#P11">JavaScript</a>
     </p>
 
-    <p class="spacer" id="P1">&nbsp;</p>
+    <br id="P1" /><br />
     <p style="font-size: 36px; margin-top: 2px; margin-bottom: 20px; padding-top: 20px; padding-bottom: 10px; border: 0px;">
       &#128578; ~ Emojis ~ &#128579;
     </p>
 
-    <p class="spacer" id="P2">&nbsp;</p>
+    <br id="P2" /><br />
     <div style="text-align: center; display: inline-block;"><p>SVG</p>
       <div style="width: 110px; float: inline-start;">
         <svg width="100" height="100">
@@ -73,12 +72,12 @@
       </div>
       <div style="text-align: center; width: 85px; margin-left: auto; margin-right: auto; margin-top: 10px;">
         <a href="https://svgstudio.com/pages/free-sample" target="_blank">
-          <img src="Freesample.svg" alt="Free SVG Sample" style="width: 75px; height: 64px; display:block; margin: auto;">
+          <img src="Freesample.svg" alt="Free SVG Sample" style="width: 75px; height: 64px; display:block; margin: auto;" />
         </a>
       </div>
-    </div><br>
+    </div><br />
 
-    <p class="spacer" id="P3">&nbsp;</p>
+    <br id="P3" /><br />
     <div>
       <p style="font-size: 125%;"><s>(125% Font-Size & Strike-through) Boxed Centered Headers - inline style</s></p>
       <h1 style="color: red; text-align: center;">This is RED Header 1</h1>
@@ -97,14 +96,13 @@
       <h5 style="color: purple;">This is PURPLE Header 5</h5>
       <h6 style="color: turquoise;">This is TURQUOISE Header 6</h6>
 
-    <p class="spacer" id="P4">&nbsp;</p>
-    <div style="text-align: center;">
-      <p>Mixed color and font-size inline text</p>
+    <br id="P4" /><br />
+    <div style="text-align: center;"><p>Mixed color and font-size inline text</p>
         <blut>Blue &nbsp;</blut><gnt>Green &nbsp;</gnt><rdt>Red &nbsp;</rdt><dgt>DarkGrey &nbsp;</dgt><blkt>Black &nbsp;</blkt>
         <dgt>DarkGrey &nbsp;</dgt><rdt>Red &nbsp;</rdt><gnt>Green &nbsp;</gnt><blut>Blue</blut>
     </div>
 
-    <p class="spacer" id="P5">&nbsp;</p>
+    <br id="P5" /><br />
     <div>
       <p>Horizontal Centered List (inline)</p>
         <ol>
@@ -141,8 +139,8 @@
         <li style="color: lightblue;">Lizard</li>
       </ul>
 
-    <p class="spacer" id="P6">&nbsp;</p>
-    <p>Unboxed Centered Table</p><br>
+      <br id="P6" /><br />
+      <p>Unboxed Centered Table</p><br />
       <table>
         <thead>
           <tr>
@@ -166,8 +164,8 @@
         </thead>
       </table>
 
-    <p class="spacer" id="P7">&nbsp;</p>
-    <div style="text-align: center;"><p>Inline Frame</p>
+      <br id="P7" /><br />
+      <div style="text-align: center;"><p>Inline Frame</p>
       <iframe src="iFrame1.html" name="ifrm" title="Inline Examples" style="width: 98%; height: 200px;" sandbox="allow-scripts"></iframe>
       <p>
         <a href="ShowDateTime.html" target="ifrm">Show Date/Time</a>&nbsp; &nbsp; &nbsp;
@@ -208,29 +206,29 @@
       });
     </script>
 
-    <p class="spacer" id="P8">&nbsp;</p>
+    <br id="P8" /><br />
     <div><p>Form</p>
       <form id="form" method="POST">
         <div class="required" style="width: 280px;">
-          <label for="fname">First name:</label><br>
-          <input type="text" id="fname" name="fname" size="30" value=""><br>
-          <label for="lname">Last name:</label><br>
-          <input type="text" id="lname" name="lname" size="30" value=""><br>
-        </div><br>
+          <label for="fname">First name:</label><br />
+          <input type="text" id="fname" name="fname" size="30" value=""><br />
+          <label for="lname">Last name:</label><br />
+          <input type="text" id="lname" name="lname" size="30" value=""><br />
+        </div><br />
         <input type="radio" id="male" name="gender" value="male">
-        <label for="male">Male</label><br>
+        <label for="male">Male</label><br />
         <input type="radio" id="female" name="gender" value="female">
-        <label for="female">Female</label><br>
+        <label for="female">Female</label><br />
         <input type="radio" id="other" name="gender" value="other">
-        <label for="other">Other</label><br><br>
+        <label for="other">Other</label><br /><br />
         <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-        <label for="vehicle1"> I have a bike</label><br>
+        <label for="vehicle1"> I have a bike</label><br />
         <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-        <label for="vehicle2"> I have a car</label><br>
+        <label for="vehicle2"> I have a car</label><br />
         <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-        <label for="vehicle3"> I have a boat</label><br><br>
+        <label for="vehicle3"> I have a boat</label><br /><br />
         <label for="favcolor">Select your favorite color:</label>
-        <input type="color" id="favcolor" name="favcolor"><br><br>
+        <input type="color" id="favcolor" name="favcolor"><br /><br />
         <input type="button" value="Submit" onclick="form_query()" style="background-color: green; border-radius: 5px; margin: 2px; padding: 5px;">
         <input type="reset" id="btn_reset" value="Reset" style="background-color: orange; border-radius: 5px; margin: 2px; padding: 5px;">
         <input type="button" style="background-color: red; border-radius: 5px; margin: 2px; padding: 5px;" onclick="alert('ALERT !!!\n\nOMG ... you just clicked the RED button !?')" value="Click Me NOT">
@@ -256,18 +254,18 @@
         var missingOneName = str.startsWith(',') || str.includes(', , ');
 
         if (!missingOneName){
-          if (document.getElementById('entries').innerHTML != ''){ document.getElementById('entries').innerHTML += "<br>"; }
+          if (document.getElementById('entries').innerHTML != ''){ document.getElementById('entries').innerHTML += "<br />"; }
           document.getElementById('entries').innerHTML += str.substring(0, str.length - 2)
           document.getElementById("btn_reset").click();
         }
       }
     </script>
 
-    <p class="spacer" id="P9">&nbsp;</p>
+    <br id="P9" /><br />
     <div style="display: inline-block;"><p>Images & Text</p>
       <div style="width: 45%; float: inline-start;">
         <a href="https://svgstudio.com/pages/free-sample" target="_blank">
-          <img src="Freesample.svg" alt="Free SVG Sample" style="width: 67px; height: 56px; float: left;">
+          <img src="Freesample.svg" alt="Free SVG Sample" style="width: 67px; height: 56px; float: left;" />
         </a>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec cursus dictum justo, nec finibus nisi auctor sed.
         In commodo odio et volutpat dictum. Vestibulum congue viverra orci, sit amet elementum eros.
@@ -278,7 +276,7 @@
       </div>&nbsp;
       <div style="width: 45%; float: inline-end;">
         <a href="https://svgstudio.com/pages/free-sample" target="_blank">
-          <img src="Freesample.svg" alt="Free SVG Sample" style="width: 67px; height: 56px; float: right;">
+          <img src="Freesample.svg" alt="Free SVG Sample" style="width: 67px; height: 56px; float: right;" />
         </a>
         Maecenas sit amet dolor vitae nisi maximus cursus. Curabitur ultricies in libero eget porttitor.
         Nulla congue luctus lobortis. Nulla efficitur, enim non euismod faucibus, nisl nibh facilisis nunc,
@@ -288,28 +286,28 @@
         Donec sed dolor in metus vestibulum sodales at a mi. Vestibulum sed nibh nec dolor consectetur posuere.
         Praesent lacus dui, aliquet elementum lobortis non, sollicitudin nec libero.
       </div>
-    </div><br>
+    </div><br />
 
-    <p class="spacer" id="P10">&nbsp;</p>
+    <br id="P10" /><br />
     <div style="display: inline-block;"><p>Rotating over X, Y, Z axis</p>
-      <div class="rotateX" style="text-align: center; width: 10%; float: inline-start;">Rotating over X axis</div><br><br><br>
+      <div class="rotateX" style="text-align: center; width: 10%; float: inline-start;">Rotating over X axis</div><br /><br /><br /><br />
 
-      <div class="rotateZ" style="text-align: center; width: 10%; margin: auto">Rotating over Z axis</div><br><br>
+      <div class="rotateZ" style="text-align: center; width: 10%; margin: auto">Rotating over Z axis</div><br /><br />
 
       <div class="rotateY" style="text-align: center; width: 10%; float: inline-end;">Rotating over Y axis</div>
-    </div><br>
+    </div><br />
 
-    <div><p>Rotating over XYZ axes</p><br><br><br>
+    <div><p>Rotating over XYZ axes</p><br /><br /><br /><br />
       <div class="rotateXYZ" style="text-align: center; width: 215px; height: 111px; margin: auto;">
         <a href="https://pixabay.com/photos/cube-play-random-gambling-luck-1963036/" target="_blank">
-          <img src="cube-1963036_640.jpg" alt="Cube Image" style="width: 215px; height: 111px;">
+          <img src="cube-1963036_640.jpg" alt="Cube Image" style="width: 215px; height: 111px;" />
         </a>
-      </div><br><br><br>
+      </div><br /><br /><br /><br />
     </div>
 
-    <p class="spacer" id="P11">&nbsp;</p>
+    <br id="P11" /><br />
     <div><p>JavaScript</p>
-      <p id="link" style="width: 120px; margin: auto;"></p><br>
+      <p id="link" style="width: 120px; margin: auto;"></p><br />
       <div style="text-align: center; width: 120px; margin: auto;">
         <button type="button" id="btnLink" onclick="show_hide_link()">Show GitHub Link</button>
       </div>
@@ -347,7 +345,7 @@
           }
         }
       </script>
-    </div><br>
+    </div><br />
 
     <p class="footer">References: https://www.w3schools.com , https://www.geeksforgeeks.org/how-to-create-a-link-in-javascript/ ,
       https://flaviocopes.com/rotate-image , https://www.lipsum.com , https://svgstudio.com/pages/free-sample , https://pixabay.com ,
