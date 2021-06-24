@@ -18,6 +18,8 @@ All it takes is to:
 # Licensing
 This is MIT licensed.
 
+The video and cube image were downloaded as a free content and are under [Pixabay License](https://pixabay.com/service/license/).
+
 # Trademarks
 Any and all trademarks, either directly or indirectly mentioned here, belong to their respective owners.
 
