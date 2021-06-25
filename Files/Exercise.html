@@ -232,8 +232,8 @@
         <input type="color" id="favcolor" name="favcolor"><br /><br />
         <input type="button" value="Submit" onclick="form_query()" style="background-color: green; border-radius: 5px; margin: 2px; padding: 5px;">
         <input type="reset" id="btn_reset" value="Reset" style="background-color: orange; border-radius: 5px; margin: 2px; padding: 5px;">
-        <input type="button" style="background-color: red; border-radius: 5px; margin: 2px; padding: 5px;" onclick="alert('ALERT !!!\n\nOMG ... you just clicked the RED button !?')" value="Click Me NOT">
         <input type="button" id="btn_disappear" onclick="document.getElementById('btn_disappear').hidden = 'True'" value="I am here temporarily">
+        <input type="button" style="float: inline-end; background-color: red; border-radius: 5px; margin-right: 2px; padding: 5px;" onclick="alert('ALERT !!!\n\nOMG ... you just clicked the RED button !?')" value="Click Me NOT">
       </form>
     </div>
 
@@ -389,6 +389,7 @@
           });
           $("#show_div").click(function(){
             $("div").show();
+            $("html, body").animate({ scrollTop: $(document).height() }, 1000);
           });
           $("#menu_animate").click(function(){
             $(".fixed-menu").animate({top: '200px'}, 'slow', function() { $(".fixed-menu").animate({top: '0px'}, 'slow') });
