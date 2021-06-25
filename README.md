@@ -1,5 +1,5 @@
 # HTML_CSS_JS
-Exercise in HTML, CSS and JavaScript. Intended for those who might be either learning these or would just like to have several examples in a single page.
+Exercise in HTML, CSS and JavaScript. Intended for those who either might be learning these or would just like to have several examples in a single page.
 
 Some might consider these as relatively simple examples but they only reflect a way of how I am going about learning these languages.
 
@@ -18,7 +18,7 @@ All it takes is to:
 # Licensing
 This is MIT licensed.
 
-The video and cube image were downloaded as a free media content and are under [Pixabay License](https://pixabay.com/service/license/).
+The video and the cube image were downloaded as a free media content and are under [Pixabay License](https://pixabay.com/service/license/).
 
 # Trademarks
 Any and all trademarks, either directly or indirectly mentioned here, belong to their respective owners.
