@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta content="utf-8" charset="utf-8" http-equiv="encoding">
+    <script src="jquery-3.6.0.js"></script>
     <style>
       div { background-color: aliceblue; width: 99%; border: 2px solid green; border-radius: 5px; padding: 5px; margin: 5px; }
       h1, h2, h3, h4, h5, h6 { margin-top: 1px; margin-bottom: 3px;}
@@ -14,14 +15,14 @@
       li { color: green; font-size: 120%; width: 10%; padding: 5px; }
       li.block { color: green; font-size: 120%; width: 10%; display: block; }
       li.inline { color: green; font-size: 120%; width: 10%; display: inline; }
-      p { text-align:center; color: blue; border: 1px solid lightblue; margin-bottom: 10px; }
+      p { text-align: center; color: blue; border: 1px solid lightblue; margin-bottom: 10px; }
       blut { color: blue; font-size: 175%; }
       gnt { color: green; font-size: 150%; }
       rdt { color: red; font-size: 125%; }
       dgt { color: darkgrey ; font-size: 100%; }
-      blkt { color: black; font-size: 75%;}
+      blkt { color: black; font-size: 75%; }
       .required label:after { color: red; content: ' *'; display: inline; }
-      .fixed-menu { position: fixed; z-index: 1; left: 0px; top: 0px; margin: 0px; font-size: larger; width: 99.7%; border: 2px solid navy; border-radius: 3px; background-color: #f8f1c1; }
+      .fixed-menu { position: fixed; z-index: 1; left: 0px; top: 0px; margin: 0px; font-size: large; width: 99.7%; border: 2px solid navy; border-radius: 3px; background-color: #f8f1c1; }
       .footer { position: static; margin: 0px; left: 0px; bottom: 0px; width: 99.7%; background-color: yellow; text-align: center; }
       .rotateX { animation: rotationX 8s infinite linear; }
       .rotateY { animation: rotationY 8s infinite linear; }
@@ -38,7 +39,7 @@
     <p class="fixed-menu"><a href="#P1">Top</a>&nbsp; &nbsp;<a href="#P2">SVG</a>&nbsp; &nbsp;<a href="#P3">Headers</a>&nbsp; &nbsp;
       <a href="#P4">Mixed Text</a>&nbsp; &nbsp;<a href="#P5">Lists</a>&nbsp; &nbsp;<a href="#P6">Table</a>&nbsp; &nbsp;
       <a href="#P7">Inline Frame</a>&nbsp; &nbsp;<a href="#P8">Form</a>&nbsp; &nbsp;<a href="#P9">Images & Text</a>&nbsp; &nbsp;
-      <a href="#P10">Rotation</a>&nbsp; &nbsp;<a href="#P11">Video</a>&nbsp; &nbsp;<a href="#P12">JavaScript</a>
+      <a href="#P10">Rotation</a>&nbsp; &nbsp;<a href="#P11">Video</a>&nbsp; &nbsp;<a href="#P12">JavaScript</a>&nbsp; &nbsp;<a href="#P13">JQuery</a>
     </p>
 
     <br id="P1" /><br />
@@ -363,7 +364,36 @@
           }
         }
       </script>
-    </div><br />
+    </div>
+
+    <br id="P13" />
+    <p>JQuery</p><br />
+      <button type="button" id="hide_div" style="width: 150px; float: inline-start; margin-left: 30%;">Hide "div" Elements</button>
+      <button type="button" id="show_div" style="width: 150px; float: inline-end; margin-right: 30%;">Show "div" Elements</button><br /><br />
+      <button type="button" id="fade_out" style="width: 150px; float: inline-start; margin-left: 37%;">Footer FadeOut</button>
+      <button type="button" id="fade_in" style="width: 150px; float: inline-end; margin-right: 37%;">Footer FadeIn</button><br /><br />
+      <button type="button" id="menu_animate" style="width: 150px; display: block; margin: auto;">Animate Top Menu</button>
+      <br /><br /><br />
+
+      <script>
+        $(document).ready(function(){
+          $("#fade_in").click(function(){
+            $(".footer").fadeIn();
+          });
+          $("#fade_out").click(function(){
+            $(".footer").fadeOut();
+          });
+          $("#hide_div").click(function(){
+            $("div").hide();
+          });
+          $("#show_div").click(function(){
+            $("div").show();
+          });
+          $("#menu_animate").click(function(){
+            $(".fixed-menu").animate({top: '200px'}, 'slow', function() { $(".fixed-menu").animate({top: '0px'}, 'slow') });
+          });
+        });
+      </script>
 
     <p class="footer">References: https://www.w3schools.com , https://www.geeksforgeeks.org/how-to-create-a-link-in-javascript/ ,
       https://flaviocopes.com/rotate-image , https://www.lipsum.com , https://svgstudio.com/pages/free-sample , https://pixabay.com ,
