@@ -379,6 +379,7 @@
         $(document).ready(function(){
           $("#fade_in").click(function(){
             $(".footer").fadeIn();
+            $("html, body").animate({ scrollTop: $(document).height() }, 1000);
           });
           $("#fade_out").click(function(){
             $(".footer").fadeOut();
