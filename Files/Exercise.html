@@ -43,11 +43,22 @@
     </style>
     <title>HTML-CSS-JS Exercise</title>
   </head>
+  <!-- Lots of code lines below have been separated to single lines for clarity -->
   <body>
-    <p class="fixed-menu"><a href="#P1">Top</a>&nbsp; &nbsp;<a href="#P2">SVG</a>&nbsp; &nbsp;<a href="#P3">Headers</a>&nbsp; &nbsp;
-      <a href="#P4">Mixed Text</a>&nbsp; &nbsp;<a href="#P5">Lists</a>&nbsp; &nbsp;<a href="#P6">Table</a>&nbsp; &nbsp;
-      <a href="#P7">Inline Frame</a>&nbsp; &nbsp;<a href="#P8">Form</a>&nbsp; &nbsp;<a href="#P9">Images & Text</a>&nbsp; &nbsp;
-      <a href="#P10">Rotation</a>&nbsp; &nbsp;<a href="#P11">Video</a>&nbsp; &nbsp;<a href="#P12">JavaScript</a>&nbsp; &nbsp;<a href="#P13">JQuery</a>
+    <p class="fixed-menu">
+      <a href="#P1">Top</a>&nbsp; &nbsp;
+      <a href="#P2">SVG</a>&nbsp; &nbsp;
+      <a href="#P3">Headers</a>&nbsp; &nbsp;
+      <a href="#P4">Mixed Text</a>&nbsp; &nbsp;
+      <a href="#P5">Lists</a>&nbsp; &nbsp;
+      <a href="#P6">Table</a>&nbsp; &nbsp;
+      <a href="#P7">Inline Frame</a>&nbsp; &nbsp;
+      <a href="#P8">Form</a>&nbsp; &nbsp;
+      <a href="#P9">Images & Text</a>&nbsp; &nbsp;
+      <a href="#P10">Rotation</a>&nbsp; &nbsp;
+      <a href="#P11">Video</a>&nbsp; &nbsp;
+      <a href="#P12">JavaScript</a>&nbsp; &nbsp;
+      <a href="#P13">JQuery</a>
     </p>
 
     <br id="P1" />
@@ -55,6 +66,7 @@
 
     <br id="P2" /><br />
     <div style="text-align: center; display: inline-block;"><p>SVG</p>
+      <!-- Side SVG pictures are drawn while the middle is just a free sample available for download -->
       <div style="width: 115px; float: inline-start;">
         <svg class="rotateZ" width="100" height="100">
           <defs>
@@ -105,8 +117,15 @@
 
     <br id="P4" /><br />
     <div style="text-align: center;"><p>Mixed color and font-size inline text</p>
-        <blut>Blue &nbsp;</blut><gnt>Green &nbsp;</gnt><rdt>Red &nbsp;</rdt><dgt>DarkGrey &nbsp;</dgt><blkt>Black &nbsp;</blkt>
-        <dgt>DarkGrey &nbsp;</dgt><rdt>Red &nbsp;</rdt><gnt>Green &nbsp;</gnt><blut>Blue</blut>
+        <blut>Blue &nbsp;</blut>
+        <gnt>Green &nbsp;</gnt>
+        <rdt>Red &nbsp;</rdt>
+        <dgt>DarkGrey &nbsp;</dgt>
+        <blkt>Black &nbsp;</blkt>
+        <dgt>DarkGrey &nbsp;</dgt>
+        <rdt>Red &nbsp;</rdt>
+        <gnt>Green &nbsp;</gnt>
+        <blut>Blue</blut>
     </div>
 
     <br id="P5" /><br />
@@ -173,11 +192,13 @@
 
       <br id="P7" /><br />
       <div style="text-align: center;"><p>Inline Frame</p>
-      <iframe src="iFrame1.html" name="ifrm" title="Inline Examples" style="width: 98%; height: 200px;" sandbox="allow-scripts"></iframe>
+      <!-- Most websites will not allow openning their page in an embedded frame  -->
+      <iframe src="iFrame1.html" name="ifrm" title="Inline Examples" style="background-color: white; width: 98%; height: 400px;" sandbox="allow-scripts"></iframe>
       <p>
-        <a href="ShowDateTime.html" target="ifrm">Show Date/Time</a>&nbsp; &nbsp; &nbsp;
-        <a href="iFrame1.html" target="ifrm">iFrame1 Page</a>&nbsp; &nbsp; &nbsp;
-        <a href="iFrame2.html" target="ifrm">iFrame2 Page</a>&nbsp; &nbsp; &nbsp;
+        <a href="iFrame1.html" target="ifrm">iFrame1</a>&nbsp; &nbsp; &nbsp;
+        <a href="iFrame2.html" target="ifrm">iFrame2</a>&nbsp; &nbsp; &nbsp;
+        <a href="3D Cube.html" target="ifrm">3D Cube</a>&nbsp; &nbsp; &nbsp;
+        <a href="ShowDateTime.html" target="ifrm">Date/Time</a>&nbsp; &nbsp; &nbsp;
         <label for="url">URL:</label>&nbsp;
         <input type="text" id="url" name="url" size="60" value="">&nbsp;
         <button id="btn_go" onclick="display_url()" style="border-radius: 2px; margin: 2px; padding: 2px;">Go</button>
@@ -190,7 +211,6 @@
 
         if ( txt != '') {
           // Create and use anchor element
-          // Some sites will still not allow openning their page in an embedded frame
           var a = document.createElement('a');
           a.href = txt;
           a.target = "ifrm"
@@ -270,7 +290,7 @@
 
     <br id="P9" /><br />
     <div style="display: inline-block;"><p>Images & Text</p>
-      <div style="width: 45%; float: inline-start;">
+      <div style="background-color: white; width: 45%; float: inline-start;">
         <a href="https://svgstudio.com/pages/free-sample" target="_blank" style="border: 0px; padding-left: 0px; padding-right: 0px;">
           <img src="Freesample.svg" alt="Free SVG Sample" style="width: 67px; height: 56px; float: left;" />
         </a>
@@ -281,7 +301,7 @@
         Cras faucibus mauris a faucibus suscipit. Nam vel elementum lectus. Integer vitae enim massa.
         Cras porttitor sit amet ex iaculis venenatis. Morbi nec arcu ac velit sagittis rutrum.
       </div>&nbsp;
-      <div style="width: 45%; float: inline-end;">
+      <div style="background-color: white; width: 45%; float: inline-end;">
         <a href="https://svgstudio.com/pages/free-sample" target="_blank" style="border: 0px; padding-left: 0px; padding-right: 0px;">
           <img src="Freesample.svg" alt="Free SVG Sample" style="width: 67px; height: 56px; float: right;" />
         </a>
@@ -297,19 +317,19 @@
 
     <br id="P10" /><br />
     <div style="display: inline-block;"><p>Rotating over X, Y, Z axis</p>
-      <div class="rotateX" style="text-align: center; width: 10%; float: inline-start;">Rotating over X axis</div><br /><br /><br /><br />
+      <div class="rotateX" style="background-color: white; text-align: center; width: 10%; float: inline-start;">Rotating over X axis</div><br /><br /><br /><br />
 
-      <div class="rotateZ" style="text-align: center; width: 10%; margin: auto">Rotating over Z axis</div><br /><br />
+      <div class="rotateZ" style="background-color: white; text-align: center; width: 10%; margin: auto">Rotating over Z axis</div><br /><br />
 
-      <div class="rotateY" style="text-align: center; width: 10%; float: inline-end;">Rotating over Y axis</div>
+      <div class="rotateY" style="background-color: white; text-align: center; width: 10%; float: inline-end;">Rotating over Y axis</div>
     </div><br />
 
     <div style="display: inline-block;"><p>Rotating over XY, XZ, YZ axes</p><br /><br /><br />
-      <div class="rotateXY" style="text-align: center; width: 10%; float: inline-start;">Rotating over XY axes</div>
+      <div class="rotateXY" style="background-color: white; text-align: center; width: 10%; float: inline-start;">Rotating over XY axes</div>
 
-      <div class="rotateYZ" style="text-align: center; width: 10%; float: inline-end;">Rotating over YZ axes</div>
+      <div class="rotateYZ" style="background-color: white; text-align: center; width: 10%; float: inline-end;">Rotating over YZ axes</div>
 
-      <div class="rotateXZ" style="text-align: center; width: 10%; margin: auto">Rotating over XZ axes</div><br /><br /><br /><br />
+      <div class="rotateXZ" style="background-color: white; text-align: center; width: 10%; margin: auto">Rotating over XZ axes</div><br /><br /><br /><br />
     </div><br />
 
     <div><p>Rotating over XYZ axes</p><br /><br /><br /><br />
@@ -454,7 +474,8 @@
 
     <p class="footer">References: https://www.w3schools.com , https://www.geeksforgeeks.org/how-to-create-a-link-in-javascript/ ,
       https://flaviocopes.com/rotate-image , https://www.lipsum.com , https://svgstudio.com/pages/free-sample , https://pixabay.com ,
-      https://stackoverflow.com/questions/11197671/ , https://css-tricks.com/use-and-reuse-everything-in-svg-even-animations/
+      https://stackoverflow.com/questions/11197671/ , https://css-tricks.com/use-and-reuse-everything-in-svg-even-animations/ ,
+      https://codepen.io/MRokas/pen/aNBjdQ , https://www.sitepoint.com/building-3d-engine-javascript/
     </p>
   </body>
 </html>
