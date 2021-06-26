@@ -36,5 +36,5 @@ All of the following that I have used and whatever other resources you can find:
 - https://svgstudio.com/pages/free-sample
 - https://stackoverflow.com/questions/11197671/
 - https://pixabay.com
-
-Here is the link to [Interactive Rotating 3D Cube](https://codepen.io/MRokas/pen/aNBjdQ), not used in this exercise but rather interesting.
+- https://codepen.io/MRokas/pen/aNBjdQ
+- https://www.sitepoint.com/building-3d-engine-javascript/
