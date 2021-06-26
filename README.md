@@ -30,6 +30,7 @@ All of the following that I have used and whatever other resources you can find:
 
 - https://www.w3schools.com
 - https://www.geeksforgeeks.org/how-to-create-a-link-in-javascript/
+- https://css-tricks.com/use-and-reuse-everything-in-svg-even-animations/
 - https://flaviocopes.com/rotate-image
 - https://www.lipsum.com
 - https://svgstudio.com/pages/free-sample
