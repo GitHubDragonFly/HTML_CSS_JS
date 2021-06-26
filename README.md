@@ -11,8 +11,6 @@ There is no specific browser support included so some things might not be suppor
 
 It would be recommended that you also check [this](https://github.com/GitHubDragonFly/WebProject) project and look at all the files created by it, especially because it is interacting with the django built-in server (there is also a link to django tutorial).
 
-Here is the link to [Interactive Rotating 3D Cube](https://codepen.io/MRokas/pen/aNBjdQ), not used in this exercise but rather interesting.
-
 # Usage
 All it takes is to:
 
@@ -38,3 +36,5 @@ All of the following that I have used and whatever other resources you can find:
 - https://svgstudio.com/pages/free-sample
 - https://stackoverflow.com/questions/11197671/
 - https://pixabay.com
+
+Here is the link to [Interactive Rotating 3D Cube](https://codepen.io/MRokas/pen/aNBjdQ), not used in this exercise but rather interesting.
