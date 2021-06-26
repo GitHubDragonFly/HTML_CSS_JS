@@ -57,8 +57,8 @@
 
     <br id="P2" /><br />
     <div style="text-align: center; display: inline-block;"><p>SVG</p>
-      <div style="width: 110px; float: inline-start;">
-        <svg width="100" height="100">
+      <div style="width: 115px; float: inline-start;">
+        <svg class="rotateZ" width="100" height="100">
           <defs>
             <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" style="stop-color:rgb(0,255,255);stop-opacity:1" />
@@ -68,8 +68,8 @@
           <ellipse cx="50" cy="50" rx="48" ry="35" stroke="navy" stroke-width="1" fill="url(#grad1)" />
         </svg>
       </div>
-      <div style="width: 110px; float: inline-end;">
-        <svg width="100" height="100">
+      <div style="width: 115px; float: inline-end;">
+        <svg class="rotateXYZ" width="100" height="100">
           <defs>
             <radialGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
@@ -326,6 +326,47 @@
       </p>
     </div>
 
+    <div><p>Rotating SVG with multiple elements over mixed axes</p>
+      <div style="text-align: center; width: 200px; height: 200px; margin: auto; border: 0px;">
+        <svg width="200" height="200">
+          <defs>
+            <g id="cube" class="cube-unit">
+              <rect class="rotateXY" width="21" height="24" fill="red" stroke="#0079ad" transform="skewY(30)"/>
+              <rect class="rotateZ" width="21" height="24" fill="yellow" stroke="#0079ad" transform="skewY(-30) translate(21 24.3)"/>
+              <rect class="rotateXYZ" width="21" height="21" fill="blue" stroke="#0079ad" transform="scale(1.41,.81) rotate(45) translate(0 -21)"/>
+            </g>
+          </defs>
+          <use xlink:href="#cube" x="121" y="112"/>
+          <use xlink:href="#cube" x="100" y="124"/>
+          <use xlink:href="#cube" x="142" y="124"/>
+          <use xlink:href="#cube" x="121" y="136"/>
+          <use xlink:href="#cube" x="79" y="136"/>
+          <use xlink:href="#cube" x="163" y="136"/>
+          <use xlink:href="#cube" x="142" y="148"/>
+          <use xlink:href="#cube" x="100" y="148"/>
+          <use xlink:href="#cube" x="121" y="160"/>
+          <use xlink:href="#cube" x="121" y="88"/>
+          <use xlink:href="#cube" x="100" y="100"/>
+          <use xlink:href="#cube" x="142" y="100"/>
+          <use xlink:href="#cube" x="121" y="112"/>
+          <use xlink:href="#cube" x="79" y="112"/>
+          <use xlink:href="#cube" x="163" y="112"/>
+          <use xlink:href="#cube" x="142" y="124"/>
+          <use xlink:href="#cube" x="100" y="124"/>
+          <use xlink:href="#cube" x="121" y="136"/>
+          <use xlink:href="#cube" x="121" y="64"/>
+          <use xlink:href="#cube" x="100" y="76"/>
+          <use xlink:href="#cube" x="142" y="76"/>
+          <use xlink:href="#cube" x="121" y="88"/>
+          <use xlink:href="#cube" x="79" y="88"/>
+          <use xlink:href="#cube" x="163" y="88"/>
+          <use xlink:href="#cube" x="142" y="100"/>
+          <use xlink:href="#cube" x="100" y="100"/>
+          <use xlink:href="#cube" x="121" y="112"/>
+        </svg>
+      </div>
+    </div>
+
     <br id="P11" /><br />
     <div><p>Media - Video</p><br />
       <div style="text-align: center; width: 640px; height: 360px; margin: auto;">
@@ -415,7 +456,7 @@
 
     <p class="footer">References: https://www.w3schools.com , https://www.geeksforgeeks.org/how-to-create-a-link-in-javascript/ ,
       https://flaviocopes.com/rotate-image , https://www.lipsum.com , https://svgstudio.com/pages/free-sample , https://pixabay.com ,
-      https://stackoverflow.com/questions/11197671/
+      https://stackoverflow.com/questions/11197671/ , https://css-tricks.com/use-and-reuse-everything-in-svg-even-animations/
     </p>
   </body>
 </html>
