@@ -11,7 +11,8 @@ There is no specific browser support included so some things might not be suppor
 
 It would be recommended that you also check [this](https://github.com/GitHubDragonFly/WebProject) project and look at all the files created by it, especially because it is interacting with the django built-in server (there is also a link to django tutorial).
 
-## Note: "3D Cube 1" drawing code might need some corrections. Currently, the transparency allows it to be seen as correct but if you go about changing the "fill" and "stroke" values to more solid, 0.1 changed to 1.0, then you might see somewhat incorrect transitions. This is even more obvious if painting each side of the cube with a different color. 
+## Note:
+"3D Cube 1" drawing code might need some corrections. Currently, the transparency allows it to be seen as correct but if you go about changing the "fill" and "stroke" values to more solid, 0.1 changed to 1.0, then you might see somewhat incorrect transitions. This is even more obvious if painting each side of the cube with a different color. 
 
 # Usage
 All it takes is to:
