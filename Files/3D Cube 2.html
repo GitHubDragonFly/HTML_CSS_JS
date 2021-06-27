@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta content="utf-8" charset="utf-8" http-equiv="encoding">
+    <style>
+      * { box-sizing: border-box; }
+      body { font-family: sans-serif; }
+
+      .scene {
+        width: 200px;
+        height: 200px;
+        margin: 80px;
+        perspective: 400px;
+      }
+
+      .cube {
+        width: 200px;
+        height: 200px;
+        position: relative;
+        transform-style: preserve-3d;
+        transform: translateZ(-100px);
+        transition: transform 1s;
+      }
+
+      .cube.show-front  { transform: translateZ(-100px) rotateY(   0deg); }
+      .cube.show-right  { transform: translateZ(-100px) rotateY( -90deg); }
+      .cube.show-back   { transform: translateZ(-100px) rotateY(-180deg); }
+      .cube.show-left   { transform: translateZ(-100px) rotateY(  90deg); }
+      .cube.show-top    { transform: translateZ(-100px) rotateX( -90deg); }
+      .cube.show-bottom { transform: translateZ(-100px) rotateX(  90deg); }
+      .cube.show-rotateX { animation: rotationX 8s infinite linear; }
+      .cube.show-rotateY { animation: rotationY 8s infinite linear; }
+      .cube.show-rotateZ { animation: rotationZ 8s infinite linear; }
+      .cube.show-rotateXY { animation: rotationXY 8s infinite linear; }
+      .cube.show-rotateXZ { animation: rotationXZ 8s infinite linear; }
+      .cube.show-rotateYZ { animation: rotationYZ 8s infinite linear; }
+      .cube.show-rotateXYZ { animation: rotationXYZ 8s infinite linear; }
+
+      .cube__face {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        border: 2px solid black;
+        line-height: 200px;
+        font-size: 40px;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+      }
+
+      .cube__face--front  { background: hsla(  0, 100%, 50%, 0.7); }
+      .cube__face--right  { background: hsla( 60, 100%, 50%, 0.7); }
+      .cube__face--back   { background: hsla(120, 100%, 50%, 0.7); }
+      .cube__face--left   { background: hsla(180, 100%, 50%, 0.7); }
+      .cube__face--top    { background: hsla(240, 100%, 50%, 0.7); }
+      .cube__face--bottom { background: hsla(300, 100%, 50%, 0.7); }
+
+      .cube__face--front  { transform: rotateY( 0deg) translateZ(100px); }
+      .cube__face--right  { transform: rotateY( 90deg) translateZ(100px); }
+      .cube__face--back   { transform: rotateY(180deg) translateZ(100px); }
+      .cube__face--left   { transform: rotateY(-90deg) translateZ(100px); }
+      .cube__face--top    { transform: rotateX( 90deg) translateZ(100px); }
+      .cube__face--bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+      label { margin-right: 10px; }
+
+      @keyframes rotationX { from { transform: translateZ(-100px) rotateX(0deg); } to { transform: translateZ(-100px) rotateX(359deg); } }
+      @keyframes rotationY { from { transform: translateZ(-100px) rotateY(0deg); } to { transform: translateZ(-100px) rotateY(359deg); } }
+      @keyframes rotationZ { from { transform: translateZ(-100px) rotateZ(0deg); } to { transform: translateZ(-100px) rotateZ(359deg); } }
+      @keyframes rotationXY { from { transform: translateZ(-100px) rotate3d(1,1,0,0deg); } to { transform: translateZ(-100px) rotate3d(1,1,0,359deg); } }
+      @keyframes rotationXZ { from { transform: translateZ(-100px) rotate3d(1,0,1,0deg); } to { transform: translateZ(-100px) rotate3d(1,0,1,359deg); } }
+      @keyframes rotationYZ { from { transform: translateZ(-100px) rotate3d(0,1,1,0deg); } to { transform: translateZ(-100px) rotate3d(0,1,1,359deg); } }
+      @keyframes rotationXYZ { from { transform: translateZ(-100px) rotate3d(1,1,1,0deg); } to { transform: translateZ(-100px) rotate3d(1,1,1,359deg); } }
+    </style>
+    <title>3D Cube 2</title>
+  </head>
+  <body>
+  	<!-- Original source code: https://codepen.io/desandro/pen/KRWjzm -->
+    <br /><br /><br />
+    <div class="scene" style="margin: auto;">
+      <div class="cube">
+        <div class="cube__face cube__face--front">front</div>
+        <div class="cube__face cube__face--back">back</div>
+        <div class="cube__face cube__face--right">right</div>
+        <div class="cube__face cube__face--left">left</div>
+        <div class="cube__face cube__face--top">top</div>
+        <div class="cube__face cube__face--bottom">bottom</div>
+      </div>
+    </div><br /><br />
+
+    <p class="radio-group" style="text-align: center;">
+      <label>
+        <input type="radio" name="rotate-cube-side" value="front" checked /> front
+      </label>
+      <label>
+        <input type="radio" name="rotate-cube-side" value="right" /> right
+      </label>
+      <label>
+        <input type="radio" name="rotate-cube-side" value="back" /> back
+      </label>
+      <label>
+        <input type="radio" name="rotate-cube-side" value="left" /> left
+      </label>
+      <label>
+        <input type="radio" name="rotate-cube-side" value="top" /> top
+      </label>
+      <label>
+        <input type="radio" name="rotate-cube-side" value="bottom" /> bottom
+      </label><br /><br />
+      <label>
+        <input type="radio" name="rotate-cube-side" value="rotateX" /> rotateX
+      </label>
+      <label>
+        <input type="radio" name="rotate-cube-side" value="rotateY" /> rotateY
+      </label>
+      <label>
+        <input type="radio" name="rotate-cube-side" value="rotateZ" /> rotateZ
+      </label>
+      <label>
+        <input type="radio" name="rotate-cube-side" value="rotateXY" /> rotateXY
+      </label>
+      <label>
+        <input type="radio" name="rotate-cube-side" value="rotateXZ" /> rotateXZ
+      </label>
+      <label>
+        <input type="radio" name="rotate-cube-side" value="rotateYZ" /> rotateYZ
+      </label>
+      <label>
+        <input type="radio" name="rotate-cube-side" value="rotateXYZ" /> rotateXYZ
+      </label>
+    </p>
+
+    <script>
+      var cube = document.querySelector('.cube');
+      var radioGroup = document.querySelector('.radio-group');
+      var currentClass = '';
+
+      function changeSide() {
+        var checkedRadio = radioGroup.querySelector(':checked');
+        var showClass = 'show-' + checkedRadio.value;
+
+        if ( currentClass ) {
+          cube.classList.remove( currentClass );
+        }
+
+        cube.classList.add( showClass );
+        currentClass = showClass;
+      }
+
+      // set initial side
+      changeSide();
+
+      radioGroup.addEventListener( 'change', changeSide );
+    </script>
+  </body>
+</html>
