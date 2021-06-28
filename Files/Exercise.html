@@ -48,8 +48,8 @@
       @keyframes rotationXYZ { from { transform: rotate3d(1,1,1,0deg); } to { transform: rotate3d(1,1,1,359deg); } }
 
       .rotateXYCubic { animation: rotationXYCubic 8s infinite linear; animation-timing-function: cubic-bezier(.05, .55, .1, 1.5); }
-      .rotateXZCubic { animation: rotationXZCubic 8s infinite linear; animation-timing-function: cubic-bezier(.05, .55, .1, 1.5); }
-      .rotateYZCubic { animation: rotationYZCubic 8s infinite linear; animation-timing-function: cubic-bezier(.05, .55, .1, 1.5); }
+      .rotateXZCubic { animation: rotationXZCubic 8s infinite linear; animation-timing-function: cubic-bezier(.42, 0, 1, 1); }
+      .rotateYZCubic { animation: rotationYZCubic 8s infinite linear; animation-timing-function: cubic-bezier(0, 0, .58, 1); }
       @keyframes rotationXYCubic { from { transform: rotate3d(1,1,0,0deg); } to { transform: rotate3d(1,1,0,359deg); } }
       @keyframes rotationXZCubic { from { transform: rotate3d(1,0,1,0deg); } to { transform: rotate3d(1,0,1,359deg); } }
       @keyframes rotationYZCubic { from { transform: rotate3d(0,1,1,0deg); } to { transform: rotate3d(0,1,1,359deg); } }
@@ -422,10 +422,10 @@
       <script>
         function show_hide_link() {
           if (document.getElementById('link').innerHTML != ''){
-            document.getElementById('link').innerHTML = ''
-            document.getElementById('btn_link').innerHTML = 'Show GitHub Link'
+            document.getElementById('link').innerHTML = '';
+            document.getElementById('btn_link').innerHTML = 'Show GitHub Link';
           } else {
-            document.getElementById('btn_link').innerHTML = 'Hide GitHub Link'
+            document.getElementById('btn_link').innerHTML = 'Hide GitHub Link';
 
             // Create anchor element
             var a = document.createElement('a');
@@ -443,32 +443,56 @@
             a.href = "https://github.com/GitHubDragonFly";
 
             // Set target as new tab or window
-            a.target = "_blank"
+            a.target = "_blank";
 
             // Append the anchor element to the 'link' paragraph
-            document.getElementById('link').appendChild(a)
+            document.getElementById('link').appendChild(a);
 
             // Append the anchor element to the body
             // document.body.appendChild(a);
           }
         }
 
-        // jQuery equivalent - remove onclick="show_hide_link()" from button, comment the above and uncomment the following
-        //$(document).ready(function(){
-        //  var btn_link_element = $("#btn_link")
+        // Alternative 1 - jQuery equivalent (replacing the element):
+        // - remove onclick="show_hide_link()" from button, comment the above and uncomment the following
+/*
+        $(document).ready(function(){
+          var btn_link_element = $("#btn_link")
 
-        //  btn_link_element.click(function(){
-        //    var link_element = $("#link")
+          btn_link_element.click(function(){
+            var link_element = $("#link")
 
-        //    if (link_element.text() == "") {
-        //      link_element.replaceWith("<p id='link'  style='width: 120px; margin: auto;'><a href='https://github.com/GitHubDragonFly/'>GitHub Account</a></p>");
-        //      btn_link_element.text("Hide GitHub Link")
-        //    } else {
-        //      link_element.replaceWith("<p id='link' style='width: 120px; margin: auto;'></p>");
-        //      btn_link_element.text("Show GitHub Link")
-        //    }
-        //  });
-        //});
+            if (link_element.text() == "") {
+              link_element.replaceWith("<p id='link' style='width: 120px; margin: auto;'><a href='https://github.com/GitHubDragonFly/'>GitHub Account</a></p>");
+              btn_link_element.text("Hide GitHub Link");
+            } else {
+              link_element.replaceWith("<p id='link' style='width: 120px; margin: auto;'></p>");
+              btn_link_element.text("Show GitHub Link");
+            }
+          });
+        });
+ */
+
+        // Alternative 2 - jQuery equivalent (using show/hide functions):
+        // - remove onclick="show_hide_link()" from button, change the #link paragraph to
+        // - "<p id='link' style='width: 120px; margin: auto; display: none;'><a href='https://github.com/GitHubDragonFly/'>GitHub Account</a></p>"
+        // - comment the above and uncomment the following
+/*
+        $(document).ready(function(){
+          var btn_link_element = $("#btn_link");
+          var link_element = $("#link");
+
+          btn_link_element.click(function(){
+            if (btn_link_element.text() == "Show GitHub Link") {
+              link_element.show();
+              btn_link_element.text("Hide GitHub Link");
+            } else {
+              link_element.hide();
+              btn_link_element.text("Show GitHub Link");
+            }
+          });
+        });
+*/
       </script>
     </div>
 
