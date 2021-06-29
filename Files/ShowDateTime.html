@@ -3,7 +3,7 @@
   <head>
     <meta content="utf-8" charset="utf-8" http-equiv="encoding">
     <style>
-      div { background-color: blue; color: white; width:50%; font-size: 150%; text-align: center; margin: auto; border: 2px solid green; border-radius: 5px; padding: 5px; }
+      div { background-color: blue; color: white; width:50%; font-size: 125%; text-align: center; margin: auto; border: 2px solid green; border-radius: 5px; padding: 5px; }
     </style>
     <title>Date/Time Page</title>
   </head>
@@ -17,10 +17,16 @@
       function showDateTime(){
         var date = new Date();
         var all_parts = date.toString().split(" ");
+        var str_date = "Date: ";
+        var str_time = "Time: ";
+        var str_zone = "Zone: ";
+        str_date = str_date.fontcolor("black");
+        str_time = str_time.fontcolor("black");
+        str_zone = str_zone.fontcolor("black");
 
-        document.getElementById("date").innerText = "Date: " + all_parts[0] + " " + date.toLocaleDateString();
-        document.getElementById("time").innerText = "Time: " + date.toLocaleTimeString();
-        document.getElementById("zone").innerText = "Zone: " + date.toString().substring(date.toString().indexOf("G"));
+        document.getElementById("date").innerHTML = str_date + all_parts[0] + " " + date.toLocaleDateString();
+        document.getElementById("time").innerHTML = str_time + date.toLocaleTimeString();
+        document.getElementById("zone").innerHTML = str_zone + date.toString().substring(date.toString().indexOf("G"));
     
         setTimeout(showDateTime, 1000);
       }
