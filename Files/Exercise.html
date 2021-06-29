@@ -93,9 +93,9 @@
     <p style="font-size: 36px; border: 0px;"><i>&#128578;</i> ~ Italicized Emojis ~ <i>&#128579;</i></p>
 
     <br id="P2" /><br />
-    <div style="text-align: center; display: inline-block;"><p>SVG</p>
+    <div style="text-align: center; display: -webkit-inline-box; -webkit-box-orient: vertical; display: inline-block;"><p>SVG</p>
       <!-- Side SVG pictures are drawn while the middle is just a free sample available for download -->
-      <div style="width: 115px; float: inline-start;">
+      <div style="width: 115px; float: left;">
         <svg class="rotateZ" width="100" height="100">
           <defs>
             <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -106,7 +106,7 @@
           <ellipse cx="50" cy="50" rx="48" ry="35" stroke="navy" stroke-width="1" fill="url(#grad1)" />
         </svg>
       </div>
-      <div style="width: 115px; float: inline-end;">
+      <div style="width: 115px; float: right;">
         <svg class="rotateXYZ" width="100" height="100">
           <defs>
             <radialGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -318,8 +318,8 @@
     </script>
 
     <br id="P9" /><br />
-    <div style="display: inline-block;"><p>Images & Text</p>
-      <div style="background-color: white; width: 45%; float: inline-start;">
+    <div style="display: -webkit-inline-box; -webkit-box-orient: vertical; display: inline-block;"><p>Images & Text</p>
+      <div style="background-color: white; width: 45%; float: left;">
         <img src="Images/Freesample.svg" alt="Free SVG Sample" style="width: 67px; height: 56px; float: left;" />
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec cursus dictum justo, nec finibus nisi auctor sed.
         In commodo odio et volutpat dictum. Vestibulum congue viverra orci, sit amet elementum eros.
@@ -328,7 +328,7 @@
         Cras faucibus mauris a faucibus suscipit. Nam vel elementum lectus. Integer vitae enim massa.
         Cras porttitor sit amet ex iaculis venenatis. Morbi nec arcu ac velit sagittis rutrum.
       </div>&nbsp;
-      <div style="background-color: white; width: 45%; float: inline-end;">
+      <div style="background-color: white; width: 45%; float: right;">
         <img src="Images/Freesample.svg" alt="Free SVG Sample" style="width: 67px; height: 56px; float: right;" />
         Maecenas sit amet dolor vitae nisi maximus cursus. Curabitur ultricies in libero eget porttitor.
         Nulla congue luctus lobortis. Nulla efficitur, enim non euismod faucibus, nisl nibh facilisis nunc,
@@ -341,22 +341,22 @@
     </div><br />
 
     <br id="P10" /><br />
-    <div style="display: inline-block; display: -moz-inline-box; -moz-box-orient: horizontal; vertical-align: top;">
+    <div style="display: -webkit-inline-box; -webkit-box-orient: vertical; display: inline-block;">
       <p>Rotating over X, Y, Z axis</p>
-      <div class="rotateX" style="background-color: white; text-align: center; width: 10%; float: inline-start;">Rotating over X axis</div><br /><br /><br /><br />
+      <div class="rotateX" style="background-color: white; text-align: center; width: 10%; float: left;">Rotating over X axis</div><br /><br /><br /><br />
 
       <div class="rotateZ" style="background-color: white; text-align: center; width: 10%; margin: auto">Rotating over Z axis</div><br /><br />
 
-      <div class="rotateY" style="background-color: white; text-align: center; width: 10%; float: inline-end;">Rotating over Y axis</div>
+      <div class="rotateY" style="background-color: white; text-align: center; width: 10%; float: right;">Rotating over Y axis</div>
     </div><br />
 
-    <div style="display: inline-block; display: -moz-inline-box; -moz-box-orient: horizontal; vertical-align: top;">
+    <div style="display: -webkit-inline-box; -webkit-box-orient: vertical; display: inline-block;">
       <p>Rotating over XY, XZ, YZ axes with timing function</p><br /><br /><br />
-      <div class="rotateXYCubic" style="background-color: white; text-align: center; width: 10%; float: inline-start;">Rotating over XY axes</div><br />
+      <div class="rotateXYCubic" style="background-color: white; text-align: center; width: 10%; float: left;">Rotating over XY axes</div><br />
 
       <div class="rotateXZCubic" style="background-color: white; text-align: center; width: 10%; margin: auto">Rotating over XZ axes</div>
 
-      <div class="rotateYZCubic" style="background-color: white; text-align: center; width: 10%; float: inline-end;">Rotating over YZ axes</div><br /><br /><br /><br /><br /><br />
+      <div class="rotateYZCubic" style="background-color: white; text-align: center; width: 10%; float: right;">Rotating over YZ axes</div><br /><br /><br /><br /><br />
     </div><br />
 
     <div><p>Rotating over XYZ axes</p><br /><br /><br /><br />
@@ -509,11 +509,11 @@
 
     <br id="P13" />
     <p>JQuery</p><br />
-      <button type="button" id="hide_div" style="width: 140px; float: inline-start; margin-left: 30%;">Hide "div" Elements</button>
-      <button type="button" id="show_div" style="width: 140px; float: inline-end; margin-right: 30%;">Show "div" Elements</button><br /><br />
-      <button type="button" id="fade_out" style="width: 120px; float: inline-start; margin-left: 37%;">Footer FadeOut</button>
-      <button type="button" id="fade_in" style="width: 120px; float: inline-end; margin-right: 37%;">Footer FadeIn</button><br /><br />
-      <button type="button" id="menu_animate" style="width: 150px; display: block; margin: auto;">Animate Top Menu</button>
+      <button type="button" id="hide_div" style="width: 140px; float: left; margin-left: 30%;">Hide "div" Elements</button>
+      <button type="button" id="show_div" style="width: 140px; float: right; margin-right: 30%;">Show "div" Elements</button><br /><br />
+      <button type="button" id="fade_out" style="width: 120px; float: left; margin-left: 37%;">Footer FadeOut</button>
+      <button type="button" id="fade_in" style="width: 120px; float: right; margin-right: 37%;">Footer FadeIn</button><br /><br />
+      <button type="button" id="menu_animate" style="width: 150px; display: -webkit-box; display: block; margin: auto;">Animate Top Menu</button>
       <br /><br /><br />
 
       <script>
