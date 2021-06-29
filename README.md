@@ -42,4 +42,5 @@ All of the following that I have used and whatever other resources you can find:
 - https://codepen.io/MRokas/pen/aNBjdQ
 - https://www.sitepoint.com/building-3d-engine-javascript/
 - https://codepen.io/desandro/pen/KRWjzm
+- https://codepen.io/thiagobraga/pen/bhDdn
 - https://mkyong.com/jquery/how-to-use-css-and-jquery-to-hide-and-show-tab-content/
