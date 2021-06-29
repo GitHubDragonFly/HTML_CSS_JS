@@ -11,6 +11,11 @@
 
       A { text-decoration: none; }
       A:hover { color:rgb(36, 36, 36); background-color:#dad9fc; text-decoration: none; border: 1px solid black; border-radius: 2px; padding-left: 1px; padding-right: 1px; }
+      A[target="_blank"]:after
+      {
+        content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
+        margin: 0 3px 0 5px
+      }
 
       table { margin-left: auto; margin-right: auto; border: 1px; padding: 2px; background-color: blue; font-size: 120%; }
       th { padding: 6px; color: navy; background-color: #f2f4f4; }
@@ -206,8 +211,10 @@
       <br id="P7" /><br />
       <div style="text-align: center;"><p>Inline Frame</p>
       <!-- Most websites will not allow openning their page in an embedded frame  -->
-      <iframe src="iFrame1.html" name="ifrm" title="Inline Examples" style="background-color: white; width: 98%; height: 400px;" sandbox="allow-scripts"></iframe>
+      <iframe src="Tabs.html" name="ifrm" title="Inline Examples" style="background-color: white; width: 98%; height: 400px;" sandbox="allow-same-origin allow-scripts"></iframe>
       <p>
+        <a href="Tabs.html" target="_blank">xTabs</a>&nbsp; &nbsp; &nbsp;
+        <a href="Tabs.html" target="ifrm">iTabs</a>&nbsp; &nbsp; &nbsp;
         <a href="iFrame1.html" target="ifrm">iFrame1</a>&nbsp; &nbsp; &nbsp;
         <a href="iFrame2.html" target="ifrm">iFrame2</a>&nbsp; &nbsp; &nbsp;
         <a href="3D Cube 1.html" target="ifrm">3D Cube 1</a>&nbsp; &nbsp; &nbsp;
@@ -227,8 +234,8 @@
           // Create and use anchor element
           var a = document.createElement('a');
           a.href = txt;
-          a.target = "ifrm"
-          a.click()
+          a.target = "ifrm";
+          a.click();
         }
       }
 
@@ -295,8 +302,8 @@
         var missingOneName = str.startsWith(',') || str.includes(', , ');
 
         if (!missingOneName){
-          if (document.getElementById('entries').innerHTML != ''){ document.getElementById('entries').innerHTML += "<br />"; }
-          document.getElementById('entries').innerHTML += str.substring(0, str.length - 2)
+          if (document.getElementById('entries').innerHTML != ''){ document.getElementById('entries').innerHTML += "<br />"; };
+          document.getElementById('entries').innerHTML += str.substring(0, str.length - 2);
           document.getElementById("btn_reset").click();
         }
       }
@@ -415,7 +422,7 @@
 
     <br id="P12" /><br />
     <div><p>JavaScript</p>
-      <p id="link" style="width: 120px; margin: auto;"></p><br />
+      <p id="link" style="width: 150px; margin: auto;"></p><br />
       <div style="text-align: center; width: 120px; margin: auto;">
         <button type="button" id="btn_link" onclick="show_hide_link()">Show GitHub Link</button>
       </div>
@@ -463,10 +470,10 @@
             var link_element = $("#link")
 
             if (link_element.text() == "") {
-              link_element.replaceWith("<p id='link' style='width: 120px; margin: auto;'><a href='https://github.com/GitHubDragonFly/'>GitHub Account</a></p>");
+              link_element.replaceWith("<p id='link' style='width: 150px; margin: auto;'><a href='https://github.com/GitHubDragonFly/'>GitHub Account</a></p>");
               btn_link_element.text("Hide GitHub Link");
             } else {
-              link_element.replaceWith("<p id='link' style='width: 120px; margin: auto;'></p>");
+              link_element.replaceWith("<p id='link' style='width: 150px; margin: auto;'></p>");
               btn_link_element.text("Show GitHub Link");
             }
           });
@@ -475,7 +482,7 @@
 
         // Alternative 2 - jQuery equivalent (using show/hide functions):
         // - remove onclick="show_hide_link()" from button, change the #link paragraph to
-        // - "<p id='link' style='width: 120px; margin: auto; display: none;'><a href='https://github.com/GitHubDragonFly/'>GitHub Account</a></p>"
+        // - "<p id='link' style='width: 150px; margin: auto; display: none;'><a href='https://github.com/GitHubDragonFly/'>GitHub Account</a></p>"
         // - comment the above and uncomment the following
 /*
         $(document).ready(function(){
@@ -527,10 +534,6 @@
         });
       </script>
 
-    <p class="footer">References: https://www.w3schools.com , https://www.geeksforgeeks.org/how-to-create-a-link-in-javascript/ ,
-      https://flaviocopes.com/rotate-image , https://www.lipsum.com , https://svgstudio.com/pages/free-sample , https://pixabay.com ,
-      https://stackoverflow.com/questions/11197671/ , https://css-tricks.com/use-and-reuse-everything-in-svg-even-animations/ ,
-      https://codepen.io/MRokas/pen/aNBjdQ , https://www.sitepoint.com/building-3d-engine-javascript/ , https://codepen.io/desandro/pen/KRWjzm
-    </p>
+    <p class="footer"><a href="https://github.com/GitHubDragonFly/HTML_CSS_JS#Resources" target="_blank">References</a></p>
   </body>
 </html>
