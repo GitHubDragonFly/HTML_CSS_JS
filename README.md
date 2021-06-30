@@ -10,6 +10,7 @@ It is using a mix of internal and inline CSS styling, which can always be change
 Some things might not be supported or work as expected on certain browsers. This was tested as working in the latest Firefox browser on Windows 10 computer and the page did also show properly in the TenFourFox browser on Power Macintosh with the following notes:
  - missing emojis support for old OS X can be compensated, to a degree, with [Symbola Font](https://dn-works.com/ufas/)
  - alignment entries of "float: inline-start" and "float: inline-end" don't work and need to be replaced with "float: left" and "float: right", which works for modern browsers as well and has now been standardized in this exercise
+ - add-on providing support for [playing MP4 video](https://sourceforge.net/projects/tenfourfox/files/addons/mp4/1.3406/) in TenFourFox
 
 It would be recommended that you also check [this](https://github.com/GitHubDragonFly/WebProject) project and look at all the files created by it, especially because it is interacting with the django built-in server (there is also a link to django tutorial).
 
