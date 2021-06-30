@@ -292,13 +292,40 @@
       </form>
     </div>
 
-    <div class="form_entries" style="color: blue; text-align: center;"><p><marquee width="15%">Submitted Form Entries</marquee></p>
-      <div id="entries" style="background-color: #eee; width: 75%; border: 1px solid #111; padding: 2px; margin: auto;"></div>
+    <div style="color: blue; text-align: center;"><p><marquee width="15%">Submitted Form Entries</marquee></p>
+      <div id="entries" style="background-color: #eee; width: 75%; border: 1px solid #111; padding: 2px; margin: auto;">
+        <table id="form_entries_table" style="background: darkgrey; width: 100%; font-size: 80%; table-layout: fixed; overflow: hidden;">
+          <col width="29%" />
+          <col width="29%" />
+          <col width="6%" />
+          <col width="6%" />
+          <col width="6%" />
+          <col width="6%" />
+          <col width="6%" />
+          <col width="6%" />
+          <col width="6%" />
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Male</th>
+              <th>Female</th>
+              <th>Other</th>
+              <th>Bike</th>
+              <th>Car</th>
+              <th>Boat</th>
+              <th>Color</th>
+            </tr>
+          </thead>
+        </table>
+        </div>
     </div>
 
     <script>
       // Submit button is currently of the 'button' input and not 'submit' input type
       // Collect all form entries to display in this window only
+      var count = 0;
+
       function form_query() {
         var formData = new FormData(document.querySelector('form'));
         var str = '';
@@ -310,8 +337,48 @@
         var missingOneName = str.startsWith(',') || str.includes(', , ');
 
         if (!missingOneName){
-          if (document.getElementById('entries').innerHTML != ''){ document.getElementById('entries').innerHTML += "<br />"; };
-          document.getElementById('entries').innerHTML += str.substring(0, str.length - 2);
+          count += 1;
+
+          var form_entries = str.substring(0, str.length - 2).split(", ");
+          var table = document.getElementById("form_entries_table");
+          var table_col_length = table.rows[0].cells.length;
+          var new_row = table.insertRow(count);
+
+          for (let i = 0; i < table_col_length; i++) {
+            new_row.insertCell(i);
+            if (i > 1 && i < 5) {new_row.cells.item(i).style.backgroundColor = "lightgrey";}
+          };
+
+          for (let j = 0; j < form_entries.length; j++) {
+            if (j < 2) {
+              new_row.cells.item(j).innerHTML = form_entries[j];
+            } else {
+              switch (form_entries[j]) {
+                case "male":
+                  new_row.cells.item(j).innerHTML = "&#10004";
+                  break;
+                case "female":
+                  new_row.cells.item(j + 1).innerHTML = "&#10004";
+                  break;
+                case "other":
+                  new_row.cells.item(j + 2).innerHTML = "&#10004";
+                  break;
+                case "Bike":
+                  new_row.cells.item(table_col_length - 4).innerHTML = "&#10004";
+                  break;
+                case "Car":
+                  new_row.cells.item(table_col_length - 3).innerHTML = "&#10004";
+                  break;
+                case "Boat":
+                  new_row.cells.item(table_col_length - 2).innerHTML = "&#10004";
+                  break;
+                default:
+                  new_row.cells.item(table_col_length - 1).style.backgroundColor = form_entries[j];
+                  break;
+              }
+            }
+          }
+
           document.getElementById("btn_reset").click();
         }
       }
