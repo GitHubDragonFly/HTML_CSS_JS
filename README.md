@@ -7,7 +7,7 @@ A good portion of the page should be self-explanatory, some content is static, s
 
 It is using a mix of internal and inline CSS styling, which can always be changed, packed and moved to external styles.css file.
 
-Some things might not be supported or work as expected on certain browsers. This was tested as working in the latest Firefox browser on Windows 10 computer and the page did show properly in the TenFourFox browser on Power Macintosh with the following notes:
+Some things might not be supported or work as expected on certain browsers. This was tested as working in the latest Firefox browser on Windows 10 computer and the page did also show properly in the TenFourFox browser on Power Macintosh with the following notes:
  - missing emojis support for old OS X can be compensated, to a degree, with [Symbola Font](https://dn-works.com/ufas/)
  - alignment entries of "float: inline-start" and "float: inline-end" don't work and need to be replaced with "float: left" and "float: right", which works for modern browsers as well and has now been standardized in this exercise
 
