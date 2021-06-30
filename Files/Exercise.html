@@ -18,8 +18,8 @@
       }
 
       table { margin-left: auto; margin-right: auto; border: 1px solid black; padding: 2px; background-color: blue; font-size: 120%; }
-      th { border: 1px solid black; border-spacing: 1px; padding: 4px; color: navy; background-color: #f2f4f4; }
-      td { border: 1px solid black; border-spacing: 1px; padding: 4px; background-color: #f8f1c1; width: 25%; }
+      th { border: 1px solid black; border-spacing: 1px; padding: 4px; color: navy; background-color: #f2f4f4; overflow: hidden; }
+      td { text-align:center; border: 1px solid black; border-spacing: 1px; padding: 6px; background-color: #f8f1c1; overflow: hidden; }
 
       ol { display: table; margin: auto; }
       ul { list-style-type: '\2711'; display: table; margin: auto; }
@@ -294,7 +294,7 @@
 
     <div style="color: blue; text-align: center;"><p><marquee width="15%">Submitted Form Entries</marquee></p>
       <div id="entries" style="background-color: #eee; width: 75%; border: 1px solid #111; padding: 2px; margin: auto;">
-        <table id="form_entries_table" style="background: darkgrey; width: 100%; font-size: 80%; table-layout: fixed; overflow: hidden;">
+        <table id="form_entries_table" style="background: darkgrey; width: 100%; font-size: 80%; table-layout: fixed;">
           <col width="4%" />
           <col width="27%" />
           <col width="27%" />
