@@ -1,5 +1,5 @@
 # HTML_CSS_JS
-Exercise in HTML, CSS and JavaScript ([JQuery](https://jquery.com/download/) as well). Intended for those who either might be learning these or would just like to have several examples in a single page. There is definitely lots of rotation examples, so try not to get dizzy.
+Exercise in HTML, CSS and JavaScript ([jQuery](https://jquery.com/download/) as well). Intended for those who either might be learning these or would just like to have several examples in a single page. There is definitely lots of rotation examples, so try not to get dizzy.
 
 Some might consider these as relatively simple examples but they only reflect a way of how I am going about learning these languages. Some code was simply adopted and modified from original public sources.
 
@@ -12,7 +12,7 @@ Some things might not be supported or work as expected on certain browsers. This
  - alignment entries of "float: inline-start" and "float: inline-end" don't work and need to be replaced with "float: left" and "float: right", which works for modern browsers as well and has now been standardized in this exercise
  - add-on providing support for [playing MP4 video](https://sourceforge.net/projects/tenfourfox/files/addons/mp4/1.3406/) in TenFourFox
 
-It would be recommended that you also check [this](https://github.com/GitHubDragonFly/WebProject) project and look at all the files created by it, especially because it is interacting with the django built-in server (there is also a link to django tutorial).
+It would be recommended that you also check [this project](https://github.com/GitHubDragonFly/WebProject) and look at all the files created by it, especially because it is interacting with the django built-in server (there is also a link to django tutorial).
 
 ## Note:
 "3D Cube 1" drawing code might eventually need some corrections. Currently, the transparency allows it to be seen as correct but if you go about changing the "fill" and "stroke" values to more solid, 0.1 changed to 1.0, then you might see somewhat incorrect transitions. This is even more obvious if painting each side of the cube with a different color. 
