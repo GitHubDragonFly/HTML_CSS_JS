@@ -7,7 +7,7 @@ A good portion of the page should be self-explanatory, some content is static, s
 
 It is using a mix of internal and inline CSS styling, which can always be changed, packed and moved to external styles.css file.
 
-Some things might not be supported or work as expected on certain browsers. This was tested as working in the latest Firefox browser on Windows 10 computer and most of the page did show properly in TenFourFox browser on Power Macintosh.
+Some things might not be supported or work as expected on certain browsers. This was tested as working in the latest Firefox browser on Windows 10 computer and the page did show properly in TenFourFox browser on Power Macintosh (missing emojis support for old OS X can be compensated, to a degree, with [Symbola Font](https://dn-works.com/ufas/)).
 
 It would be recommended that you also check [this](https://github.com/GitHubDragonFly/WebProject) project and look at all the files created by it, especially because it is interacting with the django built-in server (there is also a link to django tutorial).
 
