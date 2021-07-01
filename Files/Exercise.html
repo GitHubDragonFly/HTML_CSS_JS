@@ -5,12 +5,12 @@
     <script src="jquery-3.6.0.js"></script>
     <style>
       body { background-image: url('Images/dark_blue.png'); background-size: 100% 100%; }
-      div { background-color: aliceblue; width: 99%; border: 2px solid green; border-radius: 5px; padding: 3px; margin: 5px; }
+      div { background-color: aliceblue; width: 99%; border: 2px solid green; -webkit-border-radius: 5px; border-radius: 5px; padding: 3px; margin: 5px; }
       p { text-align: center; color: blue; border: 1px solid lightblue; margin-bottom: 10px; }
       h1, h2, h3, h4, h5, h6 { margin-top: 1px; margin-bottom: 3px;}
 
       A { text-decoration: none; }
-      A:hover { color:#363636; background-color:#dad9fc; text-decoration: none; border: 1px solid black; border-radius: 2px; padding-left: 1px; padding-right: 1px; }
+      A:hover { color:#363636; background-color:#dad9fc; text-decoration: none; border: 1px solid black; -webkit-border-radius: 2px; border-radius: 2px; padding-left: 1px; padding-right: 1px; }
       A[target="_blank"]:after {
         content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
         margin: 0 3px 0 5px;
@@ -33,7 +33,7 @@
       blkt { color: black; font-size: 75%; }
 
       .required label:after { color: red; content: ' *'; display: inline; }
-      .fixed-menu { position: fixed; z-index: 1; left: 0px; top: 0px; margin: 0px; font-size: large; width: 99.7%; border: 2px solid navy; border-radius: 3px; background-color: #f8f1c1; }
+      .fixed-menu { position: fixed; z-index: 1; left: 0px; top: 0px; margin: 0px; font-size: large; width: 99.7%; border: 2px solid navy; -webkit-border-radius: 3px; border-radius: 3px; background-color: #f8f1c1; }
       .footer { position: static; margin: 0px; left: 0px; bottom: 0px; width: 99.7%; background-color: yellow; text-align: center; }
 
       .rotateX { -webkit-animation: rotationX 8s infinite linear; animation: rotationX 8s infinite linear; }
@@ -229,7 +229,7 @@
         <a href="ShowDateTime.html" target="ifrm">Date/Time</a>&nbsp; &nbsp;
         <label for="url">URL:</label>&nbsp;
         <input type="text" id="url" name="url" size="60" value="">&nbsp;
-        <button id="btn_go" onclick="display_url()" style="border-radius: 2px; margin: 2px; padding: 2px;">Go</button>
+        <button id="btn_go" onclick="display_url()" style="-webkit-border-radius: 2px; border-radius: 2px; width: 30px; margin: 2px; padding: 2px;">Go</button>
       </p>
     </div>
 
@@ -284,10 +284,10 @@
         <label for="vehicle3"> I have a boat</label><br /><br />
         <label for="favcolor">Select your favorite color:</label>
         <input type="color" id="favcolor" name="favcolor"><br /><br />
-        <input type="button" id="btn_submit" onclick="form_query()" value="Submit" style="background-color: green; border-radius: 5px; margin: 2px; padding: 5px;">
-        <input type="reset" id="btn_reset" value="Reset" style="background-color: orange; border-radius: 5px; margin: 2px; padding: 5px;">
+        <input type="button" id="btn_submit" onclick="form_query()" value="Submit" style="background-color: green; -webkit-border-radius: 5px; border-radius: 5px; margin: 2px; padding: 5px;">
+        <input type="reset" id="btn_reset" value="Reset" style="background-color: orange; -webkit-border-radius: 5px; border-radius: 5px; margin: 2px; padding: 5px;">
         <input type="button" id="btn_disappear" onclick="document.getElementById('btn_disappear').hidden = 'True'" value="I am here temporarily">
-        <input type="button" style="float: right; background-color: red; border-radius: 5px; margin-right: 2px; padding: 5px;" onclick="alert('ALERT !!!\n\nOMG ... you just clicked the RED button !?')" value="Click Me NOT">
+        <input type="button" style="float: right; background-color: red; -webkit-border-radius: 5px; border-radius: 5px; margin-right: 2px; padding: 5px;" onclick="alert('ALERT !!!\n\nOMG ... you just clicked the RED button !?')" value="Click Me NOT">
       </form>
     </div>
 
@@ -516,13 +516,45 @@
         <video width="640" controls>
           <source src="Videos/Beach - 3998.mp4" type="video/mp4">
           Your browser does not support HTML video.
-        </video>
+        </video><br /><br />
+      </div><br /><br />
+      <div style="text-align: center; background-color: cyan; width: 320px; height: 240px; margin: auto;">
+        <video id="video_element" autoplay="false" width="320"></video><br /><br />
+      </div>
+      <div style="text-align: center; width: 320px; margin: auto;">
+        <button onclick="play_camera()">Play WebCam</button>&nbsp; &nbsp;
+        <button onclick="stop_camera()">Stop WebCam</button>
       </div><br />
-      <p>Video by
+      <p>Beach Video by
         <a href="https://pixabay.com/users/rc-aero-tech-2978946/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3998">Rc-Aero-Tech</a>
         from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3998">Pixabay</a>
       </p>
     </div>
+
+    <script>
+      var video = document.querySelector("#video_element");
+
+      function play_camera(e) {
+        if (navigator.mediaDevices.getUserMedia) {
+          navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) { video.srcObject = stream; })
+            .catch(function (err0r) { alert("Error openning webcam source!");
+          });
+        }
+      }
+
+      function stop_camera(e) {
+        var stream = video.srcObject;
+        var tracks = stream.getTracks();
+
+        for (var i = 0; i < tracks.length; i++) {
+          var track = tracks[i];
+          track.stop();
+        }
+
+        video.srcObject = null;
+      }
+    </script>
 
     <br id="P12" /><br />
     <div><p>JavaScript</p>
