@@ -36,6 +36,7 @@ Any and all trademarks, either directly or indirectly mentioned here, belong to 
 All of the following that I have used and whatever other resources you can find:
 
 - https://www.w3schools.com
+- https://developer.mozilla.org/en-US/docs/Web/API
 - https://www.geeksforgeeks.org/how-to-create-a-link-in-javascript/
 - https://css-tricks.com/use-and-reuse-everything-in-svg-even-animations/
 - https://flaviocopes.com/rotate-image
