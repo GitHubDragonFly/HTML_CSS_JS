@@ -11,8 +11,7 @@
 
       A { text-decoration: none; }
       A:hover { color:#363636; background-color:#dad9fc; text-decoration: none; border: 1px solid black; border-radius: 2px; padding-left: 1px; padding-right: 1px; }
-      A[target="_blank"]:after
-      {
+      A[target="_blank"]:after {
         content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
         margin: 0 3px 0 5px;
       }
@@ -335,7 +334,7 @@
         // the x pair with x going from 0 to key_value_pairs.length - 1 
         key_value_pairs = Array.from(formData.entries());
 
-        if (key_value_pairs[0][1] != "" && key_value_pairs[1][1] != ""){
+        if (key_value_pairs[0][1].trim() != "" && key_value_pairs[1][1].trim() != ""){
           count += 1;
 
           var table = document.getElementById("form_entries_table");
@@ -348,31 +347,31 @@
           };
 
           new_row.cells.item(0).innerHTML = count;
-          new_row.cells.item(1).innerHTML = key_value_pairs[0][1];
-          new_row.cells.item(2).innerHTML = key_value_pairs[1][1];
+          new_row.cells.item(1).innerHTML = key_value_pairs[0][1].trim();
+          new_row.cells.item(2).innerHTML = key_value_pairs[1][1].trim();
 
           for (let j = 2; j < key_value_pairs.length; j++) {
             switch (key_value_pairs[j][1]) {
               case "male":
-                new_row.cells.item(j + 1).innerHTML = "&#10004";
+                new_row.cells.item(3).innerHTML = "&#10004";
                 break;
               case "female":
-                new_row.cells.item(j + 2).innerHTML = "&#10004";
+                new_row.cells.item(4).innerHTML = "&#10004";
                 break;
               case "other":
-                new_row.cells.item(j + 3).innerHTML = "&#10004";
+                new_row.cells.item(5).innerHTML = "&#10004";
                 break;
               case "Bike":
-                new_row.cells.item(table_col_length - 4).innerHTML = "&#10004";
+                new_row.cells.item(6).innerHTML = "&#10004";
                 break;
               case "Car":
-                new_row.cells.item(table_col_length - 3).innerHTML = "&#10004";
+                new_row.cells.item(7).innerHTML = "&#10004";
                 break;
               case "Boat":
-                new_row.cells.item(table_col_length - 2).innerHTML = "&#10004";
+                new_row.cells.item(8).innerHTML = "&#10004";
                 break;
               default:
-                new_row.cells.item(table_col_length - 1).style.backgroundColor = key_value_pairs[j][1];
+                new_row.cells.item(9).style.backgroundColor = key_value_pairs[j][1];
                 break;
             }
           }
@@ -559,14 +558,11 @@
 
             // Append the anchor element to the 'link' paragraph
             document.getElementById('link').appendChild(a);
-
-            // Append the anchor element to the body
-            // document.body.appendChild(a);
           }
         }
 
         // Alternative 1 - jQuery equivalent (replacing the element):
-        // - remove onclick="show_hide_link()" from button, comment the above and uncomment the following
+        // - remove onclick="show_hide_link()" from button, comment the above function and uncomment the following
 /*
         $(document).ready(function(){
           var btn_link_element = $("#btn_link")
@@ -588,7 +584,7 @@
         // Alternative 2 - jQuery equivalent (using show/hide functions):
         // - remove onclick="show_hide_link()" from button, change the #link paragraph to
         // - "<p id='link' style='width: 150px; margin: auto; display: none;'><a href='https://github.com/GitHubDragonFly/'>GitHub Account</a></p>"
-        // - comment the above and uncomment the following
+        // - comment the above function and uncomment the following
 /*
         $(document).ready(function(){
           var btn_link_element = $("#btn_link");
