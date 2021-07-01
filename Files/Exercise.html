@@ -519,11 +519,12 @@
         </video><br /><br />
       </div><br /><br />
       <div style="text-align: center; background-color: cyan; width: 320px; height: 240px; margin: auto;">
-        <video id="video_element" autoplay="false" width="320"></video><br /><br />
-      </div>
+        <video id="video_element" autoplay="false" width="320" controls></video><br /><br />
+      </div><br />
       <div style="text-align: center; width: 320px; margin: auto;">
-        <button onclick="play_camera()">Play WebCam</button>&nbsp; &nbsp;
-        <button onclick="stop_camera()">Stop WebCam</button>
+        <button id="btn_start_camera" onclick="start_camera()">Start Cam</button>&nbsp; &nbsp;
+        <input type="number" id="camera_id" name="camera_id" min="0" max="8" value="0" style="width: 35px;">&nbsp; &nbsp;
+        <button id="btn_stop_camera" onclick="stop_camera()" disabled>Stop Cam</button>
       </div><br />
       <p>Beach Video by
         <a href="https://pixabay.com/users/rc-aero-tech-2978946/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3998">Rc-Aero-Tech</a>
@@ -533,11 +534,16 @@
 
     <script>
       var video = document.querySelector("#video_element");
+      var cam_id = document.getElementById("camera_id");
+      var btn_start = document.getElementById("btn_start_camera");
+      var btn_stop = document.getElementById("btn_stop_camera");
 
-      function play_camera(e) {
+      function start_camera(e) {
+        var id = parseInt(cam_id.value);
+
         if (navigator.mediaDevices.getUserMedia) {
-          navigator.mediaDevices.getUserMedia({ video: true })
-            .then(function (stream) { video.srcObject = stream; })
+          navigator.mediaDevices.getUserMedia({ audio: true, video: { exact: cam_id } })
+            .then(function (stream) { video.srcObject = stream; btn_start.disabled = true; btn_stop.disabled = false; cam_id.disabled = true; })
             .catch(function (err0r) { alert("Error openning webcam source!");
           });
         }
@@ -553,6 +559,9 @@
         }
 
         video.srcObject = null;
+        btn_start.disabled = false;
+        btn_stop.disabled = true;
+        cam_id.disabled = false;
       }
     </script>
 
