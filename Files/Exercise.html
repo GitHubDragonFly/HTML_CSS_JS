@@ -17,9 +17,9 @@
         margin: 0 3px 0 5px;
       }
 
-      table { margin-left: auto; margin-right: auto; border: 1px solid black; padding: 2px; background-color: blue; font-size: 120%; }
+      table { margin-left: auto; margin-right: auto; border: 1px solid black; padding: 2px; background-color: blue; }
       th { border: 1px solid black; border-spacing: 1px; padding: 4px; color: navy; background-color: #f2f4f4; overflow: hidden; }
-      td { text-align:center; border: 1px solid black; border-spacing: 1px; padding: 6px; background-color: #f8f1c1; overflow: hidden; }
+      td { text-align:center; border: 1px solid black; border-spacing: 1px; padding: 4px; background-color: #f8f1c1; overflow: hidden; }
 
       ol { display: table; margin: auto; }
       ul { list-style-type: '\2711'; display: table; margin: auto; }
@@ -193,7 +193,7 @@
 
       <br id="P6" /><br />
       <p>Unboxed Centered Table</p><br />
-      <table>
+      <table style="font-size: 120%;">
         <thead>
           <tr>
             <th colspan="3">Things that help us move around</th>
@@ -221,13 +221,13 @@
       <!-- Most websites will not allow openning their page in an embedded frame  -->
       <iframe src="iFrame1.html" name="ifrm" title="Inline Examples" style="background-color: white; width: 98%; height: 400px;" sandbox="allow-same-origin allow-scripts"></iframe>
       <p>
-        <a href="Tabs.html" target="_blank">xTabs</a>&nbsp; &nbsp; &nbsp;
-        <a href="Tabs.html" target="ifrm">iTabs</a>&nbsp; &nbsp; &nbsp;
-        <a href="iFrame1.html" target="ifrm">iFrame1</a>&nbsp; &nbsp; &nbsp;
-        <a href="iFrame2.html" target="ifrm">iFrame2</a>&nbsp; &nbsp; &nbsp;
-        <a href="3D Cube 1.html" target="ifrm">3D Cube 1</a>&nbsp; &nbsp; &nbsp;
-        <a href="3D Cube 2.html" target="ifrm">3D Cube 2</a>&nbsp; &nbsp; &nbsp;
-        <a href="ShowDateTime.html" target="ifrm">Date/Time</a>&nbsp; &nbsp; &nbsp;
+        <a href="Tabs.html" target="_blank">xTabs</a>&nbsp; &nbsp;
+        <a href="Tabs.html" target="ifrm">iTabs</a>&nbsp; &nbsp;
+        <a href="iFrame1.html" target="ifrm">iFrame1</a>&nbsp; &nbsp;
+        <a href="iFrame2.html" target="ifrm">iFrame2</a>&nbsp; &nbsp;
+        <a href="3D Cube 1.html" target="ifrm">3D Cube 1</a>&nbsp; &nbsp;
+        <a href="3D Cube 2.html" target="ifrm">3D Cube 2</a>&nbsp; &nbsp;
+        <a href="ShowDateTime.html" target="ifrm">Date/Time</a>&nbsp; &nbsp;
         <label for="url">URL:</label>&nbsp;
         <input type="text" id="url" name="url" size="60" value="">&nbsp;
         <button id="btn_go" onclick="display_url()" style="border-radius: 2px; margin: 2px; padding: 2px;">Go</button>
@@ -294,7 +294,7 @@
 
     <div style="color: blue; text-align: center;"><p><marquee width="15%">Submitted Form Entries</marquee></p>
       <div id="entries" style="background-color: #eee; width: 75%; border: 1px solid #111; padding: 2px; margin: auto;">
-        <table id="form_entries_table" style="background: darkgrey; width: 100%; font-size: 80%; table-layout: fixed;">
+        <table id="form_entries_table" style="background: darkgrey; width: 100%; font-size: 90%; table-layout: fixed;">
           <col width="4%" />
           <col width="27%" />
           <col width="27%" />
@@ -330,18 +330,14 @@
 
       function form_query() {
         var formData = new FormData(document.querySelector('form'));
-        var str = '';
 
-        formData.forEach(get_values);
+        // Array of arrays, where key_value_pairs[x][0] is the key and key_value_pairs[x][1] is the value of
+        // the x pair with x going from 0 to key_value_pairs.length - 1 
+        key_value_pairs = Array.from(formData.entries());
 
-        function get_values(value) { str += value.trim() + ', '; };
-
-        var missingOneName = str.startsWith(',') || str.includes(', , ');
-
-        if (!missingOneName){
+        if (key_value_pairs[0][1] != "" && key_value_pairs[1][1] != ""){
           count += 1;
 
-          var form_entries = str.substring(0, str.length - 2).split(", ");
           var table = document.getElementById("form_entries_table");
           var table_col_length = table.rows[0].cells.length;
           var new_row = table.insertRow(count);
@@ -352,11 +348,11 @@
           };
 
           new_row.cells.item(0).innerHTML = count;
-          new_row.cells.item(1).innerHTML = form_entries[0];
-          new_row.cells.item(2).innerHTML = form_entries[1];
+          new_row.cells.item(1).innerHTML = key_value_pairs[0][1];
+          new_row.cells.item(2).innerHTML = key_value_pairs[1][1];
 
-          for (let j = 2; j < form_entries.length; j++) {
-            switch (form_entries[j]) {
+          for (let j = 2; j < key_value_pairs.length; j++) {
+            switch (key_value_pairs[j][1]) {
               case "male":
                 new_row.cells.item(j + 1).innerHTML = "&#10004";
                 break;
@@ -376,7 +372,7 @@
                 new_row.cells.item(table_col_length - 2).innerHTML = "&#10004";
                 break;
               default:
-                new_row.cells.item(table_col_length - 1).style.backgroundColor = form_entries[j];
+                new_row.cells.item(table_col_length - 1).style.backgroundColor = key_value_pairs[j][1];
                 break;
             }
           }
