@@ -17,9 +17,9 @@ It would be recommended that you also check [this project](https://github.com/Gi
 ## Notes:
  - Camera "Id" feature is experimental and was not tested against multiple cameras.
  - Camera "Record" feature is experimental, so modify and use the best you can:
-  - It depends on the browser supporting ".webm" media format
-  - The "Save" link should turn green to offer downloading and saving the recorded video
-  - Set to restart the video/audio stream after the recording is stopped
+   - It depends on the browser supporting ".webm" media format
+   - The "Save" link should turn green to offer downloading and saving the recorded video
+   - Set to restart the video/audio stream after the recording is stopped
  - Adding more information to inline frame (iFrame) - you can get instructions for obtaining info about your browser and your public IP by visiting [WhatIsMyBrowser](https://www.whatismybrowser.com/developers/tools/iframe) developers page.
  - "3D Cube 1" drawing code might eventually need some corrections. Currently, the transparency allows it to be seen as correct but if you go about changing the "fill" and "stroke" values to more solid, 0.1 changed to 1.0, then you might see somewhat incorrect transitions. This is even more obvious if painting each side of the cube with a different color. 
 
