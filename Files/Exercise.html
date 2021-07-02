@@ -524,9 +524,9 @@
       <div style="text-align: center; width: 400px; margin: auto;">
         <button id="btn_start_camera" onclick="start_camera()">Start Cam</button>&nbsp;
         <input type="number" id="camera_id" name="camera_id" min="0" max="8" value="0" style="width: 35px;">&nbsp;
-        <button id="btn_stop_camera" onclick="stop_camera()" disabled>Stop Cam</button>&nbsp;
-        <button id="btn_start_record" onclick="start_recording()" style="background-color: lightgrey;" disabled>Record</button>&nbsp; &nbsp;
-        <a id="link_save_recording" style="background-color: lightgrey; border: 1px solid black; -webkit-border-radius: 2px; border-radius: 2px; width: 40px; padding-left: 2px; padding-right: 2px;">Save</a>
+        <button id="btn_stop_camera" onclick="stop_camera()" disabled>Stop Cam</button>&nbsp; &nbsp;
+        <button id="btn_start_record" onclick="start_recording()" style="background-color: lightgrey; border: 1px solid black; -webkit-border-radius: 3px; border-radius: 3px; padding-left: 4px; padding-right: 4px;" disabled>Record</button>&nbsp; &nbsp;
+        <a id="link_save_recording" href = "javascript:void(0);" style="background-color: lightgrey; border: 1px solid black; -webkit-border-radius: 3px; border-radius: 3px; width: 50px; padding-left: 4px; padding-right: 4px;">Save</a>
       </div><br />
       <p>Beach Video by
         <a href="https://pixabay.com/users/rc-aero-tech-2978946/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3998">Rc-Aero-Tech</a>
@@ -584,6 +584,8 @@
       async function start_recording() {
         btn_start_recording.style.backgroundColor = "red";
         btn_stop.innerHTML = "Stop Rec";
+        link_save.style.backgroundColor = "lightgrey";
+        link_save.href = "javascript:void(0);";
 
         video.captureStream = video.captureStream || video.mozCaptureStream;
 
@@ -591,7 +593,7 @@
           
         let recordedBlob = new Blob(data, { type: "video/webm" });
         link_save.href = URL.createObjectURL(recordedBlob);
-        link_save.style.backgroundColor = "green";
+        link_save.style.backgroundColor = "lightgreen";
         link_save.download = "RecordedVideo.webm";
 
         btn_start_recording.style.backgroundColor = "lightgrey";
