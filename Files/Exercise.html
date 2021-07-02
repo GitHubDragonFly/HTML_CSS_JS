@@ -518,13 +518,15 @@
           Your browser does not support HTML video.
         </video><br /><br />
       </div><br /><br />
-      <div style="text-align: center; background-color: cyan; width: 320px; height: 240px; margin: auto;">
-        <video id="video_element" autoplay="false" width="320" controls></video><br /><br />
+      <div style="text-align: center; background-color: cyan; width: 400px; height: 300px; margin: auto;">
+        <video id="video_element" autoplay="false" width="400" controls></video><br /><br />
       </div><br />
-      <div style="text-align: center; width: 320px; margin: auto;">
-        <button id="btn_start_camera" onclick="start_camera()">Start Cam</button>&nbsp; &nbsp;
-        <input type="number" id="camera_id" name="camera_id" min="0" max="8" value="0" style="width: 35px;">&nbsp; &nbsp;
-        <button id="btn_stop_camera" onclick="stop_camera()" disabled>Stop Cam</button>
+      <div style="text-align: center; width: 400px; margin: auto;">
+        <button id="btn_start_camera" onclick="start_camera()">Start Cam</button>&nbsp;
+        <input type="number" id="camera_id" name="camera_id" min="0" max="8" value="0" style="width: 35px;">&nbsp;
+        <button id="btn_stop_camera" onclick="stop_camera()" disabled>Stop Cam</button>&nbsp;
+        <button id="btn_start_record" onclick="start_recording()" style="background-color: lightgrey;" disabled>Record</button>&nbsp; &nbsp;
+        <a id="link_save_recording" style="background-color: lightgrey; border: 1px solid black; -webkit-border-radius: 2px; border-radius: 2px; width: 40px; padding-left: 2px; padding-right: 2px;">Save</a>
       </div><br />
       <p>Beach Video by
         <a href="https://pixabay.com/users/rc-aero-tech-2978946/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3998">Rc-Aero-Tech</a>
@@ -537,14 +539,21 @@
       var cam_id = document.getElementById("camera_id");
       var btn_start = document.getElementById("btn_start_camera");
       var btn_stop = document.getElementById("btn_stop_camera");
+      var btn_start_recording = document.getElementById("btn_start_record");
+      var link_save = document.getElementById("link_save_recording");
 
       function start_camera(e) {
         var id = parseInt(cam_id.value);
 
         if (navigator.mediaDevices.getUserMedia) {
           navigator.mediaDevices.getUserMedia({ audio: true, video: { exact: cam_id } })
-            .then(function (stream) { video.srcObject = stream; btn_start.disabled = true; btn_stop.disabled = false; cam_id.disabled = true; })
-            .catch(function (err0r) { alert("Error openning webcam source!");
+            .then(function (stream) {
+              video.srcObject = stream;
+              btn_start.disabled = true;
+              btn_stop.disabled = false;
+              btn_start_recording.disabled = false;
+              cam_id.disabled = true; })
+            .catch(function (err0r) { alert("Error openning camera source!");
           });
         }
       }
@@ -558,10 +567,63 @@
           track.stop();
         }
 
-        video.srcObject = null;
-        btn_start.disabled = false;
-        btn_stop.disabled = true;
-        cam_id.disabled = false;
+        if (btn_start_recording.style.backgroundColor == "red") {
+          btn_start_recording.style.backgroundColor = "lightgrey";
+          btn_stop.innerHTML = "Stop Cam";
+
+          start_camera();
+        } else {
+          video.srcObject = null;
+          btn_start.disabled = false;
+          btn_stop.disabled = true;
+          btn_start_recording.disabled = true;
+          cam_id.disabled = false;
+        }
+      }
+
+      async function start_recording() {
+        btn_start_recording.style.backgroundColor = "red";
+        btn_stop.innerHTML = "Stop Rec";
+
+        video.captureStream = video.captureStream || video.mozCaptureStream;
+
+        data = await record_camera(video.captureStream(), 1000);
+          
+        let recordedBlob = new Blob(data, { type: "video/webm" });
+        link_save.href = URL.createObjectURL(recordedBlob);
+        link_save.style.backgroundColor = "green";
+        link_save.download = "RecordedVideo.webm";
+
+        btn_start_recording.style.backgroundColor = "lightgrey";
+        btn_stop.innerHTML = "Stop Cam";
+        stop_camera();
+      }
+
+      function record_camera(stream, lengthInMS) {
+        let recorder = new MediaRecorder(stream);
+        let data = [];
+
+        recorder.ondataavailable = event => data.push(event.data);
+        recorder.start();
+
+        let stopped = new Promise((resolve, reject) => {
+          recorder.onstop = resolve;
+          recorder.onerror = event => reject(event.name);
+        });
+
+        let recorded = wait(recorder, lengthInMS).then(
+          () => recorder.state == "inactive" && recorder.stop()
+        );
+
+        return Promise.all([
+          stopped,
+          recorded
+        ])
+        .then(() => data);
+      }
+
+      function wait(delayInMS) {
+        return new Promise(resolve => setTimeout(resolve, delayInMS));
       }
     </script>
 
