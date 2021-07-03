@@ -568,20 +568,19 @@
       }
 
       function stop_camera(e) {
-        var stream = video.srcObject;
-        var tracks = stream.getTracks();
-
-        for (var i = 0; i < tracks.length; i++) {
-          var track = tracks[i];
-          track.stop();
-        }
-
         if (btn_start_recording.style.backgroundColor == "red") {
           btn_start_recording.style.backgroundColor = "lightgrey";
           btn_stop.innerHTML = "Stop Cam";
-
-          start_camera();
+          recorder.stop();
         } else {
+          var stream = video.srcObject;
+          var tracks = stream.getTracks();
+
+          for (var i = 0; i < tracks.length; i++) {
+            var track = tracks[i];
+            track.stop();
+          }
+
           video.srcObject = null;
           btn_start.disabled = false;
           btn_stop.disabled = true;
@@ -591,6 +590,7 @@
       }
 
       async function start_recording() {
+        recorder = null;
         btn_start_recording.style.backgroundColor = "red";
         btn_stop.innerHTML = "Stop Rec";
         link_save.style.backgroundColor = "lightgrey";
@@ -598,7 +598,7 @@
 
         video.captureStream = video.captureStream || video.mozCaptureStream;
 
-        data = await record_camera(video.captureStream(), 1000);
+        data = await record_camera(video.captureStream());
           
         let recordedBlob = new Blob(data, { type: "video/webm" });
         link_save.href = URL.createObjectURL(recordedBlob);
@@ -607,12 +607,11 @@
 
         btn_start_recording.style.backgroundColor = "lightgrey";
         btn_stop.innerHTML = "Stop Cam";
-        stop_camera();
       }
 
-      function record_camera(stream, lengthInMS) {
-        let recorder = new MediaRecorder(stream);
+      function record_camera(stream) {
         let data = [];
+        recorder = new MediaRecorder(stream);
 
         recorder.ondataavailable = event => data.push(event.data);
         recorder.start();
@@ -622,19 +621,10 @@
           recorder.onerror = event => reject(event.name);
         });
 
-        let recorded = wait(recorder, lengthInMS).then(
-          () => recorder.state == "inactive" && recorder.stop()
-        );
-
         return Promise.all([
-          stopped,
-          recorded
+          stopped
         ])
         .then(() => data);
-      }
-
-      function wait(delayInMS) {
-        return new Promise(resolve => setTimeout(resolve, delayInMS));
       }
     </script>
 
