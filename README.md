@@ -32,7 +32,7 @@ It would be recommended that you also check [this project](https://github.com/Gi
 # Usage
 All it takes is to:
 
-- Download a zip file of this project and extract it.
+- Download a zip file of this project and extract it (or clone the repo).
 - Navigate to the `Files` folder and open `Exercise.html` in your Internet browser.
 
 # Licensing
