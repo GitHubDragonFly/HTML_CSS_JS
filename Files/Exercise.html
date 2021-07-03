@@ -2,7 +2,9 @@
 <html lang="en">
   <head>
     <meta content="utf-8" charset="utf-8" http-equiv="encoding">
+
     <script src="jquery-3.6.0.js"></script>
+
     <style>
       body { background-image: url('Images/dark_blue.png'); background-size: 100% 100%; }
       div { background-color: aliceblue; width: 99%; border: 2px solid green; -webkit-border-radius: 5px; border-radius: 5px; padding: 3px; margin: 5px; }
@@ -77,6 +79,38 @@
       @keyframes rotationXZCubic { from { transform: rotate3d(1,0,1,0deg); } to { transform: rotate3d(1,0,1,359deg); } }
       @keyframes rotationYZCubic { from { transform: rotate3d(0,1,1,0deg); } to { transform: rotate3d(0,1,1,359deg); } }
     </style>
+
+    <script>
+      var video_input_id = [];
+
+      window.addEventListener('load', function() {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+          document.getElementById('div_enum').innerHTML += "enumerateDevices() not supported.";
+          return;
+        }
+
+        // List cameras and microphones.
+
+        navigator.mediaDevices.enumerateDevices()
+        .then(function(devices) {
+          devices.forEach(function(device) {
+            if (device.kind == "videoinput") { video_input_id.push(device.deviceId); }
+
+            document.getElementById('div_enum').innerHTML += device.kind + ": " + device.label + " id = " + device.deviceId + "<br />";
+          });
+
+          if (video_input_id.length > 0) {
+            document.getElementById("btn_start_camera").disabled = false;
+            document.getElementById("camera_id").disabled = false;
+            document.getElementById("camera_id").max = video_input_id.length - 1;
+          }
+        })
+        .catch(function(err) {
+          document.getElementById('div_enum').innerHTML += err.name + ": " + err.message;
+        });
+      }, true);
+    </script>
+
     <title>HTML-CSS-JS Exercise</title>
   </head>
   <!-- Lots of code lines below have been separated to single lines for clarity -->
@@ -531,8 +565,8 @@
         <video id="video_element" autoplay="false" width="400" controls></video><br /><br />
       </div><br />
       <div style="text-align: center; width: 400px; margin: auto;">
-        <button id="btn_start_camera" onclick="start_camera()">Start Cam</button>&nbsp;
-        <input type="number" id="camera_id" name="camera_id" min="0" max="8" value="0" style="width: 35px;">&nbsp;
+        <button id="btn_start_camera" onclick="start_camera()" disabled>Start Cam</button>&nbsp;
+        <input type="number" id="camera_id" name="camera_id" min="0" max="0" value="0" style="width: 35px;" disabled>&nbsp;
         <button id="btn_stop_camera" onclick="stop_camera()" disabled>Stop Cam</button>&nbsp; &nbsp;
         <button id="btn_start_record" onclick="start_recording()" style="background-color: lightgrey; border: 1px solid black; -webkit-border-radius: 3px; border-radius: 3px; padding-left: 4px; padding-right: 4px;" disabled>Record</button>&nbsp; &nbsp;
         <a id="link_save_recording" href = "javascript:void(0);" style="background-color: lightgrey; border: 1px solid black; -webkit-border-radius: 3px; border-radius: 3px; width: 50px; padding-left: 4px; padding-right: 4px;">Save</a>
@@ -542,6 +576,7 @@
         from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3998">Pixabay</a>
       </p>
     </div>
+    <div id="div_enum" style="text-align: center;"><p>Media Devices Enumerator</p></div>
 
     <script>
       var video = document.querySelector("#video_element");
@@ -555,7 +590,7 @@
         var id = parseInt(cam_id.value);
 
         if (navigator.mediaDevices.getUserMedia) {
-          navigator.mediaDevices.getUserMedia({ audio: true, video: { exact: cam_id } })
+          navigator.mediaDevices.getUserMedia({ audio: true, video: { exact: video_input_id[cam_id] } })
             .then(function (stream) {
               video.srcObject = stream;
               btn_start.disabled = true;
