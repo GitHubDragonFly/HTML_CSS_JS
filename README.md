@@ -5,10 +5,10 @@ Some might consider these as relatively simple examples but they only reflect a 
 
 A good portion of the page should be self-explanatory, some content is static, some animated and some is interactive.
 
-In short, these are the features you can see on the page:
+These are the features you can see on the page:
  - Bookmark style menu bar fixed on top of the page and footer on the bottom
  - Mix of internal and inline CSS styling (move it to external styles.css file if needed)
- - Basic stuff, like headers and lists and mixed inline text of different colors and sizes
+ - Basic stuff, like headers, lists, tables and mixed inline text of different colors and sizes
  - Rotating over X, Y, Z, XY, XZ, YZ, XYZ axes as well as drawing and rotating SVG
  - Inline frame (iframe) with several pages, tabbed browsing and 3D cubes
  - Form and submitted form entries table (there is no server involved in this exercise)
