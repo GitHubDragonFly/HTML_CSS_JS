@@ -1,13 +1,20 @@
 # HTML_CSS_JS
-Exercise in HTML, CSS and JavaScript ([jQuery](https://jquery.com/download/) as well). Intended for those who either might be learning these or would just like to have several examples in a single page. There is definitely lots of rotation examples, so try not to get dizzy.
+Exercise in HTML, CSS and JavaScript ([jQuery](https://jquery.com/download/) as well). Intended for those who either might be learning these or would just like to have several examples in a single page.
 
-Some might consider these as relatively simple examples but they only reflect a way of how I am going about learning these languages. Some code was simply adopted and modified from original public sources.
+Some might consider these as relatively simple examples but they only reflect a way of how I am going about learning these languages. Some code was simply adopted and modified from original public sources. There is definitely lots of rotation examples, so try not to get dizzy.
 
 A good portion of the page should be self-explanatory, some content is static, some animated and some is interactive.
 
-It is using a mix of internal and inline CSS styling, which can always be changed, packed and moved to external styles.css file.
+In short, these are the features you can see on the page:
+ - Bookmark style menu bar fixed on top of the page and footer on the bottom
+ - Mix of internal and inline CSS styling (move it to external styles.css file if needed)
+ - Basic stuff, like headers and lists and mixed inline text of different colors and sizes
+ - Rotating over X, Y, Z, XY, XZ, YZ, XYZ axes as well as drawing and rotating SVG
+ - Inline frame (iframe) with several pages, tabbed browsing and 3D cubes
+ - Media video playback, including camera streaming and an option to record and save the camera video
+ - JavaScript and jQuery examples
 
-Some things might not be supported or work as expected on certain browsers. This was tested as working in the latest Firefox browser on Windows 10 computer and the page did also show properly in the TenFourFox browser on Power Macintosh with the following notes:
+Some things might not be supported or work as expected on certain browsers. This was tested as working in the latest Firefox browser on Windows 10 computer and the page did also show properly in the TenFourFox browser on the Power Macintosh computer with the following notes:
  - missing emojis support for old OS X can be compensated, to a degree, with [Symbola Font](https://dn-works.com/ufas/)
  - alignment entries of `float: inline-start` and `float: inline-end` don't work and need to be replaced with `float: left` and `float: right`, which works for modern browsers as well and has now been standardized in this exercise
  - add-on providing support for [playing MP4 video](https://sourceforge.net/projects/tenfourfox/files/addons/mp4/1.3406/) in TenFourFox
