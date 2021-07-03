@@ -37,12 +37,15 @@
       .footer { position: static; margin: 0px; left: 0px; bottom: 0px; width: 99.7%; background-color: yellow; text-align: center; }
 
       .rotateX { -webkit-animation: rotationX 8s infinite linear; animation: rotationX 8s infinite linear; }
-      .rotateY { -webkit-animation: rotationX 8s infinite linear; animation: rotationY 8s infinite linear; }
-      .rotateZ { -webkit-animation: rotationX 8s infinite linear; animation: rotationZ 8s infinite linear; }
-      .rotateXY { -webkit-animation: rotationX 8s infinite linear; animation: rotationXY 8s infinite linear; }
-      .rotateXZ { -webkit-animation: rotationX 8s infinite linear; animation: rotationXZ 8s infinite linear; }
-      .rotateYZ { -webkit-animation: rotationX 8s infinite linear; animation: rotationYZ 8s infinite linear; }
-      .rotateXYZ { -webkit-animation: rotationX 8s infinite linear; animation: rotationXYZ 8s infinite linear; }
+      .rotateY { -webkit-animation: rotationY 8s infinite linear; animation: rotationY 8s infinite linear; }
+      .rotateZ { -webkit-animation: rotationZ 8s infinite linear; animation: rotationZ 8s infinite linear; }
+      .rotateXY { -webkit-animation: rotationXY 8s infinite linear; animation: rotationXY 8s infinite linear; }
+      .rotateXZ { -webkit-animation: rotationXZ 8s infinite linear; animation: rotationXZ 8s infinite linear; }
+      .rotateYZ { -webkit-animation: rotationYZ 8s infinite linear; animation: rotationYZ 8s infinite linear; }
+      .rotateXYZ { -webkit-animation: rotationXYZ 8s infinite linear; animation: rotationXYZ 8s infinite linear; }
+      .rotateY_SVG { -webkit-animation: rotationY_SVG 4s infinite linear; animation: rotationY_SVG 4s infinite linear; }
+      .rotateXY_SVG { -webkit-animation: rotationXY_SVG 4s infinite linear; animation: rotationXY_SVG 4s infinite linear; }
+      .rotateYZ_SVG { -webkit-animation: rotationYZ_SVG 4s infinite linear; animation: rotationYZ_SVG 4s infinite linear; }
       @-webkit-keyframes rotationX { from { -webkit-transform: rotateX(0deg); } to { -webkit-transform: rotateX(359deg); } }
       @-webkit-keyframes rotationY { from { -webkit-transform: rotateY(0deg); } to { -webkit-transform: rotateY(359deg); } }
       @-webkit-keyframes rotationZ { from { -webkit-transform: rotateZ(0deg); } to { -webkit-transform: rotateZ(359deg); } }
@@ -50,6 +53,9 @@
       @-webkit-keyframes rotationXZ { from { -webkit-transform: rotate3d(1,0,1,0deg); } to { -webkit-transform: rotate3d(1,0,1,359deg); } }
       @-webkit-keyframes rotationYZ { from { -webkit-transform: rotate3d(0,1,1,0deg); } to { -webkit-transform: rotate3d(0,1,1,359deg); } }
       @-webkit-keyframes rotationXYZ { from { -webkit-transform: rotate3d(1,1,1,0deg); } to { -webkit-transform: rotate3d(1,1,1,359deg); } }
+      @-webkit-keyframes rotationY_SVG { from { -webkit-transform: rotateY(0deg); } to { -webkit-transform: rotateY(359deg); } }
+      @-webkit-keyframes rotationXY_SVG { from { -webkit-transform: rotate3d(1,1,0,0deg); } to { -webkit-transform: rotate3d(1,1,0,359deg); } }
+      @-webkit-keyframes rotationYZ_SVG { from { -webkit-transform: rotate3d(0,1,1,0deg); } to { -webkit-transform: rotate3d(0,1,1,359deg); } }
       @keyframes rotationX { from { transform: rotateX(0deg); } to { transform: rotateX(359deg); } }
       @keyframes rotationY { from { transform: rotateY(0deg); } to { transform: rotateY(359deg); } }
       @keyframes rotationZ { from { transform: rotateZ(0deg); } to { transform: rotateZ(359deg); } }
@@ -57,6 +63,9 @@
       @keyframes rotationXZ { from { transform: rotate3d(1,0,1,0deg); } to { transform: rotate3d(1,0,1,359deg); } }
       @keyframes rotationYZ { from { transform: rotate3d(0,1,1,0deg); } to { transform: rotate3d(0,1,1,359deg); } }
       @keyframes rotationXYZ { from { transform: rotate3d(1,1,1,0deg); } to { transform: rotate3d(1,1,1,359deg); } }
+      @keyframes rotationY_SVG { from { transform: rotateY(0deg); } to { transform: rotateY(359deg); } }
+      @keyframes rotationXY_SVG { from { transform: rotate3d(1,1,0,0deg); } to { transform: rotate3d(1,1,0,359deg); } }
+      @keyframes rotationYZ_SVG { from { transform: rotate3d(0,1,1,0deg); } to { transform: rotate3d(0,1,1,359deg); } }
 
       .rotateXYCubic { -webkit-animation: rotationXYCubic 8s infinite linear; -webkit-animation-timing-function: cubic-bezier(.05, .55, .1, 1.5); animation: rotationXYCubic 8s infinite linear; animation-timing-function: cubic-bezier(.05, .55, .1, 1.5); }
       .rotateXZCubic { -webkit-animation: rotationXZCubic 8s infinite linear; -webkit-animation-timing-function: cubic-bezier(.05, .55, .1, 1.5); animation: rotationXZCubic 8s infinite linear; animation-timing-function: cubic-bezier(.42, 0, 1, 1); }
@@ -474,9 +483,9 @@
         <svg width="200" height="200">
           <defs>
             <g id="cube" class="cube-unit">
-              <rect class="rotateXY" width="21" height="24" fill="red" stroke="#0079ad" transform="skewY(30)"/>
-              <rect class="rotateY" width="21" height="24" fill="yellow" stroke="#0079ad" transform="skewY(-30) translate(21 24.3)"/>
-              <rect class="rotateYZ" width="21" height="21" fill="blue" stroke="#0079ad" transform="scale(1.41,.81) rotate(45) translate(0 -21)"/>
+              <rect class="rotateXY_SVG" width="21" height="24" fill="red" stroke="#0079ad" transform="skewY(30)"/>
+              <rect class="rotateY_SVG" width="21" height="24" fill="yellow" stroke="#0079ad" transform="skewY(-30) translate(21 24.3)"/>
+              <rect class="rotateYZ_SVG" width="21" height="21" fill="blue" stroke="#0079ad" transform="scale(1.41,.81) rotate(45) translate(0 -21)"/>
             </g>
           </defs>
           <use xlink:href="#cube" x="121" y="112"/>
