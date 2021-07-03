@@ -11,6 +11,7 @@ In short, these are the features you can see on the page:
  - Basic stuff, like headers and lists and mixed inline text of different colors and sizes
  - Rotating over X, Y, Z, XY, XZ, YZ, XYZ axes as well as drawing and rotating SVG
  - Inline frame (iframe) with several pages, tabbed browsing and 3D cubes
+ - Form and submitted form entries table (there is no server involved in this exercise)
  - Media video playback, including camera streaming and an option to record and save the camera video
  - JavaScript and jQuery examples
 
