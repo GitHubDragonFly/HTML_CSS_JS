@@ -1,5 +1,5 @@
 # HTML_CSS_JS
-Exercise in HTML, CSS and JavaScript ([jQuery](https://jquery.com/download/) as well). Intended for those who either might be learning these or would just like to have several examples in a single page.
+Exercise in HTML, CSS and JavaScript ([jQuery](https://jquery.com/download/) as well). Intended for those who either might be learning these or would just like to have several examples in a single page. See the screenshot for what the top part of this page looks like in Firefox browser.
 
 Some might consider these as relatively simple examples but they only reflect a way of how I am going about learning these languages. Some code was simply adopted and modified from original public sources. There is definitely lots of rotation examples, so try not to get dizzy.
 
