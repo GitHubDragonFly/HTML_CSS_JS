@@ -327,10 +327,10 @@
         <label for="vehicle3"> I have a boat</label><br /><br />
         <label for="favcolor">Select your favorite color:</label>
         <input type="color" id="favcolor" name="favcolor"><br /><br />
-        <input type="button" id="btn_submit" onclick="form_query()" value="Submit" style="background-color: green; -webkit-border-radius: 5px; border-radius: 5px; margin: 2px; padding: 5px;">
-        <input type="reset" id="btn_reset" value="Reset" style="background-color: orange; -webkit-border-radius: 5px; border-radius: 5px; margin: 2px; padding: 5px;">
+        <input type="button" id="btn_submit" onclick="form_query()" value="Submit" style="color: green;">
+        <input type="reset" id="btn_reset" value="Reset" style="color: orange;">
         <input type="button" id="btn_disappear" onclick="document.getElementById('btn_disappear').hidden = 'True'" value="I am here temporarily">
-        <input type="button" style="float: right; background-color: red; -webkit-border-radius: 5px; border-radius: 5px; margin-right: 2px; padding: 5px;" onclick="alert('ALERT !!!\n\nOMG ... you just clicked the RED button !?')" value="Click Me NOT">
+        <input type="button" style="float: right; color: red;" onclick="alert('ALERT !!!\n\nOMG ... you just clicked the RED button !?')" value="Click Me NOT">
       </form>
     </div>
 
@@ -568,8 +568,8 @@
         <button id="btn_start_camera" onclick="start_camera()" disabled>Start Cam</button>&nbsp;
         <input type="number" id="camera_id" name="camera_id" min="0" max="0" value="0" style="width: 35px;" disabled>&nbsp;
         <button id="btn_stop_camera" onclick="stop_camera()" disabled>Stop Cam</button>&nbsp; &nbsp;
-        <button id="btn_start_record" onclick="start_recording()" style="background-color: lightgrey; border: 1px solid black; -webkit-border-radius: 3px; border-radius: 3px; padding-left: 4px; padding-right: 4px;" disabled>Record</button>&nbsp; &nbsp;
-        <a id="link_save_recording" href = "javascript:void(0);" style="background-color: lightgrey; border: 1px solid black; -webkit-border-radius: 3px; border-radius: 3px; width: 50px; padding-left: 4px; padding-right: 4px;">Save</a>
+        <button id="btn_start_record" onclick="start_recording()"  disabled>Record</button>&nbsp; &nbsp;
+        <a id="link_save_recording" href = "javascript:void(0);" style="border: 1px solid black; -webkit-border-radius: 3px; border-radius: 3px; width: 50px; padding-left: 4px; padding-right: 4px;">Save</a>
       </div><br />
       <p>Beach Video by
         <a href="https://pixabay.com/users/rc-aero-tech-2978946/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3998">Rc-Aero-Tech</a>
@@ -603,8 +603,8 @@
       }
 
       function stop_camera(e) {
-        if (btn_start_recording.style.backgroundColor == "red") {
-          btn_start_recording.style.backgroundColor = "lightgrey";
+        if (btn_start_recording.style.color == "red") {
+          btn_start_recording.style.color = "";
           btn_stop.innerHTML = "Stop Cam";
           recorder.stop();
         } else {
@@ -626,9 +626,9 @@
 
       async function start_recording() {
         recorder = null;
-        btn_start_recording.style.backgroundColor = "red";
+        btn_start_recording.style.color = "red";
         btn_stop.innerHTML = "Stop Rec";
-        link_save.style.backgroundColor = "lightgrey";
+        link_save.style.backgroundColor = "";
         link_save.href = "javascript:void(0);";
 
         video.captureStream = video.captureStream || video.mozCaptureStream;
@@ -640,7 +640,7 @@
         link_save.style.backgroundColor = "lightgreen";
         link_save.download = "RecordedVideo.webm";
 
-        btn_start_recording.style.backgroundColor = "lightgrey";
+        btn_start_recording.style.color = "";
         btn_stop.innerHTML = "Stop Cam";
       }
 
@@ -665,7 +665,7 @@
 
     <br id="P12" /><br />
     <div><p>JavaScript</p>
-      <p id="link" style="width: 150px; margin: auto;"></p><br />
+      <p id="link" style="font-size: 90%; width: 150px; margin: auto;"></p><br />
       <div style="text-align: center; width: 120px; margin: auto;">
         <button type="button" id="btn_link" onclick="show_hide_link()">Show GitHub Link</button>
       </div>
@@ -745,11 +745,11 @@
 
     <br id="P13" />
     <p>JQuery</p><br />
-      <button type="button" id="hide_div" style="width: 140px; float: left; margin-left: 30%;">Hide "div" Elements</button>
-      <button type="button" id="show_div" style="width: 140px; float: right; margin-right: 30%;">Show "div" Elements</button><br /><br />
-      <button type="button" id="fade_out" style="width: 120px; float: left; margin-left: 37%;">Footer FadeOut</button>
-      <button type="button" id="fade_in" style="width: 120px; float: right; margin-right: 37%;">Footer FadeIn</button><br /><br />
-      <button type="button" id="menu_animate" style="width: 150px; display: -webkit-box; display: block; margin: auto;">Animate Top Menu</button>
+      <button type="button" id="hide_div" style="width: 160px; float: left; margin-left: 30%;">Hide "div" Elements</button>
+      <button type="button" id="show_div" style="width: 160px; float: right; margin-right: 30%;">Show "div" Elements</button><br /><br />
+      <button type="button" id="fade_out" style="width: 130px; float: left; margin-left: 37%;">Footer FadeOut</button>
+      <button type="button" id="fade_in" style="width: 130px; float: right; margin-right: 37%;">Footer FadeIn</button><br /><br />
+      <button type="button" id="menu_animate" style="width: 160px; display: -webkit-box; display: block; margin: auto;">Animate Top Menu</button>
       <br /><br /><br />
 
       <script>
