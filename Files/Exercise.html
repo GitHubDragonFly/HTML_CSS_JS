@@ -373,8 +373,10 @@
       function form_query() {
         var formData = new FormData(document.querySelector('form'));
 
-        // Array of arrays, where key_value_pairs[x][0] is the key and key_value_pairs[x][1] is the value of
-        // the x pair with x going from 0 to key_value_pairs.length - 1 
+        // Array of arrays, where:
+        // - key_value_pairs[x][0] is the key
+        // - key_value_pairs[x][1] is the value
+        // the x is going from 0 to key_value_pairs.length - 1 
         key_value_pairs = Array.from(formData.entries());
 
         if (key_value_pairs[0][1].trim() != "" && key_value_pairs[1][1].trim() != ""){
@@ -565,10 +567,10 @@
         <video id="video_element" autoplay="false" width="400" controls></video><br /><br />
       </div><br />
       <div style="text-align: center; width: 400px; margin: auto;">
-        <button id="btn_start_camera" onclick="start_camera()" disabled>Start Cam</button>&nbsp;
+        <button id="btn_start_camera" onclick="start_camera()" style="width: 80px;" disabled>Start Cam</button>&nbsp;
         <input type="number" id="camera_id" name="camera_id" min="0" max="0" value="0" style="width: 35px;" disabled>&nbsp;
-        <button id="btn_stop_camera" onclick="stop_camera()" disabled>Stop Cam</button>&nbsp; &nbsp;
-        <button id="btn_start_record" onclick="start_recording()"  disabled>Record</button>&nbsp; &nbsp;
+        <button id="btn_stop_camera" onclick="stop_camera()" style="width: 80px;" disabled>Stop Cam</button>&nbsp; &nbsp;
+        <button id="btn_start_record" onclick="start_recording()" style="width: 80px;"  disabled>Record</button>&nbsp; &nbsp;
         <a id="link_save_recording" href = "javascript:void(0);" style="border: 1px solid black; -webkit-border-radius: 3px; border-radius: 3px; width: 50px; padding-left: 4px; padding-right: 4px;">Save</a>
       </div><br />
       <p>Beach Video by
@@ -593,11 +595,14 @@
           navigator.mediaDevices.getUserMedia({ audio: true, video: { exact: video_input_id[cam_id] } })
             .then(function (stream) {
               video.srcObject = stream;
+              recorder = null;
               btn_start.disabled = true;
               btn_stop.disabled = false;
               btn_start_recording.disabled = false;
-              cam_id.disabled = true; })
-            .catch(function (err0r) { alert("Error openning camera source!");
+              cam_id.disabled = true;
+              link_save.style.backgroundColor = "";
+              link_save.href = "javascript:void(0);"; })
+            .catch(function () { alert("Error openning camera source!");
           });
         }
       }
@@ -625,7 +630,6 @@
       }
 
       async function start_recording() {
-        recorder = null;
         btn_start_recording.style.color = "red";
         btn_stop.innerHTML = "Stop Rec";
         link_save.style.backgroundColor = "";
@@ -642,6 +646,7 @@
 
         btn_start_recording.style.color = "";
         btn_stop.innerHTML = "Stop Cam";
+        recorder = null;
       }
 
       function record_camera(stream) {
