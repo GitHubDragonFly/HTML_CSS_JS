@@ -19,7 +19,7 @@ Some things might not be supported or work as expected on certain browsers. This
  - missing emojis support for old OS X can be compensated, to a degree, with [Symbola Font](https://dn-works.com/ufas/)
  - alignment entries of `float: inline-start` and `float: inline-end` don't work and need to be replaced with `float: left` and `float: right`, which works for modern browsers as well and has now been standardized in this exercise
  - add-on providing support for [playing MP4 video](https://sourceforge.net/projects/tenfourfox/files/addons/mp4/1.3406/) in TenFourFox
- - no camera video recording could be done since there is no webm support
+ - no camera video recording could be done since TenFourFox doesn't support async/await and doesn't seem to be capable of saving Blob with video data
 
 It would be recommended that you also check [this project](https://github.com/GitHubDragonFly/WebProject) and look at all the files created by it, especially because it is interacting with the django built-in server (there is also a link to django tutorial).
 
