@@ -15,18 +15,18 @@ These are the features you can see on the page:
  - Media video playback, including camera streaming and an option to record and save the camera video
  - JavaScript and jQuery examples
 
-Some things might not be supported or work as expected on certain browsers. This was tested as working in the latest Firefox browser on Windows 10, Chromium on CloudReady 89.4.0 and the page did also show properly in the TenFourFox browser on MacOS X 10.5 (iMac G5) with the following notes:
+Some things might not be supported or work as expected on certain browsers. This was tested as working in the latest Firefox browser on Windows 10 and Chromium on CloudReady 89.4.0.  The page did also show properly in the TenFourFox browser on MacOS X 10.5 (iMac G5) with the following notes:
  - missing emojis support for old OS X can be compensated, to a degree, with [Symbola Font](https://dn-works.com/ufas/)
  - alignment entries of `float: inline-start` and `float: inline-end` don't work and need to be replaced with `float: left` and `float: right`, which works for modern browsers as well and has now been standardized in this exercise
- - add-on providing support for [playing MP4 video](https://sourceforge.net/projects/tenfourfox/files/addons/mp4/1.3406/) in TenFourFox
- - no camera video recording could be done since TenFourFox doesn't support async/await and doesn't seem to be capable of saving Blob with video data
+ - add-on required to provide support for [playing MP4 video](https://sourceforge.net/projects/tenfourfox/files/addons/mp4/1.3406/) in TenFourFox
+ - no camera video recording could be done since TenFourFox doesn't support async/await. With a different code, it also seems to be having difficulties with `video.captureStream` (the Blob is created but its size is always 0 bytes)
 
 It would be recommended that you also check [this project](https://github.com/GitHubDragonFly/WebProject) and look at all the files created by it, especially because it is interacting with the django built-in server (there is also a link to django tutorial).
 
 ## Notes:
  - Camera "Id" feature is experimental and was not tested against multiple cameras.
- - Camera "Record" feature is experimental, so modify and use the best you can:
-   - It depends on the browser supporting ".webm" media format
+ - Camera "Record" feature is experimental but seems to be working properly (if needed, modify and use the best you can):
+   - It depends on the browser supporting ".webm" media format (HTML5)
    - The "Save" link should turn green to offer to "download" and save the recorded video (no actual downloading from any external website is done, this is all on your computer)
  - Adding more information to inline frame (iFrame) - you can get instructions for obtaining info about your browser and your public IP by visiting [WhatIsMyBrowser](https://www.whatismybrowser.com/developers/tools/iframe) developers page.
  - "3D Cube 1" drawing code might eventually need some corrections. Currently, the transparency allows it to be seen as correct but if you go about changing the "fill" and "stroke" values to more solid, 0.1 changed to 1.0, then you might see somewhat incorrect transitions. This is even more obvious if painting each side of the cube with a different color. 
@@ -36,6 +36,7 @@ All it takes is to:
 
 - Download a zip file of this project and extract it (or clone the repo).
 - Navigate to the `Files` folder and open `Exercise.html` in your Internet browser.
+- If any change is required then try using VS Code or Notepad to edit files.
 
 # Licensing
 This is MIT licensed.
