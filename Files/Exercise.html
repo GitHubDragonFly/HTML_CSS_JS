@@ -15,7 +15,7 @@
       A:hover { color:#363636; background-color:#dad9fc; text-decoration: none; border: 1px solid black; -webkit-border-radius: 2px; border-radius: 2px; padding-left: 1px; padding-right: 1px; }
       A[target="_blank"]:after {
         content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
-        margin: 0 3px 0 5px;
+        margin: 3px 3px 0 3px;
       }
 
       table { margin-left: auto; margin-right: auto; border: 1px solid black; padding: 2px; background-color: blue; }
@@ -327,6 +327,8 @@
         <label for="vehicle3"> I have a boat</label><br /><br />
         <label for="favcolor">Select your favorite color:</label>
         <input type="color" id="favcolor" name="favcolor"><br /><br />
+        <label for="file">Add a picture: &nbsp;</label>
+        <input type="file" id="file_input" name="file" accept="image/png, image/jpeg, image/bmp, image/gif"><br /><br /><br />
         <input type="button" id="btn_submit" onclick="form_query()" value="Submit" style="color: green;">
         <input type="reset" id="btn_reset" value="Reset" style="color: orange;">
         <input type="button" id="btn_disappear" onclick="document.getElementById('btn_disappear').hidden = 'True'" value="I am here temporarily">
@@ -335,11 +337,12 @@
     </div>
 
     <div style="color: blue; text-align: center;"><p><marquee width="15%">Submitted Form Entries</marquee></p>
-      <div id="entries" style="background-color: #eee; width: 75%; border: 1px solid #111; padding: 2px; margin: auto;">
+      <div id="entries" style="background-color: #eee; width: 80%; border: 1px solid #111; padding: 2px; margin: auto;">
         <table id="form_entries_table" style="background: darkgrey; width: 100%; font-size: 90%; table-layout: fixed;">
           <col width="4%" />
-          <col width="27%" />
-          <col width="27%" />
+          <col width="24%" />
+          <col width="24%" />
+          <col width="6%" />
           <col width="6%" />
           <col width="6%" />
           <col width="6%" />
@@ -349,16 +352,17 @@
           <col width="6%" />
           <thead>
             <tr>
-              <th id="count">#</th>
-              <th id="fname">First Name</th>
-              <th id="lname">Last Name</th>
-              <th id="male">Male</th>
-              <th id="female">Female</th>
-              <th id="other">Other</th>
-              <th id="vehicle1">Bike</th>
-              <th id="vehicle2">Car</th>
-              <th id="vehicle3">Boat</th>
-              <th id="favcolor">Color</th>
+              <th id="h_count">#</th>
+              <th id="h_fname">First Name</th>
+              <th id="h_lname">Last Name</th>
+              <th id="h_male">Male</th>
+              <th id="h_female">Female</th>
+              <th id="h_other">Other</th>
+              <th id="h_vehicle1">Bike</th>
+              <th id="h_vehicle2">Car</th>
+              <th id="h_vehicle3">Boat</th>
+              <th id="h_favcolor">Color</th>
+              <th id="h_file">Picture</th>
             </tr>
           </thead>
         </table>
@@ -396,27 +400,43 @@
           new_row.cells.item(2).innerHTML = key_value_pairs[1][1].trim();
 
           for (let j = 2; j < key_value_pairs.length; j++) {
-            switch (key_value_pairs[j][1]) {
-              case "male":
-                new_row.cells.item(3).innerHTML = "&#10004";
-                break;
-              case "female":
-                new_row.cells.item(4).innerHTML = "&#10004";
-                break;
-              case "other":
-                new_row.cells.item(5).innerHTML = "&#10004";
-                break;
-              case "Bike":
+            switch (key_value_pairs[j][0]) {
+              case "gender":
+                if (key_value_pairs[j][1] == "male") {
+                  new_row.cells.item(3).innerHTML = "&#10004";
+                  break;
+                } else if (key_value_pairs[j][1] == "female") {
+                  new_row.cells.item(4).innerHTML = "&#10004";
+                  break;
+                } else {
+                  new_row.cells.item(5).innerHTML = "&#10004";
+                  break;
+                }
+              case "vehicle1":
                 new_row.cells.item(6).innerHTML = "&#10004";
                 break;
-              case "Car":
+              case "vehicle2":
                 new_row.cells.item(7).innerHTML = "&#10004";
                 break;
-              case "Boat":
+              case "vehicle3":
                 new_row.cells.item(8).innerHTML = "&#10004";
                 break;
-              default:
+              case "favcolor":
                 new_row.cells.item(9).style.backgroundColor = key_value_pairs[j][1];
+                break;
+              default:
+                var picture_file = formData.get('file'); // formData.getAll('file') if multiple files
+                if (picture_file.type.startsWith('image/')) {
+                  var a = Object.assign(document.createElement('a'), { 'href': URL.createObjectURL(picture_file), 'target': '_blank' });
+                  var img = Object.assign(document.createElement('img'), { 'class': 'obj', 'file': picture_file, 'alt': picture_file.name, 'style': 'width: 24px; height: 22px; margin-right: 5px;' });
+                  a.appendChild(img);
+                  new_row.cells.item(10).appendChild(a);
+                  const reader = new FileReader();
+                  reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+                  reader.readAsDataURL(picture_file);
+                } else {
+                  new_row.cells.item(10).innerHTML = "None";
+                }
                 break;
             }
           }
@@ -439,7 +459,7 @@
             count += 1;
 
             $.each(table_headers, function() {
-              var id = this.id;
+              var id = (this.id).substring(2);
               $('#form_entries_table tr:last').append('<td></td>');
 
               if (id == "count") {$('#form_entries_table td:last').text(count);}
@@ -448,11 +468,26 @@
               $.each(formData, function(index, value) {
                 if (formData[index].name == id && (id == "fname" || id == "lname")) {
                   $('#form_entries_table td:last').text(formData[index].value);} else {
-                    if ((formData[index].name == "gender" && formData[index].value.toUpperCase() == id.toUpperCase()) || (formData[index].name == id && id != "favcolor")) {
-                      $('#form_entries_table td:last').text("\u2714");} else if (formData[index].name == id) {
+                    if ((formData[index].name == "gender" && formData[index].value.toUpperCase() == id.toUpperCase()) || (formData[index].name == id && id != "favcolor" && id != "file")) {
+                      $('#form_entries_table td:last').text("\u2714");}  else if (formData[index].name == id) {
                         $('#form_entries_table td:last').css("background-color", formData[index].value);}
                 }
               });
+
+              if (id == "file") {
+                var picture_file = $('#file_input')[0].files[0];
+                if (picture_file != null && picture_file.type.startsWith('image/')) {
+                  var a = $.extend(true, document.createElement('a'), { 'href': URL.createObjectURL(picture_file), 'target': '_blank' });
+                  var img = $.extend(true, document.createElement('img'), { 'class': 'obj', 'file': picture_file, 'alt': picture_file.name, 'style': 'width: 24px; height: 22px; margin-right: 5px;' });
+                  a.appendChild(img);
+                  $('#form_entries_table td:last').append(a);
+                  const reader = new FileReader();
+                  reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+                  reader.readAsDataURL(picture_file);
+                } else {
+                  $('#form_entries_table td:last').text("None");
+                }
+              }
             });
           }
 
@@ -715,7 +750,7 @@
             var link_element = $("#link")
 
             if (link_element.text() == "") {
-              link_element.replaceWith("<p id='link' style='width: 150px; margin: auto;'><a href='https://github.com/GitHubDragonFly/'>GitHub Account</a></p>");
+              link_element.replaceWith("<p id='link' style='width: 150px; margin: auto;'><a href='https://github.com/GitHubDragonFly/' target='_blank'>GitHub Account</a></p>");
               btn_link_element.text("Hide GitHub Link");
             } else {
               link_element.replaceWith("<p id='link' style='width: 150px; margin: auto;'></p>");
@@ -727,7 +762,7 @@
 
         // Alternative 2 - jQuery equivalent (using show/hide functions):
         // - remove onclick="show_hide_link()" from button, change the #link paragraph to
-        // - "<p id='link' style='width: 150px; margin: auto; display: none;'><a href='https://github.com/GitHubDragonFly/'>GitHub Account</a></p>"
+        // - "<p id='link' style='width: 150px; margin: auto; display: none;'><a href='https://github.com/GitHubDragonFly/' target='_blank'>GitHub Account</a></p>"
         // - comment the above function and uncomment the following
 /*
         $(document).ready(function(){
