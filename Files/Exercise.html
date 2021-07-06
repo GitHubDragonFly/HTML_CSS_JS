@@ -35,7 +35,7 @@
       blkt { color: black; font-size: 75%; }
 
       .required label:after { color: red; content: ' *'; display: inline; }
-      .fixed-menu { position: fixed; z-index: 1; left: 0px; top: 0px; margin: 0px; font-size: large; width: 99.7%; border: 2px solid navy; -webkit-border-radius: 3px; border-radius: 3px; background-color: #f8f1c1; }
+      .fixed-menu { position: fixed; z-index: 1; left: 0px; top: 0px; margin: 0px; font-size: 95%; width: 99.7%; border: 2px solid navy; -webkit-border-radius: 3px; border-radius: 3px; background-color: whitesmoke; }
       .footer { position: static; margin: 0px; left: 0px; bottom: 0px; width: 99.7%; background-color: yellow; text-align: center; }
 
       .rotateX { -webkit-animation: rotationX 8s infinite linear; animation: rotationX 8s infinite linear; }
@@ -131,8 +131,19 @@
       <a href="#P13">JQuery</a>
     </p>
 
-    <br id="P1" />
-    <p style="font-size: 36px; border: 0px;"><i>&#128578;</i> ~ Italicized Emojis ~ <i>&#128579;</i></p>
+    <br id="P1" /><br /><br />
+    <p id="emojis" style="font-size: 36px; width: 35%; margin: auto; border: 0px;"><i>&#128578;</i> ~ Italicized Emojis ~ <i>&#128579;</i></p>
+
+    <script>
+      $(document).ready(function() {
+        $('#emojis').mouseover(function(event){
+          $(this).addClass('rotateY');
+        });
+        $('#emojis').mouseout(function(event){
+          $(this).removeClass('rotateY');
+        });
+      });
+    </script>
 
     <br id="P2" /><br />
     <div style="text-align: center; display: -webkit-inline-box; -webkit-box-orient: vertical; display: inline-block;"><p>SVG</p>
@@ -371,8 +382,8 @@
 
     <script>
       // Submit button is currently of the 'button' input and not 'submit' input type
-      // Collect all form entries to display in this window only
-      var count = 0; // used with either js or jQuery
+      // Since there is no server involved then collect all form entries to display in this window only
+      var count = 0; // used with either js or jQuery, don't comment it out if switching between these
 
       function form_query() {
         var formData = new FormData(document.querySelector('form'));
@@ -469,7 +480,7 @@
                 if (formData[index].name == id && (id == "fname" || id == "lname")) {
                   $('#form_entries_table td:last').text(formData[index].value);} else {
                     if ((formData[index].name == "gender" && formData[index].value.toUpperCase() == id.toUpperCase()) || (formData[index].name == id && id != "favcolor" && id != "file")) {
-                      $('#form_entries_table td:last').text("\u2714");}  else if (formData[index].name == id) {
+                      $('#form_entries_table td:last').text("\u2714");} else if (formData[index].name == id) {
                         $('#form_entries_table td:last').css("background-color", formData[index].value);}
                 }
               });
