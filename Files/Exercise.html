@@ -50,9 +50,9 @@
       .rotateYZ_SVG { -webkit-animation: rotationYZ_SVG 4s infinite linear; animation: rotationYZ_SVG 4s infinite linear; }
       .rotateXtranslateX { -webkit-animation: rotationXtranslationX 8s infinite linear; animation: rotationXtranslationX 8s infinite linear; }
       .rotateYtranslateY { -webkit-animation: rotationYtranslationY 8s infinite linear; animation: rotationYtranslationY 8s infinite linear; }
-      .rotateZtranslateZ { -webkit-animation: rotationZtranslationZ 8s infinite linear; animation: rotationZtranslationZ 8s infinite linear; }
-      .rotateZtranslateX { -webkit-animation: rotationZtranslationX 8s infinite linear; animation: rotationZtranslationX 8s infinite linear; }
-      .rotateZtranslateXY { -webkit-animation: rotationZtranslationXY 8s infinite linear; animation: rotationZtranslationXY 8s infinite linear; }
+      .rotateZtranslateZ { -webkit-animation: rotationZtranslationZ 8s infinite linear alternate-reverse; animation: rotationZtranslationZ 8s infinite linear alternate-reverse; }
+      .rotateZtranslateX { -webkit-animation: rotationZtranslationX 8s infinite linear alternate-reverse; animation: rotationZtranslationX 8s infinite linear alternate-reverse; }
+      .rotateZtranslateXY { -webkit-animation: rotationZtranslationXY 8s infinite linear alternate-reverse; animation: rotationZtranslationXY 8s infinite linear alternate-reverse; }
       @-webkit-keyframes rotationX { from { -webkit-transform: rotateX(0deg); } to { -webkit-transform: rotateX(359deg); } }
       @-webkit-keyframes rotationY { from { -webkit-transform: rotateY(0deg); } to { -webkit-transform: rotateY(359deg); } }
       @-webkit-keyframes rotationZ { from { -webkit-transform: rotateZ(0deg); } to { -webkit-transform: rotateZ(359deg); } }
@@ -565,8 +565,8 @@
       <div class="rotateYZCubic" style="background-color: white; text-align: center; width: 10%; float: right;">Rotating over YZ axes</div><br /><br /><br /><br /><br />
     </div><br />
 
-    <div style="perspective: 300px; height: 250px; display: -webkit-inline-box; -webkit-box-orient: vertical; display: inline-block;">
-      <p>Rotating & Translating with Perspective</p><br /><br />
+    <div style="perspective: 300px; height: 280px; display: -webkit-inline-box; -webkit-box-orient: vertical; display: inline-block;">
+      <p>Rotating & Translating & Perspective - Alternate Reverse</p><br /><br />
       <div class="rotateZtranslateXY" style="background-color: white; text-align: center; width: 10%; float: left;">Rotate Z Translate XY</div><br /><br />
 
       <div class="rotateZtranslateX" style="background-color: white; text-align: center; width: 10%; margin: auto">Rotate Z Translate X</div><br /><br />
