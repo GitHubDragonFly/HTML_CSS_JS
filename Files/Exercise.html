@@ -165,7 +165,7 @@
     <br id="P2" /><br />
     <div style="text-align: center; display: -webkit-inline-box; -webkit-box-orient: vertical; display: inline-block;"><p>SVG</p>
       <!-- Side SVG pictures are drawn while the middle is just a free sample available for download -->
-      <div class="dropdown" style="width: 115px; float: left;">
+      <div id="div_svg1" class="dropdown" style="width: 115px; float: left;">
         <svg id="svg1" class="rotateZ" width="100" height="100">
           <defs>
             <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -187,7 +187,7 @@
           </svg>
         </div>
       </div>
-      <div class="dropdown" style="width: 115px; float: right;">
+      <div id="div_svg2" class="dropdown" style="width: 115px; float: right;">
         <svg id="svg2" class="rotateXYZ" width="100" height="100">
           <defs>
             <radialGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -197,7 +197,7 @@
           </defs>
           <circle cx="50" cy="50" r="48" stroke="green" stroke-width="1" fill="url(#grad2)" />
         </svg>
-        <div class="dropdown-content" style="width: 445px; margin-top: 10px; transform: translateX(-400px);">
+        <div class="dropdown-content" style="width: 445px; margin-top: 10px; transform: translateX(-350px);">
           <svg class="rotateXYZ" width="400" height="400">
             <defs>
               <radialGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -209,16 +209,29 @@
           </svg>
         </div>
       </div>
-      <div style="text-align: center; width: 85px; margin-left: auto; margin-right: auto; margin-top: 10px;">
+      <div id="div_svg_free" class="dropdown" style="text-align: center; width: 85px; margin-left: auto; margin-right: auto; margin-top: 10px;">
         <img src="Images/Freesample.svg" alt="Free SVG Sample" style="width: 75px; height: 64px; display:block; margin: auto;" />
-      </div>
+        <div class="dropdown-content" style="width: 400px; margin-top: 10px; transform: translateX(-150px);">
+          <img src="Images/Freesample.svg" alt="Free SVG Sample" style="width: 400px; height: 340px;" />
+        </div>
+        </div>
     </div><br />
 
     <script>
       $(document).ready(function() {
         $('.dropdown').hover(
-          function(event){ $('#svg1').removeClass('rotateZ'); $('#svg2').removeClass('rotateXYZ'); },
-          function(event){ $('#svg1').addClass('rotateZ'); $('#svg2').addClass('rotateXYZ'); }
+          function(event){
+            if (event.target.id == "div_svg1") {
+              $('#svg1').removeClass('rotateZ');
+            } else if (event.target.id == "div_svg2") {
+              $('#svg2').removeClass('rotateXYZ');
+            }},
+            function(event){
+            if (event.target.id == "div_svg1") {
+              $('#svg1').addClass('rotateZ');
+            } else if (event.target.id == "div_svg2") {
+              $('#svg2').addClass('rotateXYZ');
+            }},
         );
       });
     </script>
