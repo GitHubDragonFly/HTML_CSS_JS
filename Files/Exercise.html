@@ -184,7 +184,7 @@
           <ellipse cx="50" cy="50" rx="48" ry="35" stroke="navy" stroke-width="1" fill="url(#grad1)" />
         </svg>
         <div class="dropdown-content" style="width: 445px; margin-top: 10px;">
-          <svg class="rotateZ" width="400" height="400">
+          <svg id="svg2" width="400" height="400">
             <defs>
               <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" style="stop-color:rgb(0,255,255);stop-opacity:0.75" />
@@ -195,8 +195,8 @@
           </svg>
         </div>
       </div>
-      <div id="div_svg2" class="dropdown" style="width: 115px; float: right;">
-        <svg id="svg2" class="rotateXYZ" width="100" height="100">
+      <div id="div_svg3" class="dropdown" style="width: 115px; float: right;">
+        <svg id="svg3" class="rotateXYZ" width="100" height="100">
           <defs>
             <radialGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
@@ -206,7 +206,7 @@
           <circle cx="50" cy="50" r="48" stroke="green" stroke-width="1" fill="url(#grad2)" />
         </svg>
         <div class="dropdown-content" style="width: 445px; margin-top: 10px; transform: translateX(-350px);">
-          <svg class="rotateXYZ" width="400" height="400">
+          <svg id="svg4" width="400" height="400">
             <defs>
               <radialGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
@@ -219,7 +219,7 @@
       </div>
       <div id="div_svg_free" class="dropdown" style="text-align: center; width: 85px; margin-left: auto; margin-right: auto; margin-top: 10px;">
         <img src="Images/Freesample.svg" alt="Free SVG Sample" style="width: 75px; height: 64px; display:block; margin: auto;" />
-        <div class="dropdown-content" style="width: 400px; margin-top: 10px; transform: translateX(-150px);">
+        <div id="dc3" class="dropdown-content" style="width: 400px; margin-top: 10px; transform: translateX(-150px);">
           <img src="Images/Freesample.svg" alt="Free SVG Sample" style="width: 400px; height: 340px;" />
         </div>
         </div>
@@ -231,14 +231,18 @@
           function(event){
             if (event.target.id == "div_svg1") {
               $('#svg1').removeClass('rotateZ');
-            } else if (event.target.id == "div_svg2") {
-              $('#svg2').removeClass('rotateXYZ');
+              $('#svg2').addClass('rotateZ');
+            } else if (event.target.id == "div_svg3") {
+              $('#svg3').removeClass('rotateXYZ');
+              $('#svg4').addClass('rotateXYZ');
             }},
             function(event){
             if (event.target.id == "div_svg1") {
               $('#svg1').addClass('rotateZ');
-            } else if (event.target.id == "div_svg2") {
-              $('#svg2').addClass('rotateXYZ');
+              $('#svg2').removeClass('rotateZ');
+            } else if (event.target.id == "div_svg3") {
+              $('#svg3').addClass('rotateXYZ');
+              $('#svg4').removeClass('rotateXYZ');
             }},
         );
       });
@@ -873,7 +877,7 @@
     </div>
 
     <br id="P13" />
-    <p>JQuery</p><br />
+    <p id="jq">JQuery</p><br />
       <button type="button" id="hide_div" style="width: 160px; float: left; margin-left: 30%;">Hide "div" Elements</button>
       <button type="button" id="show_div" style="width: 160px; float: right; margin-right: 30%;">Show "div" Elements</button><br /><br />
       <button type="button" id="fade_out" style="width: 130px; float: left; margin-left: 37%;">Footer FadeOut</button>
@@ -891,10 +895,20 @@
             $(".footer").fadeOut();
           });
           $("#hide_div").click(function(){
-            $("div").hide();
+            $('div').each(function(index){
+            // prevent all dropdowns from hiding
+            if ($(this).attr('class') != 'dropdown-content'){
+                $(this).hide();
+              }
+            });
           });
           $("#show_div").click(function(){
-            $("div").show();
+            $('div').each(function(index){
+            // prevent all dropdowns from showing
+            if ($(this).attr('class') != 'dropdown-content'){
+                $(this).show();
+              }
+            });
             $("html, body").animate({ scrollTop: $(document).height() }, 1000);
           });
           $("#menu_animate").click(function(){
