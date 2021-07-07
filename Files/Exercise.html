@@ -112,10 +112,18 @@
 
         navigator.mediaDevices.enumerateDevices()
         .then(function(devices) {
+          let i = 0;
+          let j = 0;
           devices.forEach(function(device) {
-            if (device.kind == "videoinput") { video_input_id.push(device.deviceId); }
+            if (device.kind == "videoinput") {
+              video_input_id.push(device.deviceId);
+              document.getElementById('div_enum').innerHTML += device.kind + ": " + device.label + " id = " + i + "<br />";
+              i += 1;
+            } else {
+              document.getElementById('div_enum').innerHTML += device.kind + ": " + device.label + " id = " + j + "<br />";
+              j += 1;
+            }
 
-            document.getElementById('div_enum').innerHTML += device.kind + ": " + device.label + " id = " + device.deviceId + "<br />";
           });
 
           if (video_input_id.length > 0) {
