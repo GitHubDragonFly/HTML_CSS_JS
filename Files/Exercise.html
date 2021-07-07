@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta content="utf-8" charset="utf-8" http-equiv="encoding">
+    <meta content="width=device-width, initial-scale=1" charset="utf-8" http-equiv="encoding">
 
     <script src="jquery-3.6.0.js"></script>
 
     <style>
-      body { background-image: url('Images/dark_blue.png'); background-size: 100% 100%; overflow-x: hidden; }
+      body { z-index: 2; background-image: url('Images/dark_blue.png'); background-size: 100% 100%; overflow-x: hidden; }
       div { background-color: aliceblue; width: 99%; border: 2px solid green; -webkit-border-radius: 5px; border-radius: 5px; padding: 3px; margin: 5px; }
       p { text-align: center; color: blue; border: 1px solid lightblue; margin-bottom: 10px; }
       h1, h2, h3, h4, h5, h6 { margin-top: 1px; margin-bottom: 3px;}
 
       A { text-decoration: none; }
-      A:hover { color:#363636; background-color:#dad9fc; text-decoration: none; border: 1px solid black; -webkit-border-radius: 2px; border-radius: 2px; padding-left: 1px; padding-right: 1px; }
+      A:hover { color:#262626; background-color:#dad9fc; text-decoration: none; }
       A[target="_blank"]:after {
         content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
-        margin: 3px 3px 0 3px;
+        margin: 3px 3px 0 5px;
       }
+
+      .dropdown { position: relative; display: inline-block; }
+      .dropdown-content { display: none; position: absolute; z-index: 1; }
+      .dropdown:hover .dropdown-content { display: block; }
 
       table { margin-left: auto; margin-right: auto; border: 1px solid black; padding: 2px; background-color: blue; }
       th { border: 1px solid black; border-spacing: 1px; padding: 4px; color: navy; background-color: #f2f4f4; overflow: hidden; }
@@ -35,7 +39,7 @@
       blkt { color: black; font-size: 75%; }
 
       .required label:after { color: red; content: ' *'; display: inline; }
-      .fixed-menu { position: fixed; z-index: 1; left: 0px; top: 0px; margin: 0px; font-size: 95%; width: 99.7%; border: 2px solid navy; -webkit-border-radius: 3px; border-radius: 3px; background-color: whitesmoke; }
+      .fixed-menu { position: fixed; z-index: 1; left: 0px; top: 0px; margin: 0px; width: 99.7%; border: 1px solid navy; -webkit-border-radius: 3px; border-radius: 3px; background-color: whitesmoke; }
       .footer { position: static; margin: 0px; left: 0px; bottom: 0px; width: 99.7%; background-color: yellow; text-align: center; }
 
       .rotateX { -webkit-animation: rotationX 8s infinite linear; animation: rotationX 8s infinite linear; }
@@ -44,12 +48,12 @@
       .rotateXY { -webkit-animation: rotationXY 8s infinite linear; animation: rotationXY 8s infinite linear; }
       .rotateXZ { -webkit-animation: rotationXZ 8s infinite linear; animation: rotationXZ 8s infinite linear; }
       .rotateYZ { -webkit-animation: rotationYZ 8s infinite linear; animation: rotationYZ 8s infinite linear; }
-      .rotateXYZ { -webkit-animation: rotationXYZ 8s infinite linear; animation: rotationXYZ 8s infinite linear; }
-      .rotateY_SVG { -webkit-animation: rotationY_SVG 4s infinite linear; animation: rotationY_SVG 4s infinite linear; }
-      .rotateXY_SVG { -webkit-animation: rotationXY_SVG 4s infinite linear; animation: rotationXY_SVG 4s infinite linear; }
-      .rotateYZ_SVG { -webkit-animation: rotationYZ_SVG 4s infinite linear; animation: rotationYZ_SVG 4s infinite linear; }
-      .rotateXtranslateX { -webkit-animation: rotationXtranslationX 8s infinite linear; animation: rotationXtranslationX 8s infinite linear; }
-      .rotateYtranslateY { -webkit-animation: rotationYtranslationY 8s infinite linear; animation: rotationYtranslationY 8s infinite linear; }
+      .rotateXYZ { -webkit-animation: rotationXYZ 8s infinite linear alternate-reverse; animation: rotationXYZ 8s infinite linear alternate-reverse; }
+      .rotateY_SVG { -webkit-animation: rotationY_SVG 4s infinite linear alternate-reverse; animation: rotationY_SVG 4s infinite linear alternate-reverse; }
+      .rotateXY_SVG { -webkit-animation: rotationXY_SVG 4s infinite linear alternate-reverse; animation: rotationXY_SVG 4s infinite linear alternate-reverse; }
+      .rotateYZ_SVG { -webkit-animation: rotationYZ_SVG 4s infinite linear alternate-reverse; animation: rotationYZ_SVG 4s infinite linear alternate-reverse; }
+      .rotateXtranslateX { -webkit-animation: rotationXtranslationX 8s infinite linear alternate-reverse; animation: rotationXtranslationX 8s infinite linear alternate-reverse; }
+      .rotateYtranslateY { -webkit-animation: rotationYtranslationY 8s infinite linear alternate-reverse; animation: rotationYtranslationY 8s infinite linear alternate-reverse; }
       .rotateZtranslateZ { -webkit-animation: rotationZtranslationZ 8s infinite linear alternate-reverse; animation: rotationZtranslationZ 8s infinite linear alternate-reverse; }
       .rotateZtranslateX { -webkit-animation: rotationZtranslationX 8s infinite linear alternate-reverse; animation: rotationZtranslationX 8s infinite linear alternate-reverse; }
       .rotateZtranslateXY { -webkit-animation: rotationZtranslationXY 8s infinite linear alternate-reverse; animation: rotationZtranslationXY 8s infinite linear alternate-reverse; }
@@ -147,35 +151,44 @@
     </p>
 
     <br id="P1" /><br /><br />
-    <p id="emojis" style="font-size: 36px; width: 35%; margin: auto; border: 0px;"><i>&#128578;</i> ~ Italicized Emojis ~ <i>&#128579;</i></p>
+    <p id="emojis" style="font-size: 24px; width: 300px; margin: auto; border: none;"><i>&#128578;</i> ~ Italicized Emojis ~ <i>&#128579;</i></p>
 
     <script>
       $(document).ready(function() {
-        $('#emojis').mouseover(function(event){
-          $(this).addClass('rotateY');
-        });
-        $('#emojis').mouseout(function(event){
-          $(this).removeClass('rotateY');
-        });
+        $('#emojis').hover(
+          function(event){ $(this).addClass('rotateY'); },
+          function(event){ $(this).removeClass('rotateY'); }
+        );
       });
     </script>
 
     <br id="P2" /><br />
     <div style="text-align: center; display: -webkit-inline-box; -webkit-box-orient: vertical; display: inline-block;"><p>SVG</p>
       <!-- Side SVG pictures are drawn while the middle is just a free sample available for download -->
-      <div style="width: 115px; float: left;">
-        <svg class="rotateZ" width="100" height="100">
+      <div class="dropdown" style="width: 115px; float: left;">
+        <svg id="svg1" class="rotateZ" width="100" height="100">
           <defs>
             <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" style="stop-color:rgb(0,255,255);stop-opacity:1" />
-              <stop offset="100%" style="stop-color:rgb(0,0,255);stop-opacity:1" />
+              <stop offset="0%" style="stop-color:rgb(0,255,255);stop-opacity:0.75" />
+              <stop offset="100%" style="stop-color:rgb(0,0,255);stop-opacity:0.75" />
             </linearGradient>
           </defs>
           <ellipse cx="50" cy="50" rx="48" ry="35" stroke="navy" stroke-width="1" fill="url(#grad1)" />
         </svg>
+        <div class="dropdown-content" style="width: 445px; margin-top: 10px;">
+          <svg class="rotateZ" width="400" height="400">
+            <defs>
+              <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:rgb(0,255,255);stop-opacity:0.75" />
+                <stop offset="100%" style="stop-color:rgb(0,0,255);stop-opacity:0.75" />
+              </linearGradient>
+            </defs>
+            <ellipse cx="200" cy="200" rx="184" ry="140" stroke="navy" stroke-width="1" fill="url(#grad1)" />
+          </svg>
+        </div>
       </div>
-      <div style="width: 115px; float: right;">
-        <svg class="rotateXYZ" width="100" height="100">
+      <div class="dropdown" style="width: 115px; float: right;">
+        <svg id="svg2" class="rotateXYZ" width="100" height="100">
           <defs>
             <radialGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
@@ -184,11 +197,31 @@
           </defs>
           <circle cx="50" cy="50" r="48" stroke="green" stroke-width="1" fill="url(#grad2)" />
         </svg>
+        <div class="dropdown-content" style="width: 445px; margin-top: 10px; transform: translateX(-400px);">
+          <svg class="rotateXYZ" width="400" height="400">
+            <defs>
+              <radialGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
+                <stop offset="100%" style="stop-color:rgb(255,0,0);stop-opacity:1" />
+              </radialGradient>
+            </defs>
+            <circle cx="200" cy="200" r="184" stroke="green" stroke-width="1" fill="url(#grad2)" />
+          </svg>
+        </div>
       </div>
       <div style="text-align: center; width: 85px; margin-left: auto; margin-right: auto; margin-top: 10px;">
         <img src="Images/Freesample.svg" alt="Free SVG Sample" style="width: 75px; height: 64px; display:block; margin: auto;" />
       </div>
     </div><br />
+
+    <script>
+      $(document).ready(function() {
+        $('.dropdown').hover(
+          function(event){ $('#svg1').removeClass('rotateZ'); $('#svg2').removeClass('rotateXYZ'); },
+          function(event){ $('#svg1').addClass('rotateZ'); $('#svg2').addClass('rotateXYZ'); }
+        );
+      });
+    </script>
 
     <br id="P3" /><br />
     <div>
@@ -453,6 +486,8 @@
               default:
                 var picture_file = formData.get('file'); // formData.getAll('file') if multiple files
                 if (picture_file.type.startsWith('image/')) {
+                  var drop = Object.assign(document.createElement('div'), { 'class': 'dropdown'});
+                  var drop_c = Object.assign(document.createElement('div'), { 'class': 'dropdown-content'});
                   var a = Object.assign(document.createElement('a'), { 'href': URL.createObjectURL(picture_file), 'target': '_blank' });
                   var img = Object.assign(document.createElement('img'), { 'class': 'obj', 'file': picture_file, 'alt': picture_file.name, 'style': 'width: 24px; height: 22px; margin-right: 5px;' });
                   a.appendChild(img);
@@ -586,7 +621,7 @@
     </div>
 
     <div><p>Rotating SVG with multiple elements over mixed axes</p>
-      <div style="text-align: center; margin: auto; padding: 0px; border: 0px;">
+      <div style="text-align: center; margin: auto; padding: 0px; border: none;">
         <svg width="200" height="200">
           <defs>
             <g id="cube" class="cube-unit">
@@ -632,8 +667,12 @@
         <video width="640" controls>
           <source src="Videos/Beach - 3998.mp4" type="video/mp4">
           Your browser does not support HTML video.
-        </video><br /><br />
-      </div><br /><br />
+        </video><br />
+      </div><br />
+      <p>Video by
+        <a href="https://pixabay.com/users/rc-aero-tech-2978946/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3998">Rc-Aero-Tech</a>
+        from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3998">Pixabay</a>
+      </p><br />
       <div style="text-align: center; background-color: cyan; width: 400px; height: 300px; margin: auto;">
         <video id="video_element" autoplay="false" width="400" controls></video><br /><br />
       </div><br />
@@ -644,10 +683,6 @@
         <button id="btn_start_record" onclick="start_recording()" style="width: 80px;"  disabled>Record</button>&nbsp; &nbsp;
         <a id="link_save_recording" href = "javascript:void(0);" style="border: 1px solid black; -webkit-border-radius: 3px; border-radius: 3px; width: 50px; padding-left: 4px; padding-right: 4px;">Save</a>
       </div><br />
-      <p>Beach Video by
-        <a href="https://pixabay.com/users/rc-aero-tech-2978946/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3998">Rc-Aero-Tech</a>
-        from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3998">Pixabay</a>
-      </p>
     </div>
     <div id="div_enum" style="text-align: center;"><p>Media Devices Enumerator</p></div>
 
