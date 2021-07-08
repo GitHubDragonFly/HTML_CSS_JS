@@ -141,6 +141,7 @@
     <title>HTML-CSS-JS Exercise</title>
   </head>
   <!-- Lots of code lines below have been separated to single lines for clarity -->
+  <!-- Inline styling is generally used to override the preset for different appearance -->
   <body>
     <p class="fixed-menu">
       <a href="#P1">Top</a>&nbsp; &nbsp;
@@ -184,6 +185,7 @@
           <ellipse cx="50" cy="50" rx="48" ry="35" stroke="navy" stroke-width="1" fill="url(#grad1)" />
         </svg>
         <div class="dropdown-content" style="width: 445px; margin-top: 10px;">
+          <!-- Enlarged version of the SVG image to be displayed as a dropdown -->
           <svg id="svg2" width="400" height="400">
             <defs>
               <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -206,6 +208,7 @@
           <circle cx="50" cy="50" r="48" stroke="green" stroke-width="1" fill="url(#grad2)" />
         </svg>
         <div class="dropdown-content" style="width: 445px; margin-top: 10px; transform: translateX(-350px);">
+          <!-- Enlarged version of the SVG image to be displayed as a dropdown -->
           <svg id="svg4" width="400" height="400">
             <defs>
               <radialGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -217,9 +220,10 @@
           </svg>
         </div>
       </div>
-      <div id="div_svg_free" class="dropdown" style="text-align: center; width: 85px; margin-left: auto; margin-right: auto; margin-top: 10px;">
+      <div class="dropdown" style="text-align: center; width: 85px; margin-left: auto; margin-right: auto; margin-top: 10px;">
         <img src="Images/Freesample.svg" alt="Free SVG Sample" style="width: 75px; height: 64px; display:block; margin: auto;" />
-        <div id="dc3" class="dropdown-content" style="width: 400px; margin-top: 10px; transform: translateX(-150px);">
+        <div class="dropdown-content" style="width: 400px; margin-top: 10px; transform: translateX(-150px);">
+          <!-- Enlarged version of the SVG image to be displayed as a dropdown -->
           <img src="Images/Freesample.svg" alt="Free SVG Sample" style="width: 400px; height: 340px;" />
         </div>
         </div>
@@ -229,7 +233,8 @@
       $(document).ready(function() {
         $('.dropdown').hover(
           function(event){
-            if (event.target.id == "div_svg1") {
+              // Stop rotating the small SVG and start rotating its enlarged dropdown version
+              if (event.target.id == "div_svg1") {
               $('#svg1').removeClass('rotateZ');
               $('#svg2').addClass('rotateZ');
             } else if (event.target.id == "div_svg3") {
@@ -237,7 +242,8 @@
               $('#svg4').addClass('rotateXYZ');
             }},
             function(event){
-            if (event.target.id == "div_svg1") {
+              // Restore rotation of the small SVG and remove rotation class from its dropdown
+              if (event.target.id == "div_svg1") {
               $('#svg1').addClass('rotateZ');
               $('#svg2').removeClass('rotateZ');
             } else if (event.target.id == "div_svg3") {
@@ -456,14 +462,14 @@
     <script>
       // Submit button is currently of the 'button' input and not 'submit' input type
       // Since there is no server involved then collect all form entries to display in this window only
-      var count = 0; // used with either js or jQuery, don't comment it out if switching between these
+      var count = 0; // used with both js and jQuery, don't comment it out if switching between these
 
       function form_query() {
         var formData = new FormData(document.querySelector('form'));
 
         // Array of arrays, where:
-        // - key_value_pairs[x][0] is the key
-        // - key_value_pairs[x][1] is the value
+        //   key_value_pairs[x][0] is the key
+        //   key_value_pairs[x][1] is the value
         // the x is going from 0 to key_value_pairs.length - 1 
         key_value_pairs = Array.from(formData.entries());
 
@@ -852,7 +858,6 @@
           });
         });
  */
-
         // Alternative 2 - jQuery equivalent (using show/hide functions):
         // - remove onclick="show_hide_link()" from button, change the #link paragraph to
         // - "<p id='link' style='width: 150px; margin: auto; display: none;'><a href='https://github.com/GitHubDragonFly/' target='_blank'>GitHub Account</a></p>"
