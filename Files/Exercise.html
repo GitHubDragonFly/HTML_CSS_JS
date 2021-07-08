@@ -683,8 +683,6 @@
               default:
                 var picture_file = formData.get('file'); // formData.getAll('file') if multiple files
                 if (picture_file.type.startsWith('image/')) {
-                  var drop = Object.assign(document.createElement('div'), { 'class': 'dropdown'});
-                  var drop_c = Object.assign(document.createElement('div'), { 'class': 'dropdown-content'});
                   var a = Object.assign(document.createElement('a'), { 'href': URL.createObjectURL(picture_file), 'target': '_blank' });
                   var img = Object.assign(document.createElement('img'), { 'class': 'obj', 'file': picture_file, 'alt': picture_file.name, 'style': 'width: 24px; height: 22px; margin-right: 5px;' });
                   a.appendChild(img);
@@ -809,7 +807,7 @@
     </div><br />
 
     <div style="display: -webkit-inline-box; -webkit-box-orient: vertical; display: -moz-inline-box; display: -ms-inline-flexbox; display: inline-block;">
-      <p>Rotating over XY, XZ, YZ axes with timing function</p><br /><br /><br />
+      <p>Rotating over XY, XZ, YZ axes with timing function (cubic-bezier)</p><br /><br /><br />
       <div class="rotateXYCubic" style="background-color: white; text-align: center; width: 10%; float: left;">Rotating over XY axes</div><br />
 
       <div class="rotateXZCubic" style="background-color: white; text-align: center; width: 10%; margin: auto">Rotating over XZ axes</div>
@@ -818,7 +816,7 @@
     </div><br />
 
     <div style="display: -webkit-inline-box; -webkit-box-orient: vertical; -webkit-perspective: 400px; display: -moz-inline-box; -moz-perspective: 400px; display: -ms-inline-flexbox; -ms-perspective: 400px; display: inline-block; perspective: 400px;">
-      <p>Rotating XYZ Translating 3D</p><br />
+      <p>Rotating XYZ & Translating 3D & Perspective - Alternate Reverse</p><br />
       <div class="rotateXYZtranslate3D" style="text-align: center; width: 215px; height: 111px; margin: auto;">
         <img src="Images/cube-1963036_640.jpg" alt="Cube Image" style="width: 215px; height: 111px;" />
       </div><br /><br />
