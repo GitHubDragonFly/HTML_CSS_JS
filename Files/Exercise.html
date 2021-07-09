@@ -225,23 +225,23 @@
       @keyframes rotationXYZtranslation3D { from { transform: translate3d(-250px, -25px, -450px) rotate3d(1,1,1,0deg); } to { transform: translate3d(250px, 50px, -150px) rotate3d(1,1,1,359deg); } }
 
       .rotateXYCubic {
-        -webkit-animation: rotationXYCubic 8s infinite linear; -webkit-animation-timing-function: cubic-bezier(.05, .55, .1, 1.5);
-        -moz-animation: rotationXYCubic 8s infinite linear; -moz-animation-timing-function: cubic-bezier(.05, .55, .1, 1.5);
-        -ms-animation: rotationXYCubic 8s infinite linear; -ms-animation-timing-function: cubic-bezier(.05, .55, .1, 1.5);
-        -o-animation: rotationXYCubic 8s infinite linear; -o-animation-timing-function: cubic-bezier(.05, .55, .1, 1.5);
-        animation: rotationXYCubic 8s infinite linear; animation-timing-function: cubic-bezier(.05, .55, .1, 1.5); }
+        -webkit-animation: rotationXYCubic 8s infinite alternate-reverse; -webkit-animation-timing-function: cubic-bezier(.05, .55, .1, 1.5);
+        -moz-animation: rotationXYCubic 8s infinite alternate-reverse; -moz-animation-timing-function: cubic-bezier(.05, .55, .1, 1.5);
+        -ms-animation: rotationXYCubic 8s infinite alternate-reverse; -ms-animation-timing-function: cubic-bezier(.05, .55, .1, 1.5);
+        -o-animation: rotationXYCubic 8s infinite alternate-reverse; -o-animation-timing-function: cubic-bezier(.05, .55, .1, 1.5);
+        animation: rotationXYCubic 8s infinite alternate-reverse; animation-timing-function: cubic-bezier(.05, .55, .1, 1.5); }
       .rotateXZCubic {
-        -webkit-animation: rotationXZCubic 8s infinite linear; -webkit-animation-timing-function: cubic-bezier(.42, 0, 1, 1);
-        -moz-animation: rotationXZCubic 8s infinite linear; -moz-animation-timing-function: cubic-bezier(.42, 0, 1, 1);
-        -ms-animation: rotationXZCubic 8s infinite linear; -ms-animation-timing-function: cubic-bezier(.42, 0, 1, 1);
-        -o-animation: rotationXZCubic 8s infinite linear; -o-animation-timing-function: cubic-bezier(.42, 0, 1, 1);
-        animation: rotationXZCubic 8s infinite linear; animation-timing-function: cubic-bezier(.42, 0, 1, 1); }
+        -webkit-animation: rotationXZCubic 8s infinite alternate-reverse; -webkit-animation-timing-function: cubic-bezier(.42, 0, 1, 1);
+        -moz-animation: rotationXZCubic 8s infinite alternate-reverse; -moz-animation-timing-function: cubic-bezier(.42, 0, 1, 1);
+        -ms-animation: rotationXZCubic 8s infinite alternate-reverse; -ms-animation-timing-function: cubic-bezier(.42, 0, 1, 1);
+        -o-animation: rotationXZCubic 8s infinite alternate-reverse; -o-animation-timing-function: cubic-bezier(.42, 0, 1, 1);
+        animation: rotationXZCubic 8s infinite alternate-reverse; animation-timing-function: cubic-bezier(.42, 0, 1, 1); }
       .rotateYZCubic {
-        -webkit-animation: rotationYZCubic 8s infinite linear; -webkit-animation-timing-function: cubic-bezier(0, 0, .58, 1);
-        -moz-animation: rotationYZCubic 8s infinite linear; -moz-animation-timing-function: cubic-bezier(0, 0, .58, 1);
-        -ms-animation: rotationYZCubic 8s infinite linear; -ms-animation-timing-function: cubic-bezier(0, 0, .58, 1);
-        -o-animation: rotationYZCubic 8s infinite linear; -o-animation-timing-function: cubic-bezier(0, 0, .58, 1);
-        animation: rotationYZCubic 8s infinite linear; animation-timing-function: cubic-bezier(0, 0, .58, 1); }
+        -webkit-animation: rotationYZCubic 8s infinite alternate-reverse; -webkit-animation-timing-function: cubic-bezier(0, 0, .58, 1);
+        -moz-animation: rotationYZCubic 8s infinite alternate-reverse; -moz-animation-timing-function: cubic-bezier(0, 0, .58, 1);
+        -ms-animation: rotationYZCubic 8s infinite alternate-reverse; -ms-animation-timing-function: cubic-bezier(0, 0, .58, 1);
+        -o-animation: rotationYZCubic 8s infinite alternate-reverse; -o-animation-timing-function: cubic-bezier(0, 0, .58, 1);
+        animation: rotationYZCubic 8s infinite alternate-reverse; animation-timing-function: cubic-bezier(0, 0, .58, 1); }
 
       @-webkit-keyframes rotationXYCubic { from { -webkit-transform: rotate3d(1,1,0,0deg); } to { -webkit-transform: rotate3d(1,1,0,359deg); } }
       @-webkit-keyframes rotationXZCubic { from { -webkit-transform: rotate3d(1,0,1,0deg); } to { -webkit-transform: rotate3d(1,0,1,359deg); } }
@@ -807,7 +807,7 @@
     </div><br />
 
     <div style="display: -webkit-inline-box; -webkit-box-orient: vertical; display: -moz-inline-box; display: -ms-inline-flexbox; display: inline-block;">
-      <p>Rotating over XY, XZ, YZ axes with timing function (cubic-bezier)</p><br /><br /><br />
+      <p>Rotating over XY, XZ, YZ axes (cubic-bezier timing function alternate reverse)</p><br /><br /><br />
       <div class="rotateXYCubic" style="background-color: white; text-align: center; width: 10%; float: left;">Rotating over XY axes</div><br />
 
       <div class="rotateXZCubic" style="background-color: white; text-align: center; width: 10%; margin: auto">Rotating over XZ axes</div>
