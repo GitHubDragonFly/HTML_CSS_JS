@@ -1,0 +1,18 @@
+- https://www.w3schools.com
+- https://developer.mozilla.org/en-US/docs/Web/API
+- https://www.geeksforgeeks.org/how-to-create-a-link-in-javascript/
+- https://css-tricks.com/use-and-reuse-everything-in-svg-even-animations/
+- https://flaviocopes.com/rotate-image
+- https://www.lipsum.com
+- https://svgstudio.com/pages/free-sample
+- https://stackoverflow.com/questions/11197671/
+- https://pixabay.com
+- https://codepen.io/MRokas/pen/aNBjdQ
+- https://www.sitepoint.com/building-3d-engine-javascript/
+- https://codepen.io/desandro/pen/KRWjzm
+- https://codepen.io/thiagobraga/pen/bhDdn
+- https://mkyong.com/jquery/how-to-use-css-and-jquery-to-hide-and-show-tab-content/
+- https://www.kirupa.com/html5/accessing_your_webcam_in_html5.htm
+- https://codepen.io/Mamboleoo/pen/PqjGdN
+- https://github.com/mrdoob/three.js
+- https://davidoreilly.itch.io/walt-disney-3d-head (http://www.davidoreilly.com)
