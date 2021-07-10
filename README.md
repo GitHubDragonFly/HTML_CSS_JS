@@ -14,7 +14,7 @@ These are the features you can see on the page:
  - Form and submitted form entries table (there is no server involved in this exercise)
  - Media video playback, including camera streaming and an option to record and save the camera video
  - JavaScript and jQuery examples
- - 3DS OBJ file viewer (using [Three.js](https://github.com/mrdoob/three.js))
+ - 3DS OBJ file viewer (using [Three.js](https://github.com/mrdoob/three.js)) and example OBJ files
 
 Some things might not be supported or work as expected on certain browsers. This was tested as working in the latest Firefox browser on Windows 10 and Chromium on CloudReady 89.4.0.  The page did also show properly in the TenFourFox browser on MacOS X 10.5 (iMac G5) with the following notes:
  - missing emojis support for old OS X can be compensated, to a degree, with [Symbola Font](https://dn-works.com/ufas/)
