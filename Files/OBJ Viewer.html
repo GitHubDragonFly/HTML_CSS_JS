@@ -129,10 +129,16 @@
         var fi = document.getElementById('file_input');
 
         if (fi.files.length > 1) {
-          if (!fi.files[0].name.endsWith('.mtl')) { return; }
-
-          selected_mtl_file = fi.files[0];
-          selected_obj_file = fi.files[1];
+          if (fi.files[0].name.endsWith('.mtl') && fi.files[1].name.endsWith('.obj')) {
+            selected_mtl_file = fi.files[0];
+            selected_obj_file = fi.files[1];
+          } else if (fi.files[0].name.endsWith('.obj') && fi.files[1].name.endsWith('.mtl')) {
+            selected_mtl_file = fi.files[1];
+            selected_obj_file = fi.files[0];
+          } else {
+            if (scene != null) { scene.remove.apply(scene, scene.children); }
+            return;
+          }
 
           mtl_loader.load( URL.createObjectURL(selected_mtl_file), (mtl) => {
             mtl.preload();
@@ -141,45 +147,41 @@
           });
         } else {
           obj_loader.setMaterials(null);
+          if (!fi.files[0].name.endsWith('.obj')) {
+            if (scene != null) { scene.remove.apply(scene, scene.children); }
+            return;
+          }
           selected_obj_file = fi.files[0];
         }
 
-        if (selected_obj_file.name.endsWith('.obj')) {
-          if (scene != null) {
-            scene.remove.apply(scene, scene.children);
-          }
+        if (scene != null) { scene.remove.apply(scene, scene.children); }
 
-          document.getElementById('reset').disabled = false;
-          document.getElementById('wireframe').disabled = false;
+        document.getElementById('reset').disabled = false;
+        document.getElementById('wireframe').disabled = false;
 
-          renderer = new THREE.WebGLRenderer({ canvas : document.getElementById('scene'), antialias: true, alpha: true });
-          renderer.setPixelRatio( window.devicePixelRatio );
-          renderer.setSize(ww, wh);
-          renderer.setClearColor( 0xffffff, 0); // Allow setting the background color
+        renderer = new THREE.WebGLRenderer({ canvas : document.getElementById('scene'), antialias: true, alpha: true });
+        renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setSize(ww, wh);
+        renderer.setClearColor( 0xffffff, 0); // Allow setting the background color
 
-          // The following can be used instead of the canvas but the window mouse
-          // events might be tricky to set due to the presence of the fixed menu
-          //document.body.appendChild( renderer.domElement );
+        // The following can be used instead of the canvas but the window mouse
+        // events might be tricky to set due to the presence of the fixed menu
+        //document.body.appendChild( renderer.domElement );
 
-          scene = new THREE.Scene();
+        scene = new THREE.Scene();
 
-        	camera = new THREE.PerspectiveCamera( 45, ww/wh, 0.1, 2000 );
-        	camera.position.set(0,0,250);
-      	  scene.add(camera);
+        camera = new THREE.PerspectiveCamera( 45, ww/wh, 0.1, 2000 );
+        camera.position.set(0,0,250);
+        scene.add(camera);
 
-          // Add a light in the scene
-        	directionalLight = new THREE.DirectionalLight( 0xffffff, 0.8 );
-        	directionalLight.position.set( 0, 0, 350 );
-        	directionalLight.lookAt(new THREE.Vector3(0,0,0));
-      	  scene.add( directionalLight );
+        // Add a light in the scene
+        directionalLight = new THREE.DirectionalLight( 0xffffff, 0.8 );
+        directionalLight.position.set( 0, 0, 350 );
+        directionalLight.lookAt(new THREE.Vector3(0,0,0));
+        scene.add( directionalLight );
 
-        	// Load the obj file
-        	loadFile();
-        } else {
-          if (scene != null) {
-            scene.remove.apply(scene, scene.children);
-          }
-        }
+        // Load the obj file
+        loadFile();
       }
 
       var loadFile = function(){
