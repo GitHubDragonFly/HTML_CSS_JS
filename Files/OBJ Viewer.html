@@ -31,7 +31,7 @@
 
         cnvs.addEventListener( 'wheel', (event) => {
           var pz = document.getElementById('position_z');
-          var val = parseInt(pz.value) + parseInt(event.deltaY * 0.01)
+          var val = parseInt(pz.value) + parseInt(event.deltaY * 0.01745)
           pz.value = val;
           pz.onchange();
         }, false);
@@ -50,8 +50,18 @@
 
         cnvs.addEventListener( 'mousemove', (event) => {
           if (mouse_rotation) {
-            Obj.rotation.x += (event.clientX * event.movementY * 0.00001);
-            Obj.rotation.y += (event.clientY * event.movementX * 0.00001);
+            event.preventDefault();
+            let x = Math.abs(Obj.rotation.x);
+
+            if (x > 2 * Math.PI ) { Obj.rotation.x = 0; }
+
+            Obj.rotation.x += event.clientX * event.movementY * 0.000005;
+
+            if (x > 1.57 && x < 4.71) {
+              Obj.rotation.y -= event.clientY * event.movementX * 0.00001745;
+            } else {
+              Obj.rotation.y += event.clientY * event.movementX * 0.00001745;
+            }
           }
         }, false);
       }
