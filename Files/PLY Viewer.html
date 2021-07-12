@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta content="utf-8" charset="utf-8" http-equiv="encoding">
+
+    <script src="js/three.js"></script>
+    <script src="js/PLYLoader.js"></script>
+
+    <style>
+      body,html{ background-color: black; width: 100%; height: 100%; padding: 0; margin: 0; overflow: hidden; }
+      .fixed-menu {
+        position: fixed;
+        z-index: 1;
+        display: inline-block;
+        background-color: whitesmoke;
+        top: 0px;
+        margin: 0px;
+        padding: 4px;
+        width: 100%;
+        border: 1px solid navy;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+      }
+      canvas { display: block; position: absolute; margin: 0; width: 100%; height: 100%; }
+    </style>
+
+    <!-- Original OBJ source code: https://codepen.io/Mamboleoo/pen/PqjGdN -->
+    <!-- PLY Examples from: https://github.com/mrdoob/three.js -->
+    <!-- More PLY examples: https://people.sc.fsu.edu/~jburkardt/data/data.html -->
+    <title>PLY Viewer</title>
+  </head>
+  <body>
+    <div class="fixed-menu">
+      <label for="file" style="color: navy;">PLY: &nbsp;</label>
+      <input type="file" id="file_input" name="file" onchange="init()" value="Browse" />
+      <label for="number">Rotate :</label>
+      <label for="number" style="color: blue;">X</label>
+      <input type="number" id="rotation_x" onchange="rot_x_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp;
+      <label for="number" style="color: blue;">Y</label>
+      <input type="number" id="rotation_y" onchange="rot_y_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp;
+      <label for="number" style="color: blue;">Z</label>
+      <input type="number" id="rotation_z" onchange="rot_z_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp; &nbsp; &nbsp;
+      <label for="number">Position : </label>
+      <label for="number" style="color: green;">X</label>
+      <input type="number" id="position_x" onchange="pos_x_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp;
+      <label for="number" style="color: green;">Y</label>
+      <input type="number" id="position_y" onchange="pos_y_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp;
+      <label for="number" style="color: green;">Z</label>
+      <input type="number" id="position_z" onchange="pos_z_changed()" min="-2000" max="2000" value="0" step="1" style="width: 55px;" />&nbsp; &nbsp;
+      <input type="checkbox" id="wireframe" name="wireframe" onchange="show_wireframe()" disabled />
+      <label for="wireframe">Wire</label>&nbsp; &nbsp;
+      <label for="back_color">bgColor:</label>
+      <input type="color" id="back_color" name="back_color" onchange="set_back_color()" style="background: none; padding: 0; width: 35px;" />&nbsp; &nbsp;
+      <label for="ply_scale">plyScale:</label>
+      <input type="number" id="ply_scale" name="ply_scale" onchange="set_ply_scale()" min="0.5" max="1.5" value="1" step="0.5" style="width: 50px;" />
+      <button type="reset" id="reset" onclick="reset_all()" style="float: right; width: 55px; margin-top: 2px; margin-right: 10px;" disabled>Reset</button>
+    </div><br />
+
+    <canvas id="scene">
+      Your browser does not support HTML5 canvas tag
+    </canvas>
+
+    <script>
+      function initialize_event_listeners() {
+        var cnvs = document.getElementById('scene');
+
+        cnvs.addEventListener( 'wheel', (event) => {
+          var pz = document.getElementById('position_z');
+          var val = parseInt(pz.value) + parseInt(event.deltaY * 0.01745)
+          pz.value = val;
+          pz.onchange();
+        }, false);
+
+        cnvs.addEventListener( 'mousedown', (event) => {
+          if (event.button == 0) {
+            mouse_rotation = true;
+          }
+        }, false);
+
+        cnvs.addEventListener( 'mouseup', (event) => {
+          if (event.button == 0) {
+            mouse_rotation = false;
+          }
+        }, false);
+
+        cnvs.addEventListener( 'mousemove', (event) => {
+          if (mouse_rotation) {
+            event.preventDefault();
+
+            mesh.rotation.x += event.clientX * event.movementY * 0.00001745;
+            mesh.rotation.y += event.clientY * event.movementX * 0.00001745;
+          }
+        }, false);
+      }
+    </script>
+
+    <script>
+      var renderer, scene, camera, mesh;
+      var ww = window.innerWidth,	wh = window.innerHeight;
+      var mouse_rotation = false, reset_rotation = false, events_initialized = false;
+      var rot_x = 0, rot_y = 0, rot_z = 0, pos_x = 0, pos_y = 0, pos_z = 0;
+      previous_ply_scale = 1;
+      var selected_ply_file = null;
+
+      // Manager from ThreeJs to track a loader and its status
+      var manager = new THREE.LoadingManager();
+      // Loader for selected file from Three.js
+      const ply_loader = new THREE.PLYLoader( manager );
+
+      function set_back_color() { document.body.style.backgroundColor = document.getElementById('back_color').value; }
+
+      function set_ply_scale() {
+        if (previous_ply_scale == 0.5) {
+          mesh.scale.multiplyScalar( 2 );
+        } else if (previous_ply_scale == 1.5) {
+          mesh.scale.multiplyScalar( 2/3 );
+        } else {
+          mesh.scale.multiplyScalar( parseFloat(document.getElementById('ply_scale').value) );
+        }
+
+        previous_ply_scale = parseFloat(document.getElementById('ply_scale').value);
+      }
+
+      function rot_x_changed() { rot_x = parseFloat(document.getElementById('rotation_x').value); }
+      function rot_y_changed() { rot_y = parseFloat(document.getElementById('rotation_y').value); }
+      function rot_z_changed() { rot_z = parseFloat(document.getElementById('rotation_z').value); }
+      function pos_x_changed() { pos_x = parseInt(document.getElementById('position_x').value); }
+      function pos_y_changed() { pos_y = parseInt(document.getElementById('position_y').value); }
+      function pos_z_changed() { pos_z = parseInt(document.getElementById('position_z').value); }
+
+      function init(){
+        // Loaded file(s)
+        var fi = document.getElementById('file_input');
+        selected_ply_file = fi.files[0];
+
+        if (scene != null) { scene.remove.apply(scene, scene.children); }
+
+        if (!fi.files[0].name.endsWith('.ply')) {
+          return;
+        } else {
+          selected_ply_file = fi.files[0];
+        }
+
+        document.getElementById('reset').disabled = false;
+        document.getElementById('wireframe').disabled = false;
+
+        renderer = new THREE.WebGLRenderer({ canvas : document.getElementById('scene'), antialias: true, alpha: true });
+        renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setSize(ww, wh);
+        renderer.setClearColor( 0xffffff, 0); // Allow setting the background color
+
+        // The following can be used instead of the canvas but the window mouse
+        // events might be tricky to set due to the presence of the fixed menu
+        //document.body.appendChild( renderer.domElement );
+
+        scene = new THREE.Scene();
+
+        if (!events_initialized) {initialize_event_listeners(); events_initialized = true; }
+
+        camera = new THREE.PerspectiveCamera( 45, ww/wh, 0.1, 2000 );
+        camera.position.set(0,0,250);
+        scene.add(camera);
+
+        // Add a light in the scene
+        directionalLight = new THREE.DirectionalLight( 0xffffff, 0.8 );
+        directionalLight.position.set( 0, 0, 350 );
+        directionalLight.lookAt(new THREE.Vector3(0,0,0));
+        scene.add( directionalLight );
+
+        // Load the ply file
+        loadFile();
+      }
+
+      var loadFile = function(){
+        // Reset all current positional and rotational values
+        reset_all( true );
+
+        // Launch loading of the selected file, addFileInScene is the callback when it's ready
+        ply_loader.load( URL.createObjectURL(selected_ply_file), addFileInScene );
+      };
+
+      var addFileInScene = function(object){
+        object.computeFaceNormals();
+
+        //var material = new THREE.MeshStandardMaterial({ color: 0x0077FF }); //shades of blue
+        var material = new THREE.MeshPhongMaterial( { color: 0xFFFFFF, specular: 0x111111, shininess: 100, vertexColors: THREE.VertexColors} );
+        material.shading = THREE.SmoothShading;
+
+        mesh = new THREE.Mesh(object, material);
+        mesh.castShadow = false;
+        mesh.receiveShadow = false;
+        mesh.scale.multiplyScalar( parseFloat(document.getElementById('ply_scale').value ));
+
+        // Add mesh to the scene
+        scene.add(mesh)
+
+        camera.lookAt( mesh.position );
+
+        render();
+      };
+
+      var show_wireframe = function () {
+        // Go through all children of the loaded object and search for a Mesh
+        mesh.traverse( function ( child ) {
+          // This allow us to check if the children is an instance of the Mesh constructor
+    	    if(child instanceof THREE.Mesh){
+            if (document.getElementById('wireframe').checked) {
+              child.material.wireframe = true;
+            } else {
+              child.material.wireframe = false;
+            }
+    		  }
+    	  });
+      }
+
+      var render = function () {
+        requestAnimationFrame( render );
+
+        // Move the mesh in the scene
+        mesh.position.x = pos_x;
+        mesh.position.y = pos_y;
+        mesh.position.z = pos_z;
+
+        // Rotate the mesh
+        if (!mouse_rotation) {
+          mesh.rotation.x += rot_x;
+          mesh.rotation.y += rot_y;
+          mesh.rotation.z += rot_z;
+        }
+
+      	renderer.render( scene, camera );
+      };
+
+      var reset_all = function( values_only = false ) {
+        // Reset all current positional and rotational values
+        rot_x = document.getElementById('rotation_x').value = 0;
+        rot_y = document.getElementById('rotation_y').value = 0;
+        rot_z = document.getElementById('rotation_z').value = 0;
+        pos_x = document.getElementById('position_x').value = 0;
+        pos_y = document.getElementById('position_y').value = 0;
+        pos_z = document.getElementById('position_z').value = 0;
+
+        // Reset the ply scale values
+        document.getElementById('ply_scale').value = 1;
+        previous_ply_scale = 1;
+
+        // Reset the wireframe checkbox
+        document.getElementById('wireframe').checked = false;
+
+        // Reset the view
+        if (!values_only) { reset_rotation = true; show_wireframe(); }
+      };
+    </script>
+  </body>
+</html>
