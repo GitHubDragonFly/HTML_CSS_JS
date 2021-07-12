@@ -14,8 +14,8 @@ These are the features you can see on the page:
  - Form and submitted form entries table (there is no server involved in this exercise)
  - Media video playback, including camera streaming and an option to record and save the camera video
  - JavaScript and jQuery examples
- - Wavefront 3D OBJ file viewer (using [Three.js](https://github.com/mrdoob/three.js)) and example OBJ files
- - PLY file viewer (using [Three.js](https://github.com/mrdoob/three.js)) and example PLY files
+ - Link to Wavefront 3D OBJ file viewer, using [Three.js](https://github.com/mrdoob/three.js)), and example OBJ files
+ - Link to PLY file viewer, using [Three.js](https://github.com/mrdoob/three.js)), and example PLY files
 
 Some things might not be supported or work as expected on certain browsers. This was tested as working in the latest Firefox browser on Windows 10 and Chromium on CloudReady 89.4.0.  The page did also show properly in the TenFourFox browser on MacOS X 10.5 (iMac G5) with the following notes:
  - missing emojis support for old OS X can be compensated, to a degree, with [Symbola Font](https://dn-works.com/ufas/)
@@ -33,7 +33,7 @@ It would be recommended that you also check [this project](https://github.com/Gi
  - Adding more information to inline frame (iFrame) - you can get instructions for obtaining info about your browser and your public IP by visiting [WhatIsMyBrowser](https://www.whatismybrowser.com/developers/tools/iframe) developers page.
  - "3D Cube 1" drawing code might eventually need some corrections. Currently, the transparency allows it to be seen as correct but if you go about changing the "fill" and "stroke" values to more solid, 0.1 changed to 1.0, then you might see somewhat incorrect transitions. This is even more obvious if painting each side of the cube with a different color.
  - OBJ and PLY Viewers notes:
-   - Both viewers require a browser supporting WebGL
+   - Both viewers require a browser supporting WebGL and are set to open in new tab/window
    - They do allow some mouse control, with `wheel` serving as zoom in/out and `left-button click/drag` to rotate the image
    - Either an OBJ file alone or both MTL/OBJ files can be loaded at the dialog screen
    - Only a PLY file alone can be loaded at the dialog screen
