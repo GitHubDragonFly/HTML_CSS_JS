@@ -51,8 +51,10 @@
       <input type="number" id="position_z" onchange="pos_z_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp; &nbsp;
       <input type="checkbox" id="wireframe" name="wireframe" onchange="show_wireframe()" disabled />
       <label for="wireframe">Wire</label>&nbsp; &nbsp;
-      <label for="back_color">Color: &nbsp;</label>
-      <input type="color" id="back_color" name="back_color" onchange="set_back_color()" style="background: none; padding: 0; width: 35px;" />
+      <label for="back_color">bgColor:</label>
+      <input type="color" id="back_color" name="back_color" onchange="set_back_color()" style="background: none; padding: 0; width: 35px;" />&nbsp; &nbsp;
+      <label for="obj_scale">objScale:</label>
+      <input type="number" id="obj_scale" name="obj_scale" onchange="set_obj_scale()" min="0.5" max="1.5" value="1" step="0.5" style="width: 45px;" />
       <button type="reset" id="reset" onclick="reset_all()" style="float: right; width: 55px; margin-top: 2px; margin-right: 10px;" disabled>Reset</button>
     </div><br />
 
@@ -107,6 +109,7 @@
       var ww = window.innerWidth,	wh = window.innerHeight;
       var mouse_rotation = false, reset_rotation = false, events_initialized = false;
       var rot_x = 0, rot_y = 0, rot_z = 0, pos_x = 0, pos_y = 0, pos_z = 0;
+      var previous_obj_scale = 1;
       var selected_mtl_file = null;
       var selected_obj_file = null;
 
@@ -117,6 +120,18 @@
       const obj_loader = new THREE.OBJLoader( manager );
 
       function set_back_color() { document.body.style.backgroundColor = document.getElementById('back_color').value; }
+
+      function set_obj_scale() {
+        if (previous_obj_scale == 0.5) {
+          Obj.scale.multiplyScalar( 2 );
+        } else if (previous_obj_scale == 1.5) {
+          Obj.scale.multiplyScalar( 2/3 );
+        } else {
+          Obj.scale.multiplyScalar( parseFloat(document.getElementById('obj_scale').value) );
+        }
+
+        previous_obj_scale = parseFloat(document.getElementById('obj_scale').value);
+      }
 
       function rot_x_changed() { rot_x = parseFloat(document.getElementById('rotation_x').value); }
       function rot_y_changed() { rot_y = parseFloat(document.getElementById('rotation_y').value); }
@@ -129,6 +144,9 @@
         // Loaded file(s)
         var fi = document.getElementById('file_input');
 
+        if (scene != null) { scene.remove.apply(scene, scene.children); }
+        obj_loader.setMaterials(null);
+
         if (fi.files.length > 1) {
           if (fi.files[0].name.endsWith('.mtl') && fi.files[1].name.endsWith('.obj')) {
             selected_mtl_file = fi.files[0];
@@ -137,7 +155,6 @@
             selected_mtl_file = fi.files[1];
             selected_obj_file = fi.files[0];
           } else {
-            if (scene != null) { scene.remove.apply(scene, scene.children); }
             return;
           }
 
@@ -147,15 +164,13 @@
             selected_mtl_file = null;
           });
         } else {
-          obj_loader.setMaterials(null);
           if (!fi.files[0].name.endsWith('.obj')) {
             if (scene != null) { scene.remove.apply(scene, scene.children); }
             return;
           }
+
           selected_obj_file = fi.files[0];
         }
-
-        if (scene != null) { scene.remove.apply(scene, scene.children); }
 
         document.getElementById('reset').disabled = false;
         document.getElementById('wireframe').disabled = false;
@@ -197,6 +212,8 @@
 
       var addFileInScene = function(object){
         Obj = object;
+
+        Obj.scale.multiplyScalar( parseFloat(document.getElementById('obj_scale').value ));
 
         // Add the 3D object in the scene
       	scene.add( Obj );
@@ -255,11 +272,14 @@
         pos_y = document.getElementById('position_y').value = 0;
         pos_z = document.getElementById('position_z').value = 0;
 
+        // Reset the Obj scale values
+        document.getElementById('obj_scale').value = 1;
+
         // Reset the wireframe checkbox
         document.getElementById('wireframe').checked = false;
 
         // Reset the view
-        if (!values_only) { reset_rotation = true; show_wireframe(); }
+        if (!values_only) { reset_rotation = true; show_wireframe(); set_obj_scale(); }
       };
     </script>
   </body>
