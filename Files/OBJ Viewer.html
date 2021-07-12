@@ -177,7 +177,7 @@
 
         renderer = new THREE.WebGLRenderer({ canvas : document.getElementById('scene'), antialias: true, alpha: true });
         renderer.setPixelRatio( window.devicePixelRatio );
-        renderer.setSize(ww, wh);
+        renderer.setSize( ww, wh );
         renderer.setClearColor( 0xffffff, 0); // Allow setting the background color
 
         // The following can be used instead of the canvas but the window mouse
@@ -186,7 +186,7 @@
 
         scene = new THREE.Scene();
 
-        if (!events_initialized) {initialize_event_listeners(); events_initialized = true; }
+        if (!events_initialized) { initialize_event_listeners(); events_initialized = true; }
 
         camera = new THREE.PerspectiveCamera( 45, ww/wh, 0.1, 2000 );
         camera.position.set(0,0,250);
@@ -195,7 +195,7 @@
         // Add a light in the scene
         directionalLight = new THREE.DirectionalLight( 0xffffff, 0.8 );
         directionalLight.position.set( 0, 0, 350 );
-        directionalLight.lookAt(new THREE.Vector3(0,0,0));
+        directionalLight.lookAt( new THREE.Vector3(0,0,0) );
         scene.add( directionalLight );
 
         // Load the obj file
@@ -208,12 +208,12 @@
 
         // Launch loading of the selected file, addFileInScene is the callback when it's ready
         obj_loader.load( URL.createObjectURL(selected_obj_file), addFileInScene );
-     };
+      };
 
       var addFileInScene = function(object){
-        Obj = object;
+        Obj = object.clone();
 
-        Obj.scale.multiplyScalar( parseFloat(document.getElementById('obj_scale').value ));
+        Obj.scale.multiplyScalar( parseFloat( document.getElementById('obj_scale').value ));
 
         // Add the 3D object in the scene
       	scene.add( Obj );
@@ -227,7 +227,7 @@
         // Go through all children of the loaded object and search for a Mesh
         Obj.traverse( function ( child ) {
           // This allow us to check if the children is an instance of the Mesh constructor
-    	    if(child instanceof THREE.Mesh){
+    	    if (child instanceof THREE.Mesh) {
             if (document.getElementById('wireframe').checked) {
               child.material.wireframe = true;
             } else {

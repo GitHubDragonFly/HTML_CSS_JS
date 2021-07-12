@@ -180,13 +180,24 @@
       };
 
       var addFileInScene = function(object){
-        object.computeFaceNormals();
+        var smooth = object.clone();
+        smooth.mergeVertices();
+        smooth.computeVertexNormals();
 
         //var material = new THREE.MeshStandardMaterial({ color: 0x0077FF }); //shades of blue
-        var material = new THREE.MeshPhongMaterial( { color: 0xFFFFFF, specular: 0x111111, shininess: 100, vertexColors: THREE.VertexColors} );
+        var material = new THREE.MeshPhongMaterial( {
+          polygonOffset: true,
+          polygonOffsetFactor: 1,
+          polygonOffsetUnits: 1,
+          color: 0xFFFFFF,
+          specular: 0x111111,
+          shininess: 100,
+          vertexColors: THREE.VertexColors
+        });
+
         material.shading = THREE.SmoothShading;
 
-        mesh = new THREE.Mesh(object, material);
+        mesh = new THREE.Mesh(smooth, material);
         mesh.castShadow = false;
         mesh.receiveShadow = false;
         mesh.scale.multiplyScalar( parseFloat(document.getElementById('ply_scale').value ));
@@ -221,7 +232,7 @@
         mesh.position.y = pos_y;
         mesh.position.z = pos_z;
 
-        // Reset Obj rotational values
+        // Reset mesh rotational values
         if (reset_rotation) {
           mesh.rotation.x = 0;
           mesh.rotation.y = 0;
