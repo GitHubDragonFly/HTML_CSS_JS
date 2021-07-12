@@ -25,6 +25,41 @@
       canvas { display: block; position: absolute; margin: 0; width: 100%; height: 100%; }
     </style>
 
+    <!-- Original source code: https://codepen.io/Mamboleoo/pen/PqjGdN -->
+    <!-- OBJ Examples from: https://github.com/mrdoob/three.js -->
+    <!-- Also see: https://davidoreilly.itch.io/walt-disney-3d-head , http://www.davidoreilly.com/ -->
+    <!-- More OBJ examples: https://people.sc.fsu.edu/~jburkardt/data/data.html -->
+    <title>OBJ Viewer</title>
+  </head>
+  <body>
+    <div class="fixed-menu">
+      <label for="file" style="color: navy;">MTL/OBJ: &nbsp;</label>
+      <input type="file" id="file_input" name="file" onchange="init()" value="Browse" multiple />
+      <label for="number">Rotate :</label>
+      <label for="number" style="color: blue;">X</label>
+      <input type="number" id="rotation_x" onchange="rot_x_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp;
+      <label for="number" style="color: blue;">Y</label>
+      <input type="number" id="rotation_y" onchange="rot_y_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp;
+      <label for="number" style="color: blue;">Z</label>
+      <input type="number" id="rotation_z" onchange="rot_z_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp; &nbsp; &nbsp;
+      <label for="number">Position : </label>
+      <label for="number" style="color: green;">X</label>
+      <input type="number" id="position_x" onchange="pos_x_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp;
+      <label for="number" style="color: green;">Y</label>
+      <input type="number" id="position_y" onchange="pos_y_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp;
+      <label for="number" style="color: green;">Z</label>
+      <input type="number" id="position_z" onchange="pos_z_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp; &nbsp;
+      <input type="checkbox" id="wireframe" name="wireframe" onchange="show_wireframe()" disabled />
+      <label for="wireframe">Wire</label>&nbsp; &nbsp;
+      <label for="back_color">Color: &nbsp;</label>
+      <input type="color" id="back_color" name="back_color" onchange="set_back_color()" style="background: none; padding: 0; width: 35px;" />
+      <button type="reset" id="reset" onclick="reset_all()" style="float: right; width: 55px; margin-top: 2px; margin-right: 10px;" disabled>Reset</button>
+    </div><br />
+
+    <canvas id="scene">
+      Your browser does not support HTML5 canvas tag
+    </canvas>
+
     <script>
       function initialize_event_listeners() {
         var cnvs = document.getElementById('scene');
@@ -67,44 +102,10 @@
       }
     </script>
 
-    <!-- Original source code: https://codepen.io/Mamboleoo/pen/PqjGdN -->
-    <!-- OBJ Examples from: https://github.com/mrdoob/three.js -->
-    <!-- Also see: https://davidoreilly.itch.io/walt-disney-3d-head , http://www.davidoreilly.com/ -->
-    <title>OBJ Viewer</title>
-  </head>
-  <body id='body' onload="initialize_event_listeners()">
-    <div class="fixed-menu">
-      <label for="file" style="color: navy;">MTL/OBJ: &nbsp;</label>
-      <input type="file" id="file_input" name="file" onchange="init()" value="Browse" multiple />
-      <label for="number">Rotate :</label>
-      <label for="number" style="color: blue;">X</label>
-      <input type="number" id="rotation_x" onchange="rot_x_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp;
-      <label for="number" style="color: blue;">Y</label>
-      <input type="number" id="rotation_y" onchange="rot_y_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp;
-      <label for="number" style="color: blue;">Z</label>
-      <input type="number" id="rotation_z" onchange="rot_z_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp; &nbsp; &nbsp;
-      <label for="number">Position : </label>
-      <label for="number" style="color: green;">X</label>
-      <input type="number" id="position_x" onchange="pos_x_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp;
-      <label for="number" style="color: green;">Y</label>
-      <input type="number" id="position_y" onchange="pos_y_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp;
-      <label for="number" style="color: green;">Z</label>
-      <input type="number" id="position_z" onchange="pos_z_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp; &nbsp;
-      <input type="checkbox" id="wireframe" name="wireframe" onchange="show_wireframe()" disabled />
-      <label for="wireframe">Wire</label>&nbsp; &nbsp;
-      <label for="back_color">Color: &nbsp;</label>
-      <input type="color" id="back_color" name="back_color" onchange="set_back_color()" style="background: none; padding: 0; width: 35px;" />
-      <button type="reset" id="reset" onclick="reset_all()" style="float: right; width: 55px; margin-top: 2px; margin-right: 10px;" disabled>Reset</button>
-    </div><br />
-
-    <canvas id="scene">
-      Your browser does not support HTML5 canvas tag
-    </canvas>
-
     <script>
       var renderer, scene, camera, Obj;
       var ww = window.innerWidth,	wh = window.innerHeight;
-      var mouse_rotation = false, reset_rotation = false;
+      var mouse_rotation = false, reset_rotation = false, events_initialized = false;
       var rot_x = 0, rot_y = 0, rot_z = 0, pos_x = 0, pos_y = 0, pos_z = 0;
       var selected_mtl_file = null;
       var selected_obj_file = null;
@@ -169,6 +170,8 @@
         //document.body.appendChild( renderer.domElement );
 
         scene = new THREE.Scene();
+
+        if (!events_initialized) {initialize_event_listeners(); events_initialized = true; }
 
         camera = new THREE.PerspectiveCamera( 45, ww/wh, 0.1, 2000 );
         camera.position.set(0,0,250);
