@@ -36,7 +36,7 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - Both viewers require a browser supporting WebGL
    - They do allow some mouse control, with `wheel` serving as zoom in/out and `left-button click/drag` to rotate the image
    - Either an OBJ file alone or both MTL/OBJ files can be loaded at the dialog screen
-   - Only a PLY file an be loaded at the dialog screen
+   - Only a PLY file alone can be loaded at the dialog screen
    - OBJ and PLY examples were downloaded from [here](https://github.com/mrdoob/three.js)
 
 # Usage
