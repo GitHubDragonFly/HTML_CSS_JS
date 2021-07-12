@@ -31,7 +31,9 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - The "Save" link should turn green to offer to "download" and save the recorded video (no actual downloading from any external website is done, this is all on your computer)
  - Adding more information to inline frame (iFrame) - you can get instructions for obtaining info about your browser and your public IP by visiting [WhatIsMyBrowser](https://www.whatismybrowser.com/developers/tools/iframe) developers page.
  - "3D Cube 1" drawing code might eventually need some corrections. Currently, the transparency allows it to be seen as correct but if you go about changing the "fill" and "stroke" values to more solid, 0.1 changed to 1.0, then you might see somewhat incorrect transitions. This is even more obvious if painting each side of the cube with a different color.
- - OBJ Viewer does allow some mouse control, with wheel serving as zoom in/out and left button click/drag to rotate the image
+ - OBJ Viewer notes:
+   - It does allow some mouse control, with `wheel` serving as zoom in/out and `left-button click/drag` to rotate the image
+   - Either OBJ file alone or both MTL/OBJ files can be loaded at the same dialog screen
 
 # Usage
 All it takes is to:
