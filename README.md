@@ -39,6 +39,7 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - Either an OBJ file alone or both MTL/OBJ files can be loaded at the dialog screen
    - Only a PLY file alone can be loaded at the dialog screen
    - OBJ and PLY examples were downloaded from [here](https://github.com/mrdoob/three.js)
+   - Windows 10 users do have an option to use Paint 3D and 3D Viewer apps instead to see these files
 
 # Usage
 All it takes is to:
