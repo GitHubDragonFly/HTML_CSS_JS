@@ -45,6 +45,7 @@ All it takes is to:
 
 - Download a zip file of this project and extract it (or clone the repo).
 - Navigate to the `Files` folder and open `Exercise.html` in your Internet browser.
+- The above is serving as a hub but any of the HTML files can be open in the browser on its own
 - If any change is required then try using VS Code or Notepad to edit files.
 
 # Licensing
