@@ -1,5 +1,5 @@
 # HTML_CSS_JS
-Exercise in HTML, CSS and JavaScript ([jQuery](https://jquery.com/download/) as well). Intended for those who either might be learning these or would just like to have several examples in a single page. See the screenshot for what the top part of this page looks like in Firefox browser.
+Exercise in HTML, CSS and JavaScript ( [jQuery](https://jquery.com/download/) as well ). Intended for those who either might be learning these or would just like to have several examples in a single page. See the screenshot for what the top part of this page looks like in the Firefox browser.
 
 Some might consider these as relatively simple examples but they only reflect a way of how I am going about learning these languages. Some code was simply adopted and modified from original public sources. There is definitely lots of rotation examples, so try not to get dizzy.
 
@@ -14,14 +14,15 @@ These are the features you can see on the page:
  - Form and submitted form entries table (there is no server involved in this exercise)
  - Media video playback, including camera streaming and an option to record and save the camera video
  - JavaScript and jQuery examples
- - Link to Wavefront 3D OBJ file viewer, using [Three.js](https://github.com/mrdoob/three.js), and example OBJ files
- - Link to PLY file viewer, using [Three.js](https://github.com/mrdoob/three.js), and example PLY files
+ - Link to Wavefront 3D OBJ file viewer, using [Three.js](https://github.com/mrdoob/three.js) (some example OBJ files are in the `Images/obj` folder)
+ - Link to 3D PLY file viewer, using [Three.js](https://github.com/mrdoob/three.js) (some example PLY files are in the `Images/ply` folder)
 
-Some things might not be supported or work as expected on certain browsers. This was tested as working in the latest Firefox browser on Windows 10 and Chromium on CloudReady 89.4.0.  The page did also show properly in the TenFourFox browser on MacOS X 10.5 (iMac G5) with the following notes:
+Some things might not be supported or work as expected on certain browsers. This was tested as working in the latest Firefox and Edge browsers on Windows 10 and Chromium on CloudReady 89.4.0.  The page did also show properly in the TenFourFox browser on MacOS X 10.5 (iMac G5) with the following notes:
  - missing emojis support for old OS X can be compensated, to a degree, with [Symbola Font](https://dn-works.com/ufas/)
  - alignment entries of `float: inline-start` and `float: inline-end` don't work and need to be replaced with `float: left` and `float: right`, which works for modern browsers as well and has now been standardized in this exercise
  - add-on required to provide support for [playing MP4 video](https://sourceforge.net/projects/tenfourfox/files/addons/mp4/1.3406/) in TenFourFox
- - no camera video recording could be done since TenFourFox doesn't support async/await. With a different code, it also seems to be having difficulties with `video.captureStream` (the Blob is created but its size is always 0 bytes)
+ - no camera video recording could be done since TenFourFox doesn't support async/await. Even with a different code, it also seems to be having difficulties with `video.captureStream` (the Blob is created but its size is always 0 bytes)
+ - OBJ and PLY viewers did not work due to poor WebGL support
 
 It would be recommended that you also check [this project](https://github.com/GitHubDragonFly/WebProject) and look at all the files created by it, especially because it is interacting with the django built-in server (there is also a link to django tutorial).
 
