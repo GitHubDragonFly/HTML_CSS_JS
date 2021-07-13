@@ -91,9 +91,17 @@
         cnvs.addEventListener( 'mousemove', (event) => {
           if (mouse_rotation) {
             event.preventDefault();
+            let x = Math.abs(mesh.rotation.x);
 
-            mesh.rotation.x += event.clientX * event.movementY * 0.00001745;
-            mesh.rotation.y += event.clientY * event.movementX * 0.00001745;
+            if (x > 2 * Math.PI ) { mesh.rotation.x = 0; }
+
+            mesh.rotation.x += event.clientX * event.movementY * 0.0000087;
+
+            if (x > 1.57 && x < 4.71) {
+              mesh.rotation.y -= event.clientY * event.movementX * 0.00001745;
+            } else {
+              mesh.rotation.y += event.clientY * event.movementX * 0.00001745;
+            }
           }
         }, false);
       }
