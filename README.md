@@ -50,7 +50,7 @@ All it takes is to:
 # Licensing
 This is MIT licensed.
 
-The beach video and the cube/dice image were downloaded as a free media content and are under the [Pixabay License](https://pixabay.com/service/license/).
+The beach video and the cube/die image were downloaded as a free media content and are under the [Pixabay License](https://pixabay.com/service/license/).
 
 # Trademarks
 Any and all trademarks, either directly or indirectly mentioned here, belong to their respective owners.
