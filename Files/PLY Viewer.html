@@ -8,6 +8,9 @@
 
     <style>
       body,html{ background-color: black; width: 100%; height: 100%; padding: 0; margin: 0; overflow: hidden; }
+      div { width: 99%; border: 1px solid navy; -webkit-border-radius: 2px; border-radius: 2px; padding: 4px; margin: 1px; }
+      canvas { display: block; position: absolute; margin: 0; width: 100%; height: 100%; }
+
       .fixed-menu {
         position: fixed;
         z-index: 1;
@@ -15,13 +18,9 @@
         background-color: whitesmoke;
         top: 0px;
         margin: 0px;
-        padding: 4px;
+        padding: 2px;
         width: 100%;
-        border: 1px solid navy;
-        -webkit-border-radius: 2px;
-        border-radius: 2px;
       }
-      canvas { display: block; position: absolute; margin: 0; width: 100%; height: 100%; }
     </style>
 
     <!-- Original OBJ source code: https://codepen.io/Mamboleoo/pen/PqjGdN -->
@@ -29,31 +28,37 @@
     <!-- More PLY examples: https://people.sc.fsu.edu/~jburkardt/data/data.html -->
     <title>PLY Viewer</title>
   </head>
-  <body>
+  <body onload="reset_all()">
     <div class="fixed-menu">
-      <label for="file" style="color: navy;">PLY: &nbsp;</label>
-      <input type="file" id="file_input" name="file" onchange="init()" value="Browse" />
-      <label for="number">Rotate :</label>
-      <label for="number" style="color: blue;">X</label>
-      <input type="number" id="rotation_x" onchange="rot_x_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp;
-      <label for="number" style="color: blue;">Y</label>
-      <input type="number" id="rotation_y" onchange="rot_y_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp;
-      <label for="number" style="color: blue;">Z</label>
-      <input type="number" id="rotation_z" onchange="rot_z_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp; &nbsp; &nbsp;
-      <label for="number">Position : </label>
-      <label for="number" style="color: green;">X</label>
-      <input type="number" id="position_x" onchange="pos_x_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp;
-      <label for="number" style="color: green;">Y</label>
-      <input type="number" id="position_y" onchange="pos_y_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp;
-      <label for="number" style="color: green;">Z</label>
-      <input type="number" id="position_z" onchange="pos_z_changed()" min="-2000" max="2000" value="0" step="1" style="width: 55px;" />&nbsp; &nbsp;
-      <input type="checkbox" id="wireframe" name="wireframe" onchange="show_wireframe()" disabled />
-      <label for="wireframe">Wire</label>&nbsp; &nbsp;
-      <label for="back_color">bgColor:</label>
-      <input type="color" id="back_color" name="back_color" onchange="set_back_color()" style="background: none; padding: 0; width: 35px;" />&nbsp; &nbsp;
-      <label for="ply_scale">plyScale:</label>
-      <input type="number" id="ply_scale" name="ply_scale" onchange="set_ply_scale()" min="0.5" max="1.5" value="1" step="0.5" style="width: 45px;" />
-      <button type="reset" id="reset" onclick="reset_all()" style="float: right; width: 55px; margin-top: 2px; margin-right: 10px;" disabled>Reset</button>
+      <div>
+        <label for="file" style="color: navy;">PLY File: &nbsp;</label>
+        <input type="file" id="file_input" name="file" onchange="init()" />
+        <button type="reset" id="reset" onclick="reset_only()" style="float: right; width: 55px; margin-right: 5px;" disabled>Reset</button>
+      </div>
+      <div>
+        <input type="radio" id="light" name="mode" value="Light" onchange="radio_changed()" disabled />
+        <label for="other">Light</label>
+        <input type="radio" id="rotate" name="mode" value="Rotate" onchange="radio_changed()" checked disabled />
+        <label for="other">Rotate &nbsp;</label>
+        <label for="number" style="color: blue;">X</label>
+        <input type="number" id="rotation_x" onchange="rot_x_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" disabled />&nbsp;
+        <label for="number" style="color: blue;">Y</label>
+        <input type="number" id="rotation_y" onchange="rot_y_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" disabled />&nbsp;
+        <label for="number" style="color: blue;">Z</label>
+        <input type="number" id="rotation_z" onchange="rot_z_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" disabled />&nbsp; &nbsp; &nbsp;
+        <label for="number">Position : </label>
+        <label for="number" style="color: green;">X</label>
+        <input type="number" id="position_x" onchange="pos_x_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" disabled />&nbsp;
+        <label for="number" style="color: green;">Y</label>
+        <input type="number" id="position_y" onchange="pos_y_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" disabled />&nbsp;
+        <label for="number" style="color: green;">Z</label>
+        <input type="number" id="position_z" onchange="pos_z_changed()" min="-2000" max="2000" value="0" step="1" style="width: 55px;" disabled />&nbsp; &nbsp;
+        <input type="checkbox" id="wireframe" name="wireframe" onchange="show_wireframe()" disabled />
+        <label for="wireframe">Wire</label>&nbsp; &nbsp;
+        <label for="ply_scale">Scale:</label>
+        <input type="number" id="ply_scale" name="ply_scale" onchange="set_ply_scale()" min="0.5" max="1.5" value="1" step="0.5" style="width: 45px;" disabled />
+        <input type="color" id="back_color" name="back_color" onchange="set_back_color()" style="float: right; background: none; padding: 0; width: 50px; margin-right: 5px;" />
+      </div>
     </div><br />
 
     <canvas id="scene">
@@ -95,7 +100,7 @@
     </script>
 
     <script>
-      var renderer, scene, camera, mesh;
+      var renderer, scene, camera, directionalLight, mesh;
       var ww = window.innerWidth,	wh = window.innerHeight;
       var mouse_rotation = false, reset_rotation = false, events_initialized = false;
       var rot_x = 0, rot_y = 0, rot_z = 0, pos_x = 0, pos_y = 0, pos_z = 0;
@@ -121,9 +126,60 @@
         previous_ply_scale = parseFloat(document.getElementById('ply_scale').value);
       }
 
-      function rot_x_changed() { rot_x = parseFloat(document.getElementById('rotation_x').value); }
-      function rot_y_changed() { rot_y = parseFloat(document.getElementById('rotation_y').value); }
-      function rot_z_changed() { rot_z = parseFloat(document.getElementById('rotation_z').value); }
+      function radio_changed() {
+        if (document.getElementById('light').checked) {
+          document.getElementById('rotation_x').value = directionalLight.position.x;
+          document.getElementById('rotation_y').value = directionalLight.position.y;
+          document.getElementById('rotation_z').value = directionalLight.position.z;
+          document.getElementById('rotation_x').min = document.getElementById('rotation_y').min = document.getElementById('rotation_z').min = -500;
+          document.getElementById('rotation_x').max = document.getElementById('rotation_y').max = document.getElementById('rotation_z').max = 500;
+          document.getElementById('rotation_x').step = document.getElementById('rotation_y').step = document.getElementById('rotation_z').step = 10;
+        } else {
+          document.getElementById('rotation_x').value = rot_x;
+          document.getElementById('rotation_y').value = rot_y;
+          document.getElementById('rotation_z').value = rot_z;
+          document.getElementById('rotation_x').min = document.getElementById('rotation_y').min = document.getElementById('rotation_z').min = -0.05;
+          document.getElementById('rotation_x').max = document.getElementById('rotation_y').max = document.getElementById('rotation_z').max = 0.05;
+          document.getElementById('rotation_x').step = document.getElementById('rotation_y').step = document.getElementById('rotation_z').step = 0.001;
+        }
+      }
+
+      function rot_x_changed() {
+        let x = parseFloat(document.getElementById('rotation_x').value);
+        let y = parseFloat(document.getElementById('rotation_y').value);
+        let z = parseFloat(document.getElementById('rotation_z').value);
+
+        if (document.getElementById('light').checked) {
+          directionalLight.position.set( x, y, z );
+        } else {
+          rot_x = x;
+        }
+      }
+
+      function rot_y_changed() {
+        let x = parseFloat(document.getElementById('rotation_x').value);
+        let y = parseFloat(document.getElementById('rotation_y').value);
+        let z = parseFloat(document.getElementById('rotation_z').value);
+
+        if (document.getElementById('light').checked) {
+          directionalLight.position.set( x, y, z );
+        } else {
+          rot_y = y;
+        }
+      }
+
+      function rot_z_changed() {
+        let x = parseFloat(document.getElementById('rotation_x').value);
+        let y = parseFloat(document.getElementById('rotation_y').value);
+        let z = parseFloat(document.getElementById('rotation_z').value);
+
+        if (document.getElementById('light').checked) {
+          directionalLight.position.set( x, y, z );
+        } else {
+          rot_z = z;
+        }
+      }
+
       function pos_x_changed() { pos_x = parseInt(document.getElementById('position_x').value); }
       function pos_y_changed() { pos_y = parseInt(document.getElementById('position_y').value); }
       function pos_z_changed() { pos_z = parseInt(document.getElementById('position_z').value); }
@@ -133,7 +189,18 @@
         var fi = document.getElementById('file_input');
         selected_ply_file = fi.files[0];
 
-        if (scene != null) { scene.remove.apply(scene, scene.children); }
+        if (scene != null) {
+          // Reset the ply scale values
+          document.getElementById('ply_scale').value = 1;
+          set_ply_scale()
+
+          // Reset all values
+          reset_all( false, true );
+
+          scene.remove.apply(scene, scene.children);
+        }
+
+        enable_disable( true );
 
         if (!fi.files[0].name.endsWith('.ply')) {
           return;
@@ -141,13 +208,12 @@
           selected_ply_file = fi.files[0];
         }
 
-        document.getElementById('reset').disabled = false;
-        document.getElementById('wireframe').disabled = false;
+        enable_disable( false );
 
         renderer = new THREE.WebGLRenderer({ canvas : document.getElementById('scene'), antialias: true, alpha: true });
         renderer.setPixelRatio( window.devicePixelRatio );
         renderer.setSize(ww, wh);
-        renderer.setClearColor( 0xffffff, 0); // Allow setting the background color
+        renderer.setClearColor( 0xFFFFFF, 0); // Allow setting the background color
 
         // The following can be used instead of the canvas but the window mouse
         // events might be tricky to set due to the presence of the fixed menu
@@ -158,13 +224,13 @@
         if (!events_initialized) {initialize_event_listeners(); events_initialized = true; }
 
         camera = new THREE.PerspectiveCamera( 45, ww/wh, 0.1, 2000 );
-        camera.position.set(0,0,250);
+        camera.position.set( 0, 0, 250 );
         scene.add(camera);
 
         // Add a light in the scene
-        directionalLight = new THREE.DirectionalLight( 0xffffff, 0.8 );
-        directionalLight.position.set( 0, 0, 350 );
-        directionalLight.lookAt(new THREE.Vector3(0,0,0));
+        directionalLight = new THREE.DirectionalLight( 0xFFFFFF, 0.8 );
+        directionalLight.position.set( 0, 0, 250 );
+        directionalLight.lookAt(new THREE.Vector3( 0, 0, 0 ));
         scene.add( directionalLight );
 
         // Load the ply file
@@ -172,17 +238,14 @@
       }
 
       var loadFile = function(){
-        // Reset all current positional and rotational values
-        reset_all( true );
-
         // Launch loading of the selected file, addFileInScene is the callback when it's ready
         ply_loader.load( URL.createObjectURL(selected_ply_file), addFileInScene );
       };
 
       var addFileInScene = function(object){
         var smooth = object.clone();
-        smooth.mergeVertices();
         smooth.computeVertexNormals();
+        smooth.mergeVertices();
 
         //var material = new THREE.MeshStandardMaterial({ color: 0x0077FF }); //shades of blue
         var material = new THREE.MeshPhongMaterial( {
@@ -250,7 +313,11 @@
       	renderer.render( scene, camera );
       };
 
-      var reset_all = function( values_only = false ) {
+      var reset_only = function () {
+        reset_all( false, true );
+      }
+
+      var reset_all = function( values = false, reset = false ) {
         // Reset all current positional and rotational values
         rot_x = document.getElementById('rotation_x').value = 0;
         rot_y = document.getElementById('rotation_y').value = 0;
@@ -259,15 +326,47 @@
         pos_y = document.getElementById('position_y').value = 0;
         pos_z = document.getElementById('position_z').value = 0;
 
+        // Reset the radio inputs
+        document.getElementById('rotate').checked = true;
+        document.getElementById('light').checked = false;
+        radio_changed();
+
         // Reset the ply scale values
         document.getElementById('ply_scale').value = 1;
 
         // Reset the wireframe checkbox
         document.getElementById('wireframe').checked = false;
 
+        reset_rotation = true;
+
         // Reset the view
-        if (!values_only) { reset_rotation = true; show_wireframe(); set_ply_scale() }
+        if (!values && reset) {
+          directionalLight.position.set( 0, 0, 250 );
+          set_ply_scale()
+          show_wireframe();
+        }
+
+        if (!values && !reset) {
+          // Reset file input
+          document.getElementById('file_input').value = "";
+          document.getElementById('back_color').value = "0x000000";
+          enable_disable( true );
+        }
       };
+
+      var enable_disable = function( disable = false ) {
+        document.getElementById('light').disabled = disable;
+        document.getElementById('rotate').disabled = disable;
+        document.getElementById('rotation_x').disabled = disable;
+        document.getElementById('rotation_y').disabled = disable;
+        document.getElementById('rotation_z').disabled = disable;
+        document.getElementById('position_x').disabled = disable;
+        document.getElementById('position_y').disabled = disable;
+        document.getElementById('position_z').disabled = disable;
+        document.getElementById('wireframe').disabled = disable;
+        document.getElementById('ply_scale').disabled = disable;
+        document.getElementById('reset').disabled = disable;
+      }
     </script>
   </body>
 </html>
