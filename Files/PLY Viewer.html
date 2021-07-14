@@ -294,7 +294,7 @@
           vertexColors: THREE.VertexColors
         });
 
-        material.shading = THREE.SmoothShading;
+        material.flatShading = false;
 
         mesh = new THREE.Mesh(smooth, material);
         mesh.castShadow = false;
