@@ -8,7 +8,7 @@
     <script src="js/OBJLoader.js"></script>
 
     <style>
-      body,html{ background-color: black; width: 100%; height: 100%; padding: 0; margin: 0; overflow: hidden; }
+      body,html{ background-color: black; background-image: url('Images/DragonFly.png'); background-position: 50% 50%; background-repeat: no-repeat; width: 100%; height: 100%; padding: 0; margin: 0; overflow: hidden; }
       div { width: 99%; border: 1px solid navy; -webkit-border-radius: 2px; border-radius: 2px; padding: 4px; margin: 1px; }
       canvas { display: block; position: absolute; margin: 0; width: 100%; height: 100%; }
 
@@ -19,7 +19,7 @@
         background-color: whitesmoke;
         top: 0px;
         margin: 0px;
-        padding: 2px;
+        padding: 1px;
         width: 100%;
       }
     </style>
@@ -35,30 +35,30 @@
       <div>
         <label for="file" style="color: navy;">MTL/OBJ File(s): &nbsp;</label>
         <input type="file" id="file_input" name="file" onchange="init()" multiple />
-        <button type="reset" id="reset" onclick="reset_only()" style="float: right; width: 55px; margin-right: 5px;" disabled>Reset</button>
+        <button type="reset" id="reset" onclick="reset_only()" style="float: right; width: 55px; margin-right: 5px;">Reset</button>
       </div>
       <div>
-        <input type="radio" id="light" name="mode" value="Light" onchange="radio_changed()" disabled />
+        <input type="radio" id="light" name="mode" value="Light" onchange="radio_changed()" />
         <label for="other">Light</label>
-        <input type="radio" id="rotate" name="mode" value="Rotate" onchange="radio_changed()" checked disabled />
+        <input type="radio" id="rotate" name="mode" value="Rotate" onchange="radio_changed()" checked />
         <label for="other">Rotate &nbsp;</label>
         <label for="number" style="color: blue;">X</label>
-        <input type="number" id="rotation_x" onchange="rot_x_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" disabled />&nbsp;
+        <input type="number" id="rotation_x" onchange="rot_x_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp;
         <label for="number" style="color: blue;">Y</label>
-        <input type="number" id="rotation_y" onchange="rot_y_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" disabled />&nbsp;
+        <input type="number" id="rotation_y" onchange="rot_y_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp;
         <label for="number" style="color: blue;">Z</label>
-        <input type="number" id="rotation_z" onchange="rot_z_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" disabled />&nbsp; &nbsp; &nbsp;
+        <input type="number" id="rotation_z" onchange="rot_z_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp; &nbsp; &nbsp;
         <label for="number">Position : </label>
         <label for="number" style="color: green;">X</label>
-        <input type="number" id="position_x" onchange="pos_x_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" disabled />&nbsp;
+        <input type="number" id="position_x" onchange="pos_x_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp;
         <label for="number" style="color: green;">Y</label>
-        <input type="number" id="position_y" onchange="pos_y_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" disabled />&nbsp;
+        <input type="number" id="position_y" onchange="pos_y_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp;
         <label for="number" style="color: green;">Z</label>
-        <input type="number" id="position_z" onchange="pos_z_changed()" min="-2000" max="2000" value="0" step="1" style="width: 55px;" disabled />&nbsp; &nbsp;
-        <input type="checkbox" id="wireframe" name="wireframe" onchange="show_wireframe()" disabled />
+        <input type="number" id="position_z" onchange="pos_z_changed()" min="-2000" max="2000" value="0" step="1" style="width: 55px;" />&nbsp; &nbsp;
+        <input type="checkbox" id="wireframe" name="wireframe" onchange="show_wireframe()" />
         <label for="wireframe">Wire</label>&nbsp; &nbsp;
         <label for="obj_scale">Scale:</label>
-        <input type="number" id="obj_scale" name="obj_scale" onchange="set_obj_scale()" min="0.5" max="1.5" value="1" step="0.5" style="width: 45px;" disabled />
+        <input type="number" id="obj_scale" name="obj_scale" onchange="set_obj_scale()" min="0.5" max="1.5" value="1" step="0.5" style="width: 45px;" />
         <input type="color" id="back_color" name="back_color" onchange="set_back_color()" style="float: right; background: none; padding: 0; width: 50px; margin-right: 5px;" />
       </div>
     </div>
@@ -238,6 +238,7 @@
           selected_obj_file = fi.files[0];
         }
 
+        document.body.style.backgroundImage = "none";
         enable_disable( false );
 
         renderer = new THREE.WebGLRenderer({ canvas : document.getElementById('scene'), antialias: true, alpha: true });
@@ -357,7 +358,7 @@
         }
 
         if (!values && !reset) {
-          // Page (re)loading so reset the file input
+          // Page (re)loading so reset the file input and bgcolor
           document.getElementById('file_input').value = "";
           document.getElementById('back_color').value = "0x000000";
           enable_disable( true );
@@ -375,6 +376,7 @@
         document.getElementById('position_z').disabled = disable;
         document.getElementById('wireframe').disabled = disable;
         document.getElementById('obj_scale').disabled = disable;
+        document.getElementById('back_color').disabled = disable;
         document.getElementById('reset').disabled = disable;
       }
     </script>
