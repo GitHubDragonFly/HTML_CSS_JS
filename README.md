@@ -39,14 +39,14 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - Either an OBJ file alone or both MTL/OBJ files can be loaded at the dialog screen
    - Only a PLY file alone can be loaded at the dialog screen
    - OBJ and PLY examples were downloaded from [here](https://github.com/mrdoob/three.js)
-   - Windows 10 users do have an option to use Paint 3D and 3D Viewer apps instead to see these files
+   - Windows 10 users do have an option to instead use Paint 3D and 3D Viewer apps to see these files
 
 # Usage
 All it takes is to:
 
 - Download a zip file of this project and extract it (or clone the repo).
 - Navigate to the `Files` folder and open `Exercise.html` in your Internet browser.
-- The above is serving as a hub but any of the HTML files can be open in the browser on its own
+- The `Exercise.html` is serving as a hub but any of the HTML files can be open in the browser on its own
 - If any change is required then try using VS Code or Notepad to edit files.
 
 # Licensing
