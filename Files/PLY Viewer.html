@@ -28,7 +28,7 @@
     <!-- More PLY examples: https://people.sc.fsu.edu/~jburkardt/data/data.html -->
     <title>PLY Viewer</title>
   </head>
-  <body onload="reset_all()">
+  <body onload="reset_all()" onresize="resize()">
     <div class="fixed-menu">
       <div>
         <label for="file" style="color: navy;">PLY File: &nbsp;</label>
@@ -109,6 +109,18 @@
             }
           }
         }, false);
+      }
+
+      function resize() {
+        if (camera) {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+
+          renderer.setSize( window.innerWidth, window.innerHeight );
+
+          ww = window.innerWidth;
+          wh = window.innerHeight;
+        }
       }
     </script>
 
@@ -284,7 +296,7 @@
         smooth.mergeVertices();
 
         //var material = new THREE.MeshStandardMaterial({ color: 0x0077FF }); //shades of blue
-        var material = new THREE.MeshPhongMaterial( {
+        material = new THREE.MeshPhongMaterial( {
           polygonOffset: true,
           polygonOffsetFactor: 1,
           polygonOffsetUnits: 1,

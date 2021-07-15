@@ -8,7 +8,7 @@
     <script src="js/OBJLoader.js"></script>
 
     <style>
-      body,html{ background-color: black; background-image: url('Images/DragonFly.png'); background-position: 50% 50%; background-repeat: no-repeat; width: 100%; height: 100%; padding: 0; margin: 0; overflow: hidden; }
+      body,html{ display: block; background-color: black; background-image: url('Images/DragonFly.png'); background-position: 50% 50%; background-repeat: no-repeat; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; overflow: hidden; }
       div { width: 99%; border: 1px solid navy; -webkit-border-radius: 2px; border-radius: 2px; padding: 4px; margin: 1px; }
       canvas { display: block; position: absolute; margin: 0; width: 100%; height: 100%; }
 
@@ -30,7 +30,7 @@
     <!-- More OBJ examples: https://people.sc.fsu.edu/~jburkardt/data/data.html -->
     <title>OBJ Viewer</title>
   </head>
-  <body onload="reset_all()">
+  <body onload="reset_all()" onresize="resize()">
     <div class="fixed-menu">
       <div>
         <label for="file" style="color: navy;">MTL/OBJ File(s): &nbsp;</label>
@@ -43,21 +43,21 @@
       </div>
       <div>
         <input type="radio" id="light" name="mode" value="Light" onchange="radio_changed()" />
-        <label for="other">Light</label>
+        <label for="light">Light</label>
         <input type="radio" id="rotate" name="mode" value="Rotate" onchange="radio_changed()" checked />
-        <label for="other">Rotate &nbsp;</label>
-        <label for="number" style="color: blue;">X</label>
+        <label for="rotate">Rotate &nbsp;</label>
+        <label for="rotation_x" style="color: blue;">X</label>
         <input type="number" id="rotation_x" onchange="rot_x_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp;
-        <label for="number" style="color: blue;">Y</label>
+        <label for="rotation_y" style="color: blue;">Y</label>
         <input type="number" id="rotation_y" onchange="rot_y_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp;
-        <label for="number" style="color: blue;">Z</label>
+        <label for="rotation_z" style="color: blue;">Z</label>
         <input type="number" id="rotation_z" onchange="rot_z_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp; &nbsp;
         <label for="number">Position : </label>
-        <label for="number" style="color: green;">X</label>
+        <label for="position_x" style="color: green;">X</label>
         <input type="number" id="position_x" onchange="pos_x_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp;
-        <label for="number" style="color: green;">Y</label>
+        <label for="position_y" style="color: green;">Y</label>
         <input type="number" id="position_y" onchange="pos_y_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp;
-        <label for="number" style="color: green;">Z</label>
+        <label for="position_z" style="color: green;">Z</label>
         <input type="number" id="position_z" onchange="pos_z_changed()" min="-2000" max="2000" value="0" step="1" style="width: 55px;" />
         <input type="color" id="back_color" name="back_color" onchange="set_back_color()" style="float: right; background: none; padding: 0; width: 30px; margin-right: 5px;" />
         <label for="back_color" style="float: right; margin-top: 3px; margin-right: 5px;">BG</label>
@@ -111,6 +111,18 @@
             }
           }
         }, false);
+      }
+
+      function resize() {
+        if (camera) {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+
+          renderer.setSize( window.innerWidth, window.innerHeight );
+
+          ww = window.innerWidth;
+          wh = window.innerHeight;
+        }
       }
     </script>
 
