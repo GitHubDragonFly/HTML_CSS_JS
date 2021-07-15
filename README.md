@@ -19,7 +19,7 @@ These are the features you can see on the page:
 
 Some things might not be supported or work as expected on certain browsers. This was tested as working in the latest Firefox and Edge browsers on Windows 10 and Chromium on CloudReady 89.4.0.  The page did also show properly in the TenFourFox browser on MacOS X 10.5 (iMac G5) with the following notes:
  - missing emojis support for old OS X can be compensated, to a degree, with [Symbola Font](https://dn-works.com/ufas/)
- - alignment entries of `float: inline-start` and `float: inline-end` don't work and need to be replaced with `float: left` and `float: right`, which works for modern browsers as well and has now been standardized in this exercise
+ - alignment entries of `float: inline-start` and `float: inline-end` did not work and needed to be replaced with `float: left` and `float: right`, which works for modern browsers as well and has now been standardized in this exercise
  - add-on required to provide support for [playing MP4 video](https://sourceforge.net/projects/tenfourfox/files/addons/mp4/1.3406/) in TenFourFox
  - no camera video recording could be done since TenFourFox doesn't support async/await. Even with a different code, it also seems to be having difficulties with `video.captureStream` (the Blob is created but its size is always 0 bytes)
  - OBJ and PLY viewers did not work due to poor WebGL support
@@ -36,6 +36,7 @@ It would be recommended that you also check [this project](https://github.com/Gi
  - OBJ and PLY Viewers notes:
    - Both viewers require a browser supporting WebGL and are set to open in new tab/window
    - They do allow some mouse control, with `wheel` serving as zoom in/out and `left-button click/drag` to rotate the image
+   - Background image supported formats are PNG, JPEG, SVG, BMP and GIF while selecting non-image file will reset the background
    - Either an OBJ file alone or both MTL/OBJ files can be loaded at the dialog screen
    - Only a PLY file alone can be loaded at the dialog screen
    - OBJ and PLY examples were downloaded from [here](https://github.com/mrdoob/three.js)
