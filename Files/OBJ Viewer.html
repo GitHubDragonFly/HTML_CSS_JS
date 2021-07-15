@@ -172,6 +172,8 @@
             fii.value = "";
             scene.background = null;
           }
+        } else {
+          scene.background = null;
         }
       }
 
@@ -441,6 +443,8 @@
         if (!values && reset) {
           directionalLight.position.set( 0, 0, 250 );
           set_obj_scale();
+          set_obj_opacity();
+          set_scene_image();
           show_wireframe();
           set_ambient_light_color();
           set_directional_light_intensity();
