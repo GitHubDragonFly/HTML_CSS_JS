@@ -9,15 +9,14 @@
 
     <style>
       body,html{ display: block; background-color: black; background-image: url('Images/DragonFly.png'); background-position: 50% 50%; background-repeat: no-repeat; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; overflow: hidden; }
-      div { width: 99%; border: 1px solid navy; -webkit-border-radius: 2px; border-radius: 2px; padding: 4px; margin: 1px; }
+      div { color: white; width: 99%; border: 1px solid navy; -webkit-border-radius: 2px; border-radius: 2px; padding: 4px; margin: 1px; }
       #scene { display: block; position: absolute; margin: 0; width: 100%; height: 100%; }
 
       .fixed-menu {
         position: fixed;
         z-index: 1;
         display: inline-block;
-        background-color: whitesmoke;
-        top: 0px;
+        background-color: transparent!important;
         margin: 0px;
         padding: 1px;
         width: 100%;
@@ -37,7 +36,7 @@
         <input type="file" id="file_input" name="file" onchange="init()" style="margin-right: 5px;" multiple />
         <label for="file_image_input" style="color: #CE8704; margin-right: 5px;">BG Image:</label>
         <input type="file" id="file_image_input" name="file_image_input" accept="image/png, image/jpeg, image/bmp, image/gif, image/svg+xml" onchange="set_scene_image()" />
-        <button type="reset" id="reset" onclick="reset_only()" style="float: right; width: 55px; margin-right: 5px; margin-left: 5px;">Reset</button>
+        <button type="reset" id="reset" onclick="reset_only()" style="color: maroon; float: right; width: 55px; margin: 0px 5px 0px 5px;">Reset</button>
         <label for="wireframe" style="float: right; margin-right: 5px;">Wireframe</label>
         <input type="checkbox" id="wireframe" name="wireframe" onchange="show_wireframe()" style="float: right; margin-right: 5px;" />
         <input type="number" id="obj_scale" name="obj_scale" onchange="set_obj_scale()" min="0.5" max="1.5" value="1" step="0.5" style="float: right; margin-right: 5px; width: 45px;" />
@@ -48,11 +47,11 @@
         <label for="light">Light</label>
         <input type="radio" id="rotate" name="mode" value="Rotate" onchange="radio_changed()" checked />
         <label for="rotate">Rotate &nbsp;</label>
-        <label for="rotation_x" style="color: blue;">X</label>
+        <label for="rotation_x" style="color: navy;">X</label>
         <input type="number" id="rotation_x" onchange="rot_x_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp;
-        <label for="rotation_y" style="color: blue;">Y</label>
+        <label for="rotation_y" style="color: navy;">Y</label>
         <input type="number" id="rotation_y" onchange="rot_y_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp;
-        <label for="rotation_z" style="color: blue;">Z</label>
+        <label for="rotation_z" style="color: navy;">Z</label>
         <input type="number" id="rotation_z" onchange="rot_z_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp; &nbsp;
         <label>Position : </label>
         <label for="position_x" style="color: green;">X</label>
