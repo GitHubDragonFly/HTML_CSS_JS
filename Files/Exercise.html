@@ -11,7 +11,7 @@
       p { text-align: center; color: blue; border: 1px solid lightblue; margin-bottom: 10px; }
       h1, h2, h3, h4, h5, h6 { margin-top: 1px; margin-bottom: 3px;}
 
-      A { text-decoration: none; }
+      A { text-decoration: none; margin: 0px 3px 0px 3px; }
       A:hover { color:#262626; background-color:#dad9fc; text-decoration: none; }
       A[target="_blank"]:after {
         content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
@@ -309,20 +309,20 @@
   <!-- Inline styling is generally used to override the preset for different appearance -->
   <body>
     <p class="fixed-menu">
-      <a href="#P1">Top</a>&nbsp; &nbsp;
-      <a href="#P2">SVG</a>&nbsp; &nbsp;
-      <a href="#P3">Headers</a>&nbsp; &nbsp;
-      <a href="#P4">Mixed Text</a>&nbsp; &nbsp;
-      <a href="#P5">Lists</a>&nbsp; &nbsp;
-      <a href="#P6">Table</a>&nbsp; &nbsp;
-      <a href="#P7">Inline Frame</a>&nbsp; &nbsp;
-      <a href="#P8">Form</a>&nbsp; &nbsp;
-      <a href="#P9">Images & Text</a>&nbsp; &nbsp;
-      <a href="#P10">Rotation</a>&nbsp; &nbsp;
-      <a href="#P11">Video</a>&nbsp; &nbsp;
-      <a href="#P12">JavaScript</a>&nbsp; &nbsp;
-      <a href="#P13">JQuery</a>&nbsp; &nbsp;
-      <a href="OBJ Viewer.html" target="_blank">OBJ</a>&nbsp; &nbsp;
+      <a href="#P1">Top</a>
+      <a href="#P2">SVG</a>
+      <a href="#P3">Headers</a>
+      <a href="#P4">Mixed Text</a>
+      <a href="#P5">Lists</a>
+      <a href="#P6">Table</a>
+      <a href="#P7">Inline Frame</a>
+      <a href="#P8">Form</a>
+      <a href="#P9">Images & Text</a>
+      <a href="#P10">Rotation</a>
+      <a href="#P11">Video</a>
+      <a href="#P12">JavaScript</a>
+      <a href="#P13">JQuery</a>
+      <a href="OBJ Viewer.html" target="_blank">OBJ</a>
       <a href="PLY Viewer.html" target="_blank">PLY</a>
     </p>
 
@@ -521,16 +521,16 @@
       <!-- Sandboxing could practically be removed since it uses both 'allow-scripts' and 'allow-same-origin' -->
       <iframe src="iFrame1.html" name="ifrm" title="Inline Examples" style="background-color: white; width: 98%; height: 400px;" sandbox="allow-same-origin allow-scripts"></iframe>
       <p>
-        <a href="Tabs.html" target="_blank">xTabs</a>&nbsp; &nbsp;
-        <a href="Tabs.html" target="ifrm">iTabs</a>&nbsp; &nbsp;
-        <a href="iFrame1.html" target="ifrm">iFrame1</a>&nbsp; &nbsp;
-        <a href="iFrame2.html" target="ifrm">iFrame2</a>&nbsp; &nbsp;
-        <a href="3D Cube 1.html" target="ifrm">3D Cube 1</a>&nbsp; &nbsp;
-        <a href="3D Cube 2.html" target="ifrm">3D Cube 2</a>&nbsp; &nbsp;
-        <a href="ShowDateTime.html" target="ifrm">Date/Time</a>&nbsp; &nbsp;
-        <label for="url">URL:</label>&nbsp;
-        <input type="text" id="url" name="url" size="60" value="">&nbsp;
-        <button id="btn_go" onclick="display_url()" style="-webkit-border-radius: 2px; border-radius: 2px; width: 30px; margin: 2px; padding: 2px;">Go</button>
+        <a href="Tabs.html" target="_blank">xTabs</a>
+        <a href="Tabs.html" target="ifrm">iTabs</a>
+        <a href="iFrame1.html" target="ifrm">iFrame1</a>
+        <a href="iFrame2.html" target="ifrm">iFrame2</a>
+        <a href="3D Cube 1.html" target="ifrm">3D Cube 1</a>
+        <a href="3D Cube 2.html" target="ifrm">3D Cube 2</a>
+        <a href="ShowDateTime.html" target="ifrm">Date/Time</a>
+        <label for="url" style="margin: 0px 2px 0px 3px;">URL:</label>
+        <input type="text" id="url" name="url" size="60" value="" style="margin-right: 5px;" />
+        <button id="btn_go" onclick="display_url()" style="-webkit-border-radius: 2px; border-radius: 2px; width: 30px; padding: 2px;">Go</button>
       </p>
     </div>
 
@@ -717,7 +717,7 @@
             count += 1;
 
             $.each(table_headers, function() {
-              var id = (this.id).substring(2);
+              let id = (this.id).substring(2);
               $('#form_entries_table tr:last').append('<td></td>');
 
               if (id == "count") {$('#form_entries_table td:last').text(count);}
@@ -733,10 +733,10 @@
               });
 
               if (id == "file") {
-                var picture_file = $('#file_input')[0].files[0];
+                let picture_file = $('#file_input')[0].files[0];
                 if (picture_file != null && picture_file.type.startsWith('image/')) {
-                  var a = $.extend(true, document.createElement('a'), { 'href': URL.createObjectURL(picture_file), 'target': '_blank' });
-                  var img = $.extend(true, document.createElement('img'), { 'class': 'obj', 'file': picture_file, 'alt': picture_file.name, 'style': 'width: 24px; height: 22px; margin-right: 5px;' });
+                  let a = $.extend(true, document.createElement('a'), { 'href': URL.createObjectURL(picture_file), 'target': '_blank' });
+                  let img = $.extend(true, document.createElement('img'), { 'class': 'obj', 'file': picture_file, 'alt': picture_file.name, 'style': 'width: 24px; height: 22px; margin-right: 5px;' });
                   a.appendChild(img);
                   $('#form_entries_table td:last').append(a);
                   const reader = new FileReader();
