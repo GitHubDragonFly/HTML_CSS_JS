@@ -69,9 +69,11 @@
       </div>
     </div><br />
 
-    <canvas id="scene">
-      Your browser does not support HTML5 canvas tag
-    </canvas>
+    <div style="border: 0; margin: 0; padding: 0;">
+      <canvas id="scene">
+        Your browser does not support HTML5 canvas tag
+      </canvas>
+    </div>
 
     <script>
       function initialize_event_listeners() {
@@ -310,12 +312,12 @@
         loadFile();
       }
 
-      var loadFile = function(){
+      function loadFile(){
         // Launch loading of the selected file, addFileInScene is the callback when it's ready
         ply_loader.load( URL.createObjectURL(selected_ply_file), addFileInScene );
       };
 
-      var addFileInScene = function(object){
+      function addFileInScene(object){
         var smooth = object.clone();
         smooth.computeVertexNormals();
         smooth.mergeVertices();
@@ -348,7 +350,7 @@
         render();
       };
 
-      var show_wireframe = function () {
+      function show_wireframe() {
         // Go through all children of the loaded object and search for a Mesh
         mesh.traverse( function ( child ) {
           // This allow us to check if the children is an instance of the Mesh constructor
@@ -362,7 +364,7 @@
     	  });
       }
 
-      var render = function () {
+      function render() {
         requestAnimationFrame( render );
 
         // Move the mesh in the scene
@@ -388,11 +390,11 @@
       	renderer.render( scene, camera );
       };
 
-      var reset_only = function () {
+      function reset_only() {
         reset_all( false, true );
       }
 
-      var reset_all = function( values = false, reset = false ) {
+      function reset_all( values = false, reset = false ) {
         // Reset all current positional and rotational values
         rot_x = document.getElementById('rotation_x').value = 0;
         rot_y = document.getElementById('rotation_y').value = 0;
@@ -437,7 +439,7 @@
         }
       };
 
-      var enable_disable = function( disable = false ) {
+      function enable_disable( disable = false ) {
         document.getElementById('file_image_input').disabled = disable;
         document.getElementById('light').disabled = disable;
         document.getElementById('rotate').disabled = disable;

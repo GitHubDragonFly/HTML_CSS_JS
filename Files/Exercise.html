@@ -567,30 +567,30 @@
       <form id="form" method="POST">
         <div class="required" style="width: 280px;">
           <label for="fname">First name:</label>
-          <input type="text" id="fname" name="fname" size="30" value=""><br />
+          <input type="text" id="fname" name="fname" size="30" value="" /><br />
           <label for="lname">Last name:</label>
-          <input type="text" id="lname" name="lname" size="30" value="">
+          <input type="text" id="lname" name="lname" size="30" value="" />
         </div><br />
-        <input type="radio" id="male" name="gender" value="male">
+        <input type="radio" id="male" name="gender" value="male" />
         <label for="male">Male</label><br />
-        <input type="radio" id="female" name="gender" value="female">
+        <input type="radio" id="female" name="gender" value="female" />
         <label for="female">Female</label><br />
-        <input type="radio" id="other" name="gender" value="other">
+        <input type="radio" id="other" name="gender" value="other" />
         <label for="other">Other</label><br /><br />
-        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
         <label for="vehicle1"> I have a bike</label><br />
-        <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+        <input type="checkbox" id="vehicle2" name="vehicle2" value="Car" />
         <label for="vehicle2"> I have a car</label><br />
-        <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+        <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat" />
         <label for="vehicle3"> I have a boat</label><br /><br />
         <label for="favcolor">Select your favorite color:</label>
-        <input type="color" id="favcolor" name="favcolor"><br /><br />
+        <input type="color" id="favcolor" name="favcolor" /><br /><br />
         <label for="file">Add a picture: &nbsp;</label>
-        <input type="file" id="file_input" name="file" accept="image/png, image/jpeg, image/bmp, image/gif"><br /><br /><br />
-        <input type="button" id="btn_submit" onclick="form_query()" value="Submit" style="color: green;">
-        <input type="reset" id="btn_reset" value="Reset" style="color: orange;">
-        <input type="button" id="btn_disappear" onclick="document.getElementById('btn_disappear').hidden = 'True'" value="I am here temporarily">
-        <input type="button" style="float: right; color: red;" onclick="alert('ALERT !!!\n\nOMG ... you just clicked the RED button !?')" value="Click Me NOT">
+        <input type="file" id="file_input" name="file" accept="image/png, image/jpeg, image/bmp, image/gif" /><br /><br /><br />
+        <input type="button" id="btn_submit" onclick="form_query()" value="Submit" style="color: green;" />
+        <input type="reset" id="btn_reset" value="Reset" style="color: orange;" />
+        <input type="button" id="btn_disappear" onclick="document.getElementById('btn_disappear').hidden = 'True'" value="I am here temporarily" />
+        <input type="button" style="float: right; color: red;" onclick="alert('ALERT !!!\n\nOMG ... you just clicked the RED button !?')" value="Click Me NOT" />
       </form>
     </div>
 
@@ -624,7 +624,7 @@
             </tr>
           </thead>
         </table>
-        </div>
+      </div>
     </div>
 
     <script>
@@ -633,7 +633,7 @@
       var count = 0; // used with both js and jQuery, don't comment it out if switching between these
 
       function form_query() {
-        var formData = new FormData(document.querySelector('form'));
+        let formData = new FormData(document.querySelector('form'));
 
         // Array of arrays, where:
         //   key_value_pairs[x][0] is the key
@@ -644,9 +644,9 @@
         if (key_value_pairs[0][1].trim() != "" && key_value_pairs[1][1].trim() != ""){
           count += 1;
 
-          var table = document.getElementById("form_entries_table");
-          var table_col_length = table.rows[0].cells.length;
-          var new_row = table.insertRow(count);
+          let table = document.getElementById("form_entries_table");
+          let table_col_length = table.rows[0].cells.length;
+          let new_row = table.insertRow(count);
 
           for (let i = 0; i < table_col_length; i++) {
             new_row.insertCell(i);
@@ -683,10 +683,10 @@
                 new_row.cells.item(9).style.backgroundColor = key_value_pairs[j][1];
                 break;
               default:
-                var picture_file = formData.get('file'); // formData.getAll('file') if multiple files
+                let picture_file = formData.get('file'); // formData.getAll('file') if multiple files
                 if (picture_file.type.startsWith('image/')) {
-                  var a = Object.assign(document.createElement('a'), { 'href': URL.createObjectURL(picture_file), 'target': '_blank' });
-                  var img = Object.assign(document.createElement('img'), { 'class': 'obj', 'file': picture_file, 'alt': picture_file.name, 'style': 'width: 24px; height: 22px; margin-right: 5px;' });
+                  let a = Object.assign(document.createElement('a'), { 'href': URL.createObjectURL(picture_file), 'target': '_blank' });
+                  let img = Object.assign(document.createElement('img'), { 'class': 'obj', 'file': picture_file, 'alt': picture_file.name, 'style': 'width: 24px; height: 22px; margin-right: 5px;' });
                   a.appendChild(img);
                   new_row.cells.item(10).appendChild(a);
                   const reader = new FileReader();
@@ -901,9 +901,10 @@
       var btn_stop = document.getElementById("btn_stop_camera");
       var btn_start_recording = document.getElementById("btn_start_record");
       var link_save = document.getElementById("link_save_recording");
+      var video_file_count = 1;
 
       function start_camera(e) {
-        var id = parseInt(cam_id.value);
+        let id = parseInt(cam_id.value);
 
         if (navigator.mediaDevices.getUserMedia) {
           navigator.mediaDevices.getUserMedia({ audio: true, video: { exact: video_input_id[cam_id] } })
@@ -927,11 +928,11 @@
           btn_stop.innerHTML = "Stop Cam";
           recorder.stop();
         } else {
-          var stream = video.srcObject;
-          var tracks = stream.getTracks();
+          let stream = video.srcObject;
+          let tracks = stream.getTracks();
 
-          for (var i = 0; i < tracks.length; i++) {
-            var track = tracks[i];
+          for (let i = 0; i < tracks.length; i++) {
+            let track = tracks[i];
             track.stop();
           }
 
@@ -956,8 +957,8 @@
         let recordedBlob = new Blob(data, { type: "video/webm" });
         link_save.href = URL.createObjectURL(recordedBlob);
         link_save.style.backgroundColor = "lightgreen";
-        link_save.download = "RecordedVideo.webm";
-
+        link_save.download = "RecordedVideo" + video_file_count + ".webm";
+        video_file_count += 1;
         btn_start_recording.style.color = "";
         btn_stop.innerHTML = "Stop Cam";
         recorder = null;
@@ -994,10 +995,10 @@
             document.getElementById('btn_link').innerHTML = 'Hide GitHub Link';
 
             // Create anchor element
-            var a = document.createElement('a');
+            let a = document.createElement('a');
 
             // Create the text node for anchor element
-            var link = document.createTextNode("GitHub Account");
+            let link = document.createTextNode("GitHub Account");
 
             // Append the text node to anchor element
             a.appendChild(link);
@@ -1020,10 +1021,10 @@
         // - remove onclick="show_hide_link()" from button, comment the above function and uncomment the following
 /*
         $(document).ready(function(){
-          var btn_link_element = $("#btn_link")
+          let btn_link_element = $("#btn_link")
 
           btn_link_element.click(function(){
-            var link_element = $("#link")
+            let link_element = $("#link")
 
             if (link_element.text() == "") {
               link_element.replaceWith("<p id='link' style='width: 150px; margin: auto;'><a href='https://github.com/GitHubDragonFly/' target='_blank'>GitHub Account</a></p>");
