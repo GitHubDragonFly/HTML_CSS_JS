@@ -134,7 +134,7 @@
     </script>
 
     <script>
-      var renderer, scene, camera, ambientLight, directionalLight, mesh, material;
+      var renderer, scene, camera, ambientLight, hemisphereLight, directionalLight, mesh, material;
       var ww = window.innerWidth,	wh = window.innerHeight;
       var mouse_rotation = false, reset_rotation = false, events_initialized = false;
       var rot_x = 0, rot_y = 0, rot_z = 0, pos_x = 0, pos_y = 0, pos_z = 0;
@@ -181,7 +181,6 @@
 
       function set_hemisphere_light_color() {
         let hl_colors = document.getElementById('hemisphere_light_color').value; // hex format '#rrggbb'
-        console.log(hemisphereLight.color);
 
         hemisphereLight.color = {
           'r': parseInt(hl_colors.substring(1, 3), 16) / 10,

@@ -192,7 +192,6 @@
 
       function set_hemisphere_light_color() {
         let hl_colors = document.getElementById('hemisphere_light_color').value; // hex format '#rrggbb'
-        console.log(hemisphereLight.color);
 
         hemisphereLight.color = {
           'r': parseInt(hl_colors.substring(1, 3), 16) / 10,
