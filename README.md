@@ -39,6 +39,8 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - Background image supported formats are PNG, JPEG, SVG, BMP and GIF while selecting non-image file will reset the background
    - Either an OBJ file alone or both MTL/OBJ files can be loaded at the dialog screen
    - Only a PLY file alone can be loaded at the dialog screen
+   - GUI has lights marked as DL, HL and AL (directional, hemisphere and ambient)
+   - XYZ positions of DL and HL can be changed while DL also allows changing its intensity
    - OBJ and PLY examples were downloaded from [here](https://github.com/mrdoob/three.js)
    - Windows 10 users do have an option to instead use Paint 3D and 3D Viewer apps to see these files
 
