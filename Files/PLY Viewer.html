@@ -24,7 +24,7 @@
 
     <!-- Original OBJ source code: https://codepen.io/Mamboleoo/pen/PqjGdN -->
     <!-- PLY Examples from: https://github.com/mrdoob/three.js -->
-    <!-- More PLY examples: https://people.sc.fsu.edu/~jburkardt/data/data.html -->
+    <!-- More PLY examples: https://people.math.sc.edu/Burkardt/data/data.html -->
     <title>PLY Viewer</title>
   </head>
   <body onload="reset_all()" onresize="resize()">
@@ -282,9 +282,8 @@
       function pos_z_changed() { pos_z = parseInt(document.getElementById('position_z').value); }
 
       function init(){
-        // Loaded file(s)
+        // Loaded file
         var fi = document.getElementById('file_input');
-        selected_ply_file = fi.files[0];
 
         if (scene != null) {
           // Reset the ply scale values
@@ -322,7 +321,11 @@
 
         scene = new THREE.Scene();
 
+        // Canvas mouse events, can be replaced with Orbit Controls (further below)
         if (!events_initialized) {initialize_event_listeners(); events_initialized = true; }
+
+        // Add grid helper if necessary
+        //scene.add(new THREE.GridHelper(200, 200, "yellow"));
 
         // Add ambient light to the scene
         ambientLight = new THREE.AmbientLight(0x000000, 0.05);
@@ -334,7 +337,7 @@
         hemisphereLight.position.set( 0, 10, 0 );
         scene.add( hemisphereLight );
 
-        // The following provides a sort of "liquid background" that object can go through
+        // The following provides a plane, sort of "liquid background", that object can go through
         //var material = new THREE.MeshStandardMaterial({ color: 0x0077FF, side: THREE.DoubleSide }); //shades of blue
         //mesh = new THREE.Mesh(new THREE.PlaneGeometry( ww, wh ), material);
         //scene.add(mesh);
@@ -349,6 +352,9 @@
         directionalLight.lookAt(new THREE.Vector3( 0, 0, 0 ));
         scene.add( directionalLight );
 
+        // Orbit Controls can used for rotation, zoom and move (disable canvas mouse events above)
+        //controls = new THREE.OrbitControls(camera, renderer.domElement);
+
         // Load the ply file
         loadFile();
       }
@@ -359,11 +365,22 @@
       };
 
       function addFileInScene(object){
-        var smooth = object.clone();
+        let smooth = object.clone();
         smooth.computeVertexNormals();
         smooth.mergeVertices();
 
         //var material = new THREE.MeshStandardMaterial({ color: 0x0077FF }); //shades of blue
+
+        //material = new THREE.MeshPhysicalMaterial( { // metalic look
+        //  sheen: new THREE.Color( 0x0055FF ),
+        //  vertexColors: THREE.VertexColors,
+        //  metalness: 1,
+        //  roughness: 0,
+        //  reflectivity: 1,
+        //  clearcoatMap: null,
+        //  clearcoatRoughnessMap: null
+        //});
+
         material = new THREE.MeshPhongMaterial( {
           polygonOffset: true,
           polygonOffsetFactor: 1,
@@ -373,10 +390,9 @@
           shininess: 100,
           opacity: 1.0,
           transparent: true,
-          vertexColors: THREE.VertexColors
+          vertexColors: THREE.VertexColors,
+          flatShading: false
         });
-
-        material.flatShading = false;
 
         mesh = new THREE.Mesh(smooth, material);
         mesh.castShadow = false;
