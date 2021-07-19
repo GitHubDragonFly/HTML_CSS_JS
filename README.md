@@ -37,7 +37,7 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - Both viewers require a browser supporting WebGL and are set to open in new tab/window
    - They do allow some mouse control, with `wheel` serving as zoom in/out and `left-button click/drag` to rotate the image
    - Background image supported formats are PNG, JPEG, SVG, BMP and GIF while selecting non-image file will reset the background
-   - Either an OBJ file alone or both MTL/OBJ files or MTL/OBJ/JPG(PNG) files can be loaded at the dialog screen
+   - Either an OBJ file alone or MTL/OBJ files or MTL/OBJ/JPG(PNG) files or MTL/OBJ/DDS files can be loaded at the dialog screen
    - If the MTL file requires textures then you have to select and load them, otherwise check the console output for errors
    - Only a PLY file alone can be loaded at the dialog screen
    - GUI has lights marked as DL, HL and AL (directional, hemisphere and ambient)
