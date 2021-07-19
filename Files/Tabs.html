@@ -81,7 +81,7 @@
       .scene {
         width: 200px;
         height: 200px;
-        margin: 80px;
+        margin: 60px auto 5px auto;
         -webkit-perspective: 350px;
         perspective: 350px;
       }
@@ -188,7 +188,7 @@
       @-webkit-keyframes rotationXZ { from { -webkit-transform: translateZ(-100px) rotate3d(1,0,1,0deg); } to { -webkit-transform: translateZ(-100px) rotate3d(1,0,1,359deg); } }
       @-webkit-keyframes rotationYZ { from { -webkit-transform: translateZ(-100px) rotate3d(0,1,1,0deg); } to { -webkit-transform: translateZ(-100px) rotate3d(0,1,1,359deg); } }
       @-webkit-keyframes rotationXYZ { from { -webkit-transform: translateZ(-100px) rotate3d(1,1,1,0deg); } to { -webkit-transform: translateZ(-100px) rotate3d(1,1,1,359deg); } }
-      @-webkit-keyframes rotationXYZtranslation3D { from { -webkit-transform: translate3d(-250px, -25px, -450px) rotate3d(1,1,1,0deg); } to { -webkit-transform: translate3d(250px, 50px, -150px) rotate3d(1,1,1,359deg); } }
+      @-webkit-keyframes rotationXYZtranslation3D { from { -webkit-transform: translate3d(-450px, -25px, -450px) rotate3d(1,1,1,0deg); } to { -webkit-transform: translate3d(0px, 0px, -100px) rotate3d(1,1,1,359deg); } }
 
       @keyframes rotationX { from { transform: translateZ(-100px) rotateX(0deg); } to { transform: translateZ(-100px) rotateX(359deg); } }
       @keyframes rotationY { from { transform: translateZ(-100px) rotateY(0deg); } to { transform: translateZ(-100px) rotateY(359deg); } }
@@ -197,7 +197,7 @@
       @keyframes rotationXZ { from { transform: translateZ(-100px) rotate3d(1,0,1,0deg); } to { transform: translateZ(-100px) rotate3d(1,0,1,359deg); } }
       @keyframes rotationYZ { from { transform: translateZ(-100px) rotate3d(0,1,1,0deg); } to { transform: translateZ(-100px) rotate3d(0,1,1,359deg); } }
       @keyframes rotationXYZ { from { transform: translateZ(-100px) rotate3d(1,1,1,0deg); } to { transform: translateZ(-100px) rotate3d(1,1,1,359deg); } }
-      @keyframes rotationXYZtranslation3D { from { transform: translate3d(-250px, -25px, -450px) rotate3d(1,1,1,0deg); } to { transform: translate3d(250px, 50px, -150px) rotate3d(1,1,1,359deg); } }
+      @keyframes rotationXYZtranslation3D { from { transform: translate3d(-450px, -25px, -450px) rotate3d(1,1,1,0deg); } to { transform: translate3d(0px, 0px, -100px) rotate3d(1,1,1,359deg); } }
       /** End: style 3D Cube 2 **/
     </style>
   </head>
@@ -391,9 +391,8 @@
 
     <section id="tab4" class="tab-content hide">
     	<!-- Original source code: https://codepen.io/desandro/pen/KRWjzm -->
-      <div><br /><br /><br />
-
-        <div class="scene" style="margin: auto;">
+      <div>
+        <div class="scene">
           <div class="cube">
             <div class="cube__face cube__face--front">front</div>
             <div class="cube__face cube__face--back">back</div>
