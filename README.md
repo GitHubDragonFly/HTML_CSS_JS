@@ -45,7 +45,7 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - A plane receiving shadow is set in the background and the shadow intensity is controlled by the SpotLight and the opacity of the object
    - OBJ and PLY examples were downloaded from [here](https://github.com/mrdoob/three.js)
    - Windows 10 users do have an option to instead use Paint 3D and 3D Viewer apps to see these files
-   - There is a screenshot of the OBJ Viewer with one of the included examples
+   - There is a screenshot of the OBJ Viewer with one of the included examples, shadow enabled and blue hemisphere light turned on
 
 # Usage
 All it takes is to:
