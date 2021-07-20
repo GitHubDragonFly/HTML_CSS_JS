@@ -5,6 +5,7 @@
 
     <script src="js/three.js"></script>
     <script src="js/PLYLoader.js"></script>
+    <script src="js/OrbitControls.js"></script>
 
     <style>
       body,html{ display: block; background-color: black; background-image: url('Images/DragonFly.png'); background-position: 50% 50%; background-repeat: no-repeat; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; overflow: hidden; }
@@ -35,18 +36,22 @@
         <label for="file_image_input" style="color: #CE8704; margin-right: 5px;">BG Image:</label>
         <input type="file" id="file_image_input" name="file_image_input" accept="image/png, image/jpeg, image/bmp, image/gif, image/svg+xml" onchange="set_scene_image()" />
         <button type="reset" id="reset" onclick="reset_only()" style="color: maroon; float: right; width: 55px; margin-right: 5px; margin-left: 5px;">Reset</button>
+        <label for="shadow" style="float: right; margin-right: 5px;">Shadow</label>
+        <input type="checkbox" id="shadow" name="shadow" onchange="show_shadow()" style="float: right; margin-right: 5px;" />
         <label for="wireframe" style="float: right; margin-right: 5px;">Wireframe</label>
         <input type="checkbox" id="wireframe" name="wireframe" onchange="show_wireframe()" style="float: right; margin-right: 5px;" />
         <input type="number" id="ply_scale" name="ply_scale" onchange="set_ply_scale()" min="0.5" max="1.5" value="1" step="0.5" style="float: right; margin-right: 5px; width: 45px;" />
         <label for="ply_scale" style="float: right; margin-right: 5px;">Scale:</label>
-        <input type="number" id="ply_opacity" name="ply_opacity" min="0.05" max="1" step="0.05" value="1" onchange="set_ply_opacity()" style="float: right; width: 50px; margin-right: 5px;" />
+        <input type="number" id="ply_opacity" name="ply_opacity" min="0" max="1" step="0.05" value="1" onchange="set_ply_opacity()" style="float: right; width: 50px; margin-right: 5px;" />
         <label for="ply_opacity" style="float: right; margin-top: 3px; margin-right: 5px;">Opacity</label>
       </div>
       <div>
-        <input type="radio" id="dlight" name="mode" value="DL" onchange="radio_changed()" />
-        <label for="dlight">DL</label>
         <input type="radio" id="hlight" name="mode" value="HL" onchange="radio_changed()" />
         <label for="hlight">HL</label>
+        <input type="radio" id="slight" name="mode" value="SL" onchange="radio_changed()" />
+        <label for="hlight">SL</label>
+        <input type="radio" id="dlight" name="mode" value="DL" onchange="radio_changed()" />
+        <label for="dlight">DL</label>
         <input type="radio" id="rotate" name="mode" value="Rotate" onchange="radio_changed()" checked />
         <label for="rotate">Rotate &nbsp;</label>
         <label for="rotation_x" style="color: navy;">X</label>
@@ -68,7 +73,9 @@
         <label for="ambient_light_color" style="float: right; margin-top: 3px; margin-right: 5px;">AL</label>
         <input type="color" id="hemisphere_light_color" name="hemisphere_light_color" onchange="set_hemisphere_light_color()" style="float: right; background: none; padding: 0; width: 30px; margin-right: 5px;" />
         <label for="hemisphere_light_color" style="float: right; margin-top: 3px; margin-right: 5px;">HL</label>
-        <input type="number" id="directional_light_intensity" name="directional_light_intensity" min="0.05" max="1" step="0.05" value="0.8" onchange="set_directional_light_intensity()" style="float: right; width: 50px; margin-right: 5px;" />
+        <input type="number" id="spot_light_intensity" name="spot_light_intensity" min="0" max="1" step="0.05" value="0" onchange="set_spot_light_intensity()" style="float: right; width: 50px; margin-right: 5px;" />
+        <label for="spot_light_intensity" style="float: right; margin-top: 3px; margin-right: 5px;">SL</label>
+        <input type="number" id="directional_light_intensity" name="directional_light_intensity" min="0" max="1" step="0.05" value="0.8" onchange="set_directional_light_intensity()" style="float: right; width: 50px; margin-right: 5px;" />
         <label for="directional_light_intensity" style="float: right; margin-top: 3px; margin-right: 5px;">DL</label>
       </div>
     </div><br />
@@ -134,7 +141,7 @@
     </script>
 
     <script>
-      var renderer, scene, camera, ambientLight, hemisphereLight, directionalLight, mesh, material;
+      var renderer, scene, camera, ambientLight, hemisphereLight, spotLight, directionalLight, mesh, shadowMesh, material, shadowMaterial;
       var ww = window.innerWidth,	wh = window.innerHeight;
       var mouse_rotation = false, reset_rotation = false, events_initialized = false;
       var rot_x = 0, rot_y = 0, rot_z = 0, pos_x = 0, pos_y = 0, pos_z = 0;
@@ -151,6 +158,9 @@
       function set_ply_opacity() {
         if (material) {
           material.opacity = document.getElementById('ply_opacity').value;
+          if (document.getElementById('shadow').checked) {
+            shadowMaterial.opacity = material.opacity * document.getElementById('spot_light_intensity').value;
+          }
         }
       }
 
@@ -160,13 +170,18 @@
         if (fii.files[0]) {
           if (fii.files[0].type.startsWith('image/')) {
             const loader = new THREE.TextureLoader();
-            loader.load( URL.createObjectURL(fii.files[0]) , function(texture) { scene.background = texture; });
+            loader.load( URL.createObjectURL(fii.files[0]) , function(texture) {
+              scene.background = texture;
+              document.getElementById('back_color').disabled = true;
+            });
           } else {
             fii.value = "";
             scene.background = null;
+            document.getElementById('back_color').disabled = false;
           }
         } else {
           scene.background = null;
+          document.getElementById('back_color').disabled = false;
         }
       }
 
@@ -194,6 +209,11 @@
           hemisphereLight.groundColor = { 'r': 8.5, 'g': 8.5, 'b': 8.5 }}
       }
 
+      function set_spot_light_intensity() {
+        spotLight.intensity = parseFloat( document.getElementById('spot_light_intensity').value );
+        if (document.getElementById('shadow').checked) { shadowMaterial.opacity = spotLight.intensity * document.getElementById('ply_opacity').value; }
+      }
+
       function set_directional_light_intensity() {
         directionalLight.intensity = parseFloat( document.getElementById('directional_light_intensity').value );
       }
@@ -215,6 +235,13 @@
           document.getElementById('rotation_x').value = directionalLight.position.x;
           document.getElementById('rotation_y').value = directionalLight.position.y;
           document.getElementById('rotation_z').value = directionalLight.position.z;
+          document.getElementById('rotation_x').min = document.getElementById('rotation_y').min = document.getElementById('rotation_z').min = -500;
+          document.getElementById('rotation_x').max = document.getElementById('rotation_y').max = document.getElementById('rotation_z').max = 500;
+          document.getElementById('rotation_x').step = document.getElementById('rotation_y').step = document.getElementById('rotation_z').step = 10;
+        } else if (document.getElementById('slight').checked) {
+          document.getElementById('rotation_x').value = spotLight.position.x;
+          document.getElementById('rotation_y').value = spotLight.position.y;
+          document.getElementById('rotation_z').value = spotLight.position.z;
           document.getElementById('rotation_x').min = document.getElementById('rotation_y').min = document.getElementById('rotation_z').min = -500;
           document.getElementById('rotation_x').max = document.getElementById('rotation_y').max = document.getElementById('rotation_z').max = 500;
           document.getElementById('rotation_x').step = document.getElementById('rotation_y').step = document.getElementById('rotation_z').step = 10;
@@ -242,6 +269,8 @@
 
         if (document.getElementById('dlight').checked) {
           directionalLight.position.set( x, y, z );
+        } else if (document.getElementById('slight').checked) {
+          spotLight.position.set( x, y, z );
         } else if (document.getElementById('hlight').checked) {
           hemisphereLight.position.set( x, y, z );
         } else {
@@ -256,6 +285,8 @@
 
         if (document.getElementById('dlight').checked) {
           directionalLight.position.set( x, y, z );
+        } else if (document.getElementById('slight').checked) {
+          spotLight.position.set( x, y, z );
         } else if (document.getElementById('hlight').checked) {
           hemisphereLight.position.set( x, y, z );
         } else {
@@ -270,6 +301,8 @@
 
         if (document.getElementById('dlight').checked) {
           directionalLight.position.set( x, y, z );
+        } else if (document.getElementById('slight').checked) {
+          spotLight.position.set( x, y, z );
         } else if (document.getElementById('hlight').checked) {
           hemisphereLight.position.set( x, y, z );
         } else {
@@ -294,6 +327,8 @@
           reset_all( false, true );
 
           scene.remove.apply(scene, scene.children);
+
+          if (shadowMesh) { shadowMesh = null; }
         }
 
         enable_disable( true );
@@ -310,13 +345,14 @@
         renderer = new THREE.WebGLRenderer({ canvas : document.getElementById('scene'), antialias: true, alpha: true });
         renderer.setPixelRatio( window.devicePixelRatio );
         renderer.setSize(ww, wh);
-        //renderer.shadowMap.enabled = true;
-        //renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         renderer.setClearColor( 0xFFFFFF, 0); // Allow setting the background color
         renderer.autoClear = false;
 
         // The following can be used instead of the canvas but the window mouse
-        // events might be tricky to set due to the presence of the fixed menu
+        // events might be tricky to set due to the presence of the fixed menu.
+        // Possibly use Orbit Controls instead.
         //document.body.appendChild( renderer.domElement );
 
         scene = new THREE.Scene();
@@ -324,29 +360,50 @@
         // Canvas mouse events, can be replaced with Orbit Controls (further below)
         if (!events_initialized) {initialize_event_listeners(); events_initialized = true; }
 
-        // Add grid helper if necessary
+        // Add grid helper for use with Orbit Controls
         //scene.add(new THREE.GridHelper(200, 200, "yellow"));
-
-        // Add ambient light to the scene
-        ambientLight = new THREE.AmbientLight(0x000000, 0.05);
-        ambientLight.position.set( 0, 0, 250 );
-        scene.add(ambientLight);
-
-        // Add hemisphere light to the scene
-        hemisphereLight = new THREE.HemisphereLight( 0x000000, 0x000000, 0.05 );
-        hemisphereLight.position.set( 0, 10, 0 );
-        scene.add( hemisphereLight );
-
-        // The following provides a plane, sort of "liquid background", that object can go through
-        //var material = new THREE.MeshStandardMaterial({ color: 0x0077FF, side: THREE.DoubleSide }); //shades of blue
-        //mesh = new THREE.Mesh(new THREE.PlaneGeometry( ww, wh ), material);
-        //scene.add(mesh);
 
         camera = new THREE.PerspectiveCamera( 45, ww/wh, 0.1, 2000 );
         camera.position.set( 0, 0, 250 );
         scene.add(camera);
 
-        // Add directional light to the scene
+        // Add AmbientLight to the scene
+        ambientLight = new THREE.AmbientLight(0x000000, 0.05);
+        ambientLight.position.set( 0, 0, 250 );
+        scene.add(ambientLight);
+
+        // Add HemisphereLight to the scene
+        hemisphereLight = new THREE.HemisphereLight( 0x000000, 0x000000, 0.05 );
+        hemisphereLight.position.set( 0, 10, 0 );
+        scene.add( hemisphereLight );
+
+        // The following provides a plane that can receive a shadow but is also a sort of
+        // "liquid background" that an object will go through at a certain distance.
+        // This plane is set in the background.
+        shadowMaterial = new THREE.ShadowMaterial();
+        shadowMaterial.opacity = 0.1;
+        shadowMesh = new THREE.Mesh(new THREE.PlaneGeometry( ww, wh ), shadowMaterial);
+        shadowMesh.position.set( 0, 0, -1500 );
+        shadowMesh.scale.set( 2.5, 2.5, 1 );
+        shadowMesh.receiveShadow = true;
+
+        // Add SpotLight to the scene
+        spotLight = new THREE.SpotLight( 0xFFFFFF, 0, 0, Math.PI/4 );
+        spotLight.position.set( 150, -50, 350 );
+        spotLight.target.position.set( 0, 0, -2000 );
+        spotLight.castShadow = true;
+
+        spotLight.shadow.mapSize.width = 1024;
+        spotLight.shadow.mapSize.height = 1024;
+
+        spotLight.shadow.camera.near = 10;
+        spotLight.shadow.camera.far = 2000;
+        spotLight.shadow.camera.fov = 10;
+
+        scene.add( spotLight );
+        scene.add( spotLight.target );
+
+        // Add DirectionalLight to the scene
         directionalLight = new THREE.DirectionalLight( 0xFFFFFF, 0.8 );
         directionalLight.position.set( 0, 0, 250 );
         directionalLight.lookAt(new THREE.Vector3( 0, 0, 0 ));
@@ -395,9 +452,16 @@
         });
 
         mesh = new THREE.Mesh(smooth, material);
-        mesh.castShadow = false;
-        mesh.receiveShadow = false;
         mesh.scale.multiplyScalar( parseFloat(document.getElementById('ply_scale').value ));
+
+        // Go through all children of the loaded object and search for a Mesh
+        mesh.traverse( function ( child ) {
+          // This allow us to check if the children is an instance of the Mesh constructor
+    	    if(child instanceof THREE.Mesh){
+            child.castShadow = true;
+            child.receiveShadow = true;
+    		  }
+    	  });
 
         // Add mesh to the scene
         scene.add(mesh)
@@ -419,6 +483,15 @@
             }
     		  }
     	  });
+      }
+
+      function show_shadow() {
+        if (document.getElementById('shadow').checked) {
+          scene.add( shadowMesh );
+          shadowMaterial.opacity = document.getElementById('ply_opacity').value * document.getElementById('spot_light_intensity').value;
+        } else {
+          scene.remove( shadowMesh );
+        }
       }
 
       function render() {
@@ -461,50 +534,58 @@
         pos_y = document.getElementById('position_y').value = 0;
         pos_z = document.getElementById('position_z').value = 0;
         document.getElementById('file_image_input').value = "";
+        document.getElementById('back_color').value = "0x000000";
         document.getElementById('ambient_light_color').value = "0x000000";
         document.getElementById('hemisphere_light_color').value = "0x000000";
+        document.getElementById('spot_light_intensity').value = 0;
         document.getElementById('directional_light_intensity').value = 0.8;
         document.getElementById('ply_opacity').value = 1.0;
 
         // Reset the radio inputs
         document.getElementById('rotate').checked = true;
         document.getElementById('dlight').checked = false;
+        document.getElementById('slight').checked = false;
         document.getElementById('hlight').checked = false;
         radio_changed();
 
         // Reset the ply scale values
         document.getElementById('ply_scale').value = 1;
 
-        // Reset the wireframe checkbox
+        // Reset the wireframe and shadow checkboxes
         document.getElementById('wireframe').checked = false;
+        document.getElementById('shadow').checked = false;
 
         reset_rotation = true;
 
         // Reset the view
         if (!values && reset) {
           hemisphereLight.position.set( 0, 10, 0 );
+          spotLight.position.set( 150, -50, 350 );
           directionalLight.position.set( 0, 0, 250 );
           set_ply_scale();
           set_ply_opacity();
           set_scene_image();
           show_wireframe();
+          show_shadow();
+          set_back_color();
           set_ambient_light_color();
           set_hemisphere_light_color();
+          set_spot_light_intensity();
           set_directional_light_intensity();
         }
 
         if (!values && !reset) {
           // Page (re)loading so reset the file input and back color and disable controls
           document.getElementById('file_input').value = "";
-          document.getElementById('back_color').value = "0x000000";
           enable_disable( true );
         }
       };
 
       function enable_disable( disable = false ) {
         document.getElementById('file_image_input').disabled = disable;
-        document.getElementById('dlight').disabled = disable;
         document.getElementById('hlight').disabled = disable;
+        document.getElementById('slight').disabled = disable;
+        document.getElementById('dlight').disabled = disable;
         document.getElementById('rotate').disabled = disable;
         document.getElementById('rotation_x').disabled = disable;
         document.getElementById('rotation_y').disabled = disable;
@@ -513,9 +594,12 @@
         document.getElementById('position_y').disabled = disable;
         document.getElementById('position_z').disabled = disable;
         document.getElementById('wireframe').disabled = disable;
+        document.getElementById('shadow').disabled = disable;
         document.getElementById('ply_scale').disabled = disable;
         document.getElementById('ply_opacity').disabled = disable;
         document.getElementById('ambient_light_color').disabled = disable;
+        document.getElementById('hemisphere_light_color').disabled = disable;
+        document.getElementById('spot_light_intensity').disabled = disable;
         document.getElementById('directional_light_intensity').disabled = disable;
         document.getElementById('back_color').disabled = disable;
         document.getElementById('reset').disabled = disable;
