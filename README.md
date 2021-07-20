@@ -40,8 +40,9 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - Either an OBJ file alone or MTL/OBJ files or MTL/OBJ/JPG(PNG) files or MTL/OBJ/DDS files can be loaded at the dialog screen
    - If the MTL file requires textures then you have to select and load them, otherwise check the console output for errors
    - Only a PLY file alone can be loaded at the dialog screen
-   - GUI has lights marked as DL, HL and AL (directional, hemisphere and ambient)
-   - XYZ positions of DL and HL can be changed while DL also allows changing its intensity
+   - GUI has lights marked as DL, SL, HL and AL (directional, spot, hemisphere and ambient)
+   - XYZ positions of DL / SL / HL can be changed as well as DL / SL intensity
+   - A plane receiving shadow is set in the background and the shadow intensity is controlled by the SpotLight and the opacity of the object
    - OBJ and PLY examples were downloaded from [here](https://github.com/mrdoob/three.js)
    - Windows 10 users do have an option to instead use Paint 3D and 3D Viewer apps to see these files
    - There is a screenshot of the OBJ Viewer with one of the included examples
