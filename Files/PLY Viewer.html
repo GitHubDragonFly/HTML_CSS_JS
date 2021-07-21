@@ -32,7 +32,7 @@
     <div class="fixed-menu">
       <div>
         <label for="file" style="color: #CE8704;">PLY File:</label>
-        <input type="file" id="file_input" name="file" onchange="init()" style="margin-right: 5px;" />
+        <input type="file" id="file_input" name="file" onchange="init()" style="margin-right: 5px;" multiple />
         <label for="file_image_input" style="color: #CE8704; margin-right: 5px;">BG Image:</label>
         <input type="file" id="file_image_input" name="file_image_input" accept="image/png, image/jpeg, image/bmp, image/gif, image/svg+xml" onchange="set_scene_image()" />
         <button type="reset" id="reset" onclick="reset_only()" style="color: maroon; float: right; width: 55px; margin-right: 5px; margin-left: 5px;">Reset</button>
@@ -141,12 +141,13 @@
     </script>
 
     <script>
-      var renderer, scene, camera, ambientLight, hemisphereLight, spotLight, directionalLight, mesh, shadowMesh, material, shadowMaterial;
+      var renderer, scene, camera, ambientLight, hemisphereLight, spotLight, directionalLight, mesh, material, texture, shadowMesh, shadowMaterial;
       var ww = window.innerWidth,	wh = window.innerHeight;
       var mouse_rotation = false, reset_rotation = false, events_initialized = false;
       var rot_x = 0, rot_y = 0, rot_z = 0, pos_x = 0, pos_y = 0, pos_z = 0;
       var previous_ply_scale = 1;
       var selected_ply_file = null;
+      var texture_files_png, texture_files_jpg;
 
       // Manager from ThreeJs to track a loader and its status
       var manager = new THREE.LoadingManager();
@@ -331,13 +332,21 @@
           if (shadowMesh) { shadowMesh = null; }
         }
 
+        if (!fi.files) { return; }
+
+        selected_ply_file = null;
+        texture_files_jpg = [];
+        texture_files_png = [];
         enable_disable( true );
 
-        if (!fi.files[0].name.endsWith('.ply')) {
-          return;
-        } else {
-          selected_ply_file = fi.files[0];
-        }
+        // Include check for JPG/PNG
+        for (let i = 0; i < fi.files.length; i++) {
+          if (fi.files[i].name.toUpperCase().endsWith('.PLY')) { selected_ply_file = fi.files[i]; }
+          else if (fi.files[i].name.toUpperCase().endsWith('.PNG')) { texture_files_png.push( fi.files[i] ); }
+          else if (fi.files[i].name.toUpperCase().endsWith('.JPG')) { texture_files_jpg.push( fi.files[i] ); }
+        };
+
+        if (!selected_ply_file) { return; }
 
         document.body.style.backgroundImage = "none";
         enable_disable( false );
@@ -426,7 +435,7 @@
         smooth.computeVertexNormals();
         smooth.mergeVertices();
 
-        //var material = new THREE.MeshStandardMaterial({ color: 0x0077FF }); //shades of blue
+        //material = new THREE.MeshStandardMaterial({ color: 0x0077FF }); //shades of blue
 
         //material = new THREE.MeshPhysicalMaterial( { // metalic look
         //  sheen: new THREE.Color( 0x0055FF ),
@@ -438,7 +447,30 @@
         //  clearcoatRoughnessMap: null
         //});
 
-        material = new THREE.MeshPhongMaterial( {
+        if (texture_files_jpg.length > 0) {
+          const loader = new THREE.TextureLoader();
+          texture = loader.load( URL.createObjectURL( texture_files_jpg[0] ));
+          material = new THREE.MeshLambertMaterial( {
+            map: texture,
+            fog: true,
+            opacity: 1.0,
+            transparent: true,
+            vertexColors: THREE.VertexColors,
+            reflectivity: 1
+          });
+        } else if (texture_files_png.length > 0) {
+          const loader = new THREE.TextureLoader();
+          texture = loader.load( URL.createObjectURL( texture_files_png[0] ));
+          material = new THREE.MeshLambertMaterial( {
+            map: texture,
+            fog: true,
+            opacity: 1.0,
+            transparent: true,
+            vertexColors: THREE.VertexColors,
+            reflectivity: 1
+          });
+        } else {
+          material = new THREE.MeshPhongMaterial( {
           polygonOffset: true,
           polygonOffsetFactor: 1,
           polygonOffsetUnits: 1,
@@ -450,6 +482,7 @@
           vertexColors: THREE.VertexColors,
           flatShading: false
         });
+        }
 
         mesh = new THREE.Mesh(smooth, material);
         mesh.scale.multiplyScalar( parseFloat(document.getElementById('ply_scale').value ));
