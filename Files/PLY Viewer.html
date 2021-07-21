@@ -40,9 +40,9 @@
         <input type="checkbox" id="shadow" name="shadow" onchange="show_shadow()" style="float: right; margin-right: 5px;" />
         <label for="wireframe" style="float: right; margin-right: 5px;">Wireframe</label>
         <input type="checkbox" id="wireframe" name="wireframe" onchange="show_wireframe()" style="float: right; margin-right: 5px;" />
-        <input type="number" id="ply_scale" name="ply_scale" onchange="set_ply_scale()" min="0.5" max="1.5" value="1" step="0.5" style="float: right; margin-right: 5px; width: 45px;" />
+        <input type="number" id="ply_scale" name="ply_scale" onchange="set_ply_scale()" min="0.25" max="2" value="1" step="0.25" style="float: right; margin-right: 5px; width: 48px;" />
         <label for="ply_scale" style="float: right; margin-right: 5px;">Scale:</label>
-        <input type="number" id="ply_opacity" name="ply_opacity" min="0" max="1" step="0.05" value="1" onchange="set_ply_opacity()" style="float: right; width: 50px; margin-right: 5px;" />
+        <input type="number" id="ply_opacity" name="ply_opacity" min="0" max="1" step="0.05" value="1" onchange="set_ply_opacity()" style="float: right; width: 48px; margin-right: 5px;" />
         <label for="ply_opacity" style="float: right; margin-top: 3px; margin-right: 5px;">Opacity</label>
       </div>
       <div>
@@ -145,7 +145,7 @@
       var ww = window.innerWidth,	wh = window.innerHeight;
       var mouse_rotation = false, reset_rotation = false, events_initialized = false;
       var rot_x = 0, rot_y = 0, rot_z = 0, pos_x = 0, pos_y = 0, pos_z = 0;
-      var previous_ply_scale = 1;
+      var previous_ply_scale = '1';
       var selected_ply_file = null;
       var texture_files_png, texture_files_jpg;
 
@@ -220,15 +220,36 @@
       }
 
       function set_ply_scale() {
-        if (previous_ply_scale == 0.5) {
-          mesh.scale.multiplyScalar( 2 );
-        } else if (previous_ply_scale == 1.5) {
-          mesh.scale.multiplyScalar( 2/3 );
-        } else {
-          mesh.scale.multiplyScalar( parseFloat(document.getElementById('ply_scale').value) );
+        let current_ply_scale = document.getElementById('ply_scale').value;
+
+        switch (previous_ply_scale) {
+          case '0.25':
+            mesh.scale.multiplyScalar( 2 );
+            break;
+          case '0.5':
+            mesh.scale.multiplyScalar( (current_ply_scale == '0.75') ? 3/2 : 1/2 );
+            break;
+          case '0.75':
+            mesh.scale.multiplyScalar( (current_ply_scale == '1') ? 4/3 : 2/3 );
+            break;
+          case '1':
+            mesh.scale.multiplyScalar( (current_ply_scale == '1.25') ? 5/4 : 3/4 );
+            break;
+          case '1.25':
+            mesh.scale.multiplyScalar( (current_ply_scale == '1.5') ? 6/5 : 4/5 );
+            break;
+          case '1.5':
+            mesh.scale.multiplyScalar( (current_ply_scale == '1.75') ? 7/6 : 5/6 );
+            break;
+          case '1.75':
+            mesh.scale.multiplyScalar( (current_ply_scale == '2') ? 8/7 : 6/7 );
+            break;
+          default:
+            mesh.scale.multiplyScalar( 7/8 );
+            break;
         }
 
-        previous_ply_scale = parseFloat(document.getElementById('ply_scale').value);
+        previous_ply_scale = current_ply_scale;
       }
 
       function radio_changed() {
