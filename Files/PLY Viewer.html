@@ -113,8 +113,10 @@
           if (mouse_rotation) {
             event.preventDefault();
             let x = Math.abs(mesh.rotation.x);
+            let y = Math.abs(mesh.rotation.y);
 
             if (x > 2 * Math.PI ) { mesh.rotation.x = 0; }
+            if (y > 2 * Math.PI ) { mesh.rotation.y = 0; }
 
             mesh.rotation.x += event.clientX * event.movementY * 0.0000087;
 
@@ -569,6 +571,9 @@
           mesh.rotation.x += rot_x;
           mesh.rotation.y += rot_y;
           mesh.rotation.z += rot_z;
+          if (Math.abs(mesh.rotation.x) > 2 * Math.PI ) { mesh.rotation.x = 0; }
+          if (Math.abs(mesh.rotation.y) > 2 * Math.PI ) { mesh.rotation.y = 0; }
+          if (Math.abs(mesh.rotation.z) > 2 * Math.PI ) { mesh.rotation.z = 0; }
         }
 
         renderer.clear();
