@@ -37,15 +37,15 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - Both viewers require a browser supporting WebGL and are set to open in new tab/window
    - They do allow some mouse control, with `wheel` serving as zoom in/out and `left-button click/drag` to rotate the image
    - Background image supported formats are PNG, JPEG, SVG, BMP and GIF while selecting non-image file will reset the background
-   - Either an OBJ file alone or MTL/OBJ files or MTL/OBJ/JPG(PNG) files or MTL/OBJ/DDS files can be loaded at the dialog screen
+   - Either an OBJ file alone or MTL / OBJ files or MTL / OBJ / JPG(PNG) files or MTL / OBJ / DDS files can be loaded at the dialog screen
    - If the MTL file requires textures then you have to select and load them, otherwise check the console output for errors
-   - Only a PLY file alone can be loaded at the dialog screen
+   - Either a PLY file alone or PLY / JPG(PNG) files can be loaded at the dialog screen (texture files should be relatively simple since they are used to create color map)
    - GUI has lights marked as DL, SL, HL and AL (directional, spot, hemisphere and ambient)
    - XYZ positions of DL / SL / HL can be changed as well as DL / SL intensity
    - A plane receiving shadow is set in the background and the shadow intensity is controlled by the SpotLight and the opacity of the object
    - OBJ and PLY examples were downloaded from [here](https://github.com/mrdoob/three.js)
    - Windows 10 users do have an option to instead use Paint 3D and 3D Viewer apps to see these files
-   - There is a screenshot of the OBJ Viewer with one of the included examples, shadow enabled and blue hemisphere light turned on
+   - There are screenshots of both viewers, each with one of the included examples, shadow enabled
 
 # Usage
 All it takes is to:
