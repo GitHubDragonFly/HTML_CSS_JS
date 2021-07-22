@@ -28,7 +28,7 @@
     <!-- Original OBJ source code that inspired this: https://codepen.io/Mamboleoo/pen/PqjGdN -->
     <!-- OBJ Examples from: https://github.com/mrdoob/three.js -->
     <!-- Also see: https://davidoreilly.itch.io/walt-disney-3d-head , http://www.davidoreilly.com/ -->
-    <!-- More OBJ examples: https://people.sc.fsu.edu/~jburkardt/data/data.html -->
+    <!-- More OBJ examples: https://people.math.sc.edu/Burkardt/data/data.html -->
     <title>OBJ Viewer</title>
   </head>
   <body onload="reset_all()" onresize="resize()">
@@ -398,7 +398,8 @@
 
         scene = new THREE.Scene();
 
-        // Canvas mouse events, can be replaced with Orbit Controls (further below)
+        // Canvas mouse events, could be replaced with Orbit Controls but some features
+        // might not work as expected, since the camera is being rotated instead of the object
         if (!events_initialized) { initialize_event_listeners(); events_initialized = true; }
 
         // Add grid helper for use with Orbit Controls
@@ -408,18 +409,18 @@
         camera.position.set( 0, 0, 250 );
         scene.add( camera );
 
-        // Add ambient light to the scene
+        // Add AmbientLight to the scene
         ambientLight = new THREE.AmbientLight(0x000000, 0.05);
         ambientLight.position.set( 0, 0, 250 );
         scene.add(ambientLight);
 
-        // Add hemisphere light to the scene
+        // Add HemisphereLight to the scene
         hemisphereLight = new THREE.HemisphereLight( 0x000000, 0x000000, 0.05 );
         hemisphereLight.position.set( 0, 10, 0 );
         scene.add( hemisphereLight );
 
         // The following provides a plane that can receive a shadow but is also a sort of
-        // "liquid background" that an object will go through at a certain distance.
+        // a "liquid background" that an object will go through at a certain distance.
         // This plane is set in the background.
         shadowMaterial = new THREE.ShadowMaterial();
         shadowMaterial.opacity = 0.1;
@@ -444,13 +445,13 @@
         scene.add( spotLight );
         scene.add( spotLight.target );
 
-        // Add directional light to the scene
+        // Add DirectionalLight to the scene
         directionalLight = new THREE.DirectionalLight( 0xFFFFFF, 0.8 );
         directionalLight.position.set( 0, 0, 250 );
         directionalLight.lookAt( new THREE.Vector3( 0, 0, 0 ) );
         scene.add( directionalLight );
 
-        // Orbit Controls can be used for rotation, zoom and move (disable canvas mouse events above)
+        // Orbit Controls can be used for rotation, zoom and move but are camera related
         //controls = new THREE.OrbitControls(camera, renderer.domElement);
 
         // Load the Obj file
@@ -621,13 +622,14 @@
         pos_x = document.getElementById('position_x').value = 0;
         pos_y = document.getElementById('position_y').value = 0;
         pos_z = document.getElementById('position_z').value = 0;
+
+        // Reset the background and related values
         document.getElementById('file_image_input').value = "";
         document.getElementById('back_color').value = "0x000000";
         document.getElementById('ambient_light_color').value = "0x000000";
         document.getElementById('hemisphere_light_color').value = "0x000000";
         document.getElementById('spot_light_intensity').value = 0;
         document.getElementById('directional_light_intensity').value = 0.8;
-        document.getElementById('obj_opacity').value = 1.0;
 
         // Reset the radio inputs
         document.getElementById('rotate').checked = true;
@@ -636,7 +638,8 @@
         document.getElementById('hlight').checked = false;
         radio_changed();
 
-        // Reset the Obj scale values
+        // Reset the Obj opacity and scale values
+        document.getElementById('obj_opacity').value = 1;
         document.getElementById('obj_scale').value = 1;
 
         // Reset the wireframe and shadow checkboxes
@@ -663,7 +666,7 @@
         }
 
         if (!values && !reset) {
-          // Page (re)loading so reset the file input and back color and disable controls
+          // Page (re)loading so reset the file input and disable controls
           document.getElementById('file_input').value = "";
           enable_disable( true );
         }

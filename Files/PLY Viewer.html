@@ -23,7 +23,7 @@
       }
     </style>
 
-    <!-- Original OBJ source code: https://codepen.io/Mamboleoo/pen/PqjGdN -->
+    <!-- Original OBJ source code that inspired this: https://codepen.io/Mamboleoo/pen/PqjGdN -->
     <!-- PLY Examples from: https://github.com/mrdoob/three.js -->
     <!-- More PLY examples: https://people.math.sc.edu/Burkardt/data/data.html -->
     <title>PLY Viewer</title>
@@ -389,7 +389,8 @@
 
         scene = new THREE.Scene();
 
-        // Canvas mouse events, can be replaced with Orbit Controls (further below)
+        // Canvas mouse events, could be replaced with Orbit Controls but some features
+        // might not work as expected, since the camera is being rotated instead of the object
         if (!events_initialized) {initialize_event_listeners(); events_initialized = true; }
 
         // Add grid helper for use with Orbit Controls
@@ -441,7 +442,7 @@
         directionalLight.lookAt(new THREE.Vector3( 0, 0, 0 ));
         scene.add( directionalLight );
 
-        // Orbit Controls can used for rotation, zoom and move (disable canvas mouse events above)
+        // Orbit Controls can be used for rotation, zoom and move but are camera related
         //controls = new THREE.OrbitControls(camera, renderer.domElement);
 
         // Load the ply file
@@ -476,7 +477,7 @@
           material = new THREE.MeshLambertMaterial( {
             map: texture,
             fog: true,
-            opacity: 1.0,
+            opacity: 1,
             transparent: true,
             vertexColors: THREE.VertexColors,
             reflectivity: 1
@@ -487,7 +488,7 @@
           material = new THREE.MeshLambertMaterial( {
             map: texture,
             fog: true,
-            opacity: 1.0,
+            opacity: 1,
             transparent: true,
             vertexColors: THREE.VertexColors,
             reflectivity: 1
@@ -500,7 +501,7 @@
           color: 0xFFFFFF,
           specular: 0x111111,
           shininess: 100,
-          opacity: 1.0,
+          opacity: 1,
           transparent: true,
           vertexColors: THREE.VertexColors,
           flatShading: false
@@ -592,13 +593,14 @@
         pos_x = document.getElementById('position_x').value = 0;
         pos_y = document.getElementById('position_y').value = 0;
         pos_z = document.getElementById('position_z').value = 0;
+
+        // Reset the background and related values
         document.getElementById('file_image_input').value = "";
         document.getElementById('back_color').value = "0x000000";
         document.getElementById('ambient_light_color').value = "0x000000";
         document.getElementById('hemisphere_light_color').value = "0x000000";
         document.getElementById('spot_light_intensity').value = 0;
         document.getElementById('directional_light_intensity').value = 0.8;
-        document.getElementById('ply_opacity').value = 1.0;
 
         // Reset the radio inputs
         document.getElementById('rotate').checked = true;
@@ -607,7 +609,8 @@
         document.getElementById('hlight').checked = false;
         radio_changed();
 
-        // Reset the ply scale values
+        // Reset the ply opacity and scale values
+        document.getElementById('ply_opacity').value = 1;
         document.getElementById('ply_scale').value = 1;
 
         // Reset the wireframe and shadow checkboxes
@@ -634,7 +637,7 @@
         }
 
         if (!values && !reset) {
-          // Page (re)loading so reset the file input and back color and disable controls
+          // Page (re)loading so reset the file input and disable controls
           document.getElementById('file_input').value = "";
           enable_disable( true );
         }
