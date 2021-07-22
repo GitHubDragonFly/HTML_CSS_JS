@@ -611,6 +611,8 @@
       };
 
       function reset_only() {
+        scene.remove( Obj );
+        loadFile();
         reset_all( false, true );
       }
 
@@ -641,6 +643,7 @@
         // Reset the Obj opacity and scale values
         document.getElementById('obj_opacity').value = 1;
         document.getElementById('obj_scale').value = 1;
+        previous_obj_scale = '1';
 
         // Reset the wireframe and shadow checkboxes
         document.getElementById('wireframe').checked = false;
@@ -653,8 +656,6 @@
           hemisphereLight.position.set( 0, 10, 0 );
           spotLight.position.set( 150, -50, 350 );
           directionalLight.position.set( 0, 0, 250 );
-          set_obj_scale();
-          set_obj_opacity();
           set_scene_image();
           show_wireframe();
           show_shadow();

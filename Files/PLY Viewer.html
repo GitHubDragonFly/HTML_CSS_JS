@@ -509,7 +509,6 @@
         }
 
         mesh = new THREE.Mesh(smooth, material);
-        mesh.scale.multiplyScalar( parseFloat(document.getElementById('ply_scale').value ));
 
         // Go through all children of the loaded object and search for a Mesh
         mesh.traverse( function ( child ) {
@@ -582,6 +581,8 @@
       };
 
       function reset_only() {
+        scene.remove( mesh );
+        loadFile();
         reset_all( false, true );
       }
 
@@ -612,6 +613,7 @@
         // Reset the ply opacity and scale values
         document.getElementById('ply_opacity').value = 1;
         document.getElementById('ply_scale').value = 1;
+        previous_ply_scale = '1';
 
         // Reset the wireframe and shadow checkboxes
         document.getElementById('wireframe').checked = false;
@@ -624,8 +626,6 @@
           hemisphereLight.position.set( 0, 10, 0 );
           spotLight.position.set( 150, -50, 350 );
           directionalLight.position.set( 0, 0, 250 );
-          set_ply_scale();
-          set_ply_opacity();
           set_scene_image();
           show_wireframe();
           show_shadow();
