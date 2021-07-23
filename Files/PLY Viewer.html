@@ -35,48 +35,47 @@
         <input type="file" id="file_input" name="file" onchange="init()" style="margin-right: 5px;" multiple />
         <label for="file_image_input" style="color: #CE8704; margin-right: 5px;">BG Image:</label>
         <input type="file" id="file_image_input" name="file_image_input" accept="image/png, image/jpeg, image/bmp, image/gif, image/svg+xml" onchange="set_scene_image()" />
-        <button type="reset" id="reset" onclick="reset_only()" style="color: maroon; float: right; width: 55px; margin-right: 5px; margin-left: 5px;">Reset</button>
-        <label for="shadow" style="float: right; margin-right: 5px;">Shadow</label>
-        <input type="checkbox" id="shadow" name="shadow" onchange="show_shadow()" style="float: right; margin-right: 5px;" />
-        <label for="wireframe" style="float: right; margin-right: 5px;">Wireframe</label>
-        <input type="checkbox" id="wireframe" name="wireframe" onchange="show_wireframe()" style="float: right; margin-right: 5px;" />
-        <input type="number" id="ply_scale" name="ply_scale" onchange="set_ply_scale()" min="0.25" max="2" value="1" step="0.25" style="float: right; margin-right: 5px; width: 48px;" />
-        <label for="ply_scale" style="float: right; margin-right: 5px;">Scale:</label>
-        <input type="number" id="ply_opacity" name="ply_opacity" min="0" max="1" step="0.05" value="1" onchange="set_ply_opacity()" style="float: right; width: 48px; margin-right: 5px;" />
-        <label for="ply_opacity" style="float: right; margin-top: 3px; margin-right: 5px;">Opacity</label>
+        <label for="ply_opacity" style="margin-right: 5px;">Opacity</label>
+        <input type="number" id="ply_opacity" name="ply_opacity" min="0" max="1" step="0.05" value="1" onchange="set_ply_opacity()" style="width: 48px; margin-right: 5px;" />
+        <label for="ply_scale" style="margin-right: 5px;">Scale:</label>
+        <input type="number" id="ply_scale" name="ply_scale" onchange="set_ply_scale()" min="0.25" max="2" value="1" step="0.25" style="margin-right: 5px; width: 48px;" />
+        <input type="checkbox" id="wireframe" name="wireframe" onchange="show_wireframe()" style="margin-right: 5px;" />
+        <label for="wireframe" style="margin-right: 5px;">Wireframe</label>
+        <input type="checkbox" id="shadow" name="shadow" onchange="show_shadow()" style="margin-right: 5px;" />
+        <label for="shadow" style="margin-right: 5px;">Shadow</label>
+        <button id="reset" onclick="reset_only()" style="color: maroon; width: 55px; margin: 0px 5px 0px 70px;">Reset</button>
+        <button id="full_screen" onclick="full_screen()" style="width: 25px; margin: 0px 5px 0px 5px;">&#x26F6;</button>
       </div>
       <div>
-        <input type="radio" id="hlight" name="mode" value="HL" onchange="radio_changed()" />
-        <label for="hlight">HL</label>
-        <input type="radio" id="slight" name="mode" value="SL" onchange="radio_changed()" />
-        <label for="hlight">SL</label>
-        <input type="radio" id="dlight" name="mode" value="DL" onchange="radio_changed()" />
-        <label for="dlight">DL</label>
-        <input type="radio" id="rotate" name="mode" value="Rotate" onchange="radio_changed()" checked />
-        <label for="rotate">Rotate &nbsp;</label>
+        <label><input type="radio" id="hlight" name="mode" value="HL" onchange="radio_changed()" />HL</label>
+        <label><input type="radio" id="slight" name="mode" value="SL" onchange="radio_changed()" />SL</label>
+        <label><input type="radio" id="dlight" name="mode" value="DL" onchange="radio_changed()" />DL</label>
+        <label><input type="radio" id="rotate" name="mode" value="Rotate" onchange="radio_changed()" checked />Rotate &nbsp;</label>
         <label for="rotation_x" style="color: navy;">X</label>
-        <input type="number" id="rotation_x" onchange="rot_x_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp;
+        <input type="number" id="rotation_x" onchange="rot_x_changed()" min="-50" max="50" value="0" step="1" style="width: 50px;" />&nbsp;
         <label for="rotation_y" style="color: navy;">Y</label>
-        <input type="number" id="rotation_y" onchange="rot_y_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp;
+        <input type="number" id="rotation_y" onchange="rot_y_changed()" min="-50" max="50" value="0" step="1" style="width: 50px;" />&nbsp;
         <label for="rotation_z" style="color: navy;">Z</label>
-        <input type="number" id="rotation_z" onchange="rot_z_changed()" min="-0.05" max="0.05" value="0" step="0.001" style="width: 60px;" />&nbsp; &nbsp;
+        <input type="number" id="rotation_z" onchange="rot_z_changed()" min="-50" max="50" value="0" step="1" style="width: 50px;" />&nbsp; &nbsp;
         <label>Position : </label>
         <label for="position_x" style="color: green;">X</label>
         <input type="number" id="position_x" onchange="pos_x_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp;
         <label for="position_y" style="color: green;">Y</label>
         <input type="number" id="position_y" onchange="pos_y_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp;
         <label for="position_z" style="color: green;">Z</label>
-        <input type="number" id="position_z" onchange="pos_z_changed()" min="-2000" max="2000" value="0" step="1" style="width: 55px;" />
-        <input type="color" id="back_color" name="back_color" onchange="set_back_color()" style="float: right; background: none; padding: 0; width: 30px; margin-right: 5px;" />
-        <label for="back_color" style="float: right; margin-top: 3px; margin-right: 5px;">BG</label>
-        <input type="color" id="ambient_light_color" name="ambient_light_color" onchange="set_ambient_light_color()" style="float: right; background: none; padding: 0; width: 30px; margin-right: 5px;" />
-        <label for="ambient_light_color" style="float: right; margin-top: 3px; margin-right: 5px;">AL</label>
-        <input type="color" id="hemisphere_light_color" name="hemisphere_light_color" onchange="set_hemisphere_light_color()" style="float: right; background: none; padding: 0; width: 30px; margin-right: 5px;" />
-        <label for="hemisphere_light_color" style="float: right; margin-top: 3px; margin-right: 5px;">HL</label>
-        <input type="number" id="spot_light_intensity" name="spot_light_intensity" min="0" max="1" step="0.05" value="0" onchange="set_spot_light_intensity()" style="float: right; width: 50px; margin-right: 5px;" />
-        <label for="spot_light_intensity" style="float: right; margin-top: 3px; margin-right: 5px;">SL</label>
-        <input type="number" id="directional_light_intensity" name="directional_light_intensity" min="0" max="1" step="0.05" value="0.8" onchange="set_directional_light_intensity()" style="float: right; width: 50px; margin-right: 5px;" />
-        <label for="directional_light_intensity" style="float: right; margin-top: 3px; margin-right: 5px;">DL</label>
+        <input type="number" id="position_z" onchange="pos_z_changed()" min="-2000" max="2000" value="0" step="1" style="width: 55px; margin-right: 10px;" />
+        <label for="directional_light_intensity" style="margin-top: 3px; margin-right: 5px;">DLi</label>
+        <input type="number" id="directional_light_intensity" name="directional_light_intensity" min="0" max="1" step="0.05" value="0.8" onchange="set_directional_light_intensity()" style="margin-right: 5px; width: 50px;" />
+        <label for="spot_light_intensity" style="margin-top: 3px; margin-right: 5px;">SLi</label>
+        <input type="number" id="spot_light_intensity" name="spot_light_intensity" min="0" max="1" step="0.05" value="0" onchange="set_spot_light_intensity()" style="width: 50px; margin-right: 5px;" />
+        <label for="spot_light_color" style="margin-right: 2px;">SL</label>
+        <input type="color" id="spot_light_color" name="spot_light_color" onchange="set_spot_light_color()" style="vertical-align: middle; background: none; padding: 0; width: 23px; margin-right: 5px;" />
+        <label for="hemisphere_light_color" style="margin-right: 2px;">HL</label>
+        <input type="color" id="hemisphere_light_color" name="hemisphere_light_color" onchange="set_hemisphere_light_color()" style="vertical-align: middle; background: none; padding: 0; width: 23px; margin-right: 5px;" />
+        <label for="ambient_light_color" style="margin-right: 2px;">AL</label>
+        <input type="color" id="ambient_light_color" name="ambient_light_color" onchange="set_ambient_light_color()" style="vertical-align: middle; background: none; padding: 0; width: 23px; margin-right: 5px;" />
+        <label for="back_color" style="margin-right: 2px;">BG</label>
+        <input type="color" id="back_color" name="back_color" onchange="set_back_color()" style="vertical-align: middle; background: none; padding: 0; width: 23px; margin-right: 5px;" />
       </div>
     </div><br />
 
@@ -138,6 +137,16 @@
 
           ww = window.innerWidth;
           wh = window.innerHeight;
+        }
+      }
+
+      function full_screen() {
+        if (document.requestFullscreen) {
+          document.requestFullscreen = false;
+          document.exitFullscreen();
+        } else {
+          document.requestFullscreen = true;
+          document.body.requestFullscreen();
         }
       }
     </script>
@@ -210,6 +219,19 @@
           hemisphereLight.groundColor = { 'r': 0, 'g': 0, 'b': 0 }}
         else {
           hemisphereLight.groundColor = { 'r': 8.5, 'g': 8.5, 'b': 8.5 }}
+      }
+
+      function set_spot_light_color() {
+        let sl_colors = document.getElementById('spot_light_color').value; // hex format '#rrggbb'
+
+        if (sl_colors == '#000000') { spotLight.color = { 'r': 1, 'g': 1, 'b': 1 }; }
+        else {
+          spotLight.color = {
+            'r': parseInt(sl_colors.substring(1, 3), 16) / 250,
+            'g': parseInt(sl_colors.substring(3, 5), 16) / 250,
+            'b': parseInt(sl_colors.substring(5), 16) / 250
+          };
+        }
       }
 
       function set_spot_light_intensity() {
@@ -298,7 +320,7 @@
         } else if (document.getElementById('hlight').checked) {
           hemisphereLight.position.set( x, y, z );
         } else {
-          rot_x = x;
+          rot_x = x/1000;
         }
       }
 
@@ -314,7 +336,7 @@
         } else if (document.getElementById('hlight').checked) {
           hemisphereLight.position.set( x, y, z );
         } else {
-          rot_y = y;
+          rot_y = y/1000;
         }
       }
 
@@ -330,7 +352,7 @@
         } else if (document.getElementById('hlight').checked) {
           hemisphereLight.position.set( x, y, z );
         } else {
-          rot_z = z;
+          rot_z = z/1000;
         }
       }
 
@@ -600,6 +622,7 @@
         document.getElementById('back_color').value = "0x000000";
         document.getElementById('ambient_light_color').value = "0x000000";
         document.getElementById('hemisphere_light_color').value = "0x000000";
+        document.getElementById('spot_light_color').value = "0x000000";
         document.getElementById('spot_light_intensity').value = 0;
         document.getElementById('directional_light_intensity').value = 0.8;
 
@@ -632,6 +655,7 @@
           set_back_color();
           set_ambient_light_color();
           set_hemisphere_light_color();
+          set_spot_light_color();
           set_spot_light_intensity();
           set_directional_light_intensity();
         }
@@ -661,6 +685,7 @@
         document.getElementById('ply_opacity').disabled = disable;
         document.getElementById('ambient_light_color').disabled = disable;
         document.getElementById('hemisphere_light_color').disabled = disable;
+        document.getElementById('spot_light_color').disabled = disable;
         document.getElementById('spot_light_intensity').disabled = disable;
         document.getElementById('directional_light_intensity').disabled = disable;
         document.getElementById('back_color').disabled = disable;
