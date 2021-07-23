@@ -306,9 +306,9 @@
           document.getElementById('rotation_x').max = document.getElementById('rotation_y').max = document.getElementById('rotation_z').max = 100;
           document.getElementById('rotation_x').step = document.getElementById('rotation_y').step = document.getElementById('rotation_z').step = 5;
         } else {
-          document.getElementById('rotation_x').value = rot_x;
-          document.getElementById('rotation_y').value = rot_y;
-          document.getElementById('rotation_z').value = rot_z;
+          document.getElementById('rotation_x').value = parseInt(rot_x * 1000);
+          document.getElementById('rotation_y').value = parseInt(rot_y * 1000);
+          document.getElementById('rotation_z').value = parseInt(rot_z * 1000);
           document.getElementById('rotation_x').min = document.getElementById('rotation_y').min = document.getElementById('rotation_z').min = -50;
           document.getElementById('rotation_x').max = document.getElementById('rotation_y').max = document.getElementById('rotation_z').max = 50;
           document.getElementById('rotation_x').step = document.getElementById('rotation_y').step = document.getElementById('rotation_z').step = 1;
