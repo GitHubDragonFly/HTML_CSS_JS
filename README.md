@@ -14,8 +14,7 @@ These are the features you can see on the page:
  - Form and submitted form entries table (there is no server involved in this exercise)
  - Media video playback, including camera streaming and an option to record and save the camera video
  - JavaScript and jQuery examples
- - Link to Wavefront 3D OBJ file viewer, using Three.js found [here](https://threejs.org/) and [here](https://github.com/mrdoob/three.js) (some example OBJ files are in the `Images/obj` folder)
- - Link to 3D PLY file viewer, using Three.js found [here](https://threejs.org/) and [here](https://github.com/mrdoob/three.js) (some example PLY files are in the `Images/ply` folder)
+ - Links to Wavefront 3D OBJ and Stanford 3D PLY file viewers, using Three.js found [here](https://threejs.org/) and [here](https://github.com/mrdoob/three.js) (some example OBJ / PLY files are in the `Images` folder)
 
 Some things might not be supported or work as expected on certain browsers. This was tested as working in the latest Firefox and Edge browsers on Windows 10 and Chromium on CloudReady 89.4.0.  The page did also show properly in the TenFourFox browser on MacOS X 10.5 (iMac G5) with the following notes:
  - missing emojis support for old OS X can be compensated, to a degree, with [Symbola Font](https://dn-works.com/ufas/)
@@ -41,9 +40,10 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - If the MTL file requires textures then you have to select and load them, otherwise check the console output for errors
    - Either a PLY file alone or PLY / JPG(PNG) files can be loaded at the dialog screen (texture files should be relatively simple since they are used to create color map)
    - GUI has lights marked as DL, SL, HL and AL (directional, spot, hemisphere and ambient)
-   - XYZ positions of DL / SL / HL lights can be changed, swappable with `Rotate`, as well as DL / SL lights intensity
-   - A plane receiving shadow is set in the background and the shadow intensity is controlled by the SpotLight and the opacity of the object
-   - OBJ and PLY examples were downloaded from [here](https://github.com/mrdoob/three.js)
+   - XYZ positions of DL / SL / HL lights can be adjusted, swappable with `Rotate`, as well as DL / SL lights intensity
+   - The material of the object is set to receive the shadow and it should be visible automatically with the change of SpotLight intensity
+   - Additional plane receiving shadow is set in the background, controlled by the `Shadow` checkbox, the SpotLight intensity and the opacity of the object
+   - Most of the OBJ / PLY examples were downloaded from [here](https://github.com/mrdoob/three.js)
    - Windows 10 users do have an option to instead use Paint 3D and 3D Viewer apps to see these files
    - There are screenshots of both viewers, each with one of the included examples, shadow enabled
 
