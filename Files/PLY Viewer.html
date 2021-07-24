@@ -23,11 +23,12 @@
       }
 
       p.full_screen {
+        text-align: center;
         content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAf0lEQVRIie1VQQ6AMAjb/x9M4IRePICoK7GLB5eQbElpCTAY7j6YRiUPAvvxbNMkN76XIDhSRKCdjhmB494hzzwngcoBIa/eASgisMgTBo4ODqCTAiSFrW6Biv8LfL/I1DbtfDRV9VLgjVFhZp59A4g+7JaM6yULh7IyWUYX2AAPDxz26GjX+gAAAABJRU5ErkJggg==);
         margin: 1px 1px 1px 2px;
         padding: 0;
-        width: 14px;
-        height: 14px;
+        width: 15px;
+        height: 15px;
       }
 
       div { color: navy; width: 99%; border: 1px solid navy; -webkit-border-radius: 2px; border-radius: 2px; padding: 4px; margin: 1px; }
@@ -52,26 +53,26 @@
   <body onload="reset_all()" onresize="resize()">
     <div class="fixed-menu">
       <div>
-        <label for="file" style="color: #CE8704;">PLY File:</label>
+        <label for="file" style="color: #CE8704; margin-right: 2px;">PLY File:</label>
         <input type="file" id="file_input" name="file" onchange="init()" style="margin-right: 5px;" multiple />
-        <label for="file_image_input" style="color: #CE8704; margin-right: 5px;">BG Image:</label>
+        <label for="file_image_input" style="color: #CE8704; margin-right: 2px;">BG Image:</label>
         <input type="file" id="file_image_input" name="file_image_input" accept="image/png, image/jpeg, image/bmp, image/gif, image/svg+xml" onchange="set_scene_image()" />
-        <label for="ply_opacity" style="margin-right: 5px;">Opacity</label>
+        <label for="ply_opacity" style="margin-right: 2px;">Opacity:</label>
         <input type="number" id="ply_opacity" name="ply_opacity" min="0" max="1" step="0.05" value="1" onchange="set_ply_opacity()" style="width: 48px; margin-right: 5px;" />
-        <label for="ply_scale" style="margin-right: 5px;">Scale:</label>
+        <label for="ply_scale" style="margin-right: 2px;">Scale:</label>
         <input type="number" id="ply_scale" name="ply_scale" onchange="set_ply_scale()" min="0.25" max="2" value="1" step="0.25" style="margin-right: 5px; width: 48px;" />
-        <input type="checkbox" id="wireframe" name="wireframe" onchange="show_wireframe()" style="margin-right: 5px;" />
+        <input type="checkbox" id="wireframe" name="wireframe" onchange="show_wireframe()" style="margin-right: 1px;" />
         <label for="wireframe" style="margin-right: 5px;">Wireframe</label>
-        <input type="checkbox" id="shadow" name="shadow" onchange="show_shadow()" style="margin-right: 5px;" />
+        <input type="checkbox" id="shadow" name="shadow" onchange="show_shadow()" style="margin-right: 1px;" />
         <label for="shadow" style="margin-right: 5px;">Shadow</label>
-        <button id="reset" onclick="reset_only()" style="vertical-align: middle; color: maroon; width: 55px; margin: 0 5px 0 70px;">Reset</button>
-        <button onclick="full_screen()" style="vertical-align: middle; width: 22px; margin: 0 5px 0 5px; padding: 0;"><p class="full_screen"></p></button>
+        <button id="reset" onclick="reset_only()" style="vertical-align: middle; color: maroon; width: 55px; margin: 0 5px 0 75px;">Reset</button>
+        <button onclick="full_screen()" style="background-color: #d1cefc; vertical-align: middle; width: 22px; margin: 0 5px 0 5px; padding: 0;"><p class="full_screen"></p></button>
       </div>
       <div>
         <label><input type="radio" id="hlight" name="mode" value="HL" onchange="radio_changed()" />HL</label>
         <label><input type="radio" id="slight" name="mode" value="SL" onchange="radio_changed()" />SL</label>
         <label><input type="radio" id="dlight" name="mode" value="DL" onchange="radio_changed()" />DL</label>
-        <label><input type="radio" id="rotate" name="mode" value="Rotate" onchange="radio_changed()" checked />Rotate &nbsp;</label>
+        <label><input type="radio" id="rotate" name="mode" value="Rotate" onchange="radio_changed()" checked />Rotate :</label>
         <label for="rotation_x" style="color: navy;">X</label>
         <input type="number" id="rotation_x" onchange="rot_x_changed()" min="-50" max="50" value="0" step="1" style="width: 50px;" />&nbsp;
         <label for="rotation_y" style="color: navy;">Y</label>
