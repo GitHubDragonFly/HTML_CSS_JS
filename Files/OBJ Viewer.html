@@ -90,9 +90,9 @@
         <label for="position_z" style="color: green;">Z</label>
         <input type="number" id="position_z" onchange="pos_z_changed()" min="-2000" max="2000" value="0" step="1" style="width: 55px; margin-right: 10px;" />
         <label for="directional_light_intensity" style="margin-top: 3px; margin-right: 5px;">DLi</label>
-        <input type="number" id="directional_light_intensity" name="directional_light_intensity" min="0" max="1" step="0.05" value="0.8" onchange="set_directional_light_intensity()" style="margin-right: 5px; width: 50px;" />
+        <input type="number" id="directional_light_intensity" name="directional_light_intensity" min="0" max="2" step="0.05" value="0.8" onchange="set_directional_light_intensity()" style="margin-right: 5px; width: 50px;" />
         <label for="spot_light_intensity" style="margin-top: 3px; margin-right: 5px;">SLi</label>
-        <input type="number" id="spot_light_intensity" name="spot_light_intensity" min="0" max="1" step="0.05" value="0" onchange="set_spot_light_intensity()" style="width: 50px; margin-right: 2px;" />
+        <input type="number" id="spot_light_intensity" name="spot_light_intensity" min="0" max="2" step="0.05" value="0" onchange="set_spot_light_intensity()" style="width: 50px; margin-right: 2px;" />
         <label for="spot_light_color" style="margin-right: 2px;">SL</label>
         <input type="color" id="spot_light_color" name="spot_light_color" onchange="set_spot_light_color()" style="vertical-align: middle; background: none; padding: 0; width: 23px; margin-right: 2px;" />
         <label for="hemisphere_light_color" style="margin-right: 2px;">HL</label>
@@ -149,10 +149,10 @@
 
       function resize() {
         if (camera) {
+          renderer.setSize( window.innerWidth, window.innerHeight );
+
           camera.aspect = window.innerWidth / window.innerHeight;
           camera.updateProjectionMatrix();
-
-          renderer.setSize( window.innerWidth, window.innerHeight );
 
           ww = window.innerWidth;
           wh = window.innerHeight;
