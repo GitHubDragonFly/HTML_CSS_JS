@@ -32,7 +32,7 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - The "Save" link should turn green to offer to "download" and save the recorded video (no actual downloading from any external website is done, this is all on your computer)
  - Adding more information to inline frame (iFrame) - you can get instructions for obtaining info about your browser and your public IP by visiting [WhatIsMyBrowser](https://www.whatismybrowser.com/developers/tools/iframe) developers page.
  - "3D Cube 1" drawing code might eventually need some corrections. Currently, the transparency allows it to be seen as correct but if you go about changing the "fill" and "stroke" values to more solid, 0.1 changed to 1.0, then you might see somewhat incorrect transitions. This is even more obvious if painting each side of the cube with a different color.
- - OBJ and PLY Viewers notes:
+ - OBJ and PLY Viewers:
    - Both viewers require a browser supporting WebGL and are set to open in new tab/window
    - They do allow some mouse control, with `wheel` serving as zoom in/out and `left-button click/drag` to rotate the image
    - Background image supported formats are PNG, JPEG, SVG, BMP and GIF while selecting non-image file will reset the background
@@ -40,8 +40,9 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - If the MTL file requires textures then you have to select and load them, otherwise check the console output for errors
    - Either a PLY file alone or PLY / JPG(PNG) files can be loaded at the dialog screen (texture files should be relatively simple since they are used to create color map)
    - GUI has lights marked as DL, SL, HL and AL (directional, spot, hemisphere and ambient)
-   - XYZ positions of DL / SL / HL lights can be adjusted, swappable with `Rotate`, as well as DL / SL lights intensity
-   - The material of the object is set to receive the shadow and it should be visible automatically with the change of SpotLight intensity
+   - Swappable with `Rotate`, the XYZ positions of DL / SL / HL lights can be adjusted
+   - The DLi / SLi control those lights intensity
+   - The material of the object is set to receive the shadow and it should be automatically visible with the change of the SpotLight intensity
    - Additional plane receiving shadow is set in the background, controlled by the `Shadow` checkbox, the SpotLight intensity and the opacity of the object
    - Most of the OBJ / PLY examples were downloaded from [here](https://github.com/mrdoob/three.js)
    - Windows 10 users do have an option to instead use Paint 3D and 3D Viewer apps to see these files
