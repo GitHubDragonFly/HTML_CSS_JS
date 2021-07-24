@@ -22,7 +22,7 @@ Some things might not be supported or work as expected on certain browsers. This
  - alignment entries of `float: inline-start` and `float: inline-end` did not work and needed to be replaced with `float: left` and `float: right`, which works for modern browsers as well and has now been standardized in this exercise
  - add-on required to provide support for [playing MP4 video](https://sourceforge.net/projects/tenfourfox/files/addons/mp4/1.3406/) in TenFourFox
  - no camera video recording could be done since TenFourFox doesn't support async/await. Even with a different code, it also seems to be having difficulties with `video.captureStream` (the Blob is created but its size is always 0 bytes)
- - OBJ and PLY viewers did not work due to poor WebGL support
+ - OBJ and PLY viewers did not work due to poor WebGL support (blacklisting)
 
 It would be recommended that you also check [this project](https://github.com/GitHubDragonFly/WebProject) and look at all the files created by it, especially because it is interacting with the django built-in server (there is also a link to django tutorial).
 
