@@ -41,7 +41,7 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - If the MTL file requires textures then you have to select and load them, otherwise check the console output for errors
    - Either a PLY file alone or PLY / JPG(PNG) files can be loaded at the dialog screen (texture files should be relatively simple since they are used to create color map)
    - GUI has lights marked as DL, SL, HL and AL (directional, spot, hemisphere and ambient)
-   - XYZ positions of DL / SL / HL can be changed as well as DL / SL intensity
+   - XYZ positions of DL / SL / HL lights can be changed, swappable with `Rotate`, as well as DL / SL lights intensity
    - A plane receiving shadow is set in the background and the shadow intensity is controlled by the SpotLight and the opacity of the object
    - OBJ and PLY examples were downloaded from [here](https://github.com/mrdoob/three.js)
    - Windows 10 users do have an option to instead use Paint 3D and 3D Viewer apps to see these files
