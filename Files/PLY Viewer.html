@@ -53,7 +53,7 @@
   <body onload="reset_all()" onresize="resize()">
     <div class="fixed-menu">
       <div>
-        <label for="file" style="color: #CE8704; margin-right: 2px;">PLY File:</label>
+        <label for="file" style="color: #CE8704; margin: 2px 2px 0 5px;">PLY File:</label>
         <input type="file" id="file_input" name="file" onchange="init()" style="margin-right: 5px;" multiple />
         <label for="file_image_input" style="color: #CE8704; margin-right: 2px;">BG Image:</label>
         <input type="file" id="file_image_input" name="file_image_input" accept="image/png, image/jpeg, image/bmp, image/gif, image/svg+xml" onchange="set_scene_image()" />
@@ -66,18 +66,18 @@
         <input type="checkbox" id="shadow" name="shadow" onchange="show_shadow()" style="margin-right: 1px;" />
         <label for="shadow" style="margin-right: 5px;">Shadow</label>
         <button id="reset" onclick="reset_only()" style="vertical-align: middle; color: maroon; width: 55px; margin: 0 5px 0 75px;">Reset</button>
-        <button onclick="full_screen()" style="background-color: #d1cefc; vertical-align: middle; width: 22px; margin: 0 5px 0 5px; padding: 0;"><p class="full_screen"></p></button>
+        <button onclick="full_screen()" style="background-color: #d1cefc; vertical-align: middle; width: 22px; margin: 0 2px 0 0px; padding: 0;"><p class="full_screen"></p></button>
       </div>
       <div>
         <label><input type="radio" id="hlight" name="mode" value="HL" onchange="radio_changed()" />HL</label>
         <label><input type="radio" id="slight" name="mode" value="SL" onchange="radio_changed()" />SL</label>
         <label><input type="radio" id="dlight" name="mode" value="DL" onchange="radio_changed()" />DL</label>
         <label><input type="radio" id="rotate" name="mode" value="Rotate" onchange="radio_changed()" checked />Rotate :</label>
-        <label for="rotation_x" style="color: navy;">X</label>
+        <label for="rotation_x" style="color: blue;">X</label>
         <input type="number" id="rotation_x" onchange="rot_x_changed()" min="-50" max="50" value="0" step="1" style="width: 50px;" />&nbsp;
-        <label for="rotation_y" style="color: navy;">Y</label>
+        <label for="rotation_y" style="color: blue;">Y</label>
         <input type="number" id="rotation_y" onchange="rot_y_changed()" min="-50" max="50" value="0" step="1" style="width: 50px;" />&nbsp;
-        <label for="rotation_z" style="color: navy;">Z</label>
+        <label for="rotation_z" style="color: blue;">Z</label>
         <input type="number" id="rotation_z" onchange="rot_z_changed()" min="-50" max="50" value="0" step="1" style="width: 50px;" />&nbsp; &nbsp;
         <label>Position : </label>
         <label for="position_x" style="color: green;">X</label>
@@ -86,18 +86,18 @@
         <input type="number" id="position_y" onchange="pos_y_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp;
         <label for="position_z" style="color: green;">Z</label>
         <input type="number" id="position_z" onchange="pos_z_changed()" min="-2000" max="2000" value="0" step="1" style="width: 55px; margin-right: 10px;" />
-        <label for="directional_light_intensity" style="margin-top: 3px; margin-right: 5px;">DLi</label>
+        <label for="directional_light_intensity" style="margin-top: 3px; margin-right: 2px;">DLi:</label>
         <input type="number" id="directional_light_intensity" name="directional_light_intensity" min="0" max="2" step="0.05" value="0.8" onchange="set_directional_light_intensity()" style="margin-right: 5px; width: 50px;" />
-        <label for="spot_light_intensity" style="margin-top: 3px; margin-right: 5px;">SLi</label>
+        <label for="spot_light_intensity" style="margin-top: 3px; margin-right: 2px;">SLi:</label>
         <input type="number" id="spot_light_intensity" name="spot_light_intensity" min="0" max="2" step="0.05" value="0" onchange="set_spot_light_intensity()" style="width: 50px; margin-right: 5px;" />
-        <label for="spot_light_color" style="margin-right: 2px;">SL</label>
-        <input type="color" id="spot_light_color" name="spot_light_color" onchange="set_spot_light_color()" style="vertical-align: middle; background: none; padding: 0; width: 23px; margin-right: 2px;" />
-        <label for="hemisphere_light_color" style="margin-right: 2px;">HL</label>
-        <input type="color" id="hemisphere_light_color" name="hemisphere_light_color" onchange="set_hemisphere_light_color()" style="vertical-align: middle; background: none; padding: 0; width: 23px; margin-right: 2px;" />
-        <label for="ambient_light_color" style="margin-right: 2px;">AL</label>
-        <input type="color" id="ambient_light_color" name="ambient_light_color" onchange="set_ambient_light_color()" style="vertical-align: middle; background: none; padding: 0; width: 23px; margin-right: 2px;" />
-        <label for="back_color" style="margin-right: 2px;">BG</label>
-        <input type="color" id="back_color" name="back_color" onchange="set_back_color()" style="vertical-align: middle; background: none; padding: 0; width: 23px; margin-right: 5px;" />
+        <label for="spot_light_color" style="margin-right: 0;">SL:</label>
+        <input type="color" id="spot_light_color" name="spot_light_color" onchange="set_spot_light_color()" style="vertical-align: middle; background: none; padding: 0; width: 23px; margin-right: 5px;" />
+        <label for="hemisphere_light_color" style="margin-right: 0;">HL:</label>
+        <input type="color" id="hemisphere_light_color" name="hemisphere_light_color" onchange="set_hemisphere_light_color()" style="vertical-align: middle; background: none; padding: 0; width: 23px; margin-right: 5px;" />
+        <label for="ambient_light_color" style="margin-right: 0;">AL:</label>
+        <input type="color" id="ambient_light_color" name="ambient_light_color" onchange="set_ambient_light_color()" style="vertical-align: middle; background: none; padding: 0; width: 23px; margin-right: 5px;" />
+        <label for="back_color" style="margin-right: 0;">BG:</label>
+        <input type="color" id="back_color" name="back_color" onchange="set_back_color()" style="vertical-align: middle; background: none; padding: 0; width: 23px; margin-right: 2px;" />
       </div>
     </div><br />
 
@@ -204,7 +204,7 @@
         if (fii.files[0]) {
           if (fii.files[0].type.startsWith('image/')) {
             const loader = new THREE.TextureLoader();
-            loader.load( URL.createObjectURL(fii.files[0]) , function(texture) {
+            loader.load( URL.createObjectURL( fii.files[0] ) , function(texture) {
               scene.background = texture;
               document.getElementById('back_color').disabled = true;
             });
@@ -394,7 +394,7 @@
           // Reset all values
           reset_all( false, true );
 
-          scene.remove.apply(scene, scene.children);
+          scene.remove.apply( scene, scene.children );
 
           if (shadowMesh) { shadowMesh = null; }
         }
@@ -420,7 +420,7 @@
 
         renderer = new THREE.WebGLRenderer({ canvas : document.getElementById('scene'), antialias: true, alpha: true });
         renderer.setPixelRatio( window.devicePixelRatio );
-        renderer.setSize(ww, wh);
+        renderer.setSize( ww, wh );
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         renderer.setClearColor( 0xFFFFFF, 0); // Allow setting the background color
@@ -435,19 +435,19 @@
 
         // Canvas mouse events, could be replaced with Orbit Controls but some features
         // might not work as expected, since the camera is being rotated instead of the object
-        if (!events_initialized) {initialize_event_listeners(); events_initialized = true; }
+        if (!events_initialized) { initialize_event_listeners(); events_initialized = true; }
 
         // Add grid helper for use with Orbit Controls
         //scene.add(new THREE.GridHelper(200, 200, "yellow"));
 
         camera = new THREE.PerspectiveCamera( 45, ww/wh, 0.1, 2000 );
         camera.position.set( 0, 0, 250 );
-        scene.add(camera);
+        scene.add( camera );
 
         // Add AmbientLight to the scene
         ambientLight = new THREE.AmbientLight(0x000000, 0.05);
         ambientLight.position.set( 0, 0, 250 );
-        scene.add(ambientLight);
+        scene.add( ambientLight );
 
         // Add HemisphereLight to the scene
         hemisphereLight = new THREE.HemisphereLight( 0x000000, 0x000000, 0.05 );
@@ -459,7 +459,7 @@
         // This plane is set in the background.
         shadowMaterial = new THREE.ShadowMaterial();
         shadowMaterial.opacity = 0.1;
-        shadowMesh = new THREE.Mesh(new THREE.PlaneGeometry( ww, wh ), shadowMaterial);
+        shadowMesh = new THREE.Mesh( new THREE.PlaneGeometry( ww, wh ), shadowMaterial );
         shadowMesh.position.set( 0, 0, -1500 );
         shadowMesh.scale.set( 2.5, 2.5, 1 );
         shadowMesh.receiveShadow = true;
@@ -495,10 +495,10 @@
 
       function loadFile(){
         // Launch loading of the selected file, addFileInScene is the callback when it's ready
-        ply_loader.load( URL.createObjectURL(selected_ply_file), addFileInScene );
+        ply_loader.load( URL.createObjectURL( selected_ply_file ), addFileInScene );
       };
 
-      function addFileInScene(object){
+      function addFileInScene( object ){
         let smooth = object.clone();
         smooth.computeVertexNormals();
         smooth.mergeVertices();
@@ -552,7 +552,7 @@
         });
         }
 
-        mesh = new THREE.Mesh(smooth, material);
+        mesh = new THREE.Mesh( smooth, material );
 
         // Go through all children of the loaded object and search for a Mesh
         mesh.traverse( function ( child ) {
@@ -563,8 +563,10 @@
     		  }
     	  });
 
+        resize();
+
         // Add mesh to the scene
-        scene.add(mesh)
+        scene.add( mesh )
 
         camera.lookAt( mesh.position );
 
