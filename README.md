@@ -47,10 +47,9 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - Most of the OBJ / PLY examples were downloaded from [here](https://github.com/mrdoob/three.js)
    - My own examples were created simply by using online services to perform conversion from PNG to STL, STL to OBJ and then OBJ to PLY (Blender was also used to decrease the size of the files and add MTL with some shading to OBJ example)
    - There are screenshots of both viewers, each with one of the included examples, shadow enabled
-
-As for OBJ and PLY viewers, the following software can be used instead, which support more than just OBJ and PLY formats:
-  - Three.js [editor](https://threejs.org/editor/) available online
-  - Windows 10 users have an option to use `Paint 3D` and `3D Viewer` apps
+  - Alternative software to view OBJ and PLY files, which support more than just OBJ and PLY formats:
+   - Three.js [editor](https://threejs.org/editor/) available online
+   - Windows 10 users have an option to use `Paint 3D` and `3D Viewer` apps
 
 # Usage
 All it takes is to:
