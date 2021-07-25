@@ -52,8 +52,10 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - Windows 10 users have an option to use `Paint 3D` and `3D Viewer` apps
 
 # Usage
-All it takes is to:
+All it takes is to try either of the following:
+- Thanks to the [GitHub & BitBucket HTML Preview](https://github.com/htmlpreview/htmlpreview.github.com) you can preview the [Exercise](https://htmlpreview.github.io/?https://github.com/GitHubDragonFly/HTML_CSS_JS/blob/main/Files/Exercise.html) page and use its fixed menu to access the rest. This was tested as working in the Firefox browser and you could optionally use ctrl+click to open it in the new tab/window.
 
+OR do it this way:
 - Download a zip file of this project and extract it (or clone the repo).
 - Navigate to the `Files` folder and open `Exercise.html` in your Internet browser.
 - The `Exercise.html` is serving as a hub but any of the HTML files can be open in the browser on its own
