@@ -45,7 +45,7 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - The material of the object is set to receive the shadow and it should be automatically visible for some objects (also try changing of the SpotLight intensity)
    - Additional plane receiving shadow is set in the background, controlled by the `Shadow` checkbox, the SpotLight intensity and the opacity of the object
    - Most of the OBJ / PLY examples were downloaded from [here](https://github.com/mrdoob/three.js)
-   - My own examples were created simply by using online services to perform conversion from PNG to STL, STL to OBJ and then OBJ to PLY (Blender was also used to decrease the size of the files and add MTL with some shading to OBJ example)
+   - My own examples were created simply by using online services to perform conversion from PNG to STL, STL to OBJ and then OBJ to PLY ([Blender](https://www.blender.org/) was also used to decrease the size of the files and add MTL with some shading to OBJ example)
    - There are screenshots of both viewers, each with one of the included examples, shadow enabled
  - Alternative software to view OBJ and PLY files, which support more than just OBJ and PLY formats:
    - Three.js [editor](https://threejs.org/editor/) available online
