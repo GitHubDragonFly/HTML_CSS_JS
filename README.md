@@ -71,3 +71,5 @@ Any and all trademarks, either directly or indirectly mentioned here, belong to 
 
 # Resources
 All of the ones I used are in the REFERENCES.md file and whatever other resources you can find.
+
+Some additional resources, for creating your own OBJ / PLY files, are in the README.md files inside `Images/obj/dragonfly` and/or `Images/ply/ascii` folders.
