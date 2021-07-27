@@ -15,5 +15,7 @@
 - https://www.kirupa.com/html5/accessing_your_webcam_in_html5.htm
 - https://codepen.io/Mamboleoo/pen/PqjGdN
 - https://github.com/mrdoob/three.js
+- https://threejs.org
+- https://threejsfundamentals.org/
 - https://davidoreilly.itch.io/walt-disney-3d-head (http://www.davidoreilly.com)
 - https://www.jacksmerdon.co.uk/Dissertation/Build/Build.html#
