@@ -32,22 +32,23 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - The "Save" link should turn green to offer to "download" and save the recorded video (no actual downloading from any external website is done, this is all on your computer)
  - Adding more information to inline frame (iFrame) - you can get instructions for obtaining info about your browser and your public IP by visiting [WhatIsMyBrowser](https://www.whatismybrowser.com/developers/tools/iframe) developers page.
  - "3D Cube 1" drawing code might eventually need some corrections. Currently, the transparency allows it to be seen as correct but if you go about changing the "fill" and "stroke" values to more solid, 0.1 changed to 1.0, then you might see somewhat incorrect transitions. This is even more obvious if painting each side of the cube with a different color.
- - OBJ and PLY Viewers:
-   - Both viewers require a browser supporting WebGL and are set to open in new tab/window
+ - OBJ, PLY and GLTF Viewers:
+   - All viewers require a browser supporting WebGL and are set to open in new tab/window
    - They do allow some mouse control, with `wheel` serving as zoom in/out and `left-button click/drag` to rotate the image
    - Background image supported formats are PNG, JPEG, SVG, BMP and GIF while selecting non-image file will reset the background
    - Either an OBJ file alone or MTL / OBJ files or MTL / OBJ / JPG(PNG) files or MTL / OBJ / DDS files can be loaded at the dialog screen
    - If the MTL file requires textures then you have to select and load them, otherwise check the console output for errors
    - Either a PLY file alone or PLY / JPG(PNG) files can be loaded at the dialog screen (texture files should be relatively simple since they are used to create color map)
+   - Either a GLB / GLTF file alone or GLB / GLTF and JPG(PNG) files can be loaded at the dialog screen while there is also a URL option available
    - GUI has lights marked as DL, SL, HL and AL (directional, spot, hemisphere and ambient)
    - Swappable with `Rotate`, the XYZ positions of DL / SL / HL lights can be adjusted
    - The DLi / SLi control those lights intensity
    - The material of the object is set to receive the shadow and it should be automatically visible for some objects (also try changing of the SpotLight intensity)
    - Additional plane receiving shadow is set in the background, controlled by the `Shadow` checkbox, the SpotLight intensity and the opacity of the object
-   - Most of the OBJ / PLY examples were downloaded from [here](https://github.com/mrdoob/three.js)
-   - My own examples were created simply by using online services to perform conversion from PNG to STL, STL to OBJ and then OBJ to PLY ([Blender](https://www.blender.org/) was also used to decrease the size of the files and add MTL with some shading to OBJ example)
-   - There are screenshots of both viewers, each with one of the included examples, shadow enabled
- - Alternative software to view OBJ and PLY files, which support more than just OBJ and PLY formats:
+   - Most of the OBJ / PLY / GLTF examples were downloaded from [here](https://github.com/mrdoob/three.js)
+   - My own OBJ and PLY examples were created simply by using online services to perform conversion from PNG to STL, STL to OBJ and then OBJ to PLY ([Blender](https://www.blender.org/) was also used to decrease the size of the files and add MTL with some shading to OBJ example)
+   - There are screenshots of all viewers, each with one of the included examples, shadow enabled
+ - Alternative software viewers/editors, which support more than just OBJ / PLY / GLTF formats:
    - Three.js [editor](https://threejs.org/editor/) available online
    - Windows 10 users have an option to use `Paint 3D` and `3D Viewer` apps
 
