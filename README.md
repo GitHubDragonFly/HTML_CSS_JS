@@ -41,7 +41,7 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - Either a PLY file alone or PLY / JPG(PNG) files can be loaded at the dialog screen (texture files should be relatively simple since they are used to create color map)
    - Either a GLB / GLTF file alone or GLB / GLTF and JPG(PNG) files can be loaded at the dialog screen
    - GLTF Viewer also has a URL option available, which should fetch all associated resources
-   - GLTF Viewer currently doesn't support animations and/or local loading of .bin files
+   - GLTF Viewer currently doesn't support DRACO or KTX2 loading, animations and/or local loading of .bin files
    - GUI has lights marked as DL, SL, HL and AL (directional, spot, hemisphere and ambient)
    - Swappable with `Rotate`, the XYZ positions of DL / SL / HL lights can be adjusted
    - The DLi / SLi control those lights intensity
