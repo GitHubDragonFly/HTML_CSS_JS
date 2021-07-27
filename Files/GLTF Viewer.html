@@ -5,9 +5,7 @@
 
     <script src="js/three.js"></script>
     <script src="js/OrbitControls.js"></script>
-    <script src="js/MTLLoader.js"></script>
-    <script src="js/OBJLoader.js"></script>
-    <script src="js/DDSLoader.js"></script>
+    <script src="js/GLTFLoader.js"></script>
 
     <style>
       body,html {
@@ -33,14 +31,14 @@
         height: 15px;
       }
 
-      div { color: whitesmoke; width: 99%; padding: 4px; margin: 1px; }
+      div { color: #30D139; width: 99%; padding: 4px; margin: 1px; }
       #scene { display: block; position: absolute; margin: 0; width: 100%; height: 100%; }
 
       .fixed-menu {
         position: fixed;
         z-index: 1;
         display: inline-block;
-        background-color: transparent!important;
+        background-color: transparent;
         border: 1px solid navy;
         -webkit-border-radius: 3px;
         border-radius: 3px;
@@ -51,28 +49,32 @@
     </style>
 
     <!-- Original OBJ source code that inspired this: https://codepen.io/Mamboleoo/pen/PqjGdN -->
-    <!-- OBJ Examples from: https://github.com/mrdoob/three.js -->
-    <!-- Also see: https://davidoreilly.itch.io/walt-disney-3d-head , http://www.davidoreilly.com/ -->
-    <!-- More OBJ examples: https://people.math.sc.edu/Burkardt/data/data.html -->
-    <title>OBJ Viewer</title>
+    <!-- GLTF Examples from: https://github.com/mrdoob/three.js -->
+    <title>GLTF Viewer</title>
   </head>
   <body onload="reset_all()" onresize="resize()">
     <div class="fixed-menu">
       <div>
-        <label for="file" style="color: #CE8704; margin: 2px 2px 0 5px;">OBJ:</label>
+        <label for="file" style="color: #CE8704; margin: 0 2px 0 5px;">GLTF:</label>
+        <button onclick="show_url()" style="margin: 0 2px 0 0;">URL</button>
         <input type="file" id="file_input" name="file" onchange="init()" style="margin: 2px 5px 0 0;" multiple />
         <label for="file_image_input" style="color: #CE8704; margin-right: 2px;">BG Image:</label>
         <input type="file" id="file_image_input" name="file_image_input" accept="image/png, image/jpeg, image/bmp, image/gif, image/svg+xml" onchange="set_scene_image()" style="margin-right: 5px;" />
-        <label for="obj_opacity" style="margin-right: 2px;">Opacity:</label>
-        <input type="number" id="obj_opacity" name="obj_opacity" min="0" max="1" step="0.05" value="1" onchange="set_obj_opacity()" style="width: 48px; margin-right: 5px;" />
-        <label for="obj_scale" style="margin-right: 2px;">Scale:</label>
-        <input type="number" id="obj_scale" name="obj_scale" onchange="set_obj_scale()" min="0.25" max="2" value="1" step="0.25" style="margin-right: 5px; width: 48px;" />
+        <label for="gltf_opacity" style="margin-right: 2px;">Opacity:</label>
+        <input type="number" id="gltf_opacity" name="gltf_opacity" min="0" max="1" step="0.05" value="1" onchange="set_gltf_opacity()" style="width: 48px; margin-right: 5px;" />
+        <label for="gltf_scale" style="margin-right: 2px;">Scale:</label>
+        <input type="number" id="gltf_scale" name="gltf_scale" onchange="set_gltf_scale()" min="0.25" max="2" value="1" step="0.25" style="margin-right: 5px; width: 48px;" />
         <input type="checkbox" id="wireframe" name="wireframe" onchange="show_wireframe()" style="margin-right: 1px;" />
         <label for="wireframe" style="margin-right: 5px;">Wireframe</label>
         <input type="checkbox" id="shadow" name="shadow" onchange="show_shadow()" style="margin-right: 1px;" />
         <label for="shadow" style="margin-right: 5px;">Shadow</label>
         <button id="reset" onclick="reset_only()" style="vertical-align: middle; color: maroon; width: 55px; margin: 0 5px 0 70px;">Reset</button>
         <button onclick="full_screen()" style="background-color: #d1cefc; vertical-align: middle; width: 22px; margin: 0 2px 0 5px; padding: 0;"><p class="full_screen"></p></button>
+      </div>
+      <div id="url" style="display: none;">
+        <label for="url_entry" style="margin: 0px 2px 0px 5px;">URL:</label>
+        <input type="text" id="url_entry" name="url_entry" size="90" value="" style="margin-right: 5px;" />
+        <button id="btn_load_url" onclick="load_url_file()" style="-webkit-border-radius: 2px; border-radius: 2px; width: 50px; padding: 2px;">Load</button>
       </div>
       <div>
         <label style="color: blue;"><input type="radio" id="hlight" name="mode" value="HL" onchange="radio_changed()" />HL</label>
@@ -85,15 +87,15 @@
         <input type="number" id="rotation_y" onchange="rot_y_changed()" min="-50" max="50" value="0" step="1" style="width: 50px;" />&nbsp;
         <label for="rotation_z" style="color: blue;">Z</label>
         <input type="number" id="rotation_z" onchange="rot_z_changed()" min="-50" max="50" value="0" step="1" style="width: 50px;" />&nbsp; &nbsp;
-        <label style="color: green;">Position : </label>
-        <label for="position_x" style="color: green;">X</label>
+        <label>Position : </label>
+        <label for="position_x" style="color: #30D139;">X</label>
         <input type="number" id="position_x" onchange="pos_x_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp;
-        <label for="position_y" style="color: green;">Y</label>
+        <label for="position_y" style="color: #30D139;">Y</label>
         <input type="number" id="position_y" onchange="pos_y_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp;
-        <label for="position_z" style="color: green;">Z</label>
+        <label for="position_z" style="color: #30D139;">Z</label>
         <input type="number" id="position_z" onchange="pos_z_changed()" min="-2000" max="2000" value="0" step="1" style="width: 55px; margin-right: 10px;" />
         <label for="directional_light_intensity" style="margin-top: 3px; margin-right: 2px;">DLi:</label>
-        <input type="number" id="directional_light_intensity" name="directional_light_intensity" min="0" max="2" step="0.05" value="0.8" onchange="set_directional_light_intensity()" style="margin-right: 5px; width: 50px;" />
+        <input type="number" id="directional_light_intensity" name="directional_light_intensity" min="0" max="2" step="0.05" value="1" onchange="set_directional_light_intensity()" style="margin-right: 5px; width: 50px;" />
         <label for="spot_light_intensity" style="margin-top: 3px; margin-right: 2px;">SLi:</label>
         <input type="number" id="spot_light_intensity" name="spot_light_intensity" min="0" max="2" step="0.05" value="0" onchange="set_spot_light_intensity()" style="width: 50px; margin-right: 5px;" />
         <label for="spot_light_color" style="margin-right: 0;">SL:</label>
@@ -112,6 +114,22 @@
     </canvas>
 
     <script>
+      function show_url() {
+        if (url_displayed) {
+          document.getElementById('url').style.display = 'none';
+          url_displayed = false;
+        } else {
+          document.getElementById('url').style.display = 'block';
+          url_displayed = true;
+        }
+      }
+
+      function load_url_file() {
+        let url = document.getElementById('url_entry').value.trim();
+
+        if (url != '') { selected_url_file = url; url_loading = true; init(); }
+      }
+
       function initialize_event_listeners() {
         var cnvs = document.getElementById('scene');
 
@@ -133,25 +151,25 @@
         cnvs.addEventListener( 'mousemove', (event) => {
           if (mouse_rotation) {
             event.preventDefault();
-            let x = Math.abs(Obj.rotation.x);
-            let y = Math.abs(Obj.rotation.y);
+            let x = Math.abs(gltf_obj.rotation.x);
+            let y = Math.abs(gltf_obj.rotation.y);
 
-            if (x > 2 * Math.PI ) { Obj.rotation.x = 0; }
-            if (y > 2 * Math.PI ) { Obj.rotation.y = 0; }
+            if (x > 2 * Math.PI ) { gltf_obj.rotation.x = 0; }
+            if (y > 2 * Math.PI ) { gltf_obj.rotation.y = 0; }
 
-            Obj.rotation.x += event.clientX * event.movementY * 0.000008;
+            gltf_obj.rotation.x += event.clientX * event.movementY * 0.000008;
 
             if (x > 1.57 && x < 4.71) {
-              Obj.rotation.y -= event.clientY * event.movementX * 0.00001745;
+              gltf_obj.rotation.y -= event.clientY * event.movementX * 0.00001745;
             } else {
-              Obj.rotation.y += event.clientY * event.movementX * 0.00001745;
+              gltf_obj.rotation.y += event.clientY * event.movementX * 0.00001745;
             }
           } 
         }, false);
       }
 
       function resize() {
-        if (camera) {
+        if (scene) {
           renderer.setSize( window.innerWidth, window.innerHeight );
 
           camera.aspect = window.innerWidth / window.innerHeight;
@@ -174,28 +192,27 @@
     </script>
 
     <script>
-      var renderer, scene, camera, controls, ambientLight, hemisphereLight, spotLight, directionalLight, Obj, shadowMesh, shadowMaterial;
+      var renderer, scene, camera, controls, ambientLight, hemisphereLight, spotLight, directionalLight, gltf_obj, shadowMesh, shadowMaterial;
       var ww = window.innerWidth,	wh = window.innerHeight;
       var mouse_rotation = false, reset_rotation = false, events_initialized = false;
       var rot_x = 0, rot_y = 0, rot_z = 0, pos_x = 0, pos_y = 0, pos_z = 0;
-      var previous_obj_scale = '1';
-      var selected_mtl_file, selected_obj_file;
-      var texture_files_png, texture_files_jpg, texture_files_dds;
+      var previous_gltf_scale = '1';
+      var selected_gltf_file, selected_url_file = '', url_displayed, url_loading;
+      var texture_files_png, texture_files_jpg;
 
       // Manager from ThreeJs to track a loader and its status
       var manager = new THREE.LoadingManager();
       // Loader for selected file from Three.js
-      const mtl_loader = new THREE.MTLLoader( manager );
-      const obj_loader = new THREE.OBJLoader( manager );
+      const gltf_loader = new THREE.GLTFLoader( manager );
 
       function set_back_color() { document.body.style.backgroundColor = document.getElementById('back_color').value; }
 
-      function set_obj_opacity() {
-        if (Obj) {
-          let opacity_value = document.getElementById('obj_opacity').value;
+      function set_gltf_opacity() {
+        if (gltf_obj) {
+          let opacity_value = document.getElementById('gltf_opacity').value;
 
           // Go through all children of the loaded object and search for a Mesh
-          Obj.traverse( function ( child ) {
+          gltf_obj.traverse( function ( child ) {
             // This allow us to check if the children is an instance of the Mesh constructor
     	      if (child instanceof THREE.Mesh) {
               child.material.opacity = opacity_value;
@@ -268,44 +285,44 @@
 
       function set_spot_light_intensity() {
         spotLight.intensity = parseFloat( document.getElementById('spot_light_intensity').value );
-        if (document.getElementById('shadow').checked) { shadowMaterial.opacity = spotLight.intensity * document.getElementById('obj_opacity').value; }
+        if (document.getElementById('shadow').checked) { shadowMaterial.opacity = spotLight.intensity * document.getElementById('gltf_opacity').value; }
       }
 
       function set_directional_light_intensity() {
         directionalLight.intensity = parseFloat( document.getElementById('directional_light_intensity').value );
       }
 
-      function set_obj_scale() {
-        let current_obj_scale = document.getElementById('obj_scale').value;
+      function set_gltf_scale() {
+        let current_gltf_scale = document.getElementById('gltf_scale').value;
 
-        switch (previous_obj_scale) {
+        switch (previous_gltf_scale) {
           case '0.25':
-            Obj.scale.multiplyScalar( 2 );
+            gltf_obj.scale.multiplyScalar( 2 );
             break;
           case '0.5':
-            Obj.scale.multiplyScalar( (current_obj_scale == '0.75') ? 3/2 : 1/2 );
+            gltf_obj.scale.multiplyScalar( (current_gltf_scale == '0.75') ? 3/2 : 1/2 );
             break;
           case '0.75':
-            Obj.scale.multiplyScalar( (current_obj_scale == '1') ? 4/3 : 2/3 );
+            gltf_obj.scale.multiplyScalar( (current_gltf_scale == '1') ? 4/3 : 2/3 );
             break;
           case '1':
-            Obj.scale.multiplyScalar( (current_obj_scale == '1.25') ? 5/4 : 3/4 );
+            gltf_obj.scale.multiplyScalar( (current_gltf_scale == '1.25') ? 5/4 : 3/4 );
             break;
           case '1.25':
-            Obj.scale.multiplyScalar( (current_obj_scale == '1.5') ? 6/5 : 4/5 );
+            gltf_obj.scale.multiplyScalar( (current_gltf_scale == '1.5') ? 6/5 : 4/5 );
             break;
           case '1.5':
-            Obj.scale.multiplyScalar( (current_obj_scale == '1.75') ? 7/6 : 5/6 );
+            gltf_obj.scale.multiplyScalar( (current_gltf_scale == '1.75') ? 7/6 : 5/6 );
             break;
           case '1.75':
-            Obj.scale.multiplyScalar( (current_obj_scale == '2') ? 8/7 : 6/7 );
+            gltf_obj.scale.multiplyScalar( (current_gltf_scale == '2') ? 8/7 : 6/7 );
             break;
           default:
-            Obj.scale.multiplyScalar( 7/8 );
+            gltf_obj.scale.multiplyScalar( 7/8 );
             break;
         }
 
-        previous_obj_scale = current_obj_scale;
+        previous_gltf_scale = current_gltf_scale;
       }
 
       function radio_changed() {
@@ -393,10 +410,7 @@
       function pos_z_changed() { pos_z = parseInt(document.getElementById('position_z').value); }
 
       function init(){
-        // Loaded file(s)
-        var fi = document.getElementById('file_input');
-
-        if (scene != null) {
+        if (scene) {
           // Reset all values
           reset_all( false, true );
 
@@ -405,23 +419,32 @@
           if (shadowMesh) { shadowMesh = null; }
         }
 
-        obj_loader.setMaterials(null);
-        selected_obj_file = selected_mtl_file = null;
-        texture_files_jpg = [];
-        texture_files_png = [];
-        texture_files_dds = [];
         enable_disable( true );
 
-        // Include check for JPG/PNG and DDS (DirectDraw Surface container file format)
-        for (let i = 0; i < fi.files.length; i++) {
-          if (fi.files[i].name.toUpperCase().endsWith('.OBJ')) { selected_obj_file = fi.files[i]; }
-          else if (fi.files[i].name.toUpperCase().endsWith('.MTL')) { selected_mtl_file = fi.files[i]; }
-          else if (fi.files[i].name.toUpperCase().endsWith('.PNG')) { texture_files_png.push( fi.files[i] ); }
-          else if (fi.files[i].name.toUpperCase().endsWith('.JPG')) { texture_files_jpg.push( fi.files[i] ); }
-          else if (fi.files[i].name.toUpperCase().endsWith('.DDS')) { texture_files_dds.push( fi.files[i] ); }
-        };
+        if (!url_loading) {
+          // Loaded file(s)
+          let fi = document.getElementById('file_input');
 
-        if (!selected_obj_file) { return; }
+          selected_gltf_file = null;
+          texture_files_jpg = [];
+          texture_files_png = [];
+
+          // Include check for JPG/PNG
+          for (let i = 0; i < fi.files.length; i++) {
+            if (fi.files[i].name.toUpperCase().endsWith('.GLB') || fi.files[i].name.toUpperCase().endsWith('.GLTF')) { selected_gltf_file = fi.files[i]; }
+            else if (fi.files[i].name.toUpperCase().endsWith('.PNG')) { texture_files_png.push( fi.files[i] ); }
+            else if (fi.files[i].name.toUpperCase().endsWith('.JPG')) { texture_files_jpg.push( fi.files[i] ); }
+          };
+
+          if (!selected_gltf_file) { return; }
+
+          selected_url_file = '';
+        } else {
+          // Reset the file input and selected_gltf_file
+          document.getElementById('file_input').value = '';
+          selected_gltf_file = null;
+          url_loading = false;
+        }
 
         document.body.style.backgroundImage = "none";
         enable_disable( false );
@@ -429,17 +452,14 @@
         renderer = new THREE.WebGLRenderer({ canvas : document.getElementById('scene'), antialias: true, alpha: true });
         renderer.setPixelRatio( window.devicePixelRatio );
         renderer.setSize( ww, wh );
+        renderer.outputEncoding = THREE.sRGBEncoding;
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         renderer.setClearColor( 0xFFFFFF, 0); // Allow setting the background color
         renderer.autoClear = false;
 
-        // The following can be used instead of the canvas but the window mouse
-        // events might be tricky to set due to the presence of the fixed menu.
-        // Possibly use Orbit Controls instead.
-        //document.body.appendChild( renderer.domElement );
-
         scene = new THREE.Scene();
+        gltf_obj = new THREE.Object3D();
 
         // Canvas mouse events, could be replaced with Orbit Controls but some features
         // might not work as expected, since the camera is being rotated instead of the object
@@ -474,7 +494,7 @@
 
         // Add SpotLight to the scene
         spotLight = new THREE.SpotLight( 0xFFFFFF, 0, 0, Math.PI/4 );
-        spotLight.position.set( 150, -50, 350 );
+        spotLight.position.set( 70, 0, 350 );
         spotLight.target.position.set( 0, 0, -1500 );
         spotLight.castShadow = true;
 
@@ -497,115 +517,121 @@
         // Orbit Controls can be used for rotation, zoom and move but are camera related
         //controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-        // Load the Obj file
-        loadFile();
+        // Load the gltf file
+        if (selected_gltf_file) {
+          loadFile();
+        } else {
+          loadURLFile();
+        }
       }
 
       function loadFile() {
-        if (selected_mtl_file) {
-          mtl_loader.load( URL.createObjectURL( selected_mtl_file ), ( mtl ) => {
-            if (texture_files_png.length > 0) {
-              for (const [ key, value ] of Object.entries( mtl.materialsInfo )) {
-                texture_files_png.forEach( file => {
-                  if (file.name === value.map_kd) {
-                    mtl.materialsInfo[ key ] = URL.createObjectURL( file );
-                  }
-                });
-              }
-            } else if (texture_files_jpg.length > 0) {
-              for (const [ key, value ] of Object.entries( mtl.materialsInfo )) {
-                texture_files_jpg.forEach( file => {
-                  if (file.name === value.map_kd) {
-                    mtl.materialsInfo[ key ] = URL.createObjectURL( file );
-                  }
-                });
-              }
-            } else if (texture_files_dds.length > 0) {
-              for (const [ key, value ] of Object.entries( mtl.materialsInfo )) {
-                texture_files_dds.forEach( file => {
-                  if (file.name === value.map_kd) {
-                    mtl.materialsInfo[ key ] = URL.createObjectURL( file );
-                  }
-                });
-              }
-            }
+        if (selected_gltf_file) {
+          gltf_loader.load( URL.createObjectURL( selected_gltf_file ), ( gltf ) => {
+            // Go through all children of the loaded object and search for a Mesh
+            gltf.scene.traverse( function( child ) {
+              // This allow us to check if the children is an instance of the Mesh constructor
+          	  if (child instanceof THREE.Mesh) {
+                // Enable transparency for the Opacity control and enable shadows
+                child.material.opacity = 1;
+                child.material.transparent = true;
+                child.material.skinning = true;
+                child.castShadow = true;
+                child.receiveShadow = true;
 
-            obj_loader.setMaterials( mtl );
+                if (texture_files_png.length > 0 || texture_files_jpg.length > 0) {
+                  let files = (texture_files_png.length > 0) ? texture_files_png : texture_files_jpg;
 
-            // Launch loading of the selected file
-            obj_loader.load( URL.createObjectURL( selected_obj_file ), function ( object ) {
-              Obj = object.clone();
+                  files.forEach( file => {
+                    let loader = new THREE.TextureLoader();
+                    loader.load( URL.createObjectURL( file ) , function( texture ) {
+                      texture.encoding = THREE.sRGBEncoding;
+                      texture.wrapS = THREE.RepeatWrapping;
+                      texture.wrapT = THREE.RepeatWrapping;
+                      texture.magFilter = THREE.NearestFilter;
 
-              // Go through all children of the loaded object and search for a Mesh
-              Obj.traverse( function ( child ) {
-                // This allow us to check if the children is an instance of the Mesh constructor
-        	      if (child instanceof THREE.Mesh) {
-                  // Enable transparency for the Opacity control and enable shadows
-                  child.material.transparent = true;
-                  child.castShadow = true;
-                  child.receiveShadow = true;
-    		        }
-    	        });
-
-              if (texture_files_png.length > 0 || texture_files_jpg.length > 0 || texture_files_dds.length > 0) {
-                for (const [key, value] of Object.entries( mtl.materialsInfo )) {
-                  let texture = null;
-
-                  if (texture_files_dds.length > 0) {
-                    let texture_dds_loader = new THREE.DDSLoader();
-                    texture = texture_dds_loader.load( value );
-                  } else {
-                    texture = mtl.loadTexture( value );
-                  }
-
-                  Obj.traverse(function ( child ) {
-                    if (child instanceof THREE.Mesh) {
                       // Apply texture
                       child.material.map = texture;
-                    }
+                      child.material.needsUpdate = true;
+                    });
                   });
                 }
-              }
-
-              resize();
-
-              // Add the 3D object in the scene
-              scene.add( Obj );
-
-              camera.lookAt( Obj.position );
-
-              render();
-            });
-          });
-        } else {
-          // Launch loading of the selected file
-          obj_loader.load( URL.createObjectURL( selected_obj_file ), function ( object ) {
-            Obj = object.clone();
-
-            // Go through all children of the loaded object and search for a Mesh
-            Obj.traverse( function ( child ) {
-              // This allow us to check if the children is an instance of the Mesh constructor
-        	    if (child instanceof THREE.Mesh) {
-                // Enable transparency for the Opacity control
-                child.material.transparent = true;
     		      }
-    	      });
+            });
+
+            gltf_obj = gltf.scene;
+            gltf_obj.name = 'local_model';
 
             resize();
 
-            // Add the 3D object in the scene
-            scene.add( Obj );
+            // Add gltf model to scene
+            scene.add( gltf_obj );
 
-            camera.lookAt( Obj.position );
+            gltf_obj.position.normalize();
 
-            render();
+          }, function ( xhr ) {
+            let today = new Date();
+            let time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + '.' + today.getMilliseconds();
+
+            if (xhr.loaded == 0 && xhr.total == 0) {
+              console.log( '0% loaded - ' + time );
+            } else {
+              console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded - ' + time );
+            }
+          }, function ( error ) {
+            console.log( 'Error loading GLTF!' );
           });
+
+          render();
+        }
+      }
+
+      function loadURLFile() {
+        if (selected_url_file != '') {
+          gltf_loader.load( selected_url_file, ( gltf ) => {
+            // Go through all children of the loaded object and search for a Mesh
+            gltf.scene.traverse( function( child ) {
+              // This allow us to check if the children is an instance of the Mesh constructor
+          	  if (child instanceof THREE.Mesh) {
+                // Enable transparency for the Opacity control and enable shadows
+                child.material.opacity = 1;
+                child.material.transparent = true;
+                child.material.skinning = true;
+                child.castShadow = true;
+                child.receiveShadow = true;
+    		      }
+    	      });
+
+            gltf_obj = gltf.scene;
+            gltf_obj.name = 'url_model';
+
+            resize();
+
+            // Add gltf model to scene
+            scene.add( gltf_obj );
+
+            gltf_obj.position.normalize();
+
+          }, function ( xhr ) {
+            let today = new Date();
+            let time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + '.' + today.getMilliseconds();
+
+            if (xhr.loaded == 0 && xhr.total == 0) {
+              console.log( '0% loaded - ' + time );
+            } else {
+              console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded - ' + time );
+            }
+          }, function ( error ) {
+            console.log( 'Error loading GLTF!' );
+          });
+
+          render();
         }
       }
 
       function show_wireframe() {
         // Go through all children of the loaded object and search for a Mesh
-        Obj.traverse( function ( child ) {
+        gltf_obj.traverse( function ( child ) {
           // This allow us to check if the children is an instance of the Mesh constructor
     	    if (child instanceof THREE.Mesh) {
             if (document.getElementById('wireframe').checked) {
@@ -620,7 +646,7 @@
       function show_shadow() {
         if (document.getElementById('shadow').checked) {
           scene.add( shadowMesh );
-          shadowMaterial.opacity = document.getElementById('obj_opacity').value * document.getElementById('spot_light_intensity').value;
+          shadowMaterial.opacity = document.getElementById('gltf_opacity').value * document.getElementById('spot_light_intensity').value;
         } else {
           scene.remove( shadowMesh );
         }
@@ -630,26 +656,26 @@
         requestAnimationFrame( render );
 
         // Move the Obj in the scene
-        Obj.position.x = pos_x;
-        Obj.position.y = pos_y;
-        Obj.position.z = pos_z;
+        gltf_obj.position.x = pos_x;
+        gltf_obj.position.y = pos_y;
+        gltf_obj.position.z = pos_z;
 
         // Reset Obj rotational values
         if (reset_rotation) {
-          Obj.rotation.x = 0;
-          Obj.rotation.y = 0;
-          Obj.rotation.z = 0;
+          gltf_obj.rotation.x = 0;
+          gltf_obj.rotation.y = 0;
+          gltf_obj.rotation.z = 0;
           reset_rotation = false;
         }
 
         // Rotate the Obj
         if (!mouse_rotation) {
-          Obj.rotation.x += rot_x;
-          Obj.rotation.y += rot_y;
-          Obj.rotation.z += rot_z;
-          if (Math.abs(Obj.rotation.x) > 2 * Math.PI ) { Obj.rotation.x = 0; }
-          if (Math.abs(Obj.rotation.y) > 2 * Math.PI ) { Obj.rotation.y = 0; }
-          if (Math.abs(Obj.rotation.z) > 2 * Math.PI ) { Obj.rotation.z = 0; }
+          gltf_obj.rotation.x += rot_x;
+          gltf_obj.rotation.y += rot_y;
+          gltf_obj.rotation.z += rot_z;
+          if (Math.abs(gltf_obj.rotation.x) > 2 * Math.PI ) { gltf_obj.rotation.x = 0; }
+          if (Math.abs(gltf_obj.rotation.y) > 2 * Math.PI ) { gltf_obj.rotation.y = 0; }
+          if (Math.abs(gltf_obj.rotation.z) > 2 * Math.PI ) { gltf_obj.rotation.z = 0; }
 
         }
 
@@ -658,8 +684,14 @@
       }
 
       function reset_only() {
-        scene.remove( Obj );
-        loadFile();
+        scene.remove( gltf_obj );
+
+        if (selected_gltf_file) {
+          loadFile();
+        } else {
+          loadURLFile();
+        }
+
         reset_all( false, true );
       }
 
@@ -685,7 +717,7 @@
         document.getElementById('hemisphere_light_color').value = "0x000000";
         document.getElementById('spot_light_color').value = "0x000000";
         document.getElementById('spot_light_intensity').value = 0;
-        document.getElementById('directional_light_intensity').value = 0.8;
+        document.getElementById('directional_light_intensity').value = 1;
 
         // Reset the radio inputs
         document.getElementById('rotate').checked = true;
@@ -695,9 +727,9 @@
         radio_changed();
 
         // Reset the Obj opacity and scale values
-        document.getElementById('obj_opacity').value = 1;
-        document.getElementById('obj_scale').value = 1;
-        previous_obj_scale = '1';
+        document.getElementById('gltf_opacity').value = 1;
+        document.getElementById('gltf_scale').value = 1;
+        previous_gltf_scale = '1';
 
         // Reset the wireframe and shadow checkboxes
         document.getElementById('wireframe').checked = false;
@@ -708,7 +740,7 @@
         // Reset the view
         if (!values && reset) {
           hemisphereLight.position.set( 0, 10, 0 );
-          spotLight.position.set( 150, -50, 350 );
+          spotLight.position.set( 70, 0, 350 );
           directionalLight.position.set( 0, 0, 250 );
           set_scene_image();
           show_wireframe();
@@ -722,8 +754,9 @@
         }
 
         if (!values && !reset) {
-          // Page (re)loading so reset the file input and disable controls
-          document.getElementById('file_input').value = "";
+          // Page (re)loading so reset the file input, URL entry and disable controls
+          document.getElementById('file_input').value = '';
+          document.getElementById('url_entry').value = '';
           enable_disable( true );
         }
       }
@@ -742,8 +775,8 @@
         document.getElementById('position_z').disabled = disable;
         document.getElementById('wireframe').disabled = disable;
         document.getElementById('shadow').disabled = disable;
-        document.getElementById('obj_scale').disabled = disable;
-        document.getElementById('obj_opacity').disabled = disable;
+        document.getElementById('gltf_scale').disabled = disable;
+        document.getElementById('gltf_opacity').disabled = disable;
         document.getElementById('ambient_light_color').disabled = disable;
         document.getElementById('hemisphere_light_color').disabled = disable;
         document.getElementById('spot_light_color').disabled = disable;

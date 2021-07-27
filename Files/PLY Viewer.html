@@ -53,7 +53,7 @@
   <body onload="reset_all()" onresize="resize()">
     <div class="fixed-menu">
       <div>
-        <label for="file" style="color: #CE8704; margin: 2px 2px 0 5px;">PLY File:</label>
+        <label for="file" style="color: #CE8704; margin: 2px 2px 0 5px;">PLY:</label>
         <input type="file" id="file_input" name="file" onchange="init()" style="margin-right: 5px;" multiple />
         <label for="file_image_input" style="color: #CE8704; margin-right: 2px;">BG Image:</label>
         <input type="file" id="file_image_input" name="file_image_input" accept="image/png, image/jpeg, image/bmp, image/gif, image/svg+xml" onchange="set_scene_image()" />
@@ -69,17 +69,17 @@
         <button onclick="full_screen()" style="background-color: #d1cefc; vertical-align: middle; width: 22px; margin: 0 2px 0 0px; padding: 0;"><p class="full_screen"></p></button>
       </div>
       <div>
-        <label><input type="radio" id="hlight" name="mode" value="HL" onchange="radio_changed()" />HL</label>
-        <label><input type="radio" id="slight" name="mode" value="SL" onchange="radio_changed()" />SL</label>
-        <label><input type="radio" id="dlight" name="mode" value="DL" onchange="radio_changed()" />DL</label>
-        <label><input type="radio" id="rotate" name="mode" value="Rotate" onchange="radio_changed()" checked />Rotate :</label>
+        <label style="color: blue;"><input type="radio" id="hlight" name="mode" value="HL" onchange="radio_changed()" />HL</label>
+        <label style="color: blue;"><input type="radio" id="slight" name="mode" value="SL" onchange="radio_changed()" />SL</label>
+        <label style="color: blue;"><input type="radio" id="dlight" name="mode" value="DL" onchange="radio_changed()" />DL</label>
+        <label style="color: blue;"><input type="radio" id="rotate" name="mode" value="Rotate" onchange="radio_changed()" checked />Rotate :</label>
         <label for="rotation_x" style="color: blue;">X</label>
         <input type="number" id="rotation_x" onchange="rot_x_changed()" min="-50" max="50" value="0" step="1" style="width: 50px;" />&nbsp;
         <label for="rotation_y" style="color: blue;">Y</label>
         <input type="number" id="rotation_y" onchange="rot_y_changed()" min="-50" max="50" value="0" step="1" style="width: 50px;" />&nbsp;
         <label for="rotation_z" style="color: blue;">Z</label>
         <input type="number" id="rotation_z" onchange="rot_z_changed()" min="-50" max="50" value="0" step="1" style="width: 50px;" />&nbsp; &nbsp;
-        <label>Position : </label>
+        <label style="color: green;">Position : </label>
         <label for="position_x" style="color: green;">X</label>
         <input type="number" id="position_x" onchange="pos_x_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp;
         <label for="position_y" style="color: green;">Y</label>
@@ -342,7 +342,7 @@
         } else if (document.getElementById('hlight').checked) {
           hemisphereLight.position.set( x, y, z );
         } else {
-          rot_x = x/1000;
+          rot_x = x / 1000;
         }
       }
 
@@ -358,7 +358,7 @@
         } else if (document.getElementById('hlight').checked) {
           hemisphereLight.position.set( x, y, z );
         } else {
-          rot_y = y/1000;
+          rot_y = y / 1000;
         }
       }
 
@@ -374,7 +374,7 @@
         } else if (document.getElementById('hlight').checked) {
           hemisphereLight.position.set( x, y, z );
         } else {
-          rot_z = z/1000;
+          rot_z = z / 1000;
         }
       }
 
@@ -492,7 +492,7 @@
       function loadFile(){
         // Launch loading of the selected file, addFileInScene is the callback when it's ready
         ply_loader.load( URL.createObjectURL( selected_ply_file ), addFileInScene );
-      };
+      }
 
       function addFileInScene( object ){
         let smooth = object.clone();
@@ -567,7 +567,7 @@
         camera.lookAt( mesh.position );
 
         render();
-      };
+      }
 
       function show_wireframe() {
         // Go through all children of the loaded object and search for a Mesh
@@ -620,7 +620,7 @@
 
         renderer.clear();
       	renderer.render( scene, camera );
-      };
+      }
 
       function reset_only() {
         scene.remove( mesh );
@@ -691,7 +691,7 @@
           document.getElementById('file_input').value = "";
           enable_disable( true );
         }
-      };
+      }
 
       function enable_disable( disable = false ) {
         document.getElementById('file_image_input').disabled = disable;

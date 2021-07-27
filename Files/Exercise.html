@@ -324,6 +324,7 @@
       <a href="#P13">JQuery</a>
       <a href="OBJ Viewer.html" target="_blank">OBJ</a>
       <a href="PLY Viewer.html" target="_blank">PLY</a>
+      <a href="GLTF Viewer.html" target="_blank">GLTF</a>
     </p>
 
     <br id="P1" /><br /><br />
@@ -398,26 +399,27 @@
 
     <script>
       $(document).ready(function() {
-        $('.dropdown').hover(
-          function(event){
-              // Stop rotating the small SVG and start rotating its enlarged dropdown version
-              if (event.target.id == "div_svg1") {
+        $('.dropdown').mouseenter( function(event){
+            // Stop rotating the small SVG and start rotating its enlarged dropdown version
+            if (event.target.id == "div_svg1") {
               $('#svg1').removeClass('rotateZ');
               $('#svg2').addClass('rotateZ');
             } else if (event.target.id == "div_svg3") {
               $('#svg3').removeClass('rotateXYZ');
               $('#svg4').addClass('rotateXYZ');
-            }},
-            function(event){
-              // Restore rotation of the small SVG and remove rotation class from its dropdown
-              if (event.target.id == "div_svg1") {
+            }}
+          );
+
+        $('.dropdown').mouseleave( function(event){
+            // Restore rotation of the small SVG and remove rotation class from its dropdown
+            if (event.target.id == "div_svg1") {
               $('#svg1').addClass('rotateZ');
               $('#svg2').removeClass('rotateZ');
             } else if (event.target.id == "div_svg3") {
               $('#svg3').addClass('rotateXYZ');
               $('#svg4').removeClass('rotateXYZ');
             }}
-        );
+          );
       });
     </script>
 
@@ -536,7 +538,7 @@
 
     <script>
       function display_url() {
-        var txt = document.getElementById('url').value;
+        let txt = document.getElementById('url').value;
 
         if ( txt != '') {
           // Create and use anchor element
