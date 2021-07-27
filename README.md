@@ -14,7 +14,7 @@ These are the features you can see on the page:
  - Form and submitted form entries table (there is no server involved in this exercise)
  - Media video playback, including camera streaming and an option to record and save the camera video
  - JavaScript and jQuery examples
- - Links to Wavefront 3D OBJ and Stanford 3D PLY file viewers, using Three.js found [here](https://threejs.org/) and [here](https://github.com/mrdoob/three.js) (some example OBJ / PLY files are in the `Images` folder)
+ - Links to Wavefront 3D OBJ / Stanford 3D PLY / Khronos Group GLTF file viewers, using Three.js found [here](https://threejs.org/) and [here](https://github.com/mrdoob/three.js) (some example OBJ / PLY / GLTF files are in the `Images` folder)
 
 Some things might not be supported or work as expected on certain browsers. This was tested as working in the latest Firefox and Edge browsers on Windows 10 and Chromium on CloudReady 89.4.0.  The page did also show properly in the TenFourFox browser on MacOS X 10.5 (iMac G5) with the following notes:
  - missing emojis support for old OS X can be compensated, to a degree, with [Symbola Font](https://dn-works.com/ufas/)
@@ -39,7 +39,9 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - Either an OBJ file alone or MTL / OBJ files or MTL / OBJ / JPG(PNG) files or MTL / OBJ / DDS files can be loaded at the dialog screen
    - If the MTL file requires textures then you have to select and load them, otherwise check the console output for errors
    - Either a PLY file alone or PLY / JPG(PNG) files can be loaded at the dialog screen (texture files should be relatively simple since they are used to create color map)
-   - Either a GLB / GLTF file alone or GLB / GLTF and JPG(PNG) files can be loaded at the dialog screen while there is also a URL option available
+   - Either a GLB / GLTF file alone or GLB / GLTF and JPG(PNG) files can be loaded at the dialog screen
+   - GLTF Viewer also has a URL option available, which should fetch all associated resources
+   - GLTF Viewer currently doesn't support animations and/or local loading of .bin files
    - GUI has lights marked as DL, SL, HL and AL (directional, spot, hemisphere and ambient)
    - Swappable with `Rotate`, the XYZ positions of DL / SL / HL lights can be adjusted
    - The DLi / SLi control those lights intensity
