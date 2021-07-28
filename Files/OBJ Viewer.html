@@ -342,47 +342,41 @@
 
       function rot_x_changed() {
         let x = parseFloat(document.getElementById('rotation_x').value);
-        let y = parseFloat(document.getElementById('rotation_y').value);
-        let z = parseFloat(document.getElementById('rotation_z').value);
 
         if (document.getElementById('dlight').checked) {
-          directionalLight.position.set( x, y, z );
+          directionalLight.position.x = x;
         } else if (document.getElementById('slight').checked) {
-          spotLight.position.set( x, y, z );
+          spotLight.position.x = x;
         } else if (document.getElementById('hlight').checked) {
-          hemisphereLight.position.set( x, y, z );
+          hemisphereLight.position.x = x;
         } else {
           rot_x = x / 1000;
         }
       }
 
       function rot_y_changed() {
-        let x = parseFloat(document.getElementById('rotation_x').value);
         let y = parseFloat(document.getElementById('rotation_y').value);
-        let z = parseFloat(document.getElementById('rotation_z').value);
 
         if (document.getElementById('dlight').checked) {
-          directionalLight.position.set( x, y, z );
+          directionalLight.position.y = y;
         } else if (document.getElementById('slight').checked) {
-          spotLight.position.set( x, y, z );
+          spotLight.position.y = y;
         } else if (document.getElementById('hlight').checked) {
-          hemisphereLight.position.set( x, y, z );
+          hemisphereLight.position.y = y;
         } else {
           rot_y = y / 1000;
         }
       }
 
       function rot_z_changed() {
-        let x = parseFloat(document.getElementById('rotation_x').value);
-        let y = parseFloat(document.getElementById('rotation_y').value);
         let z = parseFloat(document.getElementById('rotation_z').value);
 
         if (document.getElementById('dlight').checked) {
-          directionalLight.position.set( x, y, z );
+          directionalLight.position.z = z;
         } else if (document.getElementById('slight').checked) {
-          spotLight.position.set( x, y, z );
+          spotLight.position.z = z;
         } else if (document.getElementById('hlight').checked) {
-          hemisphereLight.position.set( x, y, z );
+          hemisphereLight.position.z = z;
         } else {
           rot_z = z / 1000;
         }
@@ -396,16 +390,16 @@
         // Loaded file(s)
         var fi = document.getElementById('file_input');
 
-        if (scene != null) {
-          // Reset all values
-          reset_all( false, true );
-
+        if (scene) {
           scene.remove.apply( scene, scene.children );
 
           if (shadowMesh) { shadowMesh = null; }
+
+          // Reset all values
+          reset_all( false, true );
         }
 
-        obj_loader.setMaterials(null);
+        obj_loader.setMaterials( null );
         selected_obj_file = selected_mtl_file = null;
         texture_files_jpg = [];
         texture_files_png = [];
@@ -558,7 +552,7 @@
                     texture = mtl.loadTexture( value );
                   }
 
-                  Obj.traverse(function ( child ) {
+                  Obj.traverse( function( child ) {
                     if (child instanceof THREE.Mesh) {
                       // Apply texture
                       child.material.map = texture;
@@ -583,7 +577,7 @@
             Obj = object.clone();
 
             // Go through all children of the loaded object and search for a Mesh
-            Obj.traverse( function ( child ) {
+            Obj.traverse( function( child ) {
               // This allow us to check if the children is an instance of the Mesh constructor
         	    if (child instanceof THREE.Mesh) {
                 // Enable transparency for the Opacity control
@@ -605,7 +599,7 @@
 
       function show_wireframe() {
         // Go through all children of the loaded object and search for a Mesh
-        Obj.traverse( function ( child ) {
+        Obj.traverse( function( child ) {
           // This allow us to check if the children is an instance of the Mesh constructor
     	    if (child instanceof THREE.Mesh) {
             if (document.getElementById('wireframe').checked) {
@@ -659,8 +653,8 @@
 
       function reset_only() {
         scene.remove( Obj );
-        loadFile();
         reset_all( false, true );
+        loadFile();
       }
 
       function reset_all( values = false, reset = false ) {

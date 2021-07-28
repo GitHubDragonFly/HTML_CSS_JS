@@ -6,6 +6,7 @@
     <script src="js/three.js"></script>
     <script src="js/OrbitControls.js"></script>
     <script src="js/GLTFLoader.js"></script>
+    <script src="js/Water.js"></script>
 
     <style>
       body,html {
@@ -359,47 +360,41 @@
 
       function rot_x_changed() {
         let x = parseFloat(document.getElementById('rotation_x').value);
-        let y = parseFloat(document.getElementById('rotation_y').value);
-        let z = parseFloat(document.getElementById('rotation_z').value);
 
         if (document.getElementById('dlight').checked) {
-          directionalLight.position.set( x, y, z );
+          directionalLight.position.x = x;
         } else if (document.getElementById('slight').checked) {
-          spotLight.position.set( x, y, z );
+          spotLight.position.x = x;
         } else if (document.getElementById('hlight').checked) {
-          hemisphereLight.position.set( x, y, z );
+          hemisphereLight.position.x = x;
         } else {
           rot_x = x / 1000;
         }
       }
 
       function rot_y_changed() {
-        let x = parseFloat(document.getElementById('rotation_x').value);
         let y = parseFloat(document.getElementById('rotation_y').value);
-        let z = parseFloat(document.getElementById('rotation_z').value);
 
         if (document.getElementById('dlight').checked) {
-          directionalLight.position.set( x, y, z );
+          directionalLight.position.y = y;
         } else if (document.getElementById('slight').checked) {
-          spotLight.position.set( x, y, z );
+          spotLight.position.y = y;
         } else if (document.getElementById('hlight').checked) {
-          hemisphereLight.position.set( x, y, z );
+          hemisphereLight.position.y = y;
         } else {
           rot_y = y / 1000;
         }
       }
 
       function rot_z_changed() {
-        let x = parseFloat(document.getElementById('rotation_x').value);
-        let y = parseFloat(document.getElementById('rotation_y').value);
         let z = parseFloat(document.getElementById('rotation_z').value);
 
         if (document.getElementById('dlight').checked) {
-          directionalLight.position.set( x, y, z );
+          directionalLight.position.z = z;
         } else if (document.getElementById('slight').checked) {
-          spotLight.position.set( x, y, z );
+          spotLight.position.z = z;
         } else if (document.getElementById('hlight').checked) {
-          hemisphereLight.position.set( x, y, z );
+          hemisphereLight.position.z = z;
         } else {
           rot_z = z / 1000;
         }
@@ -411,12 +406,12 @@
 
       function init(){
         if (scene) {
-          // Reset all values
-          reset_all( false, true );
-
           scene.remove.apply( scene, scene.children );
 
           if (shadowMesh) { shadowMesh = null; }
+
+          // Reset all values
+          reset_all( false, true );
         }
 
         enable_disable( true );
@@ -567,7 +562,7 @@
             // Add gltf model to scene
             scene.add( gltf_obj );
 
-            gltf_obj.position.normalize();
+            camera.lookAt( gltf_obj.position );
 
           }, function ( xhr ) {
             let today = new Date();
@@ -576,7 +571,7 @@
             if (xhr.loaded == 0 && xhr.total == 0) {
               console.log( '0% loaded - ' + time );
             } else {
-              console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded - ' + time );
+              console.log( parseInt(( xhr.loaded / xhr.total * 100 )) + '% loaded - ' + time );
             }
           }, function ( error ) {
             console.log( 'Error loading GLTF!' );
@@ -610,7 +605,7 @@
             // Add gltf model to scene
             scene.add( gltf_obj );
 
-            gltf_obj.position.normalize();
+            camera.lookAt( gltf_obj.position );
 
           }, function ( xhr ) {
             let today = new Date();
@@ -619,7 +614,7 @@
             if (xhr.loaded == 0 && xhr.total == 0) {
               console.log( '0% loaded - ' + time );
             } else {
-              console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded - ' + time );
+              console.log( parseInt(( xhr.loaded / xhr.total * 100 )) + '% loaded - ' + time );
             }
           }, function ( error ) {
             console.log( 'Error loading GLTF!' );
@@ -686,13 +681,13 @@
       function reset_only() {
         scene.remove( gltf_obj );
 
+        reset_all( false, true );
+
         if (selected_gltf_file) {
           loadFile();
         } else {
           loadURLFile();
         }
-
-        reset_all( false, true );
       }
 
       function reset_all( values = false, reset = false ) {
