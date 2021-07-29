@@ -955,7 +955,7 @@
         video.captureStream = video.captureStream || video.mozCaptureStream;
 
         data = await record_camera(video.captureStream());
-          
+
         let recordedBlob = new Blob(data, { type: "video/webm" });
         link_save.href = URL.createObjectURL(recordedBlob);
         link_save.style.backgroundColor = "lightgreen";

@@ -6,7 +6,6 @@
     <script src="js/three.js"></script>
     <script src="js/OrbitControls.js"></script>
     <script src="js/GLTFLoader.js"></script>
-    <script src="js/Water.js"></script>
 
     <style>
       body,html {
@@ -26,7 +25,7 @@
       p.full_screen {
         text-align: center;
         content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAf0lEQVRIie1VQQ6AMAjb/x9M4IRePICoK7GLB5eQbElpCTAY7j6YRiUPAvvxbNMkN76XIDhSRKCdjhmB494hzzwngcoBIa/eASgisMgTBo4ODqCTAiSFrW6Biv8LfL/I1DbtfDRV9VLgjVFhZp59A4g+7JaM6yULh7IyWUYX2AAPDxz26GjX+gAAAABJRU5ErkJggg==);
-        margin: 1px 1px 1px 2px;
+        margin: 1px 1px 1px 1px;
         padding: 0;
         width: 15px;
         height: 15px;
@@ -56,57 +55,55 @@
   <body onload="reset_all()" onresize="resize()">
     <div class="fixed-menu">
       <div>
-        <label for="file" style="color: #CE8704; margin: 0 2px 0 5px;">GLTF:</label>
-        <button onclick="show_url()" style="margin: 0 2px 0 0;">URL</button>
-        <input type="file" id="file_input" name="file" onchange="init()" style="margin: 2px 5px 0 0;" multiple />
-        <label for="file_image_input" style="color: #CE8704; margin-right: 2px;">BG Image:</label>
-        <input type="file" id="file_image_input" name="file_image_input" accept="image/png, image/jpeg, image/bmp, image/gif, image/svg+xml" onchange="set_scene_image()" style="margin-right: 5px;" />
-        <label for="gltf_opacity" style="margin-right: 2px;">Opacity:</label>
-        <input type="number" id="gltf_opacity" name="gltf_opacity" min="0" max="1" step="0.05" value="1" onchange="set_gltf_opacity()" style="width: 48px; margin-right: 5px;" />
-        <label for="gltf_scale" style="margin-right: 2px;">Scale:</label>
-        <input type="number" id="gltf_scale" name="gltf_scale" onchange="set_gltf_scale()" min="0.25" max="2" value="1" step="0.25" style="margin-right: 5px; width: 48px;" />
-        <input type="checkbox" id="wireframe" name="wireframe" onchange="show_wireframe()" style="margin-right: 1px;" />
-        <label for="wireframe" style="margin-right: 5px;">Wireframe</label>
-        <input type="checkbox" id="shadow" name="shadow" onchange="show_shadow()" style="margin-right: 1px;" />
-        <label for="shadow" style="margin-right: 5px;">Shadow</label>
-        <button id="reset" onclick="reset_only()" style="vertical-align: middle; color: maroon; width: 55px; margin: 0 5px 0 70px;">Reset</button>
-        <button onclick="full_screen()" style="background-color: #d1cefc; vertical-align: middle; width: 22px; margin: 0 2px 0 5px; padding: 0;"><p class="full_screen"></p></button>
+        <label for="file" style="color: #CE8704; margin: 2px 2px 2px 5px;">GLTF:</label>
+        <button onclick="show_url()" style="margin: 2px 2px 2px 0;">URL</button>
+        <input type="file" id="file_input" name="file" onchange="init()" style="margin: 2px 5px 2px 0;" multiple />
+        <label for="file_image_input" style="color: #CE8704; margin: 2px 2px 2px 0;">BG Image:</label>
+        <input type="file" id="file_image_input" name="file_image_input" accept="image/png, image/jpeg, image/bmp, image/gif, image/svg+xml" onchange="set_scene_image()" style="margin: 2px 5px 2px 0;" />
+        <label for="gltf_opacity" style="margin: 2px 2px 2px 0;">Opacity:</label>
+        <input type="number" id="gltf_opacity" name="gltf_opacity" min="0" max="1" step="0.05" value="1" onchange="set_gltf_opacity()" style="width: 48px; margin: 2px 5px 2px 0;" />
+        <label for="gltf_scale" style="margin: 2px 2px 2px 0;">Scale:</label>
+        <input type="number" id="gltf_scale" name="gltf_scale" onchange="set_gltf_scale()" min="0.25" max="2" value="1" step="0.25" style="margin: 2px 5px 2px 0; width: 48px;" />
+        <label style="margin: 2px 5px 2px 0;"><input type="checkbox" id="wireframe" name="wireframe" onchange="show_wireframe()" />Wireframe</label>
+        <label style="margin: 2px 5px 2px 0;"><input type="checkbox" id="shadow" name="shadow" onchange="show_shadow()" />Shadow</label>
+        <button id="reset" onclick="reset_only()" style="vertical-align: middle; color: maroon; width: 55px; margin: 2px 5px 2px 40px;">Reset</button>
+        <button onclick="full_screen()" style="background-color: #d1cefc; vertical-align: middle; width: 22px; margin: 2px 2px 2px 2px; padding: 0;"><p class="full_screen"></p></button>
       </div>
       <div id="url" style="display: none;">
-        <label for="url_entry" style="margin: 0px 2px 0px 5px;">URL:</label>
-        <input type="text" id="url_entry" name="url_entry" size="90" value="" style="margin-right: 5px;" />
-        <button id="btn_load_url" onclick="load_url_file()" style="-webkit-border-radius: 2px; border-radius: 2px; width: 50px; padding: 2px;">Load</button>
+        <label for="url_entry" style="margin: 2px 2px 2px 5px;">URL:</label>
+        <input type="text" id="url_entry" name="url_entry" size="90" value="" style="margin: 2px 5px 2px 0;" />
+        <button id="btn_load_url" onclick="load_url_file()" style="-webkit-border-radius: 2px; border-radius: 2px; width: 50px; margin: 2px 0 2px 0; padding: 2px;">Load</button>
       </div>
       <div>
-        <label style="color: blue;"><input type="radio" id="hlight" name="mode" value="HL" onchange="radio_changed()" />HL</label>
-        <label style="color: blue;"><input type="radio" id="slight" name="mode" value="SL" onchange="radio_changed()" />SL</label>
-        <label style="color: blue;"><input type="radio" id="dlight" name="mode" value="DL" onchange="radio_changed()" />DL</label>
-        <label style="color: blue;"><input type="radio" id="rotate" name="mode" value="Rotate" onchange="radio_changed()" checked />Rotate :</label>
+        <label style="color: blue; margin: 2px 0 2px 0;"><input type="radio" id="hlight" name="mode" value="HL" onchange="radio_changed()" />HL</label>
+        <label style="color: blue; margin: 2px 0 2px 0;"><input type="radio" id="slight" name="mode" value="SL" onchange="radio_changed()" />SL</label>
+        <label style="color: blue; margin: 2px 0 2px 0;"><input type="radio" id="dlight" name="mode" value="DL" onchange="radio_changed()" />DL</label>
+        <label style="color: blue; margin: 2px 0 2px 0;"><input type="radio" id="rotate" name="mode" value="Rotate" onchange="radio_changed()" checked />Rotate :</label>
         <label for="rotation_x" style="color: blue;">X</label>
-        <input type="number" id="rotation_x" onchange="rot_x_changed()" min="-50" max="50" value="0" step="1" style="width: 50px;" />&nbsp;
+        <input type="number" id="rotation_x" onchange="rot_x_changed()" min="-50" max="50" value="0" step="1" style="width: 50px; margin: 2px 0 2px 0;" />&nbsp;
         <label for="rotation_y" style="color: blue;">Y</label>
-        <input type="number" id="rotation_y" onchange="rot_y_changed()" min="-50" max="50" value="0" step="1" style="width: 50px;" />&nbsp;
+        <input type="number" id="rotation_y" onchange="rot_y_changed()" min="-50" max="50" value="0" step="1" style="width: 50px; margin: 2px 0 2px 0;" />&nbsp;
         <label for="rotation_z" style="color: blue;">Z</label>
-        <input type="number" id="rotation_z" onchange="rot_z_changed()" min="-50" max="50" value="0" step="1" style="width: 50px;" />&nbsp; &nbsp;
-        <label>Position : </label>
+        <input type="number" id="rotation_z" onchange="rot_z_changed()" min="-50" max="50" value="0" step="1" style="width: 50px; margin: 2px 0 2px 0;" />&nbsp; &nbsp;
+        <label style="margin: 2px 0 2px 0;">Position : </label>
         <label for="position_x" style="color: #30D139;">X</label>
-        <input type="number" id="position_x" onchange="pos_x_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp;
+        <input type="number" id="position_x" onchange="pos_x_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px; margin: 2px 0 2px 0;" />&nbsp;
         <label for="position_y" style="color: #30D139;">Y</label>
-        <input type="number" id="position_y" onchange="pos_y_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px;" />&nbsp;
+        <input type="number" id="position_y" onchange="pos_y_changed()" min="-1000" max="1000" value="0" step="1" style="width: 55px; margin: 2px 0 2px 0;" />&nbsp;
         <label for="position_z" style="color: #30D139;">Z</label>
-        <input type="number" id="position_z" onchange="pos_z_changed()" min="-2000" max="2000" value="0" step="1" style="width: 55px; margin-right: 10px;" />
-        <label for="directional_light_intensity" style="margin-top: 3px; margin-right: 2px;">DLi:</label>
-        <input type="number" id="directional_light_intensity" name="directional_light_intensity" min="0" max="2" step="0.05" value="1" onchange="set_directional_light_intensity()" style="margin-right: 5px; width: 50px;" />
-        <label for="spot_light_intensity" style="margin-top: 3px; margin-right: 2px;">SLi:</label>
-        <input type="number" id="spot_light_intensity" name="spot_light_intensity" min="0" max="2" step="0.05" value="0" onchange="set_spot_light_intensity()" style="width: 50px; margin-right: 5px;" />
-        <label for="spot_light_color" style="margin-right: 0;">SL:</label>
-        <input type="color" id="spot_light_color" name="spot_light_color" onchange="set_spot_light_color()" style="vertical-align: middle; background: none; padding: 0; width: 23px; margin-right: 5px;" />
-        <label for="hemisphere_light_color" style="margin-right: 0;">HL:</label>
-        <input type="color" id="hemisphere_light_color" name="hemisphere_light_color" onchange="set_hemisphere_light_color()" style="vertical-align: middle; background: none; padding: 0; width: 23px; margin-right: 5px;" />
-        <label for="ambient_light_color" style="margin-right: 0;">AL:</label>
-        <input type="color" id="ambient_light_color" name="ambient_light_color" onchange="set_ambient_light_color()" style="vertical-align: middle; background: none; padding: 0; width: 23px; margin-right: 5px;" />
-        <label for="back_color" style="margin-right: 0;">BG:</label>
-        <input type="color" id="back_color" name="back_color" onchange="set_back_color()" style="vertical-align: middle; background: none; padding: 0; width: 23px; margin-right: 2px;" />
+        <input type="number" id="position_z" onchange="pos_z_changed()" min="-2000" max="2000" value="0" step="1" style="width: 55px; margin: 2px 10px 2px 0;" />
+        <label for="directional_light_intensity" style="margin: 2px 2px 2px 0;">DLi:</label>
+        <input type="number" id="directional_light_intensity" name="directional_light_intensity" min="0" max="2" step="0.05" value="1" onchange="set_directional_light_intensity()" style="margin: 2px 5px 2px 0; width: 50px;" />
+        <label for="spot_light_intensity" style="margin: 2px 2px 2px 0;">SLi:</label>
+        <input type="number" id="spot_light_intensity" name="spot_light_intensity" min="0" max="2" step="0.05" value="0" onchange="set_spot_light_intensity()" style="width: 50px; margin: 2px 5px 2px 0;" />
+        <label for="spot_light_color" style="margin: 2px 0 2px 0;">SL:</label>
+        <input type="color" id="spot_light_color" name="spot_light_color" onchange="set_spot_light_color()" style="vertical-align: middle; background: none; padding: 0; width: 23px; margin: 0 5px 0 0;" />
+        <label for="hemisphere_light_color" style="margin: 2px 0 2px 0;">HL:</label>
+        <input type="color" id="hemisphere_light_color" name="hemisphere_light_color" onchange="set_hemisphere_light_color()" style="vertical-align: middle; background: none; padding: 0; width: 23px; margin: 0 5px 0 0;" />
+        <label for="ambient_light_color" style="margin: 2px 0 2px 0;">AL:</label>
+        <input type="color" id="ambient_light_color" name="ambient_light_color" onchange="set_ambient_light_color()" style="vertical-align: middle; background: none; padding: 0; width: 23px; margin: 0 5px 0 0;" />
+        <label for="back_color" style="margin: 2px 0 2px 0;">BG:</label>
+        <input type="color" id="back_color" name="back_color" onchange="set_back_color()" style="vertical-align: middle; background: none; padding: 0; width: 23px; margin: 0 2px 0 0;" />
       </div>
     </div>
 
@@ -452,6 +449,11 @@
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         renderer.setClearColor( 0xFFFFFF, 0); // Allow setting the background color
         renderer.autoClear = false;
+
+        // The following can be used instead of the canvas but the window mouse
+        // events might be tricky to set due to the presence of the fixed menu.
+        // Possibly use Orbit Controls instead.
+        //document.body.appendChild( renderer.domElement );
 
         scene = new THREE.Scene();
         gltf_obj = new THREE.Object3D();
