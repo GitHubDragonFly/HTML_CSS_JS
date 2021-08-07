@@ -1,0 +1,12 @@
+# Blender MTL File: 'None'
+# Material Count: 1
+
+newmtl FrontColor-DragonFly
+Ns 225.000000
+Ka 1.750000 1.750000 1.750000
+Kd 0.800000 0.447713 0.083723
+Ks 0.750000 0.750000 0.750000
+Ke 0.002143 0.002143 0.002143
+Ni 1.450000
+d 1.000000
+illum 3
