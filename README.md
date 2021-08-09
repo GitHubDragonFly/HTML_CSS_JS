@@ -1,5 +1,7 @@
 # HTML_CSS_JS
-Exercise in HTML, CSS and JavaScript ( [jQuery](https://jquery.com/download/) as well ). Intended for those who either might be learning these or would just like to have several examples in a single page. See the screenshot for what the top part of this page looks like in the Firefox browser.
+Exercise in HTML, CSS and JavaScript ( [jQuery](https://jquery.com/download/) as well ). Intended for those who either might be learning these or would just like to have several examples in a single page. See the screenshot for what the top part of this page looks like in the Firefox browser (or just use the preview link from the `Usage` section).
+
+For a version with Flask server, check the [HTML_CSS_JS_Flask](https://github.com/GitHubDragonFly/HTML_CSS_JS_Flask) project. 
 
 Some might consider these as relatively simple examples but they only reflect a way of how I am going about learning these languages. Some code was simply adopted and modified from original public sources. There is definitely lots of rotation examples, so try not to get dizzy.
 
