@@ -47,7 +47,8 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - Either a local GLB / GLTF file alone or GLB / GLTF and JPG(PNG) files can be loaded at the dialog screen
    - Either a local DAE file alone or DAE and JPG(PNG) / DDS files can be loaded at the dialog screen
    - GLTF / DAE viewers also have a URL option available, which should fetch all associated resources
-   - GLTF / DAE viewers currently don't support animations and/or local loading of .bin files
+   - GLTF / DAE viewers currently support animations (some example GLB files are animated)
+   - GLTF / DAE viewers currently don't support local loading of .bin files (use URL option to fetch all the resources)
    - GLTF viewer currently doesn't support DRACO or KTX2 loading while these are available in the [HTML_CSS_JS_Flask](https://github.com/GitHubDragonFly/HTML_CSS_JS_Flask) project 
    - GUI has lights marked as DL, SL, HL and AL (directional, spot, hemisphere and ambient)
    - Apart from the DAE viewer, all other viewers allow changing the XYZ positions of DL / SL / HL lights, swappable with `Rotate`
