@@ -468,7 +468,6 @@
 
         document.body.style.backgroundImage = "none";
         document.getElementById('scale_10x').checked = false;
-        document.getElementById('btn_animate').disabled = true;
         enable_disable( false );
 
         if (renderer == undefined) {
@@ -708,7 +707,7 @@
 
       function show_wireframe() {
         // Go through all children of the loaded object and search for a Mesh
-        gltf_obj.traverse( function ( child ) {
+        gltf_obj.traverse( function( child ) {
           // This allow us to check if the children is an instance of the Mesh constructor
     	    if (child instanceof THREE.Mesh) {
             if (document.getElementById('wireframe').checked) {
