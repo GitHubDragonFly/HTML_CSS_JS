@@ -41,14 +41,14 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - All viewers require a browser supporting WebGL and are set to open in new tab/window
    - DAE viewer is set to use Orbit Controls while other viewers do allow some mouse control, with `wheel` serving as zoom in/out and `left-button click/drag` to rotate the image
    - Background image supported formats are PNG, JPEG, SVG, BMP and GIF while selecting non-image file will reset the background
-   - Either a local OBJ file alone or MTL / OBJ files or MTL / OBJ / JPG(PNG) files or MTL / OBJ / DDS files can be loaded at the dialog screen
+   - Either a local OBJ file alone or MTL + OBJ files or MTL + OBJ + JPG / PNG / BMP files or MTL + OBJ + DDS files can be loaded at the dialog screen
    - If the MTL file requires texture files then you have to select and load them, otherwise check the console output for errors
-   - Either a local PLY file alone or PLY / JPG(PNG) files can be loaded at the dialog screen (texture files should be relatively simple since they are used to create color map)
-   - Either a local GLB / GLTF file alone or GLB / GLTF and JPG(PNG) files can be loaded at the dialog screen
-   - Either a local DAE file alone or DAE and JPG(PNG) / DDS files can be loaded at the dialog screen
-   - GLTF / DAE viewers also have a URL option available, which should fetch all associated resources
+   - Either a local PLY file alone or PLY + JPG/PNG/BMP files can be loaded at the dialog screen (texture files should be relatively simple)
+   - Either a local GLB / GLTF file alone or GLB / GLTF + JPG / PNG / BMP files can be loaded at the dialog screen
+   - Either a local DAE file alone or DAE + JPG / PNG / BMP / DDS files can be loaded at the dialog screen
+   - GLTF / DAE viewers also have a URL option available, which should fetch all associated resources and is probably the best choice
    - GLTF / DAE viewers currently support animations (some example GLB files are animated)
-   - GLTF / DAE viewers currently don't support local loading of .bin files (use URL option to fetch all the resources)
+   - GLTF / DAE viewers currently don't support local loading of .bin files (use URL option instead to fetch all the resources)
    - GLTF viewer currently doesn't support DRACO or KTX2 loading while these are available in the [HTML_CSS_JS_Flask](https://github.com/GitHubDragonFly/HTML_CSS_JS_Flask) project 
    - GUI has lights marked as DL, SL, HL and AL (directional, spot, hemisphere and ambient)
    - Apart from the DAE viewer, all other viewers allow changing the XYZ positions of DL / SL / HL lights, swappable with `Rotate`
