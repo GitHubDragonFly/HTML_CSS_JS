@@ -63,8 +63,9 @@
         <input type="number" id="dae_opacity" name="dae_opacity" min="0" max="1" step="0.05" value="1" onkeydown="return false" onchange="set_dae_opacity()" style="width: 48px; margin: 2px 5px 2px 0;" />
         <label for="dae_scale" style="margin: 2px 2px 2px 0;">Scale:</label>
         <input type="number" id="dae_scale" name="dae_scale" onkeydown="return false" onchange="set_dae_scale()" min="0.25" max="2" value="1" step="0.25" style="margin: 2px 5px 2px 0; width: 48px;" />
-        <label style="margin: 2px 5px 2px 0;"><input type="checkbox" id="scale_10x" onchange="document.getElementById('reset').click();" />10x</label>
-        <button id="reset" onclick="reset_only()" style="vertical-align: middle; color: maroon; width: 55px; margin: 2px 5px 2px 40px;">Reset</button>
+        <label style="margin: 2px 10px 2px 0;"><input type="checkbox" id="scale_10x" onchange="document.getElementById('reset').click();" />10x</label>
+        <button id="btn_animate" onclick="animate_dae()" style="background-color: #d1cefc; vertical-align: middle; width: 20px; margin: 2px 2px 2px 2px; padding: 0;" disabled>A</button>
+        <button id="reset" onclick="reset_only()" style="vertical-align: middle; color: maroon; width: 55px; margin: 2px 5px 2px 20px;">Reset</button>
         <button id="btn_full_screen" onclick="full_screen()" style="background-color: #d1cefc; vertical-align: middle; width: 22px; margin: 2px 2px 2px 2px; padding: 0;"><p class="full_screen"></p></button>
       </div>
       <div id="url" style="display: none;">
@@ -153,6 +154,7 @@
     </script>
 
     <script>
+      var animations, animation_mixer, animation_running, clock;
       var renderer, scene, camera, dae_obj;
       var ambientLight, hemisphereLight, spotLight, directionalLight;
       var material, texture, shadowMesh, shadowMaterial;
@@ -161,7 +163,7 @@
       var rot_x = 0, rot_y = 0, rot_z = 0;
       var previous_dae_scale = '1';
       var selected_dae_file, selected_url_file = '', url_displayed, url_loading;
-      var texture_files_png, texture_files_jpg, texture_files_dds;
+      var texture_files_png, texture_files_jpg, texture_files_bmp, texture_files_dds;
 
       // Manager from ThreeJs to track a loader and its status
       var manager = new THREE.LoadingManager();
@@ -296,6 +298,20 @@
       function rot_y_changed() { rot_y = parseFloat(document.getElementById('rotation_y').value) / 1000; }
       function rot_z_changed() { rot_z = parseFloat(document.getElementById('rotation_z').value) / 1000; }
 
+      function animate_dae() {
+        animations.forEach( clip => {
+          if (animation_mixer.clipAction( clip ).isRunning()) {
+            animation_mixer.clipAction( clip ).stop();
+            document.getElementById('btn_animate').style.backgroundColor = '#d1cefc';
+            animation_running = false;
+          } else {
+            animation_mixer.clipAction( clip ).play();
+            document.getElementById('btn_animate').style.backgroundColor = 'lightgreen';
+            animation_running = true;
+          }
+        });
+      }
+
       function init(){
         // Loaded file
         var fi = document.getElementById('file_input');
@@ -311,18 +327,26 @@
 
         if (!fi.files) { return; }
 
-        selected_dae_file = null;
-        texture_files_jpg = [];
-        texture_files_png = [];
-        texture_files_dds = [];
         enable_disable( true );
 
+        selected_dae_file = null;
+        texture_files_png = [];
+        texture_files_jpg = [];
+        texture_files_bmp = [];
+        texture_files_dds = [];
+        animations = [];
+        animation_mixer = null;
+        animation_running = false;
+        document.getElementById('btn_animate').style.backgroundColor = '#d1cefc';
+        document.getElementById('btn_animate').disabled = true;
+
         if (!url_loading) {
-          // Include check for JPG/PNG
+          // Include check for JPG/PNG/BMP and DDS (DirectDraw Surface container file format)
           for (let i = 0; i < fi.files.length; i++) {
             if (fi.files[i].name.toUpperCase().endsWith('.DAE')) { selected_dae_file = fi.files[i]; }
             else if (fi.files[i].name.toUpperCase().endsWith('.PNG')) { texture_files_png.push( fi.files[i] ); }
             else if (fi.files[i].name.toUpperCase().endsWith('.JPG')) { texture_files_jpg.push( fi.files[i] ); }
+            else if (fi.files[i].name.toUpperCase().endsWith('.BMP')) { texture_files_bmp.push( fi.files[i] ); }
             else if (fi.files[i].name.toUpperCase().endsWith('.DDS')) { texture_files_dds.push( fi.files[i] ); }
           };
 
@@ -337,6 +361,7 @@
 
         document.body.style.backgroundImage = "none";
         document.getElementById('scale_10x').checked = false;
+        document.getElementById('btn_animate').disabled = true;
         enable_disable( false );
 
         if (renderer == undefined) {
@@ -353,6 +378,8 @@
         // events might be tricky to set due to the presence of the fixed menu.
         // Possibly use Orbit Controls instead.
         //document.body.appendChild( renderer.domElement );
+
+        clock = new THREE.Clock();
 
         if (scene == undefined) { scene = new THREE.Scene(); }
         if (dae_obj == undefined) { dae_obj = new THREE.Object3D(); }
@@ -405,13 +432,22 @@
         scene.add( spotLight );
         scene.add( spotLight.target );
 
-        // Add DirectionalLight to the camera
+        // Add DirectionalLight to the camera (add it to the scene instead if not using Orbit Controls)
         directionalLight = new THREE.DirectionalLight( 0xFFFFFF, 0.8 );
         directionalLight.position.set( 0, 0, 250 );
         directionalLight.lookAt(new THREE.Vector3( 0, 0, 0 ));
         camera.add( directionalLight );
 
         controls = new THREE.OrbitControls(camera, renderer.domElement);
+        //controls.enableKeys = false;
+        //controls.enableZoom = true;
+        //controls.enableDamping = true;
+        //controls.maxPolarAngle = 2.2;
+        //controls.minPolarAngle = 1.1;
+        //controls.dampingFactor = 0.1;
+        //controls.rotateSpeed = 0.2;
+        //controls.minDistance = 2;
+        //controls.maxDistance = 500;
 
         // Load the dae file
         if (selected_dae_file) {
@@ -429,6 +465,21 @@
       function addFileInScene( object ){
         if (selected_dae_file) {
           dae_loader.load( URL.createObjectURL( selected_dae_file ), ( collada ) => {
+            animations = collada.scene.animations;
+
+            if (animations.length > 0) {
+              animation_mixer = new THREE.AnimationMixer( collada.scene );
+              document.getElementById('btn_animate').disabled = false;
+              document.getElementById('btn_animate').style.backgroundColor = 'lightgreen';
+
+              animations.forEach( clip => {
+                animation_mixer.clipAction( clip ).loop = THREE.LoopRepeat;
+                animation_mixer.clipAction( clip ).play();
+              });
+
+              animation_running = true;
+            }
+
             // Go through all children of the loaded object and search for a Mesh
             collada.scene.traverse( function( child ) {
               // This allow us to check if the children is an instance of the Mesh constructor
@@ -442,8 +493,8 @@
                 child.castShadow = true;
                 child.receiveShadow = true;
 
-                if (texture_files_png.length > 0 || texture_files_jpg.length > 0) {
-                  let files = (texture_files_png.length > 0) ? texture_files_png : texture_files_jpg;
+                if (texture_files_png.length > 0 || texture_files_jpg.length > 0 || texture_files_bmp.length > 0) {
+                  let files = (texture_files_png.length > 0) ? texture_files_png : ((texture_files_jpg.length > 0) ? texture_files_jpg : texture_files_bmp);
 
                   files.forEach( file => {
                     let loader = new THREE.TextureLoader();
@@ -482,7 +533,7 @@
 
             resize();
 
-            // Add gltf model to scene
+            // Add dae model to scene
             scene.add( dae_obj );
 
             camera.lookAt( dae_obj.position );
@@ -492,9 +543,9 @@
             let time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + '.' + today.getMilliseconds();
 
             if (xhr.loaded == 0 && xhr.total == 0) {
-              console.log( '0% loaded - ' + time );
+              console.log( 'DAE 0% loaded - ' + time );
             } else {
-              console.log( parseInt(( xhr.loaded / xhr.total * 100 )) + '% loaded - ' + time );
+              console.log( 'DAE ' + parseInt(( xhr.loaded / xhr.total * 100 )) + '% loaded - ' + time );
             }
           }, function ( error ) {
             console.log( 'Error loading DAE!' );
@@ -508,6 +559,21 @@
       function loadURLFile() {
         if (selected_url_file != '') {
           dae_loader.load( selected_url_file, ( collada ) => {
+            animations = collada.scene.animations;
+
+            if (animations.length > 0) {
+              animation_mixer = new THREE.AnimationMixer( collada.scene );
+              document.getElementById('btn_animate').disabled = false;
+              document.getElementById('btn_animate').style.backgroundColor = 'lightgreen';
+
+              animations.forEach( clip => {
+                animation_mixer.clipAction( clip ).loop = THREE.LoopRepeat;
+                animation_mixer.clipAction( clip ).play();
+              });
+
+              animation_running = true;
+            }
+
             // Go through all children of the loaded object and search for a Mesh
             collada.scene.traverse( function( child ) {
               // This allow us to check if the children is an instance of the Mesh constructor
@@ -540,9 +606,9 @@
             let time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + '.' + today.getMilliseconds();
 
             if (xhr.loaded == 0 && xhr.total == 0) {
-              console.log( '0% loaded - ' + time );
+              console.log( 'DAE from URL 0% loaded - ' + time );
             } else {
-              console.log( parseInt(( xhr.loaded / xhr.total * 100 )) + '% loaded - ' + time );
+              console.log( 'DAE from URL ' + parseInt(( xhr.loaded / xhr.total * 100 )) + '% loaded - ' + time );
             }
           }, function ( error ) {
             console.log( 'Error loading DAE from URL!' );
@@ -593,6 +659,11 @@
           if (Math.abs(dae_obj.rotation.x) > 2 * Math.PI ) { dae_obj.rotation.x = 0; }
           if (Math.abs(dae_obj.rotation.y) > 2 * Math.PI ) { dae_obj.rotation.y = 0; }
           if (Math.abs(dae_obj.rotation.z) > 2 * Math.PI ) { dae_obj.rotation.z = 0; }
+        }
+
+        if (animation_running) {
+          var delta = clock.getDelta();
+          animation_mixer.update( delta );
         }
 
         controls.update();
@@ -658,10 +729,12 @@
         }
 
         if (!values && !reset) {
-          // Page (re)loading so reset the file input, URL entry, scale_10x checkbox and disable controls
+          // Page (re)loading so reset the file input, URL entry, scale_10x checkbox, animate button and disable controls
           document.getElementById('file_input').value = '';
           document.getElementById('url_entry').value = '';
           document.getElementById('scale_10x').checked = false;
+          document.getElementById('btn_animate').style.backgroundColor = '#d1cefc';
+          document.getElementById('btn_animate').disabled = true;
           enable_disable( true );
         }
       }
