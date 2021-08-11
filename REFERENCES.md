@@ -11,6 +11,7 @@
 - https://www.sitepoint.com/building-3d-engine-javascript/
 - https://codepen.io/desandro/pen/KRWjzm
 - https://codepen.io/thiagobraga/pen/bhDdn
+- https://codepen.io/mandelid/pen/vwKoe
 - https://mkyong.com/jquery/how-to-use-css-and-jquery-to-hide-and-show-tab-content/
 - https://www.kirupa.com/html5/accessing_your_webcam_in_html5.htm
 - https://codepen.io/Mamboleoo/pen/PqjGdN
