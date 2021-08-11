@@ -74,7 +74,7 @@
     <!-- DAE Examples from: https://github.com/mrdoob/three.js -->
     <title>DAE Viewer (Collada)</title>
   </head>
-  <body onload="reset_all( reset = false )" onresize="resize()">
+  <body onload="reset_all()" onresize="resize()">
     <div class="fixed-menu">
       <div>
         <label for="file" style="color: #CE8704; margin: 2px 2px 2px 5px;">DAE:</label>
@@ -186,7 +186,7 @@
       var ww = window.innerWidth,	wh = window.innerHeight;
       var mouse_rotation = false, reset_rotation = false, events_initialized = false;
       var rot_x = 0, rot_y = 0, rot_z = 0;
-      var previous_dae_scale = '1';
+      var previous_dae_scale = '1', reset_all_in_progress = false;
       var selected_dae_file, selected_url_file = '', url_displayed, url_loading;
       var texture_files_png, texture_files_jpg, texture_files_bmp, texture_files_dds;
 
@@ -347,7 +347,8 @@
           if (shadowMesh) { shadowMesh = null; }
 
           // Reset all values
-          reset_all( true );
+          reset_all_in_progress = true;
+          reset_all();
         }
 
         if (!fi.files) { return; }
@@ -704,7 +705,8 @@
 
       function reset_only() {
         scene.remove( dae_obj );
-        reset_all( true );
+        reset_all_in_progress = true;
+        reset_all();
 
         if (selected_dae_file) {
           loadFile();
@@ -713,7 +715,7 @@
         }
       }
 
-      function reset_all( reset = false ) {
+      function reset_all() {
         // Reset all current positional and rotational values
         document.getElementById('rotation_x').value = 0;
         document.getElementById('rotation_y').value = 0;
@@ -744,7 +746,7 @@
         reset_rotation = true;
 
         // Reset the view
-        if (reset) {
+        if (reset_all_in_progress) {
           controls.reset();
           dae_obj.position.set( 0, 0, 0 );
           hemisphereLight.position.set( 0, 10, 0 );
@@ -759,9 +761,10 @@
           set_spot_light_color();
           set_spot_light_intensity();
           set_directional_light_intensity();
+          reset_all_in_progress = false;
         }
 
-        if (!reset) {
+        if (!reset_all_in_progress) {
           // Page (re)loading so reset the file input, URL entry, spinner, animate button and disable controls
           document.getElementById('file_input').value = '';
           document.getElementById('url_entry').value = '';
