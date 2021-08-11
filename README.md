@@ -60,6 +60,7 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - There are screenshots of most viewers, each showcasing one of the mentioned examples, shadow enabled
  - Alternative software viewers/editors, which support more than just OBJ / PLY / GLTF formats:
    - Three.js [editor](https://threejs.org/editor/) available online
+   - [Online 3D Viewer](https://github.com/kovacsv/Online3DViewer)
    - Windows 10 users have an option to use `Paint 3D` and `3D Viewer` apps
 
 # Usage
