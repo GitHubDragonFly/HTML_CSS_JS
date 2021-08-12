@@ -65,7 +65,7 @@ It would be recommended that you also check [this project](https://github.com/Gi
 
 # Usage
 All it takes is to try either of the following:
-- Thanks to the [GitHub & BitBucket HTML Preview](https://github.com/htmlpreview/htmlpreview.github.com) you can preview the [Exercise](https://htmlpreview.github.io/?https://github.com/GitHubDragonFly/HTML_CSS_JS/blob/main/Files/Exercise.html) page and use its fixed menu to access the rest. This was tested as working in the Firefox browser and you could optionally use ctrl+click to open it in the new tab/window. The preview is not processing 'onload' properly so all the elements are enabled upon loading (which if used can only create a bunch of console errors until a proper object is loaded).
+- Thanks to the [GitHub & BitBucket HTML Preview](https://github.com/htmlpreview/htmlpreview.github.com) you can preview the [Exercise](https://htmlpreview.github.io/?https://github.com/GitHubDragonFly/HTML_CSS_JS/blob/main/Files/Exercise.html) page and use its fixed menu to access the rest. This was tested as working in the Firefox browser and you could optionally use ctrl+click to open it in the new tab/window.
 
 OR do it this way:
 - Download a zip file of this project and extract it (or clone the repo).
