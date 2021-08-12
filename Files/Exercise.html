@@ -523,7 +523,9 @@
       <div style="text-align: center;"><p>Inline Frame</p>
       <!-- Most websites will not allow openning their page in an embedded frame  -->
       <!-- Sandboxing could practically be removed since it uses both 'allow-scripts' and 'allow-same-origin' -->
-      <iframe src="iFrame1.html" name="ifrm" title="Inline Examples" style="background-color: white; width: 99%; height: 400px;" sandbox="allow-same-origin allow-scripts"></iframe>
+      <iframe src="iFrame1.html" name="ifrm" title="Inline Examples" style="background-color: white; width: 99%; height: 400px;" sandbox="allow-same-origin allow-scripts">
+        Your browser does not support inline frames
+      </iframe>
       <p>
         <a href="./Tabs.html" target="_blank">xTabs</a>
         <a href="./Tabs.html" target="ifrm">iTabs</a>
@@ -690,7 +692,7 @@
                 let picture_file = formData.get('file'); // formData.getAll('file') if multiple files
                 if (picture_file.type.startsWith('image/')) {
                   let a = Object.assign(document.createElement('a'), { 'href': URL.createObjectURL(picture_file), 'target': '_blank' });
-                  let img = Object.assign(document.createElement('img'), { 'class': 'obj', 'file': picture_file, 'alt': picture_file.name, 'style': 'width: 24px; height: 22px; margin-right: 5px;' });
+                  let img = Object.assign(document.createElement('img'), { 'class': 'obj', 'file': picture_file, 'alt': picture_file.name, 'style': 'width: 24px; height: 20px; margin-right: 5px;' });
                   a.appendChild(img);
                   new_row.cells.item(10).appendChild(a);
                   const reader = new FileReader();
