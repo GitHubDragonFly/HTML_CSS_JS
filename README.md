@@ -16,7 +16,7 @@ These are the features you can see on the page:
  - Form and submitted form entries table (there is no server involved in this exercise)
  - Media video playback, including camera streaming and an option to record and save the camera video
  - JavaScript and jQuery examples
- - Links to Wavefront 3D OBJ / Stanford 3D PLY / Khronos Group GLTF and DAE (Collada) file viewers, using Three.js found [here](https://threejs.org/) and [here](https://github.com/mrdoob/three.js)
+ - Links to Wavefront 3D OBJ / Stanford 3D PLY + STL (STereoLithography) / Khronos Group GLTF and DAE (Collada) file viewers, using Three.js found [here](https://threejs.org/) and [here](https://github.com/mrdoob/three.js)
    - some example OBJ / PLY / GLTF files are in the `Images` folder
    - some example DAE files can be found in the [HTML_CSS_JS_Flask](https://github.com/GitHubDragonFly/HTML_CSS_JS_Flask) project's `Images` folder
    - there is far more examples in the [Three.js](https://github.com/mrdoob/three.js) project
@@ -37,13 +37,14 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - The "Save" link should turn green to offer to "download" and save the recorded video (no actual downloading from any external website is done, this is all on your computer)
  - Adding more information to inline frame (iFrame) - you can get instructions for obtaining info about your browser and your public IP by visiting [WhatIsMyBrowser](https://www.whatismybrowser.com/developers/tools/iframe) developers page.
  - "3D Cube 1" drawing code might eventually need some corrections. Currently, the transparency allows it to be seen as correct but if you go about changing the "fill" and "stroke" values to more solid, 0.1 changed to 1.0, then you might see somewhat incorrect transitions. This is even more obvious if painting each side of the cube with a different color.
- - OBJ, PLY, GLTF and DAE Viewers:
+ - OBJ, PLY + STL, GLTF and DAE Viewers:
    - All viewers require a browser supporting WebGL and are set to open in new tab/window
    - DAE viewer is set to use Orbit Controls while other viewers do allow some mouse control, with `wheel` serving as zoom in/out and `left-button click/drag` to rotate the image
    - Background image supported formats are PNG, JPEG, SVG, BMP and GIF while selecting non-image file will reset the background
    - Either a local OBJ file alone or MTL + OBJ files or MTL + OBJ + JPG / PNG / BMP files or MTL + OBJ + DDS files can be loaded at the dialog screen
    - If the MTL file requires texture files then you have to select and load them, otherwise check the console output for errors
-   - Either a local PLY file alone or PLY + JPG/PNG/BMP files can be loaded at the dialog screen (texture files should be relatively simple)
+   - Either a local PLY file alone or PLY + JPG / PNG / BMP texture files can be loaded at the dialog screen (texture files should be relatively simple)
+   - A local STL file should be loaded alone since it doesn't play well with textures
    - Either a local GLB / GLTF file alone or GLB / GLTF + JPG / PNG / BMP files can be loaded at the dialog screen
    - Either a local DAE file alone or DAE + JPG / PNG / BMP / DDS files can be loaded at the dialog screen
    - GLTF / DAE viewers also have a URL option available, which should fetch all associated resources and is probably the best choice
@@ -56,7 +57,7 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - The material of the object is set to receive the shadow and it should be automatically visible for some objects (also try changing of the SpotLight intensity)
    - Additional plane receiving shadow is set in the background, controlled by the `Shadow` checkbox, the SpotLight intensity and the opacity of the object
    - Most of the OBJ / PLY / GLTF examples were downloaded from [here](https://github.com/mrdoob/three.js)
-   - My own OBJ and PLY examples were created simply by using online services to perform conversion from PNG to STL, STL to OBJ and then OBJ to PLY ([Blender](https://www.blender.org/) was also used to decrease the size of the files and add MTL with some shading to OBJ example)
+   - My own OBJ, STL and PLY examples were created simply by using online services to perform conversion from PNG to STL, STL to OBJ and then OBJ to PLY ([Blender](https://www.blender.org/) was also used to decrease the size of the files and add MTL with some shading to OBJ example)
    - There are screenshots of most viewers, each showcasing one of the mentioned examples, shadow enabled
  - Alternative software viewers/editors, which support more than just OBJ / PLY / GLTF formats:
    - Three.js [editor](https://threejs.org/editor/) available online
