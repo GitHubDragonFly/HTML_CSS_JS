@@ -17,7 +17,7 @@ These are the features you can see on the page:
  - Media video playback, including camera streaming and an option to record and save the camera video
  - JavaScript and jQuery examples
  - Links to Wavefront 3D OBJ / Stanford 3D PLY + STL (STereoLithography) / Khronos Group GLTF and DAE (Collada) file viewers, using Three.js found [here](https://threejs.org/) and [here](https://github.com/mrdoob/three.js)
-   - some example OBJ / PLY / GLTF files are in the `Images` folder
+   - some example OBJ / PLY / STL / GLTF files are in the `Images` folder
    - some example DAE files can be found in the [HTML_CSS_JS_Flask](https://github.com/GitHubDragonFly/HTML_CSS_JS_Flask) project's `Images` folder
    - there is far more examples in the [Three.js](https://github.com/mrdoob/three.js) project
 
