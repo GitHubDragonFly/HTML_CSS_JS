@@ -1,4 +1,6 @@
 # HTML_CSS_JS
+Intended for use on a desktop computer or a device with a larger screen.
+
 Exercise in HTML, CSS and JavaScript ( [jQuery](https://jquery.com/download/) as well ). Intended for those who either might be learning these or would just like to have several examples in a single page. See the screenshot for what the top part of this page looks like in the Firefox browser (or just use the preview link from the `Usage` section).
 
 For a version with Flask server, check the [HTML_CSS_JS_Flask](https://github.com/GitHubDragonFly/HTML_CSS_JS_Flask) project. 
