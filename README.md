@@ -39,7 +39,7 @@ It would be recommended that you also check [this project](https://github.com/Gi
  - "3D Cube 1" drawing code might eventually need some corrections. Currently, the transparency allows it to be seen as correct but if you go about changing the "fill" and "stroke" values to more solid, 0.1 changed to 1.0, then you might see somewhat incorrect transitions. This is even more obvious if painting each side of the cube with a different color.
  - OBJ, PLY + STL, GLTF and DAE Viewers:
    - All viewers require a browser supporting WebGL and are set to open in new tab/window
-   - DAE viewer is set to use Orbit Controls while other viewers do allow some mouse control, with `wheel` serving as zoom in/out and `left-button click/drag` to rotate the image
+   - GLTF and DAE viewera are set to use Orbit Controls while other viewers do allow some mouse control, with `wheel` serving as zoom in/out and `left-button click/drag` to rotate the image
    - Background image supported formats are PNG, JPEG, SVG, BMP and GIF while selecting non-image file will reset the background
    - Either a local OBJ file alone or MTL + OBJ files or MTL + OBJ + JPG / PNG / BMP files or MTL + OBJ + DDS files can be loaded at the dialog screen
    - If the MTL file requires texture files then you have to select and load them, otherwise check the console output for errors
