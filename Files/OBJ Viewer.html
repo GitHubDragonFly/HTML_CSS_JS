@@ -2,20 +2,20 @@
 <html lang="en">
   <head>
     <meta content="utf-8" charset="utf-8" http-equiv="encoding">
-    <link rel="shortcut icon" href="Images/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="./Images/favicon.ico" type="image/x-icon"/>
 
-    <script src="js/three.js"></script>
-    <script src="js/OrbitControls.js"></script>
-    <script src="js/MTLLoader.js"></script>
-    <script src="js/OBJLoader.js"></script>
-    <script src="js/DDSLoader.js"></script>
+    <script src="./js/three.js"></script>
+    <script src="./js/OrbitControls.js"></script>
+    <script src="./js/MTLLoader.js"></script>
+    <script src="./js/OBJLoader.js"></script>
+    <script src="./js/DDSLoader.js"></script>
 
     <style>
       body,html {
         position: relative;
         display: block;
         background-color: black;
-        background-image: url('Images/DragonFly.png');
+        background-image: url('./Images/DragonFly.png');
         background-position: 50% 50%;
         background-repeat: no-repeat;
         width: 100%;
@@ -429,7 +429,7 @@
           if (shadowMesh) { shadowMesh = null; }
 
           // Reset all values
-          reset_all( false, true );
+          reset_all( true );
         }
 
         enable_disable( true );
@@ -531,6 +531,15 @@
 
         // Orbit Controls can be used for rotation, zoom and move but are camera related
         //controls = new THREE.OrbitControls(camera, renderer.domElement);
+        //controls.enableDamping = true;
+        //controls.enableKeys = false;
+        //controls.enableZoom = true;
+        //controls.maxPolarAngle = 2.2;
+        //controls.minPolarAngle = 1.1;
+        //controls.dampingFactor = 0.1;
+        //controls.rotateSpeed = 0.2;
+        //controls.minDistance = 2;
+        //controls.maxDistance = 500;
 
         // Load the Obj file
         loadFile();
@@ -609,6 +618,7 @@
                   child.material.transparent = true;
                   child.castShadow = true;
                   child.receiveShadow = true;
+
                   child.name = 'child_' + child_count;
                   edges[ child.name ] = new THREE.LineSegments( new THREE.EdgesGeometry( child.geometry, 30 ), new THREE.LineBasicMaterial( { color: 0xA52A2A } ) );
                   child_count += 1;
@@ -683,6 +693,7 @@
                 child.material.transparent = true;
                 child.castShadow = true;
                 child.receiveShadow = true;
+
                 child.name = 'child_' + child_count;
                 edges[ child.name ] = new THREE.LineSegments( new THREE.EdgesGeometry( child.geometry, 30 ), new THREE.LineBasicMaterial( { color: 0xA52A2A } ) );
                 child_count += 1;
@@ -740,15 +751,11 @@
         requestAnimationFrame( render );
 
         // Move the Obj in the scene
-        Obj.position.x = pos_x;
-        Obj.position.y = pos_y;
-        Obj.position.z = pos_z;
+        Obj.position.set( pos_x, pos_y, pos_z );
 
         // Reset Obj rotational values
         if (reset_rotation) {
-          Obj.rotation.x = 0;
-          Obj.rotation.y = 0;
-          Obj.rotation.z = 0;
+          Obj.rotation.set( 0, 0, 0 );
           reset_rotation = false;
         }
 
@@ -757,10 +764,10 @@
           Obj.rotation.x += rot_x;
           Obj.rotation.y += rot_y;
           Obj.rotation.z += rot_z;
+
           if (Math.abs(Obj.rotation.x) > 2 * Math.PI ) { Obj.rotation.x = 0; }
           if (Math.abs(Obj.rotation.y) > 2 * Math.PI ) { Obj.rotation.y = 0; }
           if (Math.abs(Obj.rotation.z) > 2 * Math.PI ) { Obj.rotation.z = 0; }
-
         }
 
         //controls.update();
@@ -779,11 +786,11 @@
 
       function reset_only() {
         scene.remove( Obj );
-        reset_all( false, true );
+        reset_all( true );
         loadFile();
       }
 
-      function reset_all( values = false, reset = false ) {
+      function reset_all( reset = false ) {
         // Reset all current positional and rotational values
         document.getElementById('rotation_x').value = 0;
         document.getElementById('rotation_y').value = 0;
@@ -831,7 +838,7 @@
         reset_rotation = true;
 
         // Reset the view
-        if (!values && reset) {
+        if (reset) {
           Obj.position.set( 0, 0, 0 );
           hemisphereLight.position.set( 0, 10, 0 );
           spotLight.position.set( 150, -50, 350 );
@@ -847,7 +854,7 @@
           set_directional_light_intensity();
         }
 
-        if (!values && !reset) {
+        if (!reset) {
           // Page (re)loading so reset the file input, spinner and disable controls
           document.getElementById('file_input').value = "";
           document.getElementById('div_spinner').style.display = "block";

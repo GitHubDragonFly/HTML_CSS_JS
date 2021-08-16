@@ -33,11 +33,11 @@
       li.block { color: green; font-size: 120%; width: 10%; display: block; }
       li.inline { color: green; font-size: 120%; width: 10%; display: inline; }
 
-      blut { color: blue; font-size: 175%; }
-      gnt { color: green; font-size: 150%; }
-      rdt { color: red; font-size: 125%; }
-      dgt { color: darkgrey ; font-size: 100%; }
-      blkt { color: black; font-size: 75%; }
+      blut { color: blue; font-size: 175%; margin-right: 5px; }
+      gnt { color: green; font-size: 150%; margin-right: 5px; }
+      rdt { color: red; font-size: 125%; margin-right: 5px; }
+      dgt { color: darkgrey ; font-size: 100%; margin-right: 5px; }
+      blkt { color: black; font-size: 75%; margin-right: 5px; }
 
       .required label:after { color: red; content: ' *'; display: inline; }
       .fixed-menu { position: fixed; z-index: 1; left: 0px; top: 0px; margin: 0px; width: 99.7%; border: 1px solid navy; -webkit-border-radius: 3px; border-radius: 3px; background-color: whitesmoke; }
@@ -446,14 +446,14 @@
 
     <br id="P4" /><br />
     <div style="text-align: center;"><p>Mixed color and font-size inline text</p>
-        <blut>Blue &nbsp;</blut>
-        <gnt>Green &nbsp;</gnt>
-        <rdt>Red &nbsp;</rdt>
-        <dgt>DarkGrey &nbsp;</dgt>
-        <blkt>Black &nbsp;</blkt>
-        <dgt>DarkGrey &nbsp;</dgt>
-        <rdt>Red &nbsp;</rdt>
-        <gnt>Green &nbsp;</gnt>
+        <blut>Blue</blut>
+        <gnt>Green</gnt>
+        <rdt>Red</rdt>
+        <dgt>DarkGrey</dgt>
+        <blkt>Black</blkt>
+        <dgt>DarkGrey</dgt>
+        <rdt>Red</rdt>
+        <gnt>Green</gnt>
         <blut>Blue</blut>
     </div>
 
@@ -545,6 +545,8 @@
         let txt = document.getElementById('url').value;
 
         if ( txt != '') {
+          if (!txt.startsWith('http://') && !txt.startsWith('https://')) { txt = 'https://' + txt; }
+
           // Create and use anchor element
           var a = document.createElement('a');
           a.href = txt;
@@ -641,12 +643,12 @@
       function form_query() {
         let formData = new FormData(document.querySelector('form'));
 
-        // Array of arrays, where:
-        //   key_value_pairs[x][0] is the key
+        // Array of arrays, where the x is going from 0 to key_value_pairs.length - 1 :
+        //   key_value_pairs[x][0] is the key, in our case fname, lname, gender ... etc
         //   key_value_pairs[x][1] is the value
-        // the x is going from 0 to key_value_pairs.length - 1 
         key_value_pairs = Array.from(formData.entries());
 
+        // Check if the first and last name have been entered, since we made those as a requirement
         if (key_value_pairs[0][1].trim() != "" && key_value_pairs[1][1].trim() != ""){
           count += 1;
 
@@ -692,7 +694,12 @@
                 let picture_file = formData.get('file'); // formData.getAll('file') if multiple files
                 if (picture_file.type.startsWith('image/')) {
                   let a = Object.assign(document.createElement('a'), { 'href': URL.createObjectURL(picture_file), 'target': '_blank' });
-                  let img = Object.assign(document.createElement('img'), { 'class': 'obj', 'file': picture_file, 'alt': picture_file.name, 'style': 'width: 24px; height: 20px; margin-right: 5px;' });
+                  let img = Object.assign(document.createElement('img'), {
+                    'class': 'obj',
+                    'file': picture_file,
+                    'alt': picture_file.name,
+                    'style': 'width: 24px; height: 20px; margin-right: 5px;'
+                  });
                   a.appendChild(img);
                   new_row.cells.item(10).appendChild(a);
                   const reader = new FileReader();
@@ -771,7 +778,7 @@
         Quisque tristique purus dolor, sit amet vestibulum leo condimentum ut. Sed eget velit sed purus bibendum tincidunt.
         Cras faucibus mauris a faucibus suscipit. Nam vel elementum lectus. Integer vitae enim massa.
         Cras porttitor sit amet ex iaculis venenatis. Morbi nec arcu ac velit sagittis rutrum.
-      </div>&nbsp;
+      </div>
       <div style="background-color: white; width: 45%; float: right;">
         <img src="Images/Freesample.svg" alt="Free SVG Sample" style="width: 67px; height: 56px; float: right;" />
         Maecenas sit amet dolor vitae nisi maximus cursus. Curabitur ultricies in libero eget porttitor.
