@@ -38,7 +38,7 @@ It would be recommended that you also check [this project](https://github.com/Gi
  - Adding more information to inline frame (iFrame) - you can get instructions for obtaining info about your browser and your public IP by visiting [WhatIsMyBrowser](https://www.whatismybrowser.com/developers/tools/iframe) developers page.
  - "3D Cube 1" drawing code might eventually need some corrections. Currently, the transparency allows it to be seen as correct but if you go about changing the "fill" and "stroke" values to more solid, 0.1 changed to 1.0, then you might see somewhat incorrect transitions. This is even more obvious if painting each side of the cube with a different color.
  - OBJ, PLY + STL, GLTF and DAE Viewers:
-   - All viewers require a browser supporting WebGL and are set to open in new tab/window
+   - All viewers require a browser supporting WebGL and are set to open in the new tab/window
    - GLTF and DAE viewera are set to use Orbit Controls while other viewers do allow some mouse control, with `wheel` serving as zoom in/out and `left-button click/drag` to rotate the image
    - Background image supported formats are PNG, JPEG, SVG, BMP and GIF while selecting non-image file will reset the background
    - Either a local OBJ file alone or MTL + OBJ files or MTL + OBJ + JPG / PNG / BMP files or MTL + OBJ + DDS files can be loaded at the dialog screen
@@ -52,9 +52,10 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - GLTF / DAE viewers currently don't support local loading of .bin files (use URL option instead to fetch all the resources)
    - GLTF viewer currently doesn't support DRACO or KTX2 loading while these are available in the [HTML_CSS_JS_Flask](https://github.com/GitHubDragonFly/HTML_CSS_JS_Flask) project 
    - GUI has lights marked as DL, SL, HL and AL (directional, spot, hemisphere and ambient)
-   - Apart from the DAE viewer, all other viewers allow changing the XYZ positions of DL / SL / HL lights, swappable with `Rotate`
+   - All viewers allow changing the XYZ positions of DL / SL / HL lights, swappable with `Rotate`
    - The DLi / SLi control those lights intensity
-   - The material of the object is set to receive the shadow and it should be automatically visible for some objects (also try changing of the SpotLight intensity)
+   - The SpotLight is set to cast a shadow so use it for anything shadow related
+   - The material of the object is set to receive the shadow and it should be automatically visible for some objects (also try changing the SpotLight intensity)
    - Additional plane receiving shadow is set in the background, controlled by the `Shadow` checkbox, the SpotLight intensity and the opacity of the object
    - Most of the OBJ / PLY / GLTF examples were downloaded from [here](https://github.com/mrdoob/three.js)
    - My own OBJ, STL and PLY examples were created simply by using online services to perform conversion from PNG to STL, STL to OBJ and then OBJ to PLY ([Blender](https://www.blender.org/) was also used to decrease the size of the files and add MTL with some shading to OBJ example)
@@ -69,7 +70,7 @@ All it takes is to try either of the following:
 - Thanks to the [GitHub & BitBucket HTML Preview](https://github.com/htmlpreview/htmlpreview.github.com) you can preview the [Exercise](https://htmlpreview.github.io/?https://github.com/GitHubDragonFly/HTML_CSS_JS/blob/main/Files/Exercise.html) page and use its fixed menu to access the rest. This was tested as working in the Firefox browser and you could optionally use ctrl+click to open it in the new tab/window.
 
 OR do it this way:
-- Download a zip file of this project and extract it (or clone the repo).
+- Download a zip file of this project and extract it (or clone the repo) - this will help with having local example files available for loading.
 - Navigate to the `Files` folder and open `Exercise.html` in your Internet browser.
 - The `Exercise.html` is serving as a hub but any of the HTML files can be open in the browser on its own
 - If any change is required then try using VS Code or Notepad to edit files.
