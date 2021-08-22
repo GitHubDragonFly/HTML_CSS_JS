@@ -296,6 +296,22 @@
         directionalLight.intensity = parseFloat( document.getElementById('directional_light_intensity').value );
       }
 
+      function set_initial_scale() {
+        // Set the initial scale of the object so it comes to view
+        bounding_box.setFromObject( dae_obj );
+        let y = (bounding_box.max.y - bounding_box.min.y);
+
+        if (y < 0.001) {
+          dae_obj.scale.multiplyScalar( 1000 );
+        } else if (y < 0.01) {
+          dae_obj.scale.multiplyScalar( 100 );
+        } else if (y < 0.1) {
+          dae_obj.scale.multiplyScalar( 10 );
+        } else {
+          dae_obj.scale.multiplyScalar( 30 / y );
+        }
+      }
+
       function set_dae_scale() {
         let current_dae_scale = document.getElementById('dae_scale').value;
 
@@ -327,6 +343,16 @@
         }
 
         previous_dae_scale = current_dae_scale;
+        set_grid_y();
+      }
+
+      function scale_10x_set() {
+        if (document.getElementById('scale_10x').checked) {
+          dae_obj.scale.multiplyScalar( 10 );
+        } else {
+          dae_obj.scale.multiplyScalar( 0.1 );
+        }
+
         set_grid_y();
       }
 
@@ -651,11 +677,7 @@
             dae_obj = collada.scene;
             dae_obj.name = 'local_model';
 
-            // Set the initial scale of the object so it comes to view
-            bounding_box.setFromObject( dae_obj );
-            let scale_factor = 30 / (bounding_box.max.y - bounding_box.min.y);
-            dae_obj.scale.multiplyScalar( scale_factor );
-
+            set_initial_scale();
             resize();
 
             // Add dae model to scene
@@ -722,11 +744,7 @@
             dae_obj = collada.scene;
             dae_obj.name = 'url_model';
 
-            // Set the initial scale of the object so it comes to view
-            boounding_box.setFromObject( dae_obj );
-            let scale_factor = 30 / (boounding_box.max.y - boounding_box.min.y);
-            dae_obj.scale.multiplyScalar( scale_factor );
-
+            set_initial_scale();
             resize();
 
             // Add dae model to scene
@@ -830,16 +848,6 @@
 
         renderer.clear();
       	renderer.render( scene, camera );
-      }
-
-      function scale_10x_set() {
-        if (document.getElementById('scale_10x').checked) {
-          dae_obj.scale.multiplyScalar( 10 );
-        } else {
-          dae_obj.scale.multiplyScalar( 0.1 );
-        }
-
-        set_grid_y();
       }
 
       function reset_only() {

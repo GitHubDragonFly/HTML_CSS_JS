@@ -293,6 +293,22 @@
         directionalLight.intensity = parseFloat( document.getElementById('directional_light_intensity').value );
       }
 
+      function set_initial_scale() {
+        // Set the initial scale of the object so it comes to view
+        bounding_box.setFromObject( gltf_obj );
+        let y = (bounding_box.max.y - bounding_box.min.y);
+
+        if (y < 0.001) {
+          gltf_obj.scale.multiplyScalar( 1000 );
+        } else if (y < 0.01) {
+          gltf_obj.scale.multiplyScalar( 100 );
+        } else if (y < 0.1) {
+          gltf_obj.scale.multiplyScalar( 10 );
+        } else {
+          gltf_obj.scale.multiplyScalar( 30 / y );
+        }
+      }
+
       function set_gltf_scale() {
         let current_gltf_scale = document.getElementById('gltf_scale').value;
 
@@ -324,6 +340,16 @@
         }
 
         previous_gltf_scale = current_gltf_scale;
+        set_grid_y();
+      }
+
+      function scale_10x_set() {
+        if (document.getElementById('scale_10x').checked) {
+          gltf_obj.scale.multiplyScalar( 10 );
+        } else {
+          gltf_obj.scale.multiplyScalar( 0.1 );
+        }
+
         set_grid_y();
       }
 
@@ -666,11 +692,7 @@
             gltf_obj = gltf.scene;
             gltf_obj.name = 'local_model';
 
-            // Set the initial scale of the object so it comes to view
-            bounding_box.setFromObject( gltf_obj );
-            let scale_factor = 30 / (bounding_box.max.y - bounding_box.min.y);
-            gltf_obj.scale.multiplyScalar( scale_factor );
-
+            set_initial_scale();
             resize();
 
             // Add gltf model to scene
@@ -750,11 +772,7 @@
             gltf_obj = gltf.scene;
             gltf_obj.name = 'url_model';
 
-            // Set the initial scale of the object so it comes to view
-            bounding_box.setFromObject( gltf_obj );
-            let scale_factor = 30 / (bounding_box.max.y - bounding_box.min.y);
-            gltf_obj.scale.multiplyScalar( scale_factor );
-
+            set_initial_scale();
             resize();
 
             // Add gltf model to scene
@@ -861,16 +879,6 @@
 
         renderer.clear();
       	renderer.render( scene, camera );
-      }
-
-      function scale_10x_set() {
-        if (document.getElementById('scale_10x').checked) {
-          gltf_obj.scale.multiplyScalar( 10 );
-        } else {
-          gltf_obj.scale.multiplyScalar( 0.1 );
-        }
-
-        set_grid_y();
       }
 
       function reset_only() {
