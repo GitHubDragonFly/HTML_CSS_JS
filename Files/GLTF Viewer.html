@@ -201,11 +201,6 @@
       // Loader for selected file from Three.js
       const gltf_loader = new THREE.GLTFLoader( manager );
 
-      function set_grid_y() {
-        bounding_box.setFromObject( gltf_obj );
-        grid.position.y = bounding_box.min.y;
-      }
-
       function set_back_color() { document.body.style.backgroundColor = document.getElementById('back_color').value; }
 
       function set_gltf_opacity() {
@@ -662,6 +657,7 @@
                 child.material.opacity = 1;
                 child.material.transparent = true;
                 child.material.skinning = true;
+                child.material.needsUpdate = true;
                 child.castShadow = true;
                 child.receiveShadow = true;
 
@@ -760,6 +756,7 @@
                 child.material.opacity = 1;
                 child.material.transparent = true;
                 child.material.skinning = true;
+                child.material.needsUpdate = true;
                 child.castShadow = true;
                 child.receiveShadow = true;
 
@@ -817,6 +814,11 @@
         }
       }
 
+      function set_grid_y() {
+        bounding_box.setFromObject( gltf_obj );
+        grid.position.y = bounding_box.min.y;
+      }
+
       function show_edges() {
         if (edges_visible) {
           gltf_obj.traverse( function( child ) { if (child instanceof THREE.Mesh) { child.remove( edges[ child.name ] ); } });
@@ -859,7 +861,7 @@
           }
 
           // Rotate the gltf_obj
-          if (!mouse_rotation) {
+          if (!mouse_rotation && (rot_x != 0 || rot_y != 0 || rot_z != 0)) {
             gltf_obj.rotation.x += rot_x;
             gltf_obj.rotation.y += rot_y;
             gltf_obj.rotation.z += rot_z;
