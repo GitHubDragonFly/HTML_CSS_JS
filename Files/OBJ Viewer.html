@@ -621,14 +621,14 @@
               obj_loader.setMaterials( mtl );
             }
 
-            obj_loader.load( URL.createObjectURL( selected_obj_file ), function ( object ) {
+            obj_loader.load( URL.createObjectURL( selected_obj_file ), function( object ) {
               Obj = object.clone();
 
               let child_count = 1;
 
               // Go through all children of the loaded object and search for a Mesh
               Obj.traverse( function ( child ) {
-                // This allow us to check if the children is an instance of the Mesh constructor
+                // This will allow us to check if the child is an instance of the Mesh constructor
           	    if (child instanceof THREE.Mesh) {
                   if (texture_files_dds.length > 0) {
                     child.material.map = dds_loader.load( mtl.materials[ child.material.name ], function( texture ) {});
@@ -669,7 +669,7 @@
 
             // Go through all children of the loaded object and search for a Mesh
             Obj.traverse( function( child ) {
-              // This allow us to check if the children is an instance of the Mesh constructor
+              // This will allow us to check if the child is an instance of the Mesh constructor
         	    if (child instanceof THREE.Mesh) {
                 if (texture_files_png.length > 0) {
                   texture_files_png.forEach( file => {
@@ -753,15 +753,9 @@
       function show_wireframe() {
         // Go through all children of the loaded object and search for a Mesh
         Obj.traverse( function( child ) {
-          // This allow us to check if the children is an instance of the Mesh constructor
+          // This will allow us to check if the child is an instance of the Mesh constructor
     	    if (child instanceof THREE.Mesh) {
-            if (Array.isArray(child.material)) {
-              child.material.forEach( mtl => {
-                mtl.wireframe = document.getElementById('wireframe').checked;
-              });
-            } else {
-              child.material.wireframe = document.getElementById('wireframe').checked;
-            }
+            child.material.wireframe = document.getElementById('wireframe').checked;
     		  }
     	  });
       }
@@ -788,7 +782,7 @@
         }
 
         // Rotate the Obj
-        if (!mouse_rotation) {
+        if (!mouse_rotation && (rot_x != 0 || rot_y != 0 || rot_z != 0)) {
           Obj.rotation.x += rot_x;
           Obj.rotation.y += rot_y;
           Obj.rotation.z += rot_z;

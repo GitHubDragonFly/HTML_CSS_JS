@@ -211,12 +211,23 @@
 
       function set_dae_opacity() {
         if (dae_obj) {
+          let opacity_value = document.getElementById('dae_opacity').value;
+
           dae_obj.traverse( function( child ) {
             // This allow us to check if the children is an instance of the Mesh constructor
           	if (child instanceof THREE.Mesh) {
-              child.material.opacity = document.getElementById('dae_opacity').value;
-              if (document.getElementById('shadow').checked) {
-                shadowMaterial.opacity = child.material.opacity * document.getElementById('spot_light_intensity').value;
+              if (Array.isArray( child.material )) {
+                child.material.forEach( mtl => {
+                  mtl.opacity = opacity_value;
+                  if (document.getElementById('shadow').checked) {
+                    shadowMaterial.opacity = opacity_value * document.getElementById('spot_light_intensity').value;
+                  }
+                });
+              } else {
+                child.material.opacity = opacity_value;
+                if (document.getElementById('shadow').checked) {
+                  shadowMaterial.opacity = opacity_value * document.getElementById('spot_light_intensity').value;
+                }
               }
     		    }
           });
@@ -621,14 +632,25 @@
 
             // Go through all children of the loaded object and search for a Mesh
             collada.scene.traverse( function( child ) {
-              // This allow us to check if the children is an instance of the Mesh constructor
+              // This will allow us to check if the child is an instance of the Mesh constructor
           	  if (child instanceof THREE.Mesh) {
                 child.geometry.computeVertexNormals();
 
-                // Enable transparency for the Opacity control and enable shadows
-                child.material.opacity = 1;
-                child.material.transparent = true;
-                child.material.skinning = true;
+                if (Array.isArray( child.material )) {
+                  child.material.forEach( mtl => {
+                    // Enable transparency for the Opacity control
+                    mtl.opacity = 1;
+                    mtl.transparent = true;
+                    mtl.skinning = true;
+                  });
+                } else {
+                  // Enable transparency for the Opacity control
+                  child.material.opacity = 1;
+                  child.material.transparent = true;
+                  child.material.skinning = true;
+                }
+
+                // Enable shadows
                 child.castShadow = true;
                 child.receiveShadow = true;
 
@@ -644,8 +666,15 @@
                       texture.magFilter = THREE.NearestFilter;
 
                       // Apply texture
-                      child.material.map = texture;
-                      child.material.needsUpdate = true;
+                      if (Array.isArray( child.material )) {
+                        child.material.forEach( mtl => {
+                          mtl.map = texture;
+                          mtl.needsUpdate = true;
+                        });
+                      } else {
+                        child.material.map = texture;
+                        child.material.needsUpdate = true;
+                      }
                     });
                   });
                 } else if (texture_files_dds.length > 0) {
@@ -657,8 +686,15 @@
                       texture.magFilter = THREE.NearestFilter;
 
                       // Apply texture
-                      child.material.map = texture;
-                      child.material.needsUpdate = true;
+                      if (Array.isArray( child.material )) {
+                        child.material.forEach( mtl => {
+                          mtl.map = texture;
+                          mtl.needsUpdate = true;
+                        });
+                      } else {
+                        child.material.map = texture;
+                        child.material.needsUpdate = true;
+                      }
                     });
                   });
                 }
@@ -719,14 +755,25 @@
 
             // Go through all children of the loaded object and search for a Mesh
             collada.scene.traverse( function( child ) {
-              // This allow us to check if the children is an instance of the Mesh constructor
+              // This will allow us to check if the child is an instance of the Mesh constructor
           	  if (child instanceof THREE.Mesh) {
                 child.geometry.computeVertexNormals();
 
-                // Enable transparency for the Opacity control and enable shadows
-                child.material.opacity = 1;
-                child.material.transparent = true;
-                child.material.skinning = true;
+                if (Array.isArray( child.material )) {
+                  child.material.forEach( mtl => {
+                    // Enable transparency for the Opacity control
+                    mtl.opacity = 1;
+                    mtl.transparent = true;
+                    mtl.skinning = true;
+                  });
+                } else {
+                  // Enable transparency for the Opacity control
+                  child.material.opacity = 1;
+                  child.material.transparent = true;
+                  child.material.skinning = true;
+                }
+
+                // Enable shadows
                 child.castShadow = true;
                 child.receiveShadow = true;
 
