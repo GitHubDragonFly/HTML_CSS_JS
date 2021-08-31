@@ -218,6 +218,7 @@
       // Loader for selected file from Three.js
       const mtl_loader = new THREE.MTLLoader( manager );
       const obj_loader = new THREE.OBJLoader( manager );
+
       const texture_loader = new THREE.TextureLoader( manager );
       const dds_loader = new THREE.DDSLoader( manager );
       manager.addHandler( /\.dds$/i, dds_loader );
@@ -642,8 +643,9 @@
                   child.material.skinning = true;
                   child.material.opacity = 1;
                   child.material.transparent = true;
+                  child.material.side = THREE.DoubleSide;
                   child.castShadow = true;
-                  child.receiveShadow = true;
+                  child.receiveShadow = false;
 
                   child.name = 'child_' + child_count;
                   edges[ child.name ] = new THREE.LineSegments( new THREE.EdgesGeometry( child.geometry, 30 ), new THREE.LineBasicMaterial( { color: 0xA52A2A } ) );
@@ -685,8 +687,9 @@
                 child.material.skinning = true;
                 child.material.opacity = 1;
                 child.material.transparent = true;
+                child.material.side = THREE.DoubleSide;
                 child.castShadow = true;
-                child.receiveShadow = true;
+                child.receiveShadow = false;
 
                 child.name = 'child_' + child_count;
                 edges[ child.name ] = new THREE.LineSegments( new THREE.EdgesGeometry( child.geometry, 30 ), new THREE.LineBasicMaterial( { color: 0xA52A2A } ) );

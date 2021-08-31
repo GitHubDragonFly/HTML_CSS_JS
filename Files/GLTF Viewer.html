@@ -720,9 +720,9 @@
                 child.material.opacity = 1;
                 child.material.transparent = true;
                 child.material.skinning = true;
-                child.material.needsUpdate = true;
+                child.material.side = THREE.DoubleSide;
                 child.castShadow = true;
-                child.receiveShadow = true;
+                child.receiveShadow = false;
 
                 if (texture_files_png.length > 0 || texture_files_jpg.length > 0 || texture_files_bmp.length > 0) {
                   let files = (texture_files_png.length > 0) ? texture_files_png : ((texture_files_jpg.length > 0) ? texture_files_jpg : texture_files_bmp);
@@ -831,7 +831,7 @@
                 child.material.opacity = 1;
                 child.material.transparent = true;
                 child.material.skinning = true;
-                child.material.needsUpdate = true;
+                child.material.side = THREE.DoubleSide;
                 child.castShadow = true;
                 child.receiveShadow = true;
 

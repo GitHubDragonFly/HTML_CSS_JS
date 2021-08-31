@@ -588,6 +588,7 @@
               opacity: 1,
               transparent: true,
               skinning: true,
+              side: THREE.DoubleSide,
               vertexColors: THREE.VertexColors,
               reflectivity: 1
             });
@@ -599,6 +600,7 @@
               opacity: 1,
               transparent: true,
               skinning: true,
+              side: THREE.DoubleSide,
               vertexColors: THREE.VertexColors,
               reflectivity: 1
             });
@@ -610,6 +612,7 @@
               opacity: 1,
               transparent: true,
               skinning: true,
+              side: THREE.DoubleSide,
               vertexColors: THREE.VertexColors,
               reflectivity: 1
             });
@@ -621,6 +624,7 @@
               opacity: 1,
               transparent: true,
               skinning: true,
+              side: THREE.DoubleSide,
               vertexColors: THREE.VertexColors
             });
           } else {
@@ -634,6 +638,7 @@
               opacity: 1,
               transparent: true,
               skinning: true,
+              side: THREE.DoubleSide,
               vertexColors: THREE.VertexColors,
               flatShading: false
             });
@@ -650,6 +655,7 @@
               opacity: 1,
               transparent: true,
               skinning: true,
+              side: THREE.DoubleSide,
               vertexColors: THREE.VertexColors,
               flatShading: false
             });
@@ -662,6 +668,7 @@
               opacity: 1,
               transparent: true,
               skinning: true,
+              side: THREE.DoubleSide,
               vertexColors: THREE.VertexColors,
               reflectivity: 0.5
             });
@@ -673,7 +680,8 @@
 
         mesh = new THREE.Mesh( smooth, material );
         mesh.castShadow = true;
-        mesh.receiveShadow = true;
+        mesh.receiveShadow = false;
+
         edges = new THREE.LineSegments( new THREE.EdgesGeometry( mesh.geometry, 30 ), new THREE.LineBasicMaterial( { color: 0xA52A2A } ) );
 
         set_initial_scale();
@@ -702,7 +710,7 @@
       function show_wireframe() {
         // Go through all children of the loaded object and search for a Mesh
         mesh.traverse( function ( child ) {
-          // This allow us to check if the children is an instance of the Mesh constructor
+          // This will allow us to check if the child is an instance of the Mesh constructor
     	    if(child instanceof THREE.Mesh){
             child.material.wireframe = document.getElementById('wireframe').checked;
     		  }
@@ -731,7 +739,7 @@
         }
 
         // Rotate the mesh
-        if (!mouse_rotation) {
+        if (!mouse_rotation && (rot_x != 0 || rot_y != 0 || rot_z != 0)) {
           mesh.rotation.x += rot_x;
           mesh.rotation.y += rot_y;
           mesh.rotation.z += rot_z;

@@ -642,17 +642,19 @@
                     mtl.opacity = 1;
                     mtl.transparent = true;
                     mtl.skinning = true;
+                    mtl.side = THREE.DoubleSide;
                   });
                 } else {
                   // Enable transparency for the Opacity control
                   child.material.opacity = 1;
                   child.material.transparent = true;
                   child.material.skinning = true;
+                  child.material.side = THREE.DoubleSide;
                 }
 
                 // Enable shadows
                 child.castShadow = true;
-                child.receiveShadow = true;
+                child.receiveShadow = false;
 
                 if (texture_files_png.length > 0 || texture_files_jpg.length > 0 || texture_files_bmp.length > 0) {
                   let files = (texture_files_png.length > 0) ? texture_files_png : ((texture_files_jpg.length > 0) ? texture_files_jpg : texture_files_bmp);
@@ -765,17 +767,19 @@
                     mtl.opacity = 1;
                     mtl.transparent = true;
                     mtl.skinning = true;
+                    mtl.side = THREE.DoubleSide;
                   });
                 } else {
                   // Enable transparency for the Opacity control
                   child.material.opacity = 1;
                   child.material.transparent = true;
                   child.material.skinning = true;
+                  child.material.side = THREE.DoubleSide;
                 }
 
                 // Enable shadows
                 child.castShadow = true;
-                child.receiveShadow = true;
+                child.receiveShadow = false;
 
                 child.name = 'child_' + child_count;
                 edges[ child.name ] = new THREE.LineSegments( new THREE.EdgesGeometry( child.geometry, 30 ), new THREE.LineBasicMaterial( { color: 0xA52A2A } ) );
