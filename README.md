@@ -72,7 +72,7 @@ All it takes is to try either of the following:
 
 - Thanks to the [GitHub & BitBucket HTML Preview](https://github.com/htmlpreview/htmlpreview.github.com) you can preview the [Exercise](https://htmlpreview.github.io/?https://github.com/GitHubDragonFly/HTML_CSS_JS/blob/main/Files/Exercise.html) page and use its fixed menu to access the rest. This was tested as working in the Firefox browser and you could optionally use ctrl+click to open it in the new tab/window.
 
-And just for the convenience, you can access the viewers directly here: [OBJ](https://htmlpreview.github.io/?https://github.com/GitHubDragonFly/HTML_CSS_JS/blob/main/Files/python/app/templates/OBJ%20Viewer.html) / [PLY + STL](https://htmlpreview.github.io/?https://github.com/GitHubDragonFly/HTML_CSS_JS/blob/main/Files/python/app/templates/PLY%20Viewer.html) / [DAE](https://htmlpreview.github.io/?https://github.com/GitHubDragonFly/HTML_CSS_JS/blob/main/Files/python/app/templates/DAE%20Viewer.html) / [GLTF](https://htmlpreview.github.io/?https://github.com/GitHubDragonFly/HTML_CSS_JS/blob/main/Files/python/app/templates/GLTF%20Viewer.html)
+And just for the convenience, you can access the viewers directly here: [OBJ](https://htmlpreview.github.io/?https://github.com/GitHubDragonFly/HTML_CSS_JS/blob/main/Files/OBJ%20Viewer.html) / [PLY + STL](https://htmlpreview.github.io/?https://github.com/GitHubDragonFly/HTML_CSS_JS/blob/main/Files/PLY%20Viewer.html) / [DAE](https://htmlpreview.github.io/?https://github.com/GitHubDragonFly/HTML_CSS_JS/blob/main/Files/DAE%20Viewer.html) / [GLTF](https://htmlpreview.github.io/?https://github.com/GitHubDragonFly/HTML_CSS_JS/blob/main/Files/GLTF%20Viewer.html)
 
 OR do it this way:
 
