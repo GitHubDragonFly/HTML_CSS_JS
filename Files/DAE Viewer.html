@@ -104,7 +104,8 @@
       <div id="url" style="display: none;">
         <label for="url_entry" style="margin: 2px 2px 2px 5px;">URL:</label>
         <input type="text" id="url_entry" name="url_entry" size="90" value="" style="margin: 2px 5px 2px 0;" />
-        <button id="btn_load_url" onclick="load_url_file()" style="-webkit-border-radius: 2px; border-radius: 2px; width: 50px; margin: 2px 0 2px 0; padding: 2px;">Load</button>
+        <button onclick="load_url_file()" style="-webkit-border-radius: 2px; border-radius: 2px; width: 50px; margin: 2px 0 2px 0; padding: 2px;">Load</button>
+        <button onclick="clear_url()" style="-webkit-border-radius: 2px; border-radius: 2px; width: 50px; margin: 2px 2px 2px 0; padding: 2px;">Clear</button>
       </div>
       <div>
         <label style="color: blue; margin: 2px 0 2px 0;"><input type="radio" id="hlight" name="mode" value="HL" onchange="radio_changed()" disabled />HL</label>
@@ -157,9 +158,10 @@
 
       function load_url_file() {
         let url = document.getElementById('url_entry').value.trim();
-
         if (url != '') { selected_url_file = url; url_loading = true; init(); }
       }
+
+      function clear_url() { document.getElementById('url_entry').value = ''; }
 
       function initialize_event_listeners() {
         var cnvs = document.getElementById('scene');
@@ -204,12 +206,15 @@
       var rot_x = 0, rot_y = 0, rot_z = 0;
       var previous_dae_scale = '1', bounding_box = new THREE.Box3();
       var selected_dae_file, selected_url_file = '', url_displayed, url_loading;
-      var texture_files_png, texture_files_jpg, texture_files_bmp, texture_files_dds;
+      var texture_files_png, texture_files_jpg, texture_files_bmp, texture_files_gif, texture_files_dds;
 
       // Manager from ThreeJs to track a loader and its status
       var manager = new THREE.LoadingManager();
+
       // Loader for selected file from Three.js
       const dae_loader = new THREE.ColladaLoader( manager );
+
+      const texture_loader = new THREE.TextureLoader();
 
       const dds_loader = new THREE.DDSLoader( manager );
       manager.addHandler( /\.dds$/i, dds_loader );
@@ -253,8 +258,7 @@
           document.body.style.backgroundColor = document.getElementById('back_color').value;
 
           if (fii.files[0].type.startsWith('image/')) {
-            const loader = new THREE.TextureLoader();
-            loader.load( URL.createObjectURL( fii.files[0] ) , function ( texture ) {
+            texture_loader.load( URL.createObjectURL( fii.files[0] ) , function( texture ) {
               scene.background = texture;
             });
           } else {
@@ -487,6 +491,7 @@
         texture_files_png = [];
         texture_files_jpg = [];
         texture_files_bmp = [];
+        texture_files_gif = [];
         texture_files_dds = [];
         animations = [];
         animation_mixer = null;
@@ -507,12 +512,13 @@
 
           if (!fi.files) { return; }
 
-          // Include check for JPG/PNG/BMP and DDS (DirectDraw Surface container file format)
+          // Include check for JPG/PNG/BMP/GIF and DDS (DirectDraw Surface container file format)
           for (let i = 0; i < fi.files.length; i++) {
             if (fi.files[i].name.toUpperCase().endsWith('.DAE')) { selected_dae_file = fi.files[i]; }
             else if (fi.files[i].name.toUpperCase().endsWith('.PNG')) { texture_files_png.push( fi.files[i] ); }
             else if (fi.files[i].name.toUpperCase().endsWith('.JPG')) { texture_files_jpg.push( fi.files[i] ); }
             else if (fi.files[i].name.toUpperCase().endsWith('.BMP')) { texture_files_bmp.push( fi.files[i] ); }
+            else if (fi.files[i].name.toUpperCase().endsWith('.GIF')) { texture_files_gif.push( fi.files[i] ); }
             else if (fi.files[i].name.toUpperCase().endsWith('.DDS')) { texture_files_dds.push( fi.files[i] ); }
           };
 
@@ -672,12 +678,11 @@
                 child.castShadow = true;
                 child.receiveShadow = false;
 
-                if (texture_files_png.length > 0 || texture_files_jpg.length > 0 || texture_files_bmp.length > 0) {
-                  let files = (texture_files_png.length > 0) ? texture_files_png : ((texture_files_jpg.length > 0) ? texture_files_jpg : texture_files_bmp);
+                if (texture_files_png.length > 0 || texture_files_jpg.length > 0 || texture_files_bmp.length > 0 || texture_files_gif.length > 0) {
+                  let files = (texture_files_png.length > 0) ? texture_files_png : ((texture_files_jpg.length > 0) ? texture_files_jpg : ((texture_files_bmp.length > 0) ? texture_files_bmp : texture_files_gif));
 
                   files.forEach( file => {
-                    let loader = new THREE.TextureLoader();
-                    loader.load( URL.createObjectURL( file ) , function( texture ) {
+                    texture_loader.load( URL.createObjectURL( file ) , function( texture ) {
                       texture.encoding = THREE.sRGBEncoding;
                       texture.wrapS = THREE.RepeatWrapping;
                       texture.wrapT = THREE.RepeatWrapping;
@@ -826,12 +831,12 @@
             let time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + '.' + today.getMilliseconds();
 
             if (xhr.loaded == 0 && xhr.total == 0) {
-              console.log( 'DAE from URL 0% loaded - ' + time );
+              console.log( 'URL DAE 0% loaded - ' + time );
             } else {
-              console.log( 'DAE from URL ' + parseInt(( xhr.loaded / xhr.total * 100 )) + '% loaded - ' + time );
+              console.log( 'URL DAE ' + parseInt(( xhr.loaded / xhr.total * 100 )) + '% loaded - ' + time );
             }
           }, function ( error ) {
-            console.log( 'Error loading DAE from URL!' );
+            console.log( 'Error loading URL DAE!' );
             console.log( error );
             render_requested = false;
           });
@@ -1007,8 +1012,8 @@
 
         // Reset the view
         if (reset) {
-           controls.reset();
-          dae_obj.position.set( 0, 0, 0 );
+          controls.reset();
+          if (dae_obj) dae_obj.position.set( 0, 0, 0 );
           hemisphereLight.position.set( 0, 10, 0 );
           spotLight.position.set( 150, 0, 350 );
           directionalLight.position.set( 0, 0, 250 );

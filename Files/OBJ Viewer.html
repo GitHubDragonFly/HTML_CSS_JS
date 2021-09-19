@@ -211,7 +211,8 @@
       var rot_x = 0, rot_y = 0, rot_z = 0, pos_x = 0, pos_y = 0, pos_z = 0;
       var previous_obj_scale = '1', bounding_box = new THREE.Box3();
       var selected_mtl_file, selected_obj_file;
-      var texture_files_png, texture_files_jpg, texture_files_bmp, texture_files_dds, textures, current_texture;
+      var texture_files_png, texture_files_jpg, texture_files_bmp, texture_files_gif;
+      var texture_files_dds, textures, current_texture;
 
       // Manager from ThreeJs to track a loader and its status
       var manager = new THREE.LoadingManager();
@@ -464,19 +465,21 @@
         texture_files_png = [];
         texture_files_jpg = [];
         texture_files_bmp = [];
+        texture_files_gif = [];
         texture_files_dds = [];
         edges = {};
         edges_visible = false;
         current_texture = -1;
         document.getElementById('btn_textures').disabled = true;
 
-        // Include check for JPG/PNG/BMP and DDS (DirectDraw Surface container file format)
+        // Include check for JPG/PNG/BMP/GIF and DDS (DirectDraw Surface container file format)
         for (let i = 0; i < fi.files.length; i++) {
           if (fi.files[i].name.toUpperCase().endsWith('.OBJ')) { selected_obj_file = fi.files[i]; }
           else if (fi.files[i].name.toUpperCase().endsWith('.MTL')) { selected_mtl_file = fi.files[i]; }
           else if (fi.files[i].name.toUpperCase().endsWith('.PNG')) { texture_files_png.push( fi.files[i] ); }
           else if (fi.files[i].name.toUpperCase().endsWith('.JPG')) { texture_files_jpg.push( fi.files[i] ); }
           else if (fi.files[i].name.toUpperCase().endsWith('.BMP')) { texture_files_bmp.push( fi.files[i] ); }
+          else if (fi.files[i].name.toUpperCase().endsWith('.GIF')) { texture_files_gif.push( fi.files[i] ); }
           else if (fi.files[i].name.toUpperCase().endsWith('.DDS')) { texture_files_dds.push( fi.files[i] ); }
         };
 
@@ -609,6 +612,17 @@
                 }
               }
 
+              if (texture_files_gif.length > 0) {
+                for (const [ key, value ] of Object.entries( mtl.materialsInfo )) {
+                  texture_files_gif.forEach( file => {
+                    if (file.name === value.map_kd) {
+                      mtl.materials[ key ] = URL.createObjectURL( file );
+                      mtl.materialsInfo[ key ].map_kd = mtl.materials[ key ].substring(10);
+                    }
+                  });
+                }
+              }
+
               if (texture_files_dds.length > 0) {
                 for (const [ key, value ] of Object.entries( mtl.materialsInfo )) {
                   texture_files_dds.forEach( file => {
@@ -635,7 +649,7 @@
           	    if (child instanceof THREE.Mesh) {
                   if (texture_files_dds.length > 0) {
                     child.material.map = dds_loader.load( mtl.materials[ child.material.name ], function( texture ) {});
-                  } else if (texture_files_png.length > 0 || texture_files_jpg.length > 0) {
+                  } else if (texture_files_png.length > 0 || texture_files_jpg.length > 0 || texture_files_bmp.length > 0 || texture_files_gif.length > 0) {
                     child.material.map = mtl.loadTexture( mtl.materials[ child.material.name ] );
                   }
 
@@ -673,6 +687,7 @@
             if (texture_files_png.length > 0) { texture_files_png.forEach( file => { textures.push( file ); }); }
             if (texture_files_jpg.length > 0) { texture_files_jpg.forEach( file => { textures.push( file ); }); }
             if (texture_files_bmp.length > 0) { texture_files_bmp.forEach( file => { textures.push( file ); }); }
+            if (texture_files_gif.length > 0) { texture_files_gif.forEach( file => { textures.push( file ); }); }
             if (texture_files_dds.length > 0) { texture_files_dds.forEach( file => { textures.push( file ); }); }
                 
             if (textures.length > 0) { document.getElementById('btn_textures').disabled = false; }
@@ -875,7 +890,7 @@
 
         // Reset the view
         if (reset) {
-          Obj.position.set( 0, 0, 0 );
+          if (Obj) Obj.position.set( 0, 0, 0 );
           hemisphereLight.position.set( 0, 10, 0 );
           spotLight.position.set( 150, -50, 350 );
           directionalLight.position.set( 0, 0, 250 );

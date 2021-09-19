@@ -212,7 +212,7 @@
       var rot_x = 0, rot_y = 0, rot_z = 0, pos_x = 0, pos_y = 0, pos_z = 0;
       var previous_ply_scale = '1', bounding_box = new THREE.Box3();
       var selected_ply_file, selected_stl_file;
-      var texture_files_png, texture_files_jpg, texture_files_bmp, texture_files_dds;
+      var texture_files_png, texture_files_jpg, texture_files_bmp, texture_files_gif, texture_files_dds;
 
       // Manager from ThreeJs to track a loader and its status
       var manager = new THREE.LoadingManager();
@@ -458,17 +458,19 @@
         texture_files_png = [];
         texture_files_jpg = [];
         texture_files_bmp = [];
+        texture_files_gif = [];
         texture_files_dds = [];
         edges = null;
         edges_visible = false;
 
-        // Include check for JPG/PNG/BMP and DDS (DirectDraw Surface container file format)
+        // Include check for JPG/PNG/BMP/GIF and DDS (DirectDraw Surface container file format)
         for (let i = 0; i < fi.files.length; i++) {
           if (fi.files[i].name.toUpperCase().endsWith('.PLY')) { selected_ply_file = fi.files[i]; }
           else if (fi.files[i].name.toUpperCase().endsWith('.STL')) { selected_stl_file = fi.files[i]; }
           else if (fi.files[i].name.toUpperCase().endsWith('.PNG')) { texture_files_png.push( fi.files[i] ); }
           else if (fi.files[i].name.toUpperCase().endsWith('.JPG')) { texture_files_jpg.push( fi.files[i] ); }
           else if (fi.files[i].name.toUpperCase().endsWith('.BMP')) { texture_files_bmp.push( fi.files[i] ); }
+          else if (fi.files[i].name.toUpperCase().endsWith('.GIF')) { texture_files_gif.push( fi.files[i] ); }
           else if (fi.files[i].name.toUpperCase().endsWith('.DDS')) { texture_files_dds.push( fi.files[i] ); }
         };
 
@@ -606,6 +608,18 @@
             });
           } else if (texture_files_bmp.length > 0) {
             texture = texture_loader.load( URL.createObjectURL( texture_files_bmp[0] ));
+            material = new THREE.MeshLambertMaterial( {
+              map: texture,
+              fog: true,
+              opacity: 1,
+              transparent: true,
+              skinning: true,
+              side: THREE.DoubleSide,
+              vertexColors: THREE.VertexColors,
+              reflectivity: 1
+            });
+          } else if (texture_files_gif.length > 0) {
+            texture = texture_loader.load( URL.createObjectURL( texture_files_gif[0] ));
             material = new THREE.MeshLambertMaterial( {
               map: texture,
               fog: true,
@@ -810,7 +824,7 @@
 
         // Reset the view
         if (reset) {
-          mesh.position.set( 0, 0, 0 );
+          if (mesh) mesh.position.set( 0, 0, 0 );
           hemisphereLight.position.set( 0, 10, 0 );
           spotLight.position.set( 150, -50, 350 );
           directionalLight.position.set( 0, 0, 250 );

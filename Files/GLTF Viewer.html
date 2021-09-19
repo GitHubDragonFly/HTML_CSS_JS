@@ -108,7 +108,8 @@
       <div id="url" style="display: none;">
         <label for="url_entry" style="margin: 2px 2px 2px 5px;">URL:</label>
         <input type="text" id="url_entry" name="url_entry" size="90" value="" style="margin: 2px 5px 2px 0;" />
-        <button id="btn_load_url" onclick="load_url_file()" style="-webkit-border-radius: 2px; border-radius: 2px; width: 50px; margin: 2px 0 2px 0; padding: 2px;">Load</button>
+        <button onclick="load_url_file()" style="-webkit-border-radius: 2px; border-radius: 2px; width: 50px; margin: 2px 0 2px 0; padding: 2px;">Load</button>
+        <button onclick="clear_url()" style="-webkit-border-radius: 2px; border-radius: 2px; width: 50px; margin: 2px 2px 2px 0; padding: 2px;">Clear</button>
       </div>
       <div>
         <label style="color: blue; margin: 2px 0 2px 0;"><input type="radio" id="hlight" name="mode" value="HL" onchange="radio_changed()" disabled />HL</label>
@@ -159,9 +160,10 @@
 
       function load_url_file() {
         let url = document.getElementById('url_entry').value.trim();
-
         if (url != '') { selected_url_file = url; url_loading = true; init(); }
       }
+
+      function clear_url() { document.getElementById('url_entry').value = ''; }
 
       function initialize_event_listeners() {
         var cnvs = document.getElementById('scene');
@@ -206,7 +208,7 @@
       var rot_x = 0, rot_y = 0, rot_z = 0;
       var previous_gltf_scale = '1', bounding_box = new THREE.Box3();
       var selected_gltf_file, selected_url_file = '', url_displayed, url_loading;
-      var texture_files_png, texture_files_jpg, texture_files_bmp;
+      var texture_files_png, texture_files_jpg, texture_files_bmp, texture_files_gif;
 
       // Manager from ThreeJs to track a loader and its status
       var manager = new THREE.LoadingManager();
@@ -545,6 +547,7 @@
         texture_files_jpg = [];
         texture_files_png = [];
         texture_files_bmp = [];
+        texture_files_gif = [];
         animations = [];
         animation_mixer = null;
         animation_running = false;
@@ -572,12 +575,13 @@
 
           if (!fi.files) { return; }
 
-          // Include check for JPG/PNG/BMP
+          // Include check for JPG/PNG/BMP/GIF
           for (let i = 0; i < fi.files.length; i++) {
             if (fi.files[i].name.toUpperCase().endsWith('.GLB') || fi.files[i].name.toUpperCase().endsWith('.GLTF')) { selected_gltf_file = fi.files[i]; }
             else if (fi.files[i].name.toUpperCase().endsWith('.PNG')) { texture_files_png.push( fi.files[i] ); }
             else if (fi.files[i].name.toUpperCase().endsWith('.JPG')) { texture_files_jpg.push( fi.files[i] ); }
             else if (fi.files[i].name.toUpperCase().endsWith('.BMP')) { texture_files_bmp.push( fi.files[i] ); }
+            else if (fi.files[i].name.toUpperCase().endsWith('.GIF')) { texture_files_gif.push( fi.files[i] ); }
           };
 
           if (!selected_gltf_file) { return; }
@@ -736,12 +740,11 @@
                 child.material.opacity = 1;
                 child.material.transparent = true;
                 child.material.skinning = true;
-                child.material.side = THREE.DoubleSide;
                 child.castShadow = true;
                 child.receiveShadow = false;
 
-                if (texture_files_png.length > 0 || texture_files_jpg.length > 0 || texture_files_bmp.length > 0) {
-                  let files = (texture_files_png.length > 0) ? texture_files_png : ((texture_files_jpg.length > 0) ? texture_files_jpg : texture_files_bmp);
+                if (texture_files_png.length > 0 || texture_files_jpg.length > 0 || texture_files_bmp.length > 0 || texture_files_gif.length > 0) {
+                  let files = (texture_files_png.length > 0) ? texture_files_png : ((texture_files_jpg.length > 0) ? texture_files_jpg : ((texture_files_bmp.length > 0) ? texture_files_bmp : texture_files_gif));
 
                   files.forEach( file => {
                     let loader = new THREE.TextureLoader();
@@ -772,7 +775,7 @@
 
             // Add gltf model to scene
             scene.add( gltf_obj );
-
+            console.log(gltf_obj);
             camera.lookAt( gltf_obj.position );
 
             if (animations.length > 0) {
@@ -847,7 +850,6 @@
                 child.material.opacity = 1;
                 child.material.transparent = true;
                 child.material.skinning = true;
-                child.material.side = THREE.DoubleSide;
                 child.castShadow = true;
                 child.receiveShadow = false;
 
@@ -1068,7 +1070,7 @@
         // Reset the view
         if (reset) {
           controls.reset();
-          gltf_obj.position.set( 0, 0, 0 );
+          if (gltf_obj) gltf_obj.position.set( 0, 0, 0 );
           hemisphereLight.position.set( 0, 10, 0 );
           spotLight.position.set( 150, 0, 350 );
           directionalLight.position.set( 0, 0, 250 );
