@@ -43,12 +43,12 @@ It would be recommended that you also check [this project](https://github.com/Gi
    - All viewers require a browser supporting WebGL and are set to open in the new tab/window
    - GLTF and DAE viewers are set to use Orbit Controls while other viewers do allow some mouse control, with `wheel` being zoom in/out and `left-button click/drag` rotating the image
    - Scene background image supported formats are PNG, JPEG, SVG, BMP and GIF while selecting non-image file will reset the background
-   - Either a local OBJ file alone or MTL + OBJ files or MTL + OBJ + JPG / PNG / BMP files or MTL + OBJ + DDS files can be loaded at the dialog screen
+   - Either a local OBJ file alone or MTL + OBJ files or MTL + OBJ + JPG / PNG / BMP / GIF files or MTL + OBJ + DDS files can be loaded at the dialog screen
    - If the MTL file requires texture files then you have to select and load them, otherwise check the console output for errors
-   - Either a local PLY file alone or PLY + JPG / PNG / BMP texture files can be loaded at the dialog screen (texture files should be relatively simple)
+   - Either a local PLY file alone or PLY + JPG / PNG / BMP / GIF texture files can be loaded at the dialog screen (texture files should be relatively simple)
    - A local STL file should be loaded alone since it doesn't play well with textures
-   - Either a local GLB / GLTF file alone or GLB / GLTF + JPG / PNG / BMP files can be loaded at the dialog screen
-   - Either a local DAE file alone or DAE + JPG / PNG / BMP / DDS files can be loaded at the dialog screen
+   - Either a local GLB / GLTF file alone or GLB / GLTF + JPG / PNG / BMP / GIF files can be loaded at the dialog screen
+   - Either a local DAE file alone or DAE + JPG / PNG / BMP / GIF / DDS files can be loaded at the dialog screen
    - GLTF / DAE viewers also have a URL option available, which should fetch all associated resources and is probably the best choice
    - GLTF / DAE viewers currently support animations (some example GLB files are animated)
    - GLTF / DAE viewers currently don't support local loading of .bin files (use URL option instead to fetch all the resources)
