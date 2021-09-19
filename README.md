@@ -3,7 +3,7 @@ Intended for use on a desktop computer or a device with a larger screen.
 
 Exercise in HTML, CSS and JavaScript ( [jQuery](https://jquery.com/download/) as well ). Intended for those who either might be learning these or would just like to have several examples in a single page. See the screenshot for what the top part of this page looks like in the Firefox browser (or just use the preview link from the `Usage` section).
 
-For a version with the Flask server and FBX / MMD viewers, check the [HTML_CSS_JS_Flask](https://github.com/GitHubDragonFly/HTML_CSS_JS_Flask) project. 
+For a version with the Flask server and 3DM / FBX / MMD / VRML viewers, check the [HTML_CSS_JS_Flask](https://github.com/GitHubDragonFly/HTML_CSS_JS_Flask) project. 
 
 Some might consider these as relatively simple examples but they only reflect a way of how I am going about learning these languages. Some code was simply adopted and modified from original public sources. There is definitely lots of rotation examples, so try not to get dizzy.
 
@@ -42,7 +42,7 @@ It would be recommended that you also check [this project](https://github.com/Gi
  - OBJ, PLY + STL, GLTF and DAE Viewers:
    - All viewers require a browser supporting WebGL and are set to open in the new tab/window
    - GLTF and DAE viewers are set to use Orbit Controls while other viewers do allow some mouse control, with `wheel` being zoom in/out and `left-button click/drag` rotating the image
-   - Background image supported formats are PNG, JPEG, SVG, BMP and GIF while selecting non-image file will reset the background
+   - Scene background image supported formats are PNG, JPEG, SVG, BMP and GIF while selecting non-image file will reset the background
    - Either a local OBJ file alone or MTL + OBJ files or MTL + OBJ + JPG / PNG / BMP files or MTL + OBJ + DDS files can be loaded at the dialog screen
    - If the MTL file requires texture files then you have to select and load them, otherwise check the console output for errors
    - Either a local PLY file alone or PLY + JPG / PNG / BMP texture files can be loaded at the dialog screen (texture files should be relatively simple)
@@ -85,7 +85,7 @@ OR do it this way:
 This is MIT licensed.
 
 Three.js MIT license is included in the `js` folder together with a link to jQuery MIT license.
-Some examples obtained from the three.js project might have a note included about their own license.
+Some files/examples obtained from the three.js project might have a note included about their own license.
 
 The beach video and the cube/die image were downloaded as a free media content and are under the [Pixabay License](https://pixabay.com/service/license/).
 
