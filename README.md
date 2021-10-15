@@ -1,4 +1,6 @@
 # HTML_CSS_JS
+Note about three.js viewers included in this project: all of these viewers plus new ones should be fully functional on the main [webpage](https://githubdragonfly.github.io) and any future updates and additions will be maintained there.
+
 Intended for use on a desktop computer or a device with a larger screen.
 
 Exercise in HTML, CSS and JavaScript ( [jQuery](https://jquery.com/download/) as well ). Intended for those who either might be learning these or would just like to have several examples in a single page. See the screenshot for what the top part of this page looks like in the Firefox browser (or just use the preview link from the `Usage` section).
