@@ -19,4 +19,4 @@
 - https://threejs.org
 - https://threejsfundamentals.org/
 - https://davidoreilly.itch.io/walt-disney-3d-head (http://www.davidoreilly.com)
-- https://www.jacksmerdon.co.uk/Dissertation/Build/Build.html#
+- https://github.com/JackSmerdon/jacksmerdon.github.io
