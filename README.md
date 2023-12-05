@@ -1,13 +1,16 @@
 # HTML_CSS_JS
-Note about three.js viewers included in this project: all of these viewers plus new ones should be fully functional on the main [webpage](https://githubdragonfly.github.io) and any future updates and additions will be maintained there.
+Notes about three.js viewers included in this project:
+- all of these viewers should be considered obsolete and are here for historical purposes
+- all of these viewers, plus new ones, should be fully functional on the main [webpage](https://githubdragonfly.github.io)
+- any future updates and additions will be maintained on the main webpage
 
-Intended for use on a desktop computer or a device with a larger screen.
+This is all intended for use on a desktop computer or a device with a larger screen.
 
-Exercise in HTML, CSS and JavaScript ( [jQuery](https://jquery.com/download/) as well ). Intended for those who either might be learning these or would just like to have several examples in a single page. See the screenshot for what the top part of this page looks like in the Firefox browser (or just use the preview link from the `Usage` section).
+This project features an exercise in HTML, CSS and JavaScript ( [jQuery](https://jquery.com/download/) as well ). Intended for those who either might be learning these or would just like to have several examples in a single page. See the screenshot for what the top part of this page looks like in the Firefox browser (or just use the preview link from the `Usage` section).
 
-For a version with the Flask server and 3DM / FBX / MMD / VRML viewers, check the [HTML_CSS_JS_Flask](https://github.com/GitHubDragonFly/HTML_CSS_JS_Flask) project. 
+For a version with the Flask server, check the [HTML_CSS_JS_Flask](https://github.com/GitHubDragonFly/HTML_CSS_JS_Flask) project. 
 
-Some might consider these as relatively simple examples but they only reflect a way of how I am going about learning these languages. Some code was simply adopted and modified from original public sources. There is definitely lots of rotation examples, so try not to get dizzy.
+Some of these are relatively simple examples and could help you learn these programming languages. Some code was simply adopted and modified from original public sources. There is definitely lots of rotation examples, so try not to get dizzy.
 
 A good portion of the page should be self-explanatory, some content is static, some animated and some is interactive.
 
@@ -24,6 +27,11 @@ These are the features you can see on the page:
    - some example OBJ / PLY / STL / GLTF files are in the `Images` folder
    - some example DAE files can be found in the [HTML_CSS_JS_Flask](https://github.com/GitHubDragonFly/HTML_CSS_JS_Flask) project's `Images` folder
    - there is far more examples in the [Three.js](https://github.com/mrdoob/three.js) project
+
+## Mozilla Firefox screenshot
+
+Main Menu Page
+![Start Page](screenshot/Exercise.png?raw=true)
 
 Some things might not be supported or work as expected on certain browsers. This was tested as working in the latest Firefox and Edge browsers on Windows 10 and Chromium on CloudReady 89.4.0.  The page did also show properly in the TenFourFox browser on MacOS X 10.5 (iMac G5) with the following notes:
  - missing emojis support for old OS X can be compensated, to a degree, with [Symbola Font](https://dn-works.com/ufas/)
