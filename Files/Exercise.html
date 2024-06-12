@@ -348,7 +348,7 @@
   </head>
   <!-- Lots of code lines below have been separated to single lines for clarity -->
   <!-- Inline styling is generally used to override the preset for different appearance -->
-  <body onload="document_ready();">
+  <body>
     <div class="fixed-menu">
       <a href="#P1">Top</a>&nbsp;
       <a href="#P2">SVG</a>&nbsp;
@@ -1090,7 +1090,7 @@
     <p class="footer"><a href="https://github.com/GitHubDragonFly/HTML_CSS_JS" target="_blank">References</a></p>
 
     <script>
-      function document_ready() {
+      $(document).ready(function() {
         $('#emojis').hover(
           function(event){ $(this).addClass('rotateY'); },
           function(event){ $(this).removeClass('rotateY'); }
@@ -1150,7 +1150,7 @@
         $("#menu_animate").click(function(){
           $(".fixed-menu").animate({top: '400px'}, 'slow', function() { $(".fixed-menu").animate({top: '0px'}, 'slow') });
         });
-      }
+      });
     </script>
   </body>
 </html>
