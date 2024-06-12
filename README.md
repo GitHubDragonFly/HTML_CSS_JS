@@ -4,7 +4,9 @@ Notes about three.js viewers included in this project:
 - all of these viewers, plus new ones, should be fully functional on the main [webpage](https://githubdragonfly.github.io)
 - any future updates and additions will be maintained on the main webpage
 
-This is all intended for use on a desktop computer or a device with a larger screen.
+Generally intended for educational purposes.
+
+The latest GUI is slightly different than what the screenshot below shows. Also, the preview should show OK on mobile devices as well.
 
 This project features an exercise in HTML, CSS and JavaScript ( [jQuery](https://jquery.com/download/) as well ). Intended for those who either might be learning these or would just like to have several examples in a single page. See the screenshot for what the top part of this page looks like in the Firefox browser (or just use the preview link from the `Usage` section).
 
@@ -80,7 +82,7 @@ It would be recommended that you also check [this project](https://github.com/Gi
 # Usage
 All it takes is to try either of the following:
 
-- Thanks to the [GitHub & BitBucket HTML Preview](https://github.com/htmlpreview/htmlpreview.github.com) you can preview the [Exercise](https://htmlpreview.github.io/?https://github.com/GitHubDragonFly/HTML_CSS_JS/blob/main/Files/Exercise.html) page and use its fixed menu to access the rest. This was tested as working in the Firefox browser and you could optionally use ctrl+click to open it in the new tab/window.
+- Thanks to the [GitHub & BitBucket HTML Preview](https://github.com/htmlpreview/htmlpreview.github.com) you can preview the [Exercise](https://htmlpreview.github.io/?https://github.com/GitHubDragonFly/HTML_CSS_JS/blob/main/Files/Exercise.html) page and use its fixed menu to access the rest (jQuery section might not work with this preview). This was tested as working in the Firefox browser and you could optionally use ctrl+click to open it in the new tab/window.
 
 And just for the convenience, you can access the viewers directly here: [OBJ](https://htmlpreview.github.io/?https://github.com/GitHubDragonFly/HTML_CSS_JS/blob/main/Files/OBJ%20Viewer.html) / [PLY + STL](https://htmlpreview.github.io/?https://github.com/GitHubDragonFly/HTML_CSS_JS/blob/main/Files/PLY%20Viewer.html) / [DAE](https://htmlpreview.github.io/?https://github.com/GitHubDragonFly/HTML_CSS_JS/blob/main/Files/DAE%20Viewer.html) / [GLTF](https://htmlpreview.github.io/?https://github.com/GitHubDragonFly/HTML_CSS_JS/blob/main/Files/GLTF%20Viewer.html)
 
